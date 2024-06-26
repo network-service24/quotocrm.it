@@ -1,0 +1,68 @@
+Informationen zur Verarbeitung personenbezogener Daten
+Artikel 13-14 EU-Verordnung 2016/679
+
+Interessierte Themen: Service-Nutzer
+
+{!rag_soc!}, mit legaler und operativer Adresse in {!indirizzo!} - {!cap!} {!citta!} {!provincia!}, Umsatzsteuernummer: {!p_iva!} in seiner Eigenschaft als Data Controller Ihre personenbezogenen Daten gemäß und für die Auswirkungen der EU-Verordnung 2016/679, nachstehend "DSGVO" genannt, informieren Sie hiermit darüber, dass das oben genannte Gesetz den Schutz von betroffenen Personen bei der Verarbeitung personenbezogener Daten vorsieht und dass diese Behandlung basiert die Grundsätze der Korrektheit, Rechtmäßigkeit, Transparenz und Schutz Ihrer Privatsphäre und Ihrer Rechte.
+Ihre persönlichen Daten werden in Übereinstimmung mit den gesetzlichen Bestimmungen des oben genannten Gesetzes und den darin festgelegten Geheimhaltungspflichten verarbeitet.
+
+Ziele der Behandlung:
+Bereitstellung des Dienstes: Ihre Daten werden verarbeitet, um auf alle Anfragen zu antworten, die von den Formularen zur Fertigstellung empfangen werden können, und auf der Website verfügbare Formulare oder per E-Mail empfangene Anfragen.
+
+Rechtsgrundlage: Die Rechtsgrundlage für die Verarbeitung ist vertraglich in den Bedingungen, in denen die Datenverarbeitung für ein Auskunftsersuchen bereitgestellt wird, gefolgt von einer Antwort.
+
+Marketing - E-Mail-Empfangsdienst: Ihre Daten werden insbesondere vorbehaltlich Ihrer freien Einwilligung für den Empfang von E-Mails zu Werbezwecken verarbeitet, indem Sie das entsprechende Kästchen anklicken und die Zustimmung zum Erhalt von Marketingmaterial in einem Formular markieren.
+
+Rechtsgrundlage: Die Rechtsgrundlage für die Verarbeitung ist die Zustimmung der interessierten Partei.
+
+Obligatorische oder fakultative Art der Übertragung:
+Die Bereitstellung von Daten ist für Sie in Bezug auf die oben genannten Zwecke der Erbringung der Dienstleistung optional, die Nicht-Erstellung der angeforderten Felder oder möglicherweise mit einem Sternchen gekennzeichnet, erlaubt nicht weiter in Anfragen nach Informationen, Ihre Verweigerung der Behandlung beeinträchtigt nicht die Fortsetzung der Beziehung oder der Angemessenheit der Behandlung selbst.
+Für Marketingzwecke ist die Einwilligung frei, unzusammenhängend und optional. Die Nichteinwilligung hat weder Auswirkungen auf die Navigation der Website noch auf die Bereitstellung der angeforderten Dienste.
+
+Verarbeitungsmethoden: Ihre persönlichen Daten können unter Verwendung von hauptsächlich elektronischen und telematischen Methoden verarbeitet werden, wie:
+- mittels elektronischer Rechner, die Softwaresysteme von Drittanbietern verwenden;
+- mittels elektronischer Rechner, die Softwaresysteme verwenden, die direkt verwaltet oder programmiert werden;
+- Vorübergehende Behandlung in anonymisierter Form.
+Jede Behandlung wird gemäß den in den Artikeln beschriebenen Methoden durchgeführt. 6, 32 der Datenschutz-Grundverordnung und durch die Annahme geeigneter Sicherheitsmaßnahmen.
+
+Kommunikation: Ihre Daten werden ausschließlich an kompetente und ordnungsgemäß ernannte Personen für die Erbringung der Dienstleistungen übermittelt, die für eine ordnungsgemäße Verwaltung der Beziehung erforderlich sind, mit einer Garantie des Schutzes der Rechte der interessierten Partei.
+Ihre Daten werden nur von Personal verarbeitet, das ausdrücklich vom Eigentümer und insbesondere von dem mit der Wartung und Aktualisierung des Standorts beauftragten Personal und, falls erforderlich, vom Personal, das für die Durchführung von Marketingmitteilungen verantwortlich ist, autorisiert wurde.
+
+Empfänger:
+Andere technische Themen, deren Kenntnis der Daten für die Erfüllung ihrer Aufgaben erforderlich ist, um die korrekte Ausführung der Anfrage zu gewährleisten.
+
+Drittländer: Ihre Daten werden nicht in Nicht-EU-Ländern veröffentlicht
+Verbreitung: Ihre persönlichen Daten werden in keiner Weise weitergegeben.
+
+Konservierungszeit. Bitte beachten Sie, dass in Übereinstimmung mit den Grundsätzen der Rechtmäßigkeit, Zweckbindung und Datenminimierung, gemäß Art. 5 der DSGVO ist die Aufbewahrungsfrist für Ihre personenbezogenen Daten:
+Für einen Zeitraum festgelegt, der die Erreichung der Zwecke, für die sie erhoben und verarbeitet werden, nicht überschreitet und in Übereinstimmung mit dem Zeitplan für die korrekte Erbringung der angeforderten Dienstleistungen.
+
+Data Controller: Der Data Controller ist laut Gesetz {!rag_soc!}, Mit registriertem und operativem Hauptsitz in {!indirizzo!} - {!cap!} {!citta!} {!provincia!}, Umsatzsteuernummer: {!p_iva!} In der Person seines gesetzlichen Vertreters pro tempore.
+
+Sie haben das Recht, vom Inhaber die Löschung (mögliches Recht auf Vergessenwerden), die Beschränkung, Aktualisierung, Berichtigung, Portabilität, Widerspruch gegen die Verarbeitung von persönlichen Daten, die Sie betreffen, zu erhalten, und können im Allgemeinen alle Rechte ausüben in den Artikeln vorgesehen 15, 16, 17, 18, 19, 20, 21, 22 der Datenschutz-Grundverordnung, gegebenenfalls in Bezug auf die Datenverarbeitung.
+Die betroffenen Parteien haben unter Zugrundelegung der Bedingungen auch das Recht, bei der Garantin als Aufsichtsbehörde gemäß den festgelegten Verfahren Beschwerde einzulegen. Wenn Sie weitere Informationen benötigen und die Rechte geltend machen möchten, die Ihnen von der Europäischen Verordnung anerkannt wurden, können Sie sich an den für die Verarbeitung Verantwortlichen wenden.
+EU-Verordnung 2016/679: Artikel 15, 16, 17, 18, 19, 20, 21, 22 - Rechte der interessierten Partei
+1. Die betroffene Person hat das Recht, eine Bestätigung darüber zu erhalten, ob die sie betreffenden personenbezogenen Daten, auch wenn sie noch nicht registriert sind, und ihre Mitteilung in verständlicher Form erhalten.
+
+2. Der Betroffene hat das Recht, den Hinweis zu erhalten:
+a. die Herkunft der persönlichen Daten;
+b. der Zweck und die Methoden der Verarbeitung;
+c. der Logik, die im Falle einer Behandlung mit Hilfe elektronischer Instrumente angewandt wird;
+d. der Identifizierungsangaben des Inhabers, des Verantwortlichen und des benannten Vertreters gemäß Artikel 5 Absatz 2;
+e. von den Subjekten oder Kategorien von Subjekten, denen die persönlichen Daten mitgeteilt werden können oder die sie als ernannte Vertreter im Staatsgebiet, Manager oder Agenten erfahren können.
+
+3. Der Betroffene hat das Recht, zu erhalten:
+a. Aktualisierung, Berichtigung oder bei Interesse Integration von Daten;
+b. die Löschung, Umwandlung in anonyme Form oder Sperrung von Daten, die unrechtmäßig verarbeitet wurden, einschließlich Daten, deren Aufbewahrung für die Zwecke, für die die Daten gesammelt oder später verarbeitet wurden, unnötig ist;
+c. die Bescheinigung, dass die in Buchstaben a) und b) genannten Vorgänge auch in Bezug auf deren Inhalt den Personen mitgeteilt wurden, denen die Daten übermittelt oder verbreitet wurden, außer in dem Fall, in dem sich diese Erfüllung als unmöglich erweist o eine Verwendung von Mitteln beinhaltet, die zu dem geschützten Recht offensichtlich unverhältnismäßig sind;
+d. Datenübertragbarkeit.
+
+4. Der Betroffene hat das Recht, sich ganz oder teilweise zu widersetzen:
+a. aus legitimen Gründen die Verarbeitung personenbezogener Daten, die ihn betreffen, auch wenn sie für den Zweck der Sammlung relevant sind;
+b. zur Verarbeitung personenbezogener Daten, die ihn betreffen, zum Zwecke der Zusendung von Werbe- oder Direktverkaufsmaterial oder zur Durchführung von Marktforschungen oder kommerzieller Kommunikation.
+
+
+Zustimmung
+Formel des Erwerbs der Zustimmung der interessierten Partei
+Ihre Einwilligung für den Erhalt von Marketingmaterial wird (IP-Adresse, E-Mail, Datum und Uhrzeit) durch Ankreuzen des entsprechenden Kästchens und gleichzeitiges Drücken des entsprechenden Buttons gespeichert.
+Diese Zustimmung wird eingereicht, um die Verleihung nachzuweisen, und Sie können sich zusätzlich zu allen anderen oben genannten Rechten jederzeit abmelden.

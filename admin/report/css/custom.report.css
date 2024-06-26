@@ -1,0 +1,75 @@
+.blu {
+    background: #2E74B5 !important;
+    color: #FFFFFF !important;
+}
+
+.no_border_top_dx {
+    border-top: 0px !important;
+    border-right: 0px !important;
+}
+
+.no_border_input {
+    border-top: 0px !important;
+    border-bottom: 0px !important;
+    border-right: 0px !important;
+    border-left: 0px !important;
+}
+
+.no_border_input_no_color {
+    border-top: 0px !important;
+    border-bottom: 0px !important;
+    border-right: 0px !important;
+    border-left: 0px !important;
+    background-color: transparent !important;
+}
+
+.font24Bold {
+    font-size: 30px !important;
+    font-weight: bold !important;
+}
+
+.font20 {
+    font-size: 20px !important;
+}
+
+.font20Bold {
+    font-size: 20px !important;
+    font-weight: bold !important;
+}
+
+.dueColonne {
+    column-count: 2;
+    column-gap: 30px;
+    -moz-column-count: 2;
+    -moz-column-gap: 30px;
+    -webkit-column-count: 2;
+    -webkit-column-gap: 30px;
+}
+
+#bar_analitycs {
+    border: 0px !important;
+    background-color: #FFFFFF !important;
+}
+
+#semi_pie_analitycs {
+    border: 0px !important;
+    background-color: #FFFFFF !important;
+}
+
+.font12 {
+    font-size: 12px;
+    font-weight: bold;
+}
+
+.noborder {
+    border-top: 0px !important;
+}
+
+.logo_marketing {
+    padding: 35px;
+    width: 65%;
+}
+
+.selectfrecce {
+    font-family: 'FontAwesome', Arial !important;
+}

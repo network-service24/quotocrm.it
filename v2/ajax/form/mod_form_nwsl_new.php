@@ -1,0 +1,78 @@
+<?php
+include($_SERVER['DOCUMENT_ROOT']."/v2/include/settings.inc.php");
+
+//error_reporting(0); 
+
+ require_once BASE_PATH_SITO. '/class/MysqliDb.php';
+
+ $db_form = new MysqliDb(HOST,DB_USER,DB_PASSWORD,DATABASE);
+
+
+ function getLingueSito($idSito){
+	global $db_form;
+		$lingue = array();
+		$q = "SELECT 
+					hospitality_lingue_form.codlingua, 
+					hospitality_lista_lingue.id_lang 
+				FROM 
+					hospitality_lista_lingue, hospitality_lingue_form 
+				WHERE 
+					hospitality_lingue_form.idsito = '".$idSito."' 
+				AND 
+					hospitality_lingue_form.codlingua = hospitality_lista_lingue.codice 
+				ORDER BY
+					hospitality_lista_lingue.id_lang asc";
+		$res = $db_form->query($q);
+		foreach($res as $key => $row){
+			$lingue[$row['id_lang']] = $row['codlingua'];
+		}
+	return $lingue;
+}
+
+						if($_REQUEST['act'] == 'upd'){
+							$lingue = getLingueSito($_REQUEST['idsito']);
+							$idSito = $_REQUEST['idsito'];
+							$idlang = $_REQUEST['id_lang'];
+							$idForm = $_REQUEST['idform'];
+							$raw = explode('_',$_REQUEST['nomeForm']);
+							$form_ref = $raw[1];
+
+							
+						
+							foreach($lingue as $k => $v){
+								$idLingua = $idlang;
+							
+								foreach($_REQUEST['header'][$k] as $kl => $vl){
+
+									$sel = "SELECT * FROM hospitality_form_testata_lang WHERE tipo_label= '".$kl."' AND id_form = '".$idForm."' AND id_lang = '".$idLingua."' limit 1";
+									$res = $db_form->query($sel);
+									if(sizeof($res) > 0){
+										$update = "UPDATE hospitality_form_testata_lang SET descrizione = '".urldecode($vl)."' WHERE tipo_label= '".$kl."' AND id_form = '".$idForm."' AND id_lang = '".$idLingua."' ";
+										$db_form->query($update);
+									}else{
+										$insert = "INSERT INTO hospitality_form_testata_lang (id_form,tipo_label,descrizione,id_lang) VALUES('".$idForm."','".$kl."','".urldecode($vl)."','".$idLingua."')";
+										$db_form->query($insert);
+									}
+								}
+								
+								if(isset($_REQUEST['content'][$k])){
+									foreach($_REQUEST['content'][1] as $kl => $vl){
+										
+										$update2 = "UPDATE hospitality_form_contenuti SET id_tipo_input = '".$vl['tipo']."' ,name = '".$vl['name']."',attivo = '".$vl['attivo']."',obbligatorio = '".$vl['obbligatorio']."' WHERE id= '".$vl['id_campo']."' ";
+										$db_form->query($update2);
+									}
+
+									foreach($_REQUEST['content'][$k] as $kl => $vl){
+
+										$update3 = "UPDATE hospitality_form_contenuti_lang SET label = '".urlencode($vl['label'])."' ,parametri = '".urlencode(addslashes($vl['parametri']))."',campo = '".$vl['campo']."' WHERE id= '".$kl."' ";
+										$db_form->query($update3);
+									}
+								}
+							}
+ 							
+
+							
+						}
+
+
+?>

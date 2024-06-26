@@ -1,0 +1,40 @@
+ <?php
+
+if($_REQUEST['action']=='modif_template'){
+
+        $update = "UPDATE mailing_newsletter_template SET nome_template = '".addslashes($_REQUEST['nome_template'])."', lingua = '".$_REQUEST['lingua']."', template = '".addslashes($_REQUEST['template'])."' WHERE id = ".$_REQUEST['id']." AND idsito = ".IDSITO;
+        $db->query($update);
+        $prt->_goto(BASE_URL_SITO.'newsletter/visualizza_modelli/');  
+}
+
+$select = "SELECT * FROM mailing_newsletter_template WHERE idsito = ".IDSITO." AND id = '".$_REQUEST['azione']."' ";
+$res = $db->query($select);
+$dati = $db->row($res);
+
+
+$js_script_editor ='
+<script>
+    $(function(){ 
+        $("#preview").on("click",function(){
+			$("#screenshots").modal("show");  
+		});  
+    CKEDITOR.replace("template");
+        $(".textarea").wysihtml5();                                               
+    });        
+</script>';
+$js_script_editor .='<script type="text/javascript" src="'.BASE_URL_SITO.'xcrud/editors/ckeditor/ckeditor.js"></script>'."\r\n";  
+$js_script_editor .='<script type="text/javascript">
+                        CKEDITOR.config.toolbar = [
+                                        [\'Source\',\'-\',\'Maximize\'],[\'Format\',\'Font\',\'FontSize\'],
+                                        [\'Bold\',\'Italic\',\'Underline\',\'StrikeThrough\',\'-\',\'Cut\',\'Copy\',\'Paste\',\'PasteText\',\'PasteFromWord\',\'-\',\'Outdent\',\'Indent\'],
+                                        [\'NumberedList\',\'BulletedList\',\'-\',\'JustifyLeft\',\'JustifyCenter\',\'JustifyRight\',\'JustifyBlock\'],
+                                        [\'Image\',\'Table\',\'Link\',\'TextColor\',\'BGColor\']
+                                    ] ;
+                        CKEDITOR.config.autoGrow_onStartup = true;
+                        CKEDITOR.config.extraPlugins = \'autogrow\';
+                        CKEDITOR.config.autoGrow_minHeight = 400;
+                        CKEDITOR.config.autoGrow_maxHeight = 600;
+                        CKEDITOR.config.autoGrow_bottomSpace = 50;           
+                </script>'."\r\n";
+
+?> 

@@ -1,0 +1,38 @@
+CONTRATTO DI LICENZA PER IL CRM QUOTO!
+
+Le presenti condizioni di licenza costituiscono il contratto tra il Developer Marcello Visigalli e Network Service s.r.l
+Qualora Network Service s.r.l si attenga alle condizioni del presente contratto, disporrà dei diritti di seguito indicati.
+
+1. INSTALLAZIONE E DIRITTI SULL’UTILIZZO.
+
+2. REQUISITI AGGIUNTIVI PER LE LICENZE E/O DIRITTI SULL’UTILIZZO.
+a. Codice Distribuibile. Il software contiene codice che Network Service s.r.l potrà distribuire ai propri clienti, a condizione che si attenga alle disposizioni di seguito riportate.
+b. Diritto di Utilizzo e Distribuzione. Il codice e i file costituiscono il “Codice Distribuibile”.
+• distribuire, per ogni file del Codice distribuibile con estensione .php, solo i risultati dell'esecuzione di tale Codice distribuibile attraverso l'uso del programma;
+• distribuire il Codice distribuibile incluso in un programma di installazione solo come parte di tale programma e senza alcuna modifica;
+• far accettare ai futuri developer e agli utenti finali esterni un contratto con condizioni che garantiscano almeno lo stesso livello di tutela definito nel presente contratto,
+• visualizzare una valida comunicazione di copyright di Network Service s.r.l stesso nel programma e
+• indennizzare, manlevare e difendere Marcello Visigalli da ogni e qualsiasi domanda o azione giudiziaria, ivi incluse le spese legali, relative all’utilizzo o alla distribuzione del programma da parte di Network Service s.r.l.
+c. Restrizioni relative alla Distribuzione. Network Service s.r.l non potrà
+• modificare le eventuali comunicazioni relative ai copyright, ai marchi o ai brevetti riportati nel Codice Distribuibile,
+• distribuire il Codice distribuibile da eseguire su una piattaforma che non sia una piattaforma applicativa;
+• includere Codice Distribuibile in programmi dannosi, ingannevoli o illegali oppure
+• modificare o distribuire il codice sorgente in modo tale da assoggettare il predetto codice alle condizioni di una Licenza Esclusa. Per Licenza Esclusa si intende qualsiasi licenza che richieda, come condizione per l’utilizzo, la modifica o la distribuzione, che
+• il codice sia divulgato o distribuito nel formato in codice sorgente oppure
+• altri abbiano il diritto di modificarlo.
+
+3. AMBITO DI VALIDITÀ DELLA LICENZA. Il Software non viene venduto, ma è concesso in licenza. Il presente contratto concede a Network Service s.r.l. solamente diritti di utilizzo del software, ma non la paternità intellettuale.
+• Nel limite massimo consentito dalla legge applicabile Network Service s.r.l. potrà utilizzare il software esclusivamente nei modi espressamente consentiti nel presente contratto. A tal fine, Network Service s.r.l. dovrà attenersi a qualsiasi limitazione tecnica presente nel software che gli consenta di utilizzarlo solo in determinati modi. Network Service s.r.l. non potrà aggirare le limitazioni tecniche presenti nel software.
+
+Network Service s.r.l. non potrà inoltre
+• disassemblare il software, fatta eccezione per i casi in cui tali attività siano espressamente consentite dalla legge applicabile, o per previa comunicazione a Marcello Visigalli,
+• effettuare più copie del software di quante specificate o consentite dalla legge applicabile, o per previa comunicazione a Marcello Visigalli,
+• pubblicare il software per consentire ad altri di duplicarlo,
+• concedere il software in locazione, leasing o prestito, a patto di una possibile previa comunicazione e consenso di Marcello Visigalli,
+• trasferire il software o il presente contratto a terzi a patto di una possibile previa comunicazione e consenso di Marcello Visigalli.
+
+4. COPIA DI BACKUP. Network Service s.r.l potrà effettuare una copia di backup del software. 
+
+5. SERVIZI DI SUPPORTO TECNICO. Poiché questo software è fornito “così com’è”, non è prevista la fornitura di servizi di supporto tecnico da parte di Marcello Visigalli.
+
+6. LIMITAZIONE DI RESPONSABILITÀ ED ESCLUSIONE DI DANNI. Network Service s.r.l non avrà dirito ad ottenere il risarcimento per eventuali danni, inclusi i danni consequenziali, speciali, indiretti o accidentali o per mancato guadagno sull'uso del software.

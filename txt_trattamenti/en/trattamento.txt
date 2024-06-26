@@ -1,0 +1,68 @@
+Information on the processing of personal data
+Articles 13-14 EU Reg. 2016/679
+
+Interested Subjects: Service users
+
+{!rag_soc!}, with legal and operational address in {!indirizzo!} - {!cap!} {!citta!} {!provincia!}, VAT: {!p_iva!} in its capacity as Data Controller Your personal data, pursuant to and for the effects of the EU Reg. 2016/679 hereafter referred to as 'GDPR', hereby informs you that the aforementioned law provides for the protection of data subjects regarding the processing of personal data and that this treatment will be based the principles of correctness, lawfulness, transparency and protection of your privacy and your rights.
+Your personal data will be processed in accordance with the legislative provisions of the aforementioned law and the confidentiality obligations laid down therein.
+
+Purposes of treatment:
+Provision of the service: Your data will be processed to respond to any requests that may be received from the forms for completion, and forms available on the website, or requests received by email.
+
+Legal basis: The legal basis for processing is contractual in the terms in which data processing is provided for a request for information, followed by an answer.
+
+Marketing - e-mail receiving service: in particular, your data will be processed, subject to your free consent, for the receipt of emails for promotional purposes, by selecting / ticking the appropriate box indicating consent to receive marketing material in a form.
+
+Legal basis: The legal basis of the processing is the consent of the interested party.
+
+Mandatory or optional nature of the transfer:
+The provision of data is optional for you regarding the aforementioned purposes of providing the service, the non-compilation of the fields requested or possibly marked with an asterisk, does not allow to continue in requests for information, your refusal to treatment does not compromise the continuation of the relationship or the adequacy of the treatment itself.
+For marketing purposes, consent is free, disjointed and optional. failure to consent does not affect the navigation of the site nor the provision of the services requested.
+
+Processing methods: your personal data may be processed using mainly electronic and telematic methods such as:
+- By means of electronic calculators using third party software systems;
+- By means of electronic calculators using software systems managed or programmed directly;
+- Temporary treatment in aggregate anonymous form.
+Each treatment is carried out in compliance with the methods set out in articles. 6, 32 of the GDPR and through the adoption of the appropriate security measures.
+
+Communication: your data will be communicated exclusively to competent and duly appointed persons for the completion of the services necessary for a proper management of the relationship, with a guarantee of protection of the rights of the interested party.
+Your data will be processed only by personnel expressly authorized by the Owner and, in particular, by personnel in charge of maintaining and updating the site, and, if necessary, the personnel in charge of carrying out marketing communications.
+
+Recipients:
+Any other technical subjects whose knowledge of the data is necessary for the performance of their duties to ensure the correct execution of the request.
+
+Third Countries: Your data are not disclosed in non-EU countries
+Dissemination: Your personal data will not be disclosed in any way.
+
+Conservation Period. Please note that, in compliance with the principles of lawfulness, purpose limitation and data minimization, pursuant to art. 5 of the GDPR, the retention period of your personal data is:
+Established for a period of time not exceeding the achievement of the purposes for which they are collected and processed and in compliance with the timing for the correct provision of the services requested.
+
+Data Controller: the Data Controller, pursuant to the law, is {!rag_soc!}, With registered and operational headquarters in {!indirizzo!} - {!cap!} {!citta!} {!provincia!}, VAT: {!p_iva!} In the person of its legal representative pro tempore.
+
+You have the right to obtain from the holder the cancellation (possible right to be forgotten), the limitation, updating, rectification, portability, opposition to the processing of personal data concerning you, as well as in general can exercise all the rights provided for by the articles 15, 16, 17, 18, 19, 20, 21, 22 of the GDPR, where applicable with respect to the data processing purposes.
+The parties concerned, having recourse to the conditions, also have the right to lodge a complaint with the Guarantor as the supervisory authority in accordance with the procedures laid down. For any further information, and to assert the rights recognized to you by the European Regulation, you can contact the data controller.
+EU Reg. 2016/679: Articles 15, 16, 17, 18, 19, 20, 21, 22 - Rights of the interested party
+1. The interested party has the right to obtain confirmation of the existence or not of personal data concerning him / her, even if not yet registered, and their communication in intelligible form.
+
+2. The interested party has the right to obtain the indication:
+to. the origin of personal data;
+b. of the purposes and methods of processing;
+c. of the logic applied in case of treatment carried out with the aid of electronic instruments;
+d. of the identifying details of the holder, of the responsible and of the designated representative according to article 5, paragraph 2;
+is. of the subjects or categories of subjects to whom the personal data may be communicated or who can learn about them as appointed representative in the territory of the State, managers or agents.
+
+3. The interested party has the right to obtain:
+to. updating, rectification or, when interested, integration of data;
+b. the cancellation, transformation into anonymous form or blocking of data processed unlawfully, including data whose retention is unnecessary for the purposes for which the data were collected or subsequently processed;
+c. the attestation that the operations referred to in letters a) and b) have been brought to the attention, also with regard to their content, of those to whom the data have been communicated or disseminated, except in the case in which this fulfillment proves impossible o involves a use of means manifestly disproportionate to the protected right;
+d. data portability.
+
+4. The interested party has the right to object, in whole or in part:
+to. for legitimate reasons, the processing of personal data concerning him, even if pertinent to the purpose of the collection;
+b. to the processing of personal data concerning him for the purpose of sending advertising or direct sales material or for carrying out market research or commercial communication.
+
+
+Consent
+Formula of acquisition of the consent of the interested party
+Your consent for the receipt of marketing material will be recorded (IP address, email, date and time) by ticking the appropriate box and together with the press of the appropriate button.
+This consent will be filed to prove the conferment, and allow you at any time to unsubscribe, in addition to all other rights above.

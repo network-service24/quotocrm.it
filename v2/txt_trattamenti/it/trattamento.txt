@@ -1,0 +1,68 @@
+Informativa sul trattamento dei dati personali
+Artt. 13-14 Reg.to UE 2016/679
+
+Soggetti Interessati: Fruitori del servizio
+
+{!rag_soc!}, con sede legale ed operativa in {!indirizzo!} - {!cap!} {!citta!} {!provincia!}, P.iva: {!p_iva!} nella qualità di Titolare del trattamento dei Suoi dati personali, ai sensi e per gli effetti del Reg.to UE 2016/679 di seguito 'GDPR', con la presente La informa che la citata normativa prevede la tutela degli interessati rispetto al trattamento dei dati personali e che tale trattamento sarà improntato ai principi di correttezza, liceità, trasparenza e di tutela della Sua riservatezza e dei Suoi diritti.
+I Suoi dati personali verranno trattati in accordo alle disposizioni legislative della normativa sopra richiamata e degli obblighi di riservatezza ivi previsti.
+
+Finalità di trattamento:
+Erogazione del servizio: I suoi dati saranno trattati per rispondere alle eventuali richieste che possono pervenire dai moduli per la compilazione, e form disponibili sul sito internet, od a richieste pervenute per email.
+
+Base giuridica: La base giuridica del trattamento è di tipo contrattuale nei termini in cui è previsto un trattamento dati a fronte di una richiesta di informazioni a cui segue una risposta.
+
+Marketing - servizio di ricezione email: in particolare i Suoi dati verranno trattati, previo Suo libero consenso, per la ricezione di email a scopo promozionale, selezionando/spuntando l'apposita casella indicante il consenso a ricevere materiale marketing presente in un form.
+
+Base giuridica: La base giuridica del trattamento è il consenso dell'interessato.
+
+Natura obbligatoria o facoltativa del conferimento:
+Il conferimento dei dati è per Lei facoltativo riguardo alle sopraindicate finalità di erogazione del servizio, la non compilazione dei campi richiesti od eventualmente segnati con l'asterisco, non permette di proseguire nelle richieste di informazioni, un Suo eventuale rifiuto al trattamento non compromette la prosecuzione del rapporto o la congruità del trattamento stesso.
+Per le finalità di Marketing il consenso è libero, disgiunto e facoltativo. il mancato consenso non pregiudica la navigazione del sito ne l'erogazione dei servizi richiesti.
+
+Modalità del trattamento: i Suoi dati personali potranno essere trattati con modalità prevalentemente elettroniche e telematiche quali:
+- A mezzo calcolatori elettronici con utilizzo di sistemi software gestiti da Terzi;
+- A mezzo calcolatori elettronici con utilizzo di sistemi software gestiti o programmati direttamente;
+- Trattamento temporaneo in forma anonima aggregata.
+Ogni trattamento avviene nel rispetto delle modalità di cui agli artt. 6, 32 del GDPR e mediante l'adozione delle adeguate misure di sicurezza previste.
+
+Comunicazione: i Suoi dati saranno comunicati esclusivamente a soggetti competenti e debitamente nominati per l'espletamento dei servizi necessari ad una corretta gestione del rapporto, con garanzia di tutela dei diritti dell'interessato.
+I suoi dati saranno trattati unicamente da personale espressamente autorizzato dal Titolare ed, in particolare, da personale preposto alla manutenzione ed aggiornamento del sito, e, qualora necessario, al personale incaricato a svolgere le comunicazioni di marketing.
+
+Destinatari:
+Eventuali altri soggetti tecnici la cui conoscenza dei dati è necessaria per lo svolgimento della propria mansione quale garantire la corretta esecuzione della richiesta.
+
+Paesi Terzi: I suoi dati non sono comunicati in paesi extra UE
+Diffusione: I suoi dati personali non verranno diffusi in alcun modo.
+
+Periodo di Conservazione. Le segnaliamo che, nel rispetto dei principi di liceità, limitazione delle finalità e minimizzazione dei dati, ai sensi dell'art. 5 del GDPR, il periodo di conservazione dei Suoi dati personali è:
+Stabilito per un arco di tempo non superiore al conseguimento delle finalità per le quali sono raccolti e trattati e nel rispetto dei tempi per la corretta l'erogazione dei servizi richiesti.
+
+Titolare del Trattamento: il Titolare del trattamento dei dati, ai sensi della normativa è {!rag_soc!}, con sede legale ed operativa in {!indirizzo!} - {!cap!} {!citta!} {!provincia!}, P.iva: {!p_iva!} nella persona del suo legale rappresentante pro tempore.
+
+Lei ha diritto di ottenere dal titolare la cancellazione (eventuale diritto all'oblio), la limitazione, l'aggiornamento, la rettificazione, la portabilità, l'opposizione al trattamento dei dati personali che La riguardano, nonchè in generale può esercitare tutti i diritti previsti dagli artt. 15, 16, 17, 18, 19, 20, 21, 22 del GDPR, ove applicabili rispetto alle finalità di trattamento dei dati.
+Gli interessati, ricorrendone i presupposti, hanno, altresì, il diritto di proporre reclamo al Garante quale autorità di controllo secondo le procedure previste. Per qualsiasi ulteriore informazione, e per far valere i diritti a Lei riconosciuti dal Regolamento europeo, potrà rivolgersi al titolare del trattamento.
+Reg.to UE 2016/679: Artt. 15, 16, 17, 18, 19, 20, 21, 22 - Diritti dell'Interessato
+1. L'interessato ha diritto di ottenere la conferma dell'esistenza o meno di dati personali che lo riguardano, anche se non ancora registrati, e la loro comunicazione in forma intelligibile.
+
+2. L'interessato ha diritto di ottenere l'indicazione:
+a. dell'origine dei dati personali;
+b. delle finalità e modalità del trattamento;
+c. della logica applicata in caso di trattamento effettuato con l'ausilio di strumenti elettronici;
+d. degli estremi identificativi del titolare, dei responsabili e del rappresentante designato ai sensi dell'articolo 5, comma 2;
+e. dei soggetti o delle categorie di soggetti ai quali i dati personali possono essere comunicati o che possono venirne a conoscenza in qualità di rappresentante designato nel territorio dello Stato, di responsabili o incaricati.
+
+3. L'interessato ha diritto di ottenere:
+a. l'aggiornamento, la rettificazione ovvero, quando vi ha interesse, l'integrazione dei dati;
+b. la cancellazione, la trasformazione in forma anonima o il blocco dei dati trattati in violazione di legge, compresi quelli di cui non è necessaria la conservazione in relazione agli scopi per i quali i dati sono stati raccolti o successivamente trattati;
+c. l'attestazione che le operazioni di cui alle lettere a) e b) sono state portate a conoscenza, anche per quanto riguarda il loro contenuto, di coloro ai quali i dati sono stati comunicati o diffusi, eccettuato il caso in cui tale adempimento si rivela impossibile o comporta un impiego di mezzi manifestamente sproporzionato rispetto al diritto tutelato;
+d. la portabilità dei dati.
+
+4. L'interessato ha diritto di opporsi, in tutto o in parte:
+a. per motivi legittimi al trattamento dei dati personali che lo riguardano, ancorchè pertinenti allo scopo della raccolta;
+b. al trattamento di dati personali che lo riguardano a fini di invio di materiale pubblicitario o di vendita diretta o per il compimento di ricerche di mercato o di comunicazione commerciale.
+
+
+Consenso
+Formula di acquisizione del consenso dell'interessato
+Il Suo consenso per la ricezione di materiale marketing sarà registrato (indirizzo IP, email, data e ora) barrando l'apposita casella e congiuntamente alla pressione del apposito pulsante.
+Tale consenso sarà archiviato per comprovarne il conferimento, e permetterLe in ogni momento la disiscrizione, oltre a tutti gli altri diritti sopraesposti.

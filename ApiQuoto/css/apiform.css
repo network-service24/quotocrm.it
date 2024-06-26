@@ -1,0 +1,37 @@
+.form_ok {
+    position: fixed;
+    left: 50%;
+    transform: translateX(-50%);
+    width: calc(100% - 30px) !important;
+    max-width: 550px;
+    padding: 22px;
+    background-color: white;
+    border-radius: 3px;
+    box-shadow: 0 0 15px #000;
+    z-index: 100000000000;
+    height: auto;
+    top: 150px;
+    font-size: 14px;
+    display: none !important;
+}
+.form_ok.open{    display: block!important;;
+}
+
+.form_ok .exit {
+    position: absolute;
+    top: 7px;
+    right: 7px;
+    font-size: 20px;
+    cursor: pointer;
+    z-index: 2;
+}
+
+.chiusox {
+    display: none !important;
+    margin-bottom: 0 !important;
+}
+
+.puls {
+    font-weight: strong;
+    cursor: pointer;
+}

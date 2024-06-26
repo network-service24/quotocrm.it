@@ -1,0 +1,17 @@
+<?php
+
+include($_SERVER['DOCUMENT_ROOT']."/include/settings.inc.php");
+include($_SERVER['DOCUMENT_ROOT']."/include/declaration.inc.php");
+
+if($_REQUEST['action'] == 'del_evento'){
+
+    $delete = "DELETE FROM hospitality_eventi  WHERE Id = ".$_REQUEST['Id']." AND idsito = ".$_REQUEST['idsito'];
+    $dbMysqli->query($delete);
+
+    $delete2 = "DELETE FROM hospitality_eventi_lang  WHERE Id_eventi = ".$_REQUEST['Id']." AND idsito = ".$_REQUEST['idsito'];
+    $dbMysqli->query($delete2);
+
+}
+
+
+?>

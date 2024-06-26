@@ -1,0 +1,49 @@
+.progetti a {
+    position: relative;
+    z-index: 24;
+}
+
+.progetti a:hover {
+    z-index: 25;
+}
+
+.progetti a span {
+    display: none;
+}
+
+.progetti a:hover span {
+    /*lo span verrà mostrato solo sullo stato :hover */
+    display: block;
+    position: absolute;
+    width: auto;
+    background: #000 !important;
+    border: 1px solid #FFF !important;
+    color: #FFF !important;
+    padding: 10px 20px;
+    border-radius: 10px;
+    font: bold 12px "Helvetica Neue", Sans-Serif !important;
+    text-transform: uppercase;
+    box-shadow: 0 0 7px black;
+    text-align: left;
+    white-space: normal;
+}
+
+.progetti a span.a_destra {
+    left: 2em;
+}
+
+.progetti a span.a_sinistra {
+    right: 2em;
+}
+
+.progetti a span.sotto {
+    top: 2em;
+}
+
+.progetti a span.sopra {
+    bottom: 2em;
+}
+
+.progetti a span.no_wrap {
+    white-space: nowrap !important;
+}

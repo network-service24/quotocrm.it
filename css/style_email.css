@@ -1,0 +1,68 @@
+@charset "UTF-8";
+
+@font-face {
+  font-family: 'Source Sans Pro';
+  font-style: normal;
+  font-weight: 300;
+  src: local('Source Sans Pro Light'), local('SourceSansPro-Light'), url(https://www.quotocrm.it/css/fonts/toadOcfmlt9b38dHJxOBGNbE_oMaV8t2eFeISPpzbdE.woff) format('woff');
+}
+@font-face {
+  font-family: 'Source Sans Pro';
+  font-style: normal;
+  font-weight: 400;
+  src: local('Source Sans Pro'), local('SourceSansPro-Regular'), url(https://www.quotocrm.it/css/fonts/ODelI1aHBYDBqgeIAH2zlBM0YzuT7MdOe03otPbuUS0.woff) format('woff');
+}
+@font-face {
+  font-family: 'Source Sans Pro';
+  font-style: normal;
+  font-weight: 700;
+  src: local('Source Sans Pro Bold'), local('SourceSansPro-Bold'), url(https://www.quotocrm.it/css/fonts/toadOcfmlt9b38dHJxOBGFkQc6VGVFSmCnC_l7QZG60.woff) format('woff');
+}
+
+@font-face {
+  font-family: 'Vollkorn';
+  font-style: normal;
+  font-weight: 400;
+  src: local('Vollkorn Regular'), local('Vollkorn-Regular'), url(https://www.quotocrm.it/css/fonts/BCFBp4rt5gxxFrX6F12DKvesZW2xOQ-xsNqO47m55DA.woff) format('woff');
+}
+@font-face {
+  font-family: 'Vollkorn';
+  font-style: normal;
+  font-weight: 700;
+  src: local('Vollkorn Bold'), local('Vollkorn-Bold'), url(https://www.quotocrm.it/css/fonts/wMZpbUtcCo9GUabw9JODeobN6UDyHWBl620a-IRfuBk.woff) format('woff');
+}
+
+body { background-image:url(https://www.quotocrm.it/img/bg-mail.jpg); background-position:top left; background-repeat:no-repeat; background-color:#FFFFFF; margin:0 auto; font-family:Tahoma,Geneva,sans-serif; font-size:11px; }
+a{ text-decoration:none; color:#333333; }
+h2{ font-size:12pt; }
+.tbl_body { width:700px; font-size:10pt; background-color:#FFFFFF; border-collapse:collapse; }
+.tbl_body td { padding:5px; }
+.tbl_body .spacer_td { border-top:solid 1px #999999; background-color:#EEEEEE; height:30px; }
+.tbl_body .spacer_btm_td { border-bottom:solid 1px #999999; height:15px; }
+.title{ background-color:#FFFFFF; color:#666666; font-size:14pt; }
+.footer{ background-color:#BBBBBB; color:#666666; font-size:8pt; }
+.footer a{ color:#EEEEEE; }
+.tit_residuo{ display: inline-block; font-size: 10pt; margin: 0 0 0 40px; padding: 3px 0 0; /* text-shadow: 1px 1px 2px #333; */ filter: dropshadow(color=#333, offx=1, offy=1);}
+.alert_tit_residuo{ color:#990000; }
+.tit_residuo .lbl_tit_residuo { display:inline-block; width:450px; }
+.tit_residuo .lbl_val_residuo { display:inline-block; width:100px; vertical-align: top;}
+.tit_ass_ore_residuo{   display: inline-block; font-size: 10pt; margin: 0 5px; padding: 3px 0 0; text-align: left; /*text-shadow: 1px 1px 2px #333; */ filter: dropshadow(color=#333, offx=1, offy=1);}
+.tit_ass_ore_consumato{ display: inline-block; font-size: 10pt; margin: 0 5px; padding: 3px 0 0; text-align: center; width: 40%; /* text-shadow: 1px 1px 2px #333; */ filter: dropshadow(color=#333, offx=1, offy=1);}
+.tbl_pack {display:table;}
+.tbl_pack_row {display:table-row;}
+.tbl_pack_row:nth-child(1) {border-top: 1px solid #DDDDDD;}
+.tbl_pack_row:nth-child(2) {background-color:#dfedfe;}
+.tbl_pack_td {border-bottom: 1px solid #DDDDDD; border-right: 1px solid #DDDDDD; display: table-cell; margin: 0 5px 5px 0; padding: 5px; font-size: 9pt; vertical-align:top;}
+.tbl_pack_td:nth-child(1) {border-left: 1px solid #DDDDDD;}
+.tbl_pack_td_tit { font-weight:bold; background-color:#f7fedf; font-size: 10pt;}
+.tbl_pack_td small{font-size:8pt;}
+.tbl_pack_td b{font-size: 9pt;}
+.box_note_commerciali_det_storico{background-color: #FFFFFF; border: 1px solid #999999; display: inline-block; min-height: 350px; overflow: auto; padding: 0 5px; width: 465px; vertical-align: top;}
+.info_note_commerciali_top{font-size:9pt; border-bottom:solid 1px #999999; padding:5px 0; display:block; height: auto; position:relative;}
+.info_note_commerciali_bottom{font-size:9pt; border-top:solid 1px #999999; padding:5px 0; display:block; height: auto; position:relative;}
+.info_note_commerciali_top p, .info_note_commerciali_bottom p{margin:0;}
+.info_note_commerciali_top h3, .info_note_commerciali_bottom h3{margin:0;}
+.txt_nota_commerciale{font-size:10pt; padding:5px 15px;}
+.txt_nota_tecnica{display:block; margin:0px 0px 10px 0px; padding:10px; background-color:#F5F5F5;}
+.row_nota_commerciale{display:block; margin:0px 0px 10px 0px; padding:10px;}
+.row_list_note{display:block; padding: 10px 5px; border: 1px solid #666666; margin:0px 0px 5px;}

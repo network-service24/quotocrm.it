@@ -1,0 +1,68 @@
+Informations sur le traitement des données personnelles
+Articles 13-14 Règl. UE 2016/679
+
+Sujets intéressés: Utilisateurs du service
+
+{!rag_soc!}, avec le siège légal et opérationnel à {!indirizzo!} - {!cap!} {!citta!} {!provincia!}, TVA: {!p_iva!} en qualité de responsable du traitement de vos données personnelles, en vertu et par effet de l'UE Reg.to 2016/679 ci-après « GDPR », vous informe par la présente que le règlement précité prévoit la protection des parties intéressées concernant le traitement des données à caractère personnel et que ce traitement sera les principes d'exactitude, de légalité, de transparence et de protection de votre vie privée et de vos droits.
+Vos données personnelles seront traitées conformément aux dispositions législatives de la loi susmentionnée et aux obligations de confidentialité qui y sont énoncées.
+
+Buts du traitement:
+Mise à disposition du service: Vos données seront traitées pour répondre à toute demande pouvant être reçue des formulaires à remplir et des formulaires disponibles sur le site Web ou des demandes reçues par courrier électronique.
+
+Base juridique: La base juridique du traitement est contractuelle dans les conditions dans lesquelles le traitement des données est fourni pour une demande d'informations, suivie d'une réponse.
+
+Marketing - service de réception d'e-mails: en particulier, vos données seront traitées, sous réserve de votre libre consentement, pour la réception d'e-mails à des fins promotionnelles, en sélectionnant / cochant la case appropriée indiquant le consentement à recevoir du matériel marketing dans un formulaire.
+
+Base juridique: la base juridique du traitement est le consentement de la partie intéressée.
+
+Caractère obligatoire ou facultatif du transfert:
+La fourniture de données est facultative pour les fins ci-dessus de la prestation des services, et non l'achèvement des champs obligatoires ou éventuellement marqués d'un astérisque, pas vous laisser continuer les informations requises, votre refus de traitement ne pas la poursuite de la relation ou de l'adéquation du traitement lui-même.
+À des fins de marketing, le consentement est gratuit, disjoint et facultatif. le défaut de consentement n'affecte pas la navigation du site ni la fourniture des services demandés.
+
+Méthodes de traitement: vos données personnelles peuvent être traitées en utilisant principalement des méthodes électroniques et télématiques telles que:
+- au moyen de calculatrices électroniques utilisant des logiciels tiers;
+- au moyen de calculatrices électroniques utilisant des logiciels gérés ou programmés directement;
+- Traitement temporaire sous forme anonyme globale.
+Chaque traitement est effectué conformément aux méthodes décrites dans les articles. 6, 32 du RGPD et par l'adoption des mesures de sécurité appropriées.
+
+Communication: vos données seront communiquées exclusivement à des personnes compétentes et dûment désignées pour l'accomplissement des services nécessaires à une bonne gestion de la relation, avec une garantie de protection des droits de l'intéressé.
+Vos données ne seront traitées que par du personnel expressément autorisé par le Propriétaire et, en particulier, par le personnel chargé de la maintenance et de la mise à jour du site et, le cas échéant, du personnel chargé de la communication marketing.
+
+Destinataires:
+Tout autre sujet technique dont la connaissance des données est nécessaire à l'exercice de ses fonctions pour assurer la bonne exécution de la demande.
+
+Pays tiers: Vos données ne sont pas divulguées dans les pays hors UE
+Diffusion: Vos données personnelles ne seront en aucun cas divulguées.
+
+Période de conservation. Veuillez noter que, conformément aux principes de légalité, de limitation de la finalité et de minimisation des données, conformément à l'art. 5 du GDPR, la période de conservation de vos données personnelles est:
+Établi pour une période de temps ne dépassant pas la réalisation des fins pour lesquelles ils sont collectés et traités et en conformité avec le calendrier pour la fourniture correcte des services demandés.
+
+Contrôleur de données: le contrôleur de données, conformément à la loi, est {!rag_soc!}, Avec siège social enregistré et opérationnel dans {!indirizzo!} - {!cap!} {!citta!} {!provincia!}, TVA: {!p_iva!} En la personne de son représentant légal pro tempore.
+
+Vous avez le droit d'obtenir du titulaire l'annulation (possibilité d'être oublié), la limitation, la mise à jour, la rectification, la portabilité, l'opposition au traitement des données personnelles vous concernant, ainsi que d'une manière générale peut exercer tous les droits prévu par les articles 15, 16, 17, 18, 19, 20, 21, 22 du GDPR, le cas échéant en ce qui concerne le traitement des données.
+Les parties concernées, ayant recours aux conditions, ont également le droit de déposer une plainte auprès du Garant en tant qu'autorité de contrôle conformément aux procédures prévues. Pour toute information complémentaire et pour faire valoir les droits reconnus par le règlement européen, vous pouvez contacter le responsable du traitement des données.
+Règlement de l'UE 2016/679: Articles 15, 16, 17, 18, 19, 20, 21, 22 - Droits de la partie intéressée
+1. L'intéressé a le droit d'obtenir la confirmation de l'existence ou non de données personnelles le concernant, même si elles ne sont pas encore enregistrées, et leur communication sous forme intelligible.
+
+2. L'intéressé a le droit d'obtenir l'indication:
+a. l'origine des données personnelles;
+b. des buts et des méthodes de traitement;
+c. de la logique appliquée en cas de traitement effectué à l'aide d'instruments électroniques;
+d. des coordonnées du titulaire, du responsable et du représentant désigné conformément à l'article 5, paragraphe 2;
+e. des sujets ou des catégories de sujets à qui les données personnelles peuvent être communiquées ou qui peuvent apprendre à leur sujet en tant que représentant désigné sur le territoire de l'Etat, les gestionnaires ou les agents.
+
+3. L'intéressé a le droit d'obtenir:
+a. mise à jour, rectification ou, lorsque cela est intéressé, intégration des données;
+b. l'annulation, la transformation en forme anonyme ou le blocage de données traitées illégalement, y compris les données dont la conservation est inutile aux fins pour lesquelles les données ont été collectées ou traitées;
+c. l'attestation que les opérations visées aux lettres a) et b) ont été portées à l'attention, même en ce qui concerne leur contenu, de ceux à qui les données ont été communiquées ou diffusées, sauf dans le cas où cet accomplissement s'avère impossible o implique l'utilisation de moyens manifestement disproportionnés par rapport au droit protégé;
+d. portabilité des données.
+
+4. L'intéressé a le droit de s'opposer, en tout ou en partie:
+a. pour des raisons légitimes, le traitement des données personnelles le concernant, même si pertinentes au but de la collecte;
+b. au traitement de données personnelles le concernant dans le but d'envoyer de la publicité ou du matériel de vente directe ou pour effectuer des études de marché ou des communications commerciales.
+
+
+consentement
+Formule d'acquisition du consentement de la partie intéressée
+Votre consentement pour la réception du matériel de marketing sera enregistré (adresse IP, email, date et heure) en cochant la case appropriée et en appuyant sur le bouton approprié.
+Ce consentement sera déposé pour prouver l'accord, et vous permettre à tout moment de vous désinscrire, en plus de tous les autres droits ci-dessus.

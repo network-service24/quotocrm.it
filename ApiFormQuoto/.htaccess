@@ -1,0 +1,4 @@
+AuthType Basic
+AuthName 'Area Riservata'
+AuthUserFile /var/www/vhosts/quotocrm.it/httpdocs/ApiFormQuoto/.htpasswd
+Require valid-user
