@@ -20,11 +20,11 @@ $messaggio = '<p>Email di test con turbo-smtp ' . date('Y-m-d H:i:s');
 $_oggetto = 'Test turbo-smtp ' . date('Y-m-d H:i:s');
 
 $SmtpAuth = true;
-$SmtpHost = 'pro.eu.turbo-smtp.com';
+$SmtpHost = '';
 $SmtpPort = 587;
 $SmtpSecure = 'tls';
-$SmtpUsername = 'info@network-service.it';
-$SmtpPassword = 'TesD1300524!';
+$SmtpUsername = '';
+$SmtpPassword = '';
 $NumberSend = 1;
 
 
