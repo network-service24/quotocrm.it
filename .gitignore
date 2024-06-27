@@ -18,6 +18,7 @@
 /tmp
 /tutorial
 /chatbot
+/cron/performize.php
 /v2/apiForm
 /v2/bootstrap
 /v2/build
