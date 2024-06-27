@@ -41,6 +41,10 @@ include($_SERVER['DOCUMENT_ROOT']."/include/function.inc.php");
                     $DataInvio                           = $row['DataInvio'];
                     $DataArrivo                          = $row['DataArrivo'];
                     $Visibile                            = $row['Visibile'];
+                    $SendCS                              = $row['SendCS'];
+
+                    $SendInfo                            = $row['SendInfo'];
+                    $SendRE                              = $row['SendRE'];
                     $Note                                = $row['Note'];
 
                     if($idTemplate!= '' && $idTemplate!= 0){
@@ -351,8 +355,8 @@ include($_SERVER['DOCUMENT_ROOT']."/include/function.inc.php");
                                                                         <span class="f-12">Disabilita autoresponder invio del Questionario</span>
                                                                         <div class="clearfix p-b-10"></div>
                                                                         <div id="questionario'.$Id.'">
-                                                                            <i class="fa fa-square-o fa-2x fa-fw text-black" data-id="'.$Id.'" id="Quest'.$Id.'" '.($Visibile==0?'style="display:none"':'').'></i>           
-                                                                            <i class="fa fa-check-square-o fa-2x fa-fw text-black" data-id="'.$Id.'" id="noQuest'.$Id.'" '.($Visibile==1?'style="display:none"':'').'></i>
+                                                                            <i class="fa fa-square-o fa-2x fa-fw text-black" data-id="'.$Id.'" id="Quest'.$Id.'" '.($SendCS==0?'style="display:none"':'').'></i>           
+                                                                            <i class="fa fa-check-square-o fa-2x fa-fw text-black" data-id="'.$Id.'" id="noQuest'.$Id.'" '.($SendCS==1?'style="display:none"':'').'></i>
                                                                         </div>
                                                                     </div>
                                                                 </div>
@@ -373,7 +377,7 @@ include($_SERVER['DOCUMENT_ROOT']."/include/function.inc.php");
                                                                 </div>
                                                             </div>'."\r\n";
                                                         }else{
-                                                            echo'<div class="col-md-4">
+/*                                                             echo'<div class="col-md-4">
                                                                     <div class="row">
                                                                         <div class="col-md-2">
                                                                             <i class="fa fa-vcard fa-2x fa-fw text-black"></i>
@@ -383,12 +387,12 @@ include($_SERVER['DOCUMENT_ROOT']."/include/function.inc.php");
                                                                             <span class="f-12">Disabilita autoresponder dell\'invio del modulo di Check-In OnLine</span>
                                                                             <div class="clearfix p-b-10"></div>
                                                                             <div id="checkinonline'.$Id.'">
-                                                                                <i class="fa fa-square-o fa-2x fa-fw text-black" data-id="'.$Id.'" id="Chec'.$Id.'" '.($Visibile==0?'style="display:none"':'').'></i>           
-                                                                                <i class="fa fa-check-square-o fa-2x fa-fw text-black" data-id="'.$Id.'" id="noChec'.$Id.'" '.($Visibile==1?'style="display:none"':'').'></i>
+                                                                                <i class="fa fa-square-o fa-2x fa-fw text-black" data-id="'.$Id.'" id="Chec'.$Id.'" '.($SendCheckin==0?'style="display:none"':'').'></i>           
+                                                                                <i class="fa fa-check-square-o fa-2x fa-fw text-black" data-id="'.$Id.'" id="noChec'.$Id.'" '.($SendCheckin==1?'style="display:none"':'').'></i>
                                                                             </div>
                                                                         </div>
                                                                     </div>
-                                                                </div>';
+                                                                </div>'; */
                                                         }
                                                     echo'   <div class="col-md-4">
                                                                 <div class="row">
@@ -437,8 +441,8 @@ include($_SERVER['DOCUMENT_ROOT']."/include/function.inc.php");
                                                                             <span class="f-12">Disabilita autoresponder dell\'invio della email di Pre-check-in</span>
                                                                             <div class="clearfix p-b-10"></div>
                                                                             <div id="precheckin'.$Id.'">
-                                                                                <i class="fa fa-square-o fa-2x fa-fw text-black" data-id="'.$Id.'" id="PreCheck'.$Id.'" '.($Visibile==0?'style="display:none"':'').'></i>           
-                                                                                <i class="fa fa-check-square-o fa-2x fa-fw text-black" data-id="'.$Id.'" id="noPreCheck'.$Id.'" '.($Visibile==1?'style="display:none"':'').'></i>
+                                                                                <i class="fa fa-square-o fa-2x fa-fw text-black" data-id="'.$Id.'" id="PreCheck'.$Id.'" '.($SendInfo==0?'style="display:none"':'').'></i>           
+                                                                                <i class="fa fa-check-square-o fa-2x fa-fw text-black" data-id="'.$Id.'" id="noPreCheck'.$Id.'" '.($SendInfo==1?'style="display:none"':'').'></i>
                                                                             </div>
                                                                         </div>
                                                                     </div>
@@ -455,8 +459,8 @@ include($_SERVER['DOCUMENT_ROOT']."/include/function.inc.php");
                                                                             <span class="f-12">Disabilita autoresponder dell\'invio per la richiesta di recensioni su TripAdvisor</span>
                                                                             <div class="clearfix p-b-10"></div>
                                                                             <div id="recens'.$Id.'">
-                                                                                <i class="fa fa-square-o fa-2x fa-fw text-black" data-id="'.$Id.'" id="Rec'.$Id.'" '.($Visibile==0?'style="display:none"':'').'></i>           
-                                                                                <i class="fa fa-check-square-o fa-2x fa-fw text-black" data-id="'.$Id.'" id="noRec'.$Id.'" '.($Visibile==1?'style="display:none"':'').'></i>
+                                                                                <i class="fa fa-square-o fa-2x fa-fw text-black" data-id="'.$Id.'" id="Rec'.$Id.'" '.($SendRE==0?'style="display:none"':'').'></i>           
+                                                                                <i class="fa fa-check-square-o fa-2x fa-fw text-black" data-id="'.$Id.'" id="noRec'.$Id.'" '.($SendRE==1?'style="display:none"':'').'></i>
                                                                             </div>
                                                                         </div>
                                                                     </div>
