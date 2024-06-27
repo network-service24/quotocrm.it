@@ -1,4 +1,5 @@
 <?php
+
 /**
  * * controllo per l'esecuzione del codice che avviene solo se
  * * la variabile action è valorizzata a 'send'

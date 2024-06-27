@@ -553,5 +553,6 @@ if(empty($json_data) || is_null($json_data)){
 }else{
 	$json_data = json_encode($json_data);
 }
+
 	  echo $json_data;
 

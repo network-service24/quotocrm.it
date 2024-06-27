@@ -29,7 +29,7 @@ switch ($provenienza) {
 $q = $dbMysqli->query('SELECT * FROM hospitality_chat WHERE NumeroPrenotazione = ' . $NumeroPrenotazione . ' AND idsito = ' . $idsito . ' ORDER by data DESC');
 $rec = $q[0];
 
-if (sizeof($rec) > 0) {
+if (!empty($rec) && sizeof($rec) > 0) {
     if ($rec['operator'] == 0) {
         $new_chat = '<i class="fa fa-spinner fa-pulse"></i>';
         $title = 'Rispondi alla Chat';
