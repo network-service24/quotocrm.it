@@ -69,7 +69,7 @@ if($_REQUEST['action']=='search'){
                                                 <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
                                               </div>
                                               <div class="modal-body" style="line-height:10px!important">';
-                                            if($_SERVER['REQUEST_URI']=='/preventivi/' || $_SERVER['REQUEST_URI']=='/conferme/'){
+                                            if(strstr($_SERVER['REQUEST_URI'],'/preventivi/') || $_SERVER['REQUEST_URI']=='/conferme/'){
 
                                                       $form_ricerca .= '<h4 class="linea_bottom">Filtro Univoco</h4>
                                                                         <div class="clearfix p-b-10"></div>
@@ -108,7 +108,7 @@ if($_REQUEST['action']=='search'){
                                       $form_ricerca .= '<form  method="POST" id="form_search" name="form_search" action="'.$_SERVER['REQUEST_URI'].'">';
 
                                       $form_ricerca .= '<div class="row">';
-                                      if($_SERVER['REQUEST_URI']=='/preventivi/' || $_SERVER['REQUEST_URI']=='/prenotazioni/'){
+                                      if(strstr($_SERVER['REQUEST_URI'],'/preventivi/') || $_SERVER['REQUEST_URI']=='/prenotazioni/'){
 
                                         if($fun->check_vista(IDSITO)==true){
                                           $form_ricerca .= '
@@ -186,7 +186,7 @@ if($_REQUEST['action']=='search'){
                                                               </div>
                                                           </div>';
                                     }
-                                    if($_SERVER['REQUEST_URI']=='/preventivi/' || $_SERVER['REQUEST_URI']=='/conferme/'){
+                                    if(strstr($_SERVER['REQUEST_URI'],'/preventivi/') || $_SERVER['REQUEST_URI']=='/conferme/'){
                                       $form_ricerca .= '  <div class="form-group">
                                                               <label for="TipoSoggiorno" class="control-label"><b>Soggiorno</b></label>
                                                                   <div class="input-group input-group-primary">
@@ -213,7 +213,7 @@ if($_REQUEST['action']=='search'){
                                                             </div>
                                                           </div>';
                                     }
-                                    if($_SERVER['REQUEST_URI']=='/preventivi/' || $_SERVER['REQUEST_URI']=='/conferme/'){
+                                    if(strstr($_SERVER['REQUEST_URI'],'/preventivi/') || $_SERVER['REQUEST_URI']=='/conferme/'){
                                           $form_ricerca .= '
                                                             <div class="col-md-4">
                                                               <div class="form-group">
