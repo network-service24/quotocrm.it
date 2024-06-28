@@ -297,7 +297,7 @@ include($_SERVER['DOCUMENT_ROOT']."/include/function.inc.php");
                                                                         <b>INVIA  E-MAIL</b><br>
                                                                         <span class="f-12">Invia una mail al cliente con la richiesta di pagamento</span>
                                                                         <div class="clearfix p-b-10"></div>
-                                                                        '.(($DataScadenza > date('Y-m-d') && $DataScadenza!='')?'<a href="#" id="pul_send_mail'.$Id.'" class="btn btn-primary btn-sm">Invia</a>':'<label class="badge badge-inverse-danger f-11">Controlla la data di scadenza</label>').'
+                                                                        '.(($DataScadenza >= date('Y-m-d') && $DataScadenza!='')?'<a href="#" id="pul_send_mail'.$Id.'" class="btn btn-primary btn-sm">Invia</a>':'<label class="badge badge-inverse-danger f-11">Controlla la data di scadenza</label>').'
                                                                     </div>
                                                                 </div>
                                                             </div>
@@ -310,7 +310,7 @@ include($_SERVER['DOCUMENT_ROOT']."/include/function.inc.php");
                                                                         <b>INVIA WHATSAPP</b><br>
                                                                         <span class="f-12">Invia un messaggio con il link della pagina di conferma</span>
                                                                         <div class="clearfix p-b-10"></div>
-                                                                        '.(($DataScadenza > date('Y-m-d') && $DataScadenza!='')?'
+                                                                        '.(($DataScadenza >= date('Y-m-d') && $DataScadenza!='')?'
                                                                             '.(($Cellulare!='' && $PrefissoInternazionale!='')?'<a href="'.BASE_URL_SITO.'send_whatsapp/send/'.$Id.'" target="_blank" class="btn btn-primary btn-sm">invia conferma</a>':'<label class="badge badge-inverse-danger f-11">Cellulare non inserito</label>').''
                                                                         :'<label class="badge badge-inverse-danger f-11">Controlla la data di scadenza</label>').'
                                                                     </div>
@@ -325,7 +325,7 @@ include($_SERVER['DOCUMENT_ROOT']."/include/function.inc.php");
                                                                         <b>INVIA WHATSAPP</b><br>
                                                                         <span class="f-12">Invia un messaggio con il link della pagina voucher</span>
                                                                         <div class="clearfix p-b-10"></div>
-                                                                        '.(($DataScadenza > date('Y-m-d') && $DataScadenza!='')?'
+                                                                        '.(($DataScadenza >= date('Y-m-d') && $DataScadenza!='')?'
                                                                             '.(($Cellulare!='' && $PrefissoInternazionale!='')?'<a href="'.BASE_URL_SITO.'send_whatsapp_voucher/send/'.$Id.'" target="_blank" class="btn btn-primary btn-sm">invia voucher</a>':'<label class="badge badge-inverse-danger f-11">Cellulare non inserito</label>').''
                                                                         :'<label class="badge badge-inverse-danger f-11">Controlla la data di scadenza</label>').'
                                                                     </div>

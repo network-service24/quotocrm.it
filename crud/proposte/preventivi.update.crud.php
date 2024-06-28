@@ -329,7 +329,7 @@ include($_SERVER['DOCUMENT_ROOT']."/include/function.inc.php");
                                                                         <span class="f-12">Invia una mail al cliente con le proposte di soggiorno</span>
                                                                         <div class="clearfix p-b-10"></div>
                                                                         '.($dett_check_proposta==true?
-                                                                            (($DataScadenza > date('Y-m-d') && $DataScadenza!='')?'<a href="#" id="pul_send_mail'.$Id.'" class="btn btn-primary btn-sm">Invia</a>':'<label class="badge badge-inverse-danger f-11">Controlla la data di scadenza</label>')
+                                                                            (($DataScadenza >= date('Y-m-d') && $DataScadenza!='')?'<a href="#" id="pul_send_mail'.$Id.'" class="btn btn-primary btn-sm">Invia</a>':'<label class="badge badge-inverse-danger f-11">Controlla la data di scadenza</label>')
                                                                         :'<label class="badge badge-inverse-danger f-11">Preventivo da completare</label>').'
                                                                         </div>
                                                                 </div>
@@ -344,7 +344,7 @@ include($_SERVER['DOCUMENT_ROOT']."/include/function.inc.php");
                                                                         <span class="f-12">Invia una messaggio al cliente con il link al preventivo</span>
                                                                         <div class="clearfix p-b-10"></div>
                                                                         '.($dett_check_proposta==true?
-                                                                            (($DataScadenza > date('Y-m-d') && $DataScadenza!='')?'
+                                                                            (($DataScadenza >= date('Y-m-d') && $DataScadenza!='')?'
                                                                                 '.(($Cellulare!='' && $PrefissoInternazionale!='')?'<a href="'.BASE_URL_SITO.'send_whatsapp/send/'.$Id.'" target="_blank"  class="btn btn-primary btn-sm">invia messaggio</a>':'<label class="badge badge-inverse-danger f-11">Cellulare non inserito</label>').''
                                                                             :'<label class="badge badge-inverse-danger f-11">Controlla la data di scadenza</label>')
                                                                         :'<label class="badge badge-inverse-danger f-11">Preventivo da completare</label>').'
