@@ -88,7 +88,7 @@ $anniprima = (date('Y')-$diff_anni);
                                                     <li class="<?=$GLOBALS['ActiveMenu']['conferme']?>">
                                                         <a href="<?=BASE_URL_SITO?>conferme/">
                                                             <span class="pcoded-micon"><i class="fa fa-credit-card text-white"></i></span>
-                                                            <span class="pcoded-mtext"><small class="fw-lighter">Conferme</small> ... in Trattativa</span>
+                                                            <span class="pcoded-mtext"><small class="fw-lighter f-10">Conferme</small> ... in Trattativa</span>
                                                                 <?php 
                                                                     //if(check_configurazioni(IDSITO,'check_notifiche_push')==1){
                                                                         echo n_conferme_send();
