@@ -314,7 +314,7 @@ $content .='   //EQUALIZZO BOX DETTAGLI
                         { "data": "partenza","type":"date","class":"text-center nowrap"}, 
                         { "data": "a","class":"text-center"}, 
                         { "data": "b","class":"text-center"},
-                        { "data": "invio","type":"date","class":"text-center"},
+                        { "data": "invio","class":"text-center"},
                         { "data": "aperto","class":"text-center"},
                         { "data": "chat","class":"text-center"},
                         { "data": "scadenza","class":"text-center nowrap"}, 
