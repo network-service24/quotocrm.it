@@ -35,14 +35,15 @@
             'Content-Type:      application/json',                                                                                
             'Content-Length:   ' .strlen($data_string),  
             'X-ProviderCode:   '.$_SESSION['ProviderCode'],
-            'X-ProviderApiKey: '.$_SESSION['ApiKey']));
+            'X-ProviderApiKey: '.$_SESSION['ApiKey']),
+            'X-ProviderIdentityKey: a90f688b-37e7-426c-a20c-6fa62b64ee0a');
             $res = curl_exec($ch);
 
             $risult = json_decode($res);
 
             $persone = $risult->Configuration->PersonTypes;        
          
-
+        
             $insert     = '';
             $check_type = '';
             foreach ($persone as $key => $value) {
@@ -69,7 +70,7 @@
             }
 
             $carte = $risult->Configuration->AcceptedCreditCards;
-
+           
             $insert2     = '';
             $check_type2 = '';
             foreach ($carte as $k => $val) {
@@ -119,46 +120,46 @@
                         'Content-Type: application/json',                                                                                
                         'Content-Length: ' . strlen($data_string2),                      
                         'X-ProviderCode: '.$_SESSION['ProviderCode'],
-                        'X-ProviderApiKey: '.$_SESSION['ApiKey']));
+                        'X-ProviderApiKey: '.$_SESSION['ApiKey']),
+                        'X-ProviderIdentityKey: a90f688b-37e7-426c-a20c-6fa62b64ee0a');
                         $res2 = curl_exec($ch2);
 
                         $risultato = json_decode($res2);
 
                         $oggetto_rates = $risultato->Rates;
-
+                     
                         foreach ($oggetto_rates as $key => $value) {
                             ## query per verificare se la tipologia è già present
-
 
                             $sel1 = $dbMysqli->query("SELECT * FROM hospitality_tipo_soggiorno WHERE idsito = '".IDSITO."' AND Lingua = 'it' AND PlanCode = '".$value->RateId."' AND Abilitato = 1");
                             $tot1 = sizeof($sel1);
                             if($tot1 == 0){
-                                $sync1 = $dbMysqli->query("INSERT INTO hospitality_tipo_soggiorno(idsito,Lingua,TipoSoggiorno,PlanCode,Abilitato) VALUES('".IDSITO."','it','".$value->DescriptionTranslation."','".$value->RateId."','1')");
+                                $sync1 = $dbMysqli->query("INSERT INTO hospitality_tipo_soggiorno(idsito,Lingua,TipoSoggiorno,PlanCode,Abilitato) VALUES('".IDSITO."','it','".$dbMysqli->escape($value->DescriptionTranslation)."','".$value->RateId."','1')");
                                 $id_sync1 = $dbMysqli->getInsertId($sync1); 
-                                $db->query("INSERT INTO hospitality_tipo_soggiorno_lingua(soggiorni_id,idsito,lingue,Soggiorno,Descrizione,PlanCode) VALUES('".$id_sync1."','".IDSITO."','it','".$value->DescriptionTranslation."','".addslashes($value->NotesTranslation)."','".$value->RateId."')");      
-                                $db->query("INSERT INTO hospitality_tipo_soggiorno_lingua(soggiorni_id,idsito,lingue,Soggiorno,Descrizione,PlanCode) VALUES('".$id_sync1."','".IDSITO."','en','".$value->DescriptionTranslation."','".addslashes($GT->translate('it','en',$value->NotesTranslation))."','".$value->RateId."')");      
-                                $db->query("INSERT INTO hospitality_tipo_soggiorno_lingua(soggiorni_id,idsito,lingue,Soggiorno,Descrizione,PlanCode) VALUES('".$id_sync1."','".IDSITO."','fr','".$value->DescriptionTranslation."','".addslashes($GT->translate('it','fr',$value->NotesTranslation))."','".$value->RateId."')");      
-                                $db->query("INSERT INTO hospitality_tipo_soggiorno_lingua(soggiorni_id,idsito,lingue,Soggiorno,Descrizione,PlanCode) VALUES('".$id_sync1."','".IDSITO."','de','".$value->DescriptionTranslation."','".addslashes($GT->translate('it','de',$value->NotesTranslation))."','".$value->RateId."')");      
+                                $dbMysqli->query("INSERT INTO hospitality_tipo_soggiorno_lingua(soggiorni_id,idsito,lingue,Soggiorno,Descrizione,PlanCode) VALUES('".$id_sync1."','".IDSITO."','it','".$dbMysqli->escape($value->DescriptionTranslation)."','".$dbMysqli->escape($value->NotesTranslation)."','".$value->RateId."')");      
+                                $dbMysqli->query("INSERT INTO hospitality_tipo_soggiorno_lingua(soggiorni_id,idsito,lingue,Soggiorno,Descrizione,PlanCode) VALUES('".$id_sync1."','".IDSITO."','en','".$dbMysqli->escape($value->DescriptionTranslation)."','".$dbMysqli->escape($GT->translate('it','en',$value->NotesTranslation))."','".$value->RateId."')");      
+                                $dbMysqli->query("INSERT INTO hospitality_tipo_soggiorno_lingua(soggiorni_id,idsito,lingue,Soggiorno,Descrizione,PlanCode) VALUES('".$id_sync1."','".IDSITO."','fr','".$dbMysqli->escape($value->DescriptionTranslation)."','".$dbMysqli->escape($GT->translate('it','fr',$value->NotesTranslation))."','".$value->RateId."')");      
+                                $dbMysqli->query("INSERT INTO hospitality_tipo_soggiorno_lingua(soggiorni_id,idsito,lingue,Soggiorno,Descrizione,PlanCode) VALUES('".$id_sync1."','".IDSITO."','de','".$dbMysqli->escape($value->DescriptionTranslation)."','".$dbMysqli->escape($GT->translate('it','de',$value->NotesTranslation))."','".$value->RateId."')");      
                             }                                                              
                                      
                         }
 
                         $oggetto_resources = $risultato->ResourceTypes;
-
+                     
                         foreach ($oggetto_resources as $k => $val) {
 
                             $selcam1 = $dbMysqli->query("SELECT * FROM hospitality_tipo_camere WHERE idsito = '".IDSITO."' AND Lingua = 'it' AND RoomCode = '".$val->ResourceTypeId."' AND Abilitato = 1");
                             $totcam1 = sizeof($selcam1);
                               if($totcam1 == 0){ 
-                                $cam1 = $dbMysqli->query("INSERT INTO hospitality_tipo_camere(idsito,Lingua,TipoCamere,RoomCode,Abilitato) VALUES('".IDSITO."','it','".$val->DescriptionTranslation."','".$val->ResourceTypeId."','1')");                        
+                                $cam1 = $dbMysqli->query("INSERT INTO hospitality_tipo_camere(idsito,Lingua,TipoCamere,RoomCode,Abilitato) VALUES('".IDSITO."','it','".$dbMysqli->escape($val->DescriptionTranslation)."','".$val->ResourceTypeId."','1')");                        
                                 $id_cam1 = $dbMysqli->getInsertId($cam1); 
-                                $db->query("INSERT INTO hospitality_camere_testo(camere_id,idsito,lingue,Camera,Descrizione,RoomCode) VALUES('".$id_cam1."','".IDSITO."','it','".$val->DescriptionTranslation."','".addslashes($val->NotesTranslation)."','".$val->ResourceTypeId."')");      
-                                $db->query("INSERT INTO hospitality_camere_testo(camere_id,idsito,lingue,Camera,Descrizione,RoomCode) VALUES('".$id_cam1."','".IDSITO."','en','".$val->DescriptionTranslation."','".addslashes($GT->translate('it','en',$val->NotesTranslation))."','".$val->ResourceTypeId."')");
-                                $db->query("INSERT INTO hospitality_camere_testo(camere_id,idsito,lingue,Camera,Descrizione,RoomCode) VALUES('".$id_cam1."','".IDSITO."','fr','".$val->DescriptionTranslation."','".addslashes($GT->translate('it','fr',$val->NotesTranslation))."','".$val->ResourceTypeId."')");
-                                $db->query("INSERT INTO hospitality_camere_testo(camere_id,idsito,lingue,Camera,Descrizione,RoomCode) VALUES('".$id_cam1."','".IDSITO."','de','".$val->DescriptionTranslation."','".addslashes($GT->translate('it','de',$val->NotesTranslation))."','".$val->ResourceTypeId."')");
-                                $db->query("INSERT INTO hospitality_gallery_camera(IdCamera,idsito,Foto) VALUES('".$id_cam1."','".IDSITO."','singola1.jpg')");
-                                $db->query("INSERT INTO hospitality_gallery_camera(IdCamera,idsito,Foto) VALUES('".$id_cam1."','".IDSITO."','doppia1.jpg')"); 
-                                $db->query("INSERT INTO hospitality_gallery_camera(IdCamera,idsito,Foto) VALUES('".$id_cam1."','".IDSITO."','tripla1.jpg')");
+                                $dbMysqli->query("INSERT INTO hospitality_camere_testo(camere_id,idsito,lingue,Camera,Descrizione,RoomCode) VALUES('".$id_cam1."','".IDSITO."','it','".$dbMysqli->escape($val->DescriptionTranslation)."','".$dbMysqli->escape($val->NotesTranslation)."','".$val->ResourceTypeId."')");      
+                                $dbMysqli->query("INSERT INTO hospitality_camere_testo(camere_id,idsito,lingue,Camera,Descrizione,RoomCode) VALUES('".$id_cam1."','".IDSITO."','en','".$dbMysqli->escape($val->DescriptionTranslation)."','".$dbMysqli->escape($GT->translate('it','en',$val->NotesTranslation))."','".$val->ResourceTypeId."')");
+                                $dbMysqli->query("INSERT INTO hospitality_camere_testo(camere_id,idsito,lingue,Camera,Descrizione,RoomCode) VALUES('".$id_cam1."','".IDSITO."','fr','".$dbMysqli->escape($val->DescriptionTranslation)."','".$dbMysqli->escape($GT->translate('it','fr',$val->NotesTranslation))."','".$val->ResourceTypeId."')");
+                                $dbMysqli->query("INSERT INTO hospitality_camere_testo(camere_id,idsito,lingue,Camera,Descrizione,RoomCode) VALUES('".$id_cam1."','".IDSITO."','de','".$dbMysqli->escape($val->DescriptionTranslation)."','".$dbMysqli->escape($GT->translate('it','de',$val->NotesTranslation))."','".$val->ResourceTypeId."')");
+                                $dbMysqli->query("INSERT INTO hospitality_gallery_camera(IdCamera,idsito,Foto) VALUES('".$id_cam1."','".IDSITO."','singola1.jpg')");
+                                $dbMysqli->query("INSERT INTO hospitality_gallery_camera(IdCamera,idsito,Foto) VALUES('".$id_cam1."','".IDSITO."','doppia1.jpg')"); 
+                                $dbMysqli->query("INSERT INTO hospitality_gallery_camera(IdCamera,idsito,Foto) VALUES('".$id_cam1."','".IDSITO."','tripla1.jpg')");
                               }
 
                         }

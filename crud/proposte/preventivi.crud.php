@@ -521,12 +521,12 @@ if(!$_REQUEST['action']){
 								"nr"             => '<a href="'.BASE_URL_SITO.'timeline/'.$row['NumeroPrenotazione'].'" class="f-12" title="Timeline"  data-toogle="tooltip">'.$row['NumeroPrenotazione'].'</a>',
 								"fonte"          => $bg_fonte,
 								"tipo"           => $bg_tipo,
-								"data"           => $dataRichiesta,
+								"data"           => '<span class="ordinamento">'.$row['DataRichiesta'].'</span>'.$dataRichiesta,
 								"cliente"        => '<b>'.stripslashes($row['Nome']).' '.stripslashes($row['Cognome']).'</b>'.$gia_presente,
 								"email"          => '<i class="fa fa-envelope fa-fw cursore" data-toogle="tooltip" title="'.$row['Email'].'"></i>',
 								"lingua"         => '<img src="'.BASE_URL_SITO.'img/flags/'.$row['Lingua'].'.png" class="image_flag">',
-								"arrivo"         => $arrivo,
-								"partenza"       => $partenza,
+								"arrivo"         => '<span class="ordinamento">'.$row['DataArrivo'].'</span>'.$arrivo,
+								"partenza"       => '<span class="ordinamento">'.$row['DataPartenza'].'</span>'.$partenza,
 								"a"              => $row['NumeroAdulti'],
 								"b"              => $row['NumeroBambini'],
 								"invio"          => $get_invio.'<br>'.($check_proposta==false?'<label class="badge badge-inverse-danger f-10">Da completare</label>':''),
@@ -553,6 +553,5 @@ if(empty($json_data) || is_null($json_data)){
 }else{
 	$json_data = json_encode($json_data);
 }
-
 	  echo $json_data;
 

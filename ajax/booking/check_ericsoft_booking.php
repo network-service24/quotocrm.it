@@ -811,7 +811,8 @@ include($_SERVER['DOCUMENT_ROOT']."/include/declaration.inc.php");
                 'Content-Type:      application/json',                                                                                
                 'Content-Length:   ' .strlen($data_string),  
                 'X-ProviderCode:   '.$ProviderCode,
-                'X-ProviderApiKey: '.$ApiKey));
+                'X-ProviderApiKey: '.$ApiKey),
+                'X-ProviderIdentityKey: a90f688b-37e7-426c-a20c-6fa62b64ee0a');
                 $res = curl_exec($ch);
 
                 $risultato = json_decode($res);

@@ -30,16 +30,16 @@ $giorniRecall = $fun->check_recall_conferme(IDSITO);
 if($giorniRecall!='' || $giorniRecall=='0'){
     $boxRecall = '  <button class="btn btn-primary btn-sm f-left cursore" id="closeButtonBoxInfo">
                         Chiudi box autoresponder attivi <i class="fa fa-times" data-toggle="tooltip" title="Chiudi box sincronizzazioni e autoresponder attivi"></i>
-                    </button> 
+                    </button>
                     <button class="btn btn-primary btn-sm f-left cursore" id="openButtonBoxInfo">
                          Visualizza autoresponder attivi <i class="fa fa-angle-double-down" data-toggle="tooltip" title="Visualizza sincronizzazioni e autoresponder attivi"></i>
-                    </button> 
+                    </button>
                     <div class="clearfix p-b-10"></div>
                     <div class="row row-eq-height"  id="boxInfo">
                             <div class="col-md-6">
                             <div class="card col-eq-height">
                                 <div class="card-header">
-                                    <h5 class="text-primary">AUTORESPONDER CONFERME</h5>                                                                                        
+                                    <h5 class="text-primary">AUTORESPONDER CONFERME</h5>
                                 </div>
                                 <div class="card-block">
                                     <div class="row">
@@ -49,7 +49,7 @@ if($giorniRecall!='' || $giorniRecall=='0'){
                                 </div>
                             </div>
                         </div>
-                    </div>'; 
+                    </div>';
 }
 # INTERFACCIA CRUD DATATABLE
 $content .='   <!-- Table datatable-->
@@ -71,13 +71,13 @@ $content .='               <th></th>
                             <th>A</th>
                             <th>B</th>
                             <th><span data-toggle="tooltip" title="Data e metodo d\'invio">Invio</span></th>
-                            <th>Aperto</th>  
-                            <th>Chat</th>                           
+                            <th>Aperto</th>
+                            <th>Chat</th>
                             <th><span data-toggle="tooltip" title="Data Scadenza">Scadenza</span></th>
                             <th>Notifiche</th>'."\r\n";
 if($check_pms5==1 || $check_pmsB==1 || $check_pmsE==1){
     $content .='             <th style="width:5%">PMS</th>'."\r\n";
-}                            
+}
 $content .='                 <th>Azioni</th>
                         </tr>
                     </thead>
@@ -112,19 +112,19 @@ $content .='<script>
             //FUNZIONE CHE POPOLA CONTENUTI INPUT PER LA MODIFICA
             function get_content_update(id){
 
-                   $.ajax({								 
-                        type: "POST",								 
-                        url: "'.BASE_URL_SITO.'crud/proposte/conferme.update.crud.php",								 
+                   $.ajax({
+                        type: "POST",
+                        url: "'.BASE_URL_SITO.'crud/proposte/conferme.update.crud.php",
                         data: "id="+id,
                         dataType: "html",
                             success: function(data){
                                 $("#load_db_date").html(data);
                             },
                             error: function(){
-                                alert("Chiamata fallita, si prega di riprovare..."); 
+                                alert("Chiamata fallita, si prega di riprovare...");
                             }
-                    });  
-                        
+                    });
+
             }
             $(document).ready(function() {'."\r\n";
 
@@ -146,12 +146,12 @@ $content .='   //EQUALIZZO BOX DETTAGLI
 
                 // CONFIG DATATABLE
                 var table = $("#conferme").DataTable( {
-                    order: [[2, \'desc\'],[5, \'desc\']], 
+                    order: [[2, \'desc\'],[5, \'desc\']],
                     responsive: true,
                     processing:true,
                     oLanguage: {sProcessing: "<div class=\'cell preloader5 loader-block\'><div class=\'circle-5 l loader-primary\'></div><div class=\'circle-5 m loader-primary\'></div><div class=\'circle-5 r loader-primary\'></div></div><span class=\'text-primary f-w-400 f-14 f-s-intial\'>QUOTO! sta caricando i dati...<br><span class=\'\'>Attendere!!</span></span>"},
                     "paging": true,
-						"pagingType": "simple_numbers",    
+						"pagingType": "simple_numbers",
 						"language": {
 							 "search": "Filtro rapido:",
 							 "info": "Visualizza pagina _PAGE_ di _PAGES_ per _TOTAL_ righe",
@@ -161,7 +161,7 @@ $content .='   //EQUALIZZO BOX DETTAGLI
 								 "next":"Successivo",
 							 },
 							 buttons: {
-								pageLength: {                                
+								pageLength: {
 									_: "Mostra %d record",
                                     \'-1\': "Mostra tutto"
 								}
@@ -171,7 +171,7 @@ $content .='   //EQUALIZZO BOX DETTAGLI
 						lengthMenu: [
 							[ 30, 40, 60, 100, -1 ],
 							[ \'30 record\', \'40 record\', \'60 record\', \'100 record\', \'Tutti\' ]
-                        ],	
+                        ],
                         buttons: [
                         {
                             text:      \'<i class="fa fa-square-o fa-2x fa-fw"></i> seleziona\',
@@ -207,7 +207,7 @@ $content .='   //EQUALIZZO BOX DETTAGLI
                             className: \'buttonSelezioni\',
                             attr: {id: \'archivia_all\'},
                             action: function () {
-                              
+
                                     var checkbox_value = "";
                                     $("input[name=Id]").each(function () {
                                         var ischecked = $(this).is(":checked");
@@ -223,16 +223,16 @@ $content .='   //EQUALIZZO BOX DETTAGLI
                                                 data: "idsito='.IDSITO.'&checkbox_value="+checkbox_value,
                                                 dataType: "html",
                                                 success: function(data) {
-                                                            _alert("<i class=\"fa fa-inbox \"></i> Esito:","Conferma/e sono state archiviate!"); 
+                                                            _alert("<i class=\"fa fa-inbox \"></i> Esito:","Conferma/e sono state archiviate!");
                                                             setTimeout(function(){
                                                                 location.reload();
-                                                            }, 1000);  
+                                                            }, 1000);
                                                     }
                                             });
                                             return false; // con false senza refresh della pagina
                                         }
                                     }else{
-                                            _alert("<i class=\"fa fa-inbox \"></i> Attenzione:","Selezionare prima di cliccare il pulsante!"); 
+                                            _alert("<i class=\"fa fa-inbox \"></i> Attenzione:","Selezionare prima di cliccare il pulsante!");
                                     }
 
                             }
@@ -258,21 +258,21 @@ $content .='   //EQUALIZZO BOX DETTAGLI
                                                 data: "idsito='.IDSITO.'&cestino=1&checkbox_value="+checkbox_value,
                                                 dataType: "html",
                                                 success: function(data) {
-                                                            _alert("<i class=\"fa fa-trash \"></i> Esito:","Conferma/e sono state cestinate!"); 
+                                                            _alert("<i class=\"fa fa-trash \"></i> Esito:","Conferma/e sono state cestinate!");
                                                             setTimeout(function(){
                                                                 location.reload();
-                                                            }, 1000);   
+                                                            }, 1000);
                                                     }
                                             });
                                             return false; // con false senza refresh della pagina
                                         }
 
                                     }else{
-                                            _alert("<i class=\"fa fa-trash \"></i> Attenzione:","Selezionare prima di cliccare il pulsante!"); 
+                                            _alert("<i class=\"fa fa-trash \"></i> Attenzione:","Selezionare prima di cliccare il pulsante!");
 
                                     }
                             }
-                        },                        
+                        },
                         {
 
                             text:      \'<i class="fa fa-search fa-2x fa-fw"></i> Ricerca avanzata\',
@@ -283,65 +283,65 @@ $content .='   //EQUALIZZO BOX DETTAGLI
                                 $("#myModalASearch").modal("show");
                             }
                         },
-                    \'pageLength\',                    
+                    \'pageLength\',
                     /* {
                             extend: \'collection\',
                             className: \'buttonExport\',
                             text: \'Esporta\',
-                            buttons: [  
+                            buttons: [
                                 { extend: \'copy\', text: \'Copia\' },
-                                { extend: \'excel\', text: \'Excel\' },  
+                                { extend: \'excel\', text: \'Excel\' },
                                 { extend: \'print\', text: \'Stampa\' },
-                                
+
                             ]
                         },
                         { extend: \'colvis\', text: \'Colonne visibili\' }*/
-                    ],			
+                    ],
                     "ajax": "'.BASE_URL_SITO.'crud/proposte/conferme.crud.php?idsito='.IDSITO.''.$variabili.'",
                     "deferRender": true,
                     "columns": ['."\r\n";
 
         $content .='    { "data": "id","class":"text-center"},
                         { "data": "op","class":"text-center"},
-                        { "data": "nr","class":"text-center"},          
+                        { "data": "nr","class":"text-center"},
                         { "data": "fonte"},
                         { "data": "tipo"},
-                        { "data": "data","type":"date","class":"text-center nowrap"}, 
-                        { "data": "cliente"}, 
-                        { "data": "email","class":"text-center"}, 
-                        { "data": "lingua","class":"text-center"}, 
-                        { "data": "arrivo","type":"date","class":"text-center nowrap"}, 
-                        { "data": "partenza","type":"date","class":"text-center nowrap"}, 
-                        { "data": "a","class":"text-center"}, 
+                        { "data": "data","class":"text-center nowrap"},
+                        { "data": "cliente"},
+                        { "data": "email","class":"text-center"},
+                        { "data": "lingua","class":"text-center"},
+                        { "data": "arrivo","class":"text-center nowrap"},
+                        { "data": "partenza","class":"text-center nowrap"},
+                        { "data": "a","class":"text-center"},
                         { "data": "b","class":"text-center"},
                         { "data": "invio","class":"text-center"},
                         { "data": "aperto","class":"text-center"},
                         { "data": "chat","class":"text-center"},
-                        { "data": "scadenza","class":"text-center nowrap"}, 
-                        { "data": "check","class":"text-center"},'."\r\n"; 
-    if($check_pms5==1 || $check_pmsB==1 || $check_pmsE==1){ 
-        $content .='    { "data": "pms","class":"text-center"},'."\r\n"; 
-    }                        
+                        { "data": "scadenza","class":"text-center nowrap"},
+                        { "data": "check","class":"text-center"},'."\r\n";
+    if($check_pms5==1 || $check_pmsB==1 || $check_pmsE==1){
+        $content .='    { "data": "pms","class":"text-center"},'."\r\n";
+    }
         $content .='    { "data": "action","class":"text-center"}
                     ],';
-     if($check_pms5==1 || $check_pmsB==1 || $check_pmsE==1){                    
+     if($check_pms5==1 || $check_pmsB==1 || $check_pmsE==1){
         $content .='    "columnDefs": [
                            {"targets": [0,1,7,8,11,12,14,15,17,18,19], "orderable": false}
 
                         ],
 
-                    })'."\r\n"; 
+                    })'."\r\n";
      }else{
 
         $content .='    "columnDefs": [
                            {"targets": [0,1,7,8,11,12,14,15,17,18], "orderable": false}
 
                         ]
-                    })'."\r\n";      
-     }   
+                    })'."\r\n";
+     }
 
         $content .='
-                    $("#conferme_processing").removeClass("card"); 
+                    $("#conferme_processing").removeClass("card");
 
                     $(\'#conferme tbody\').on( \'click\', \'td:last-child\', function () {
 
@@ -365,24 +365,24 @@ $content .='   //EQUALIZZO BOX DETTAGLI
                             $(this).find("i").addClass("colorArrow");
                             $(this).parent().find("a[title=\"Timeline\"]").addClass("linkNumP");
                             $("#infobox").show(300);
-                            $("#closeButtonInfoBox").show(300);                                                                               
+                            $("#closeButtonInfoBox").show(300);
                             if($("#boxInfo").is(":visible")){
-                                $("html, body").animate({  
+                                $("html, body").animate({
                                     scrollTop: 350
                                 }, 200);
                             }else{
-                                $("html, body").animate({  
+                                $("html, body").animate({
                                     scrollTop: 0
                                 }, 200);
 
-                            }                         
-                        } 
-                    });                    
+                            }
+                        }
+                    });
 
                     '."\r\n";
 
 
-$content .='      
+$content .='
                         if($("input[class=\'seleziona\']").prop(\'checked\')==true) {
                             $("button[class=\'dt-button buttonUnSelect\']").show();
                             $("button[class=\'dt-button buttonSelect\']").hide();
@@ -390,7 +390,7 @@ $content .='
                             $("button[class=\'dt-button buttonUnSelect\']").hide();
                             $("button[class=\'dt-button buttonSelect\']").show();
                         }
-                        
+
                         $("button[class=\'dt-button buttonSelect\']").on("click",function(){
                             $("button[class=\'dt-button buttonUnSelect\']").show();
                             $("button[class=\'dt-button buttonSelect\']").hide();
@@ -401,19 +401,19 @@ $content .='
                         });'."\r\n";
 
 
-$content .='        $("#boxInfo").hide();    
+$content .='        $("#boxInfo").hide();
                     $("#openButtonBoxInfo").show();
                     $("#closeButtonBoxInfo").hide();
                     $("#closeButtonBoxInfo").on("click",function(){
                             $("#closeButtonBoxInfo").hide();
                             $("#openButtonBoxInfo").show();
-                            $("#boxInfo").hide(300);                           
+                            $("#boxInfo").hide(300);
                     });
                      $("#openButtonBoxInfo").on("click",function(){
                             $("#openButtonBoxInfo").hide();
                             $("#closeButtonBoxInfo").show();
-                            $("#boxInfo").show(300);                           
-                    }); 
+                            $("#boxInfo").show(300);
+                    });
 
                     $(".buttons-page-length").before("<i class=\"fa fa-eye fa-2x fa-fw\"></i>");
                     $(".buttonExport").before("<i class=\"fa fa-file-excel-o fa-2x fa-fw\"></i>");'."\r\n";
@@ -435,8 +435,8 @@ $content .= '   <form name="form_last_contact" id="form_last_contact" method="PO
 if($_REQUEST['id_conferma']){
     $content .= '   <script>
                         $(document).ready(function(){
-                            get_content_update('.$_REQUEST['id_conferma'].');  
-                            setTimeout(function() { 
+                            get_content_update('.$_REQUEST['id_conferma'].');
+                            setTimeout(function() {
                                 $("#row_'.$_REQUEST['id_conferma'].'").find("td").addClass(\'selected\');
                             }, 2000);
                         });

@@ -1,6 +1,5 @@
 <?
 $NumeroRecord = $fun->countRowsPreventivi(IDSITO);
-
 $num_paginazione = $fun->get_pag(IDSITO);
 
 if($num_paginazione != '' && $num_paginazione != 0){
@@ -566,12 +565,12 @@ $content .='   //EQUALIZZO BOX DETTAGLI
                         { "data": "nr","class":"text-center"},
                         { "data": "fonte"},
                         { "data": "tipo"},
-                        { "data": "data","type":"date","class":"text-center nowrap"},
+                        { "data": "data","class":"text-center nowrap"},
                         { "data": "cliente","class":"nowrap"},
                         { "data": "email","class":"text-center"},
                         { "data": "lingua","class":"text-center"},
-                        { "data": "arrivo","type":"date","class":"text-center nowrap"},
-                        { "data": "partenza","type":"date","class":"text-center nowrap"},
+                        { "data": "arrivo","class":"text-center nowrap"},
+                        { "data": "partenza","class":"text-center nowrap"},
                         { "data": "a","class":"text-center"},
                         { "data": "b","class":"text-center"},
                         { "data": "invio","class":"text-center"},
