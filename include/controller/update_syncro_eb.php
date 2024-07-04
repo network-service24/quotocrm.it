@@ -157,9 +157,18 @@
                                 $dbMysqli->query("INSERT INTO hospitality_camere_testo(camere_id,idsito,lingue,Camera,Descrizione,RoomCode) VALUES('".$id_cam1."','".IDSITO."','en','".$dbMysqli->escape($val->DescriptionTranslation)."','".$dbMysqli->escape($GT->translate('it','en',$val->NotesTranslation))."','".$val->ResourceTypeId."')");
                                 $dbMysqli->query("INSERT INTO hospitality_camere_testo(camere_id,idsito,lingue,Camera,Descrizione,RoomCode) VALUES('".$id_cam1."','".IDSITO."','fr','".$dbMysqli->escape($val->DescriptionTranslation)."','".$dbMysqli->escape($GT->translate('it','fr',$val->NotesTranslation))."','".$val->ResourceTypeId."')");
                                 $dbMysqli->query("INSERT INTO hospitality_camere_testo(camere_id,idsito,lingue,Camera,Descrizione,RoomCode) VALUES('".$id_cam1."','".IDSITO."','de','".$dbMysqli->escape($val->DescriptionTranslation)."','".$dbMysqli->escape($GT->translate('it','de',$val->NotesTranslation))."','".$val->ResourceTypeId."')");
-                                $dbMysqli->query("INSERT INTO hospitality_gallery_camera(IdCamera,idsito,Foto) VALUES('".$id_cam1."','".IDSITO."','singola1.jpg')");
-                                $dbMysqli->query("INSERT INTO hospitality_gallery_camera(IdCamera,idsito,Foto) VALUES('".$id_cam1."','".IDSITO."','doppia1.jpg')"); 
-                                $dbMysqli->query("INSERT INTO hospitality_gallery_camera(IdCamera,idsito,Foto) VALUES('".$id_cam1."','".IDSITO."','tripla1.jpg')");
+
+                                foreach ($val->Images as $chiave => $img) {
+
+                                    $url = $img->FullImagePath; 
+
+                                    $file_name = BASE_PATH_SITO.'uploads/'.IDSITO.'/'.basename($url); 
+
+                                    if (file_put_contents($file_name, file_get_contents($url))) {    
+                                        $dbMysqli->query("INSERT INTO hospitality_gallery_camera(IdCamera,idsito,Foto) VALUES('".$id_cam1."','".IDSITO."','".basename($url)."')");
+                                    }                                
+
+                                }
                               }
 
                         }
