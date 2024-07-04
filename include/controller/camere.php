@@ -4,7 +4,7 @@ $booking_attivo = '';
 $pms_attivo     = '';
 
 $legenda = '<div class="clearfix p-b-20"></div>
-            <ul class="text-center">
+            <ul class="text-left">
                 <li> <b>ATTENZIONE ad eliminare delle camere</b>: </li>
                 <li> perchè così facendo se avete già una attività di preventivi e/o prenotazioni in corso, <b>andreste a svuotare le proposte di soggiorno in produzione</b> e le relative statistiche!</li>
             </ul>';
@@ -33,7 +33,7 @@ if(FORM_SUL_SITO==1){
 
     if($fun->check_simplebooking(IDSITO)==1){
         $SbMsg ='<p class="text-right"><a href="'.BASE_URL_SITO.'update_syncro_sb/cm/" class="btn bg-purple btn-sm" id="resynchBtn">Re-Synch</a> <br><small>Ri-sincronizza le camere se hai aggiunto una o più tipologie nuove su SimpleBooking!</small></p>
-                <p class="text-right"><i class="fa fa-exclamation-circle text-red"></i> <small>Se il lancio della sincronia dovesse aggiungere nuove camere...,ricordatevi di associare i servizi in camera, inserire i testi e le immagini relative!</small></p>';
+                <p class="text-right"><i class="fa fa-exclamation-circle text-red"></i> <small>Se il lancio della sincronia dovesse aggiungere nuove camere...,<b class="text-warning">ricordatevi di associare i servizi in camera, inserire i testi e le immagini delle camere</b> (perchè quelle caricate sono solo dei rendering generici)!</small></p>';
         if(IS_NETWORK_SERVICE_USER==1){
             $SbMsg .='<p class="text-right"><i class="fa fa-exclamation-triangle text-orange"></i> <small>Solo l\'operatore Network Service vede il pulsante per eliminare le camere sincronizzate, se dovesse essere neccessario re-sincronizzare da SimpleBooking:<br>per esempio se i nomi delle camere sono stati modificati, disabilitare le camere interessata, re-sincronizzare e successivamente eliminare le camere vecchie!</small></p>';
         }
@@ -42,7 +42,7 @@ if(FORM_SUL_SITO==1){
     }
     if($fun->check_ericsoftbooking(IDSITO)==1){
         $SbMsg ='<p class="text-right"><a href="'.BASE_URL_SITO.'update_syncro_eb/cm/" class="btn bg-light-blue btn-sm" id="resynchBtn">Re-Synch</a> <br><small>Ri-sincronizza le camere se hai aggiunto una o più tipologie nuove su Ericsoft Booking!</small></p>
-                <p class="text-right"><i class="fa fa-exclamation-circle text-red"></i> <small>Se il lancio della sincronia dovesse aggiungere nuove camere...,ricordatevi di associare i servizi in camera e le immagini relative!</small></p>';
+                <p class="text-right"><i class="fa fa-exclamation-circle text-red"></i> <small>Se il lancio della sincronia dovesse aggiungere nuove camere...,<b class="text-warning">ricordatevi di associare i servizi in camera e le immagini delle camere</b>  (perchè quelle caricate sono solo dei rendering generici)!</small></p>';
         if(IS_NETWORK_SERVICE_USER==1){
             $SbMsg .='<p class="text-right"><i class="fa fa-exclamation-triangle text-orange"></i> <small>Solo l\'operatore Network Service vede il pulsante per eliminare le camere sincronizzate, se dovesse essere neccessario re-sincronizzare da Ericsoft Booking:<br>per esempio se i nomi delle camere sono stati modificati, disabilitare le camere interessata, re-sincronizzare e successivamente eliminare le camere vecchie!</small></p>';
         }
@@ -51,7 +51,7 @@ if(FORM_SUL_SITO==1){
     }
     if($fun->check_bedzzlebooking(IDSITO)==1){
         $SbMsg ='<p class="text-right"><a href="'.BASE_URL_SITO.'update_syncro_bedzzle/cm/" class="btn btn-danger btn-sm" id="resynchBtn">Re-Synch</a> <br><small>Ri-sincronizza le camere se hai aggiunto una o più tipologie nuove su Bedzzle Booking/PMS!</small></p>
-                <p class="text-right"><i class="fa fa-exclamation-circle text-red"></i> <small>Se il lancio della sincronia dovesse aggiungere nuove camere...,ricordatevi di associare i servizi in camera e le immagini relative!</small></p>';
+                <p class="text-right"><i class="fa fa-exclamation-circle text-red"></i> <small>Se il lancio della sincronia dovesse aggiungere nuove camere...,<b class="text-warning">ricordatevi di associare i servizi in camera e le immagini delle camere</b>  (perchè quelle caricate sono solo dei rendering generici)!</small></p>';
         if(IS_NETWORK_SERVICE_USER==1){
             $SbMsg .='<p class="text-right"><i class="fa fa-exclamation-triangle text-orange"></i> <small>Solo l\'operatore Network Service vede il pulsante per eliminare le camere sincronizzate, se dovesse essere neccessario re-sincronizzare da Bedzzle Booking:<br>per esempio se i nomi delle camere sono stati modificati, disabilitare le camere interessata, re-sincronizzare e successivamente eliminare le camere vecchie!</small></p>';
         }
