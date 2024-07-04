@@ -1789,17 +1789,35 @@ $("#AccontoPercentuale_5").change(function(){
             $("#DataArrivoB4").val($("#DataArrivo").val());
             $("#DataArrivoB5").val($("#DataArrivo").val());
 
+            $("#DataPartenzaB1").val($("#DataPartenza").val());
+            $("#DataPartenzaB2").val($("#DataPartenza").val());
+            $("#DataPartenzaB3").val($("#DataPartenza").val());
+            $("#DataPartenzaB4").val($("#DataPartenza").val());
+            $("#DataPartenzaB5").val($("#DataPartenza").val());
+
             $("#DataArrivoE1").val($("#DataArrivo").val());
             $("#DataArrivoE2").val($("#DataArrivo").val());
             $("#DataArrivoE3").val($("#DataArrivo").val());
             $("#DataArrivoE4").val($("#DataArrivo").val());
             $("#DataArrivoE5").val($("#DataArrivo").val());
 
+            $("#DataPartenzaE1").val($("#DataPartenza").val());
+            $("#DataPartenzaE2").val($("#DataPartenza").val());
+            $("#DataPartenzaE3").val($("#DataPartenza").val());
+            $("#DataPartenzaE4").val($("#DataPartenza").val());
+            $("#DataPartenzaE5").val($("#DataPartenza").val());
+
             $("#DataArrivoBedzzle1").val($("#DataArrivo").val());
             $("#DataArrivoBedzzle2").val($("#DataArrivo").val());
             $("#DataArrivoBedzzle3").val($("#DataArrivo").val());
             $("#DataArrivoBedzzle4").val($("#DataArrivo").val());
             $("#DataArrivoBedzzle5").val($("#DataArrivo").val());
+
+            $("#DataPartenzaBedzzle1").val($("#DataPartenza").val());
+            $("#DataPartenzaBedzzle2").val($("#DataPartenza").val());
+            $("#DataPartenzaBedzzle3").val($("#DataPartenza").val());
+            $("#DataPartenzaBedzzle4").val($("#DataPartenza").val());
+            $("#DataPartenzaBedzzle5").val($("#DataPartenza").val());
 
             $("#DataArrivo_1").val($("#DataArrivo").val());
             $("#DataPartenza_1").val($('#DataPartenza').val());
