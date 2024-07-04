@@ -361,15 +361,6 @@ $dati = array(
 	*/	
 	&lt;script type="text/javascript" src="https://www.quotocrm.it/apiForm/js/saveUtmApiQuoto.min.js"  async defer&gt;&lt;/script&gt;
 
-	####################################################################################################################################
-	/**
-	* INSERIRE OBBLIGATORIAMENTE QUESTO SCRIPT SOLO NELLA PAGINA (urlback) DI RITORNO DAL INVIO DEL VOSTRO FORM (dentro il tag &lt;head&gt;&lt;/head&gt;) 
-	* (il mancato inserimento pregiudicherebbe il tracciamento delle campagne ADS)
-	*/		
-	&lt;script&gt;
-	window.dataLayer = window.dataLayer || []; 
-	dataLayer.push({'event': 'Init', 'NumeroPrenotazione': '&lt;?=$_POST['NumeroPrenotazione']?&gt;#&lt;?=$_POST['idsito']?&gt;'});
-	&lt;/script&gt;
 </pre>	
 ################################################################################################################################################### <br>
 <b>ATTENZIONE:</b> <br>
