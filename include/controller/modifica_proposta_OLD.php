@@ -1163,7 +1163,58 @@ if($_REQUEST['action']=='modify'){
                 }
                 ## INSERIMENTO DELLO SCONTO IN TABELLA RELAZIONALE
                 $dbMysqli->query("INSERT INTO hospitality_relazione_sconto_proposte(idsito,id_richiesta,id_proposta,sconto) VALUES('".IDSITO."','".$IdRichiesta."','".$IdProposta."','".$_REQUEST['SC5']."')");                     
+                    ######################################### ARRAY UTILE AL CURL PER ANALITICS####################################
 
+                        $query  = " SELECT 
+                                        hospitality_tipo_servizi.*,
+                                        hospitality_relazione_servizi_proposte.num_persone,
+                                        hospitality_relazione_servizi_proposte.num_notti 
+                                    FROM 
+                                        hospitality_relazione_servizi_proposte
+                                    INNER JOIN 
+                                        hospitality_tipo_servizi ON hospitality_relazione_servizi_proposte.servizio_id = hospitality_tipo_servizi.Id
+                                    WHERE 
+                                        hospitality_tipo_servizi.idsito = ".IDSITO."
+                                    AND 
+                                        hospitality_relazione_servizi_proposte.id_proposta = '".$IdProposta."'
+                                    ORDER BY 
+                                        hospitality_tipo_servizi.TipoServizio ASC";
+                        $record = $dbMysqli->query($query);
+
+                        if(sizeof($record)>0){
+
+                            $array_serv     = array();
+                            $num_persone    = '';
+                            $num_notti      = '';                          
+                            $PrezzoServizio = ''; 
+
+                            foreach($record as $key => $campo){
+
+                                switch($campo['CalcoloPrezzo']){
+                                    case "Al giorno":
+                                        $num_persone = ''; 
+                                        $num_notti = $campo['num_notti'];                            
+                                        $PrezzoServizio = ($campo['PrezzoServizio']!=0?'€ '.number_format(($campo['PrezzoServizio']*$num_notti),2):'Gratis');
+                                    break;
+                                    case "A percentuale":
+                                    $num_persone = '';
+                                    $PrezzoServizio = ($campo['PercentualeServizio']!=''?'% '.number_format(($campo['PercentualeServizio']),2):'');
+                                    break;
+                                    case "Una tantum":
+                                        $num_persone = '';
+                                        $PrezzoServizio = ($campo['PrezzoServizio']!=0?'€ '.number_format($campo['PrezzoServizio'],2):'Gratis');
+                                    break;
+                                    case "A persona":
+                                    $num_persone = $campo['num_persone'];
+                                    $num_notti = $campo['num_notti'];                          
+                                    $PrezzoServizio = ($campo['PrezzoServizio']!=0?'€ '.number_format(($campo['PrezzoServizio']*$num_notti*$num_persone),2):'Gratis');
+                                    break;
+                                }
+                                $serv .= str_replace("&"," ",$campo['TipoServizio']).' '.$campo['CalcoloPrezzo'].' '.$PrezzoServizio;
+                            }
+                        }                                                        
+    
+                    ######################################### ARRAY UTILE AL CURL PER ANALITICS###################################
                 $n_camere = count($_REQUEST['TipoCamere1']);
                     for($i=0; $i<=($n_camere-1); $i++){
                         $insertR1 = "INSERT INTO hospitality_richiesta(id_richiesta,
@@ -1187,9 +1238,92 @@ if($_REQUEST['action']=='modify'){
                                                             '".$_REQUEST['Prezzo1'][$i]."')";
                         $dbMysqli->query($insertR1);
                 
+                    ######################################### ARRAY UTILE AL CURL PER ANALITICS####################################         
+                        $sel3 = "SELECT Id as idCamera,TipoCamere as camera FROM hospitality_tipo_camere WHERE Id = ".$_REQUEST['TipoCamere1'][$i]." AND idsito = ".$_REQUEST['idsito'];
+                        $res3 = $dbMysqli->query($sel3);
+                        $rec3 = $res3[0];
+
+                        $sel4 = "SELECT TipoSoggiorno as soggiorno FROM hospitality_tipo_soggiorno WHERE Id = ".$_REQUEST['TipoSoggiorno1'][$i]." AND idsito = ".$_REQUEST['idsito'];
+                        $res4 = $dbMysqli->query($sel4);
+                        $rec4 = $res4[0];
+
+                        $formato="%a";
+                        $GA4Notti = $fun->dateDiff($DataArrivo1,$DataPartenza1,$formato);
+                        $clean_camera = str_replace('&',' ',$rec3['camera']);
+                        $array_camere[] = array("item_name" => "quoto - $clean_camera","quantity" => "1","price" => $_REQUEST['Prezzo1'][$i]);
+                        
+                        $proposta .= '&pr'.$n_camere.'id='.$rec3['idCamera'].'&pr'.$n_camere.'nm=QUOTO - '.str_replace("&"," ",$rec3['camera']).' - '.str_replace("&"," ",$rec4['soggiorno']).' - dal '.$DataArrivo1.' al '.$DataPartenza1.'&pr'.$n_camere.'ca='.str_replace("&"," ",$rec3['camera']).' - '.str_replace("&"," ",$rec4['soggiorno']).'&pr'.$n_camere.'qt=1&pr'.$n_camere.'pr='.$_REQUEST['Prezzo1'][$i].'$pr'.$n_camere.'va='.$serv;
+
+                        ######################################### ARRAY UTILE AL CURL PER ANALITICS####################################
+                
 
                     }// fine cilo for delle camere
-          
+
+                    // ##############CURL VERSO ANALYTICS PER IMPUTARE I DATI DI QUOTO IN ANALYTICS##############
+                        // Solo se la provenienza è da Sito Web
+                        if($_REQUEST['FontePrenotazione']== 'Sito Web'){
+
+                            $dati_analytics   = $fun->get_account_analytics($_REQUEST['idsito']);
+                            $AccountAnalytics = $dati_analytics['IdAccountAnalytics'];
+                            $measurement_id   = $dati_analytics['measurement_id'];
+                            $api_secret       = $dati_analytics['api_secret'];
+        
+                            if($AccountAnalytics != ''){
+        
+                            $select = "SELECT CLIENT_ID FROM hospitality_client_id WHERE NumeroPrenotazione = '".$_REQUEST['NumeroPrenotazione']."' AND idsito = ".$_REQUEST['idsito'];
+                            $result = $dbMysqli->query($select);
+                            $record = $result[0];
+                            $CLIENT_ID = $record['CLIENT_ID'];
+        
+                            if($CLIENT_ID != ''){
+        
+/*                                 $stringaDati = 'v=1&tid=UA-'.$AccountAnalytics.'&cid='.$CLIENT_ID.'&t=event&ti='.$_REQUEST['NumeroPrenotazione'].'&tr='.str_replace(",",".",$_REQUEST['PrezzoP1']).'&pa=purchase&ec=Ecommerce&ea=purchase&el=QUOTO CRM'.$proposta;
+        
+                                $ch = curl_init();
+                                curl_setopt($ch, CURLOPT_URL, 'https://www.google-analytics.com/collect');
+                                curl_setopt($ch, CURLOPT_HTTPAUTH, CURLAUTH_BASIC);
+                                curl_setopt($ch, CURLOPT_RETURNTRANSFER, 0);
+                                curl_setopt($ch, CURLOPT_POST, true);
+                                curl_setopt($ch, CURLOPT_POSTFIELDS, $stringaDati);
+                                curl_exec($ch);
+                                curl_close($ch);  */
+                                /**
+                                 * * NUOVO INVIO AD ANALYTICS GA4 EVENTO E-COMMERCE
+                                 */
+                                if($api_secret != '' && $measurement_id != ''){// solo se i campi measurement_id e api_secret sono compilati
+
+            /*                         $CLIENT_ID_GA4_ = explode(".",$CLIENT_ID);
+                                    $CLIENT_ID_GA4  = $CLIENT_ID_GA4_[1]; */
+                                    $CLIENT_ID_GA4  = $CLIENT_ID;
+
+                                    $stringa_dati = array("client_id"  => $CLIENT_ID_GA4,
+                                                            "events" => array(array("name" => "purchase",
+                                                            "params" => array("items" => $array_camere,
+                                                            "affiliation" => "quoto",
+                                                            "currency" => "EUR",
+                                                            "transaction_id" => $_REQUEST['NumeroPrenotazione'],
+                                                            "value" => str_replace(",",".",$_REQUEST['PrezzoP1']))))
+                                                        );
+
+                                    $data = json_encode($stringa_dati);
+                                    $url = 'https://www.google-analytics.com/mp/collect?api_secret=' . $api_secret . '&measurement_id=' . $measurement_id;
+                                    $ch = curl_init();
+                                    curl_setopt($ch, CURLOPT_USERAGENT, $_SERVER['HTTP_USER_AGENT']);
+                                    curl_setopt($ch, CURLOPT_URL, $url);
+                                    curl_setopt($ch, CURLOPT_HTTPHEADER, ['Content-Type: application/json']);
+                                    curl_setopt($ch, CURLOPT_POST, true);
+                                    curl_setopt($ch, CURLOPT_POSTFIELDS, $data);
+                                    curl_setopt($ch, CURLOPT_RETURNTRANSFER, 0);
+                                    curl_exec($ch);
+                                    curl_close($ch);
+
+                                }
+                            }// fine se account è inserito su suiteweb
+        
+                            }// fine se client id è presente
+        
+                        }// fine if solo se la provenienza è da Sito Web
+                    // ##############CURL VERSO ANALYTICS PER IMPUTARE I DATI DI QUOTO IN ANALYTICS##############
 
 
             }
@@ -1240,7 +1374,58 @@ if($_REQUEST['action']=='modify'){
                 }
                 ## INSERIMENTO DELLO SCONTO IN TABELLA RELAZIONALE
                 $dbMysqli->query("INSERT INTO hospitality_relazione_sconto_proposte(idsito,id_richiesta,id_proposta,sconto) VALUES('".IDSITO."','".$IdRichiesta."','".$IdProposta2."','".$_REQUEST['SC2']."')");    
-               
+                ######################################### ARRAY UTILE AL CURL PER ANALITICS####################################
+
+                    $query  = " SELECT 
+                                    hospitality_tipo_servizi.*,
+                                    hospitality_relazione_servizi_proposte.num_persone,
+                                    hospitality_relazione_servizi_proposte.num_notti 
+                                FROM 
+                                    hospitality_relazione_servizi_proposte
+                                INNER JOIN 
+                                    hospitality_tipo_servizi ON hospitality_relazione_servizi_proposte.servizio_id = hospitality_tipo_servizi.Id
+                                WHERE 
+                                    hospitality_tipo_servizi.idsito = ".IDSITO."
+                                AND 
+                                    hospitality_relazione_servizi_proposte.id_proposta = '".$IdProposta2."'
+                                ORDER BY 
+                                    hospitality_tipo_servizi.TipoServizio ASC";
+                    $record = $dbMysqli->query($query);
+
+                        if(sizeof($record)>0){
+
+                            $array_serv     = array();
+                            $num_persone    = '';
+                            $num_notti      = '';                          
+                            $PrezzoServizio = ''; 
+
+                            foreach($record as $key => $campo){
+
+                                switch($campo['CalcoloPrezzo']){
+                                    case "Al giorno":
+                                        $num_persone = ''; 
+                                        $num_notti = $campo['num_notti'];                            
+                                        $PrezzoServizio = ($campo['PrezzoServizio']!=0?'€ '.number_format(($campo['PrezzoServizio']*$num_notti),2):'Gratis');
+                                    break;
+                                    case "A percentuale":
+                                    $num_persone = '';
+                                    $PrezzoServizio = ($campo['PercentualeServizio']!=''?'% '.number_format(($campo['PercentualeServizio']),2):'');
+                                    break;
+                                    case "Una tantum":
+                                        $num_persone = '';
+                                        $PrezzoServizio = ($campo['PrezzoServizio']!=0?'€ '.number_format($campo['PrezzoServizio'],2):'Gratis');
+                                    break;
+                                    case "A persona":
+                                    $num_persone = $campo['num_persone'];
+                                    $num_notti = $campo['num_notti'];                          
+                                    $PrezzoServizio = ($campo['PrezzoServizio']!=0?'€ '.number_format(($campo['PrezzoServizio']*$num_notti*$num_persone),2):'Gratis');
+                                    break;
+                                }
+                                $serv2 .= str_replace("&"," ",$campo['TipoServizio']).' '.$campo['CalcoloPrezzo'].' '.$PrezzoServizio;
+                            }
+                        }                                                        
+                
+                ######################################### ARRAY UTILE AL CURL PER ANALITICS###################################
                     $n_camere2 = count($_REQUEST['TipoCamere2']);
                     for($i=0; $i<=($n_camere2-1); $i++){
                         $insertR2 = "INSERT INTO hospitality_richiesta(id_richiesta,
@@ -1264,11 +1449,94 @@ if($_REQUEST['action']=='modify'){
                                                             '".$_REQUEST['Prezzo2'][$i]."')";
 
                         $dbMysqli->query($insertR2);
+
+                        ######################################### ARRAY UTILE AL CURL PER ANALITICS####################################         
+                        $sel3 = "SELECT Id as idCamera,TipoCamere as camera FROM hospitality_tipo_camere WHERE Id = ".$_REQUEST['TipoCamere2'][$i]." AND idsito = ".$_REQUEST['idsito'];
+                        $res3 = $dbMysqli->query($sel3);
+                        $rec3 = $res3[0];
+
+                        $sel4 = "SELECT TipoSoggiorno as soggiorno FROM hospitality_tipo_soggiorno WHERE Id = ".$_REQUEST['TipoSoggiorno2'][$i]." AND idsito = ".$_REQUEST['idsito'];
+                        $res4 = $dbMysqli->query($sel4);
+                        $rec4 = $res4[0];
+
+                        $formato="%a";
+                        $GA4Notti = $fun->dateDiff($DataArrivo1,$DataPartenza1,$formato);
+                        $clean_camera = str_replace('&',' ',$rec3['camera']);
+                        $array_camere[] = array("item_name" => "quoto - $clean_camera","quantity" => "1","price" => $_REQUEST['Prezzo2'][$i]);
+                        
+                        $proposta2 .= '&pr'.$n_camere2.'id='.$rec3['idCamera'].'&pr'.$n_camere2.'nm=QUOTO - '.str_replace("&"," ",$rec3['camera']).' - '.str_replace("&"," ",$rec4['soggiorno']).' - dal '.$DataArrivo2.' al '.$DataPartenza2.'&pr'.$n_camere2.'ca='.str_replace("&"," ",$rec3['camera']).' - '.str_replace("&"," ",$rec4['soggiorno']).'&pr'.$n_camere2.'qt=1&pr'.$n_camere2.'pr='.$_REQUEST['Prezzo2'][$i].'$pr'.$n_camere2.'va='.$serv2;
+
+                        ######################################### ARRAY UTILE AL CURL PER ANALITICS####################################
                     
 
                     }// fine ciclo for delle camere
 
-                   
+                    // ##############CURL VERSO ANALYTICS PER IMPUTARE I DATI DI QUOTO IN ANALYTICS##############
+                        // Solo se la provenienza è da Sito Web
+                        if($_REQUEST['FontePrenotazione']== 'Sito Web'){
+
+                            $dati_analytics   = $fun->get_account_analytics($_REQUEST['idsito']);
+                            $AccountAnalytics = $dati_analytics['IdAccountAnalytics'];
+                            $measurement_id   = $dati_analytics['measurement_id'];
+                            $api_secret       = $dati_analytics['api_secret'];
+
+                            if($AccountAnalytics != ''){
+        
+                            $select = "SELECT CLIENT_ID FROM hospitality_client_id WHERE NumeroPrenotazione = '".$_REQUEST['NumeroPrenotazione']."' AND idsito = ".$_REQUEST['idsito'];
+                            $result = $dbMysqli->query($select);
+                            $record = $result[0];
+                            $CLIENT_ID = $record['CLIENT_ID'];
+        
+                            if($CLIENT_ID != ''){
+        
+/*                                 $stringaDati = 'v=1&tid=UA-'.$AccountAnalytics.'&cid='.$CLIENT_ID.'&t=event&ti='.$_REQUEST['NumeroPrenotazione'].'&tr='.str_replace(",",".",$_REQUEST['PrezzoP2']).'&pa=purchase&ec=Ecommerce&ea=purchase&el=QUOTO CRM'.$proposta2;
+        
+                                $ch = curl_init();
+                                curl_setopt($ch, CURLOPT_URL, 'https://www.google-analytics.com/collect');
+                                curl_setopt($ch, CURLOPT_HTTPAUTH, CURLAUTH_BASIC);
+                                curl_setopt($ch, CURLOPT_RETURNTRANSFER, 0);
+                                curl_setopt($ch, CURLOPT_POST, true);
+                                curl_setopt($ch, CURLOPT_POSTFIELDS, $stringaDati);
+                                curl_exec($ch);
+                                curl_close($ch);  */
+                                /**
+                                 * * NUOVO INVIO AD ANALYTICS GA4 EVENTO E-COMMERCE
+                                 */
+                                if($api_secret != '' && $measurement_id != ''){// solo se i campi measurement_id e api_secret sono compilati
+
+            /*                         $CLIENT_ID_GA4_ = explode(".",$CLIENT_ID);
+                                    $CLIENT_ID_GA4  = $CLIENT_ID_GA4_[1]; */
+                                    $CLIENT_ID_GA4  = $CLIENT_ID;
+
+                                    $stringa_dati = array("client_id"  => $CLIENT_ID_GA4,
+                                                            "events" => array(array("name" => "purchase",
+                                                            "params" => array("items" => $array_camere,
+                                                            "affiliation" => "quoto",
+                                                            "currency" => "EUR",
+                                                            "transaction_id" => $_REQUEST['NumeroPrenotazione'],
+                                                            "value" => str_replace(",",".",$_REQUEST['PrezzoP1']))))
+                                                        );
+
+                                    $data = json_encode($stringa_dati);
+                                    $url = 'https://www.google-analytics.com/mp/collect?api_secret=' . $api_secret . '&measurement_id=' . $measurement_id;
+                                    $ch = curl_init();
+                                    curl_setopt($ch, CURLOPT_USERAGENT, $_SERVER['HTTP_USER_AGENT']);
+                                    curl_setopt($ch, CURLOPT_URL, $url);
+                                    curl_setopt($ch, CURLOPT_HTTPHEADER, ['Content-Type: application/json']);
+                                    curl_setopt($ch, CURLOPT_POST, true);
+                                    curl_setopt($ch, CURLOPT_POSTFIELDS, $data);
+                                    curl_setopt($ch, CURLOPT_RETURNTRANSFER, 0);
+                                    curl_exec($ch);
+                                    curl_close($ch);
+
+                                }
+                            }// fine se account è inserito su suiteweb
+        
+                            }// fine se client id è presente
+        
+                        }// fine if solo se la provenienza è da Sito Web
+                    // ##############CURL VERSO ANALYTICS PER IMPUTARE I DATI DI QUOTO IN ANALYTICS##############
+
 
 
             }
@@ -1320,7 +1588,58 @@ if($_REQUEST['action']=='modify'){
                 }
                 ## INSERIMENTO DELLO SCONTO IN TABELLA RELAZIONALE
                 $dbMysqli->query("INSERT INTO hospitality_relazione_sconto_proposte(idsito,id_richiesta,id_proposta,sconto) VALUES('".IDSITO."','".$IdRichiesta."','".$IdProposta3."','".$_REQUEST['SC3']."')");    
-               
+                ######################################### ARRAY UTILE AL CURL PER ANALITICS####################################
+
+                $query  = " SELECT 
+                                hospitality_tipo_servizi.*,
+                                hospitality_relazione_servizi_proposte.num_persone,
+                                hospitality_relazione_servizi_proposte.num_notti 
+                            FROM 
+                                hospitality_relazione_servizi_proposte
+                            INNER JOIN 
+                                hospitality_tipo_servizi ON hospitality_relazione_servizi_proposte.servizio_id = hospitality_tipo_servizi.Id
+                            WHERE 
+                                hospitality_tipo_servizi.idsito = ".IDSITO."
+                            AND 
+                                hospitality_relazione_servizi_proposte.id_proposta = '".$IdProposta3."'
+                            ORDER BY 
+                                hospitality_tipo_servizi.TipoServizio ASC";
+                $record = $dbMysqli->query($query);
+
+                    if(sizeof($record)>0){
+
+                        $array_serv     = array();
+                        $num_persone    = '';
+                        $num_notti      = '';                          
+                        $PrezzoServizio = ''; 
+
+                        foreach($record as $key => $campo){
+
+                            switch($campo['CalcoloPrezzo']){
+                                case "Al giorno":
+                                    $num_persone = ''; 
+                                    $num_notti = $campo['num_notti'];                            
+                                    $PrezzoServizio = ($campo['PrezzoServizio']!=0?'€ '.number_format(($campo['PrezzoServizio']*$num_notti),2):'Gratis');
+                                break;
+                                case "A percentuale":
+                                $num_persone = '';
+                                $PrezzoServizio = ($campo['PercentualeServizio']!=''?'% '.number_format(($campo['PercentualeServizio']),2):'');
+                                break;
+                                case "Una tantum":
+                                    $num_persone = '';
+                                    $PrezzoServizio = ($campo['PrezzoServizio']!=0?'€ '.number_format($campo['PrezzoServizio'],2):'Gratis');
+                                break;
+                                case "A persona":
+                                $num_persone = $campo['num_persone'];
+                                $num_notti = $campo['num_notti'];                          
+                                $PrezzoServizio = ($campo['PrezzoServizio']!=0?'€ '.number_format(($campo['PrezzoServizio']*$num_notti*$num_persone),2):'Gratis');
+                                break;
+                            }
+                            $serv3 .= str_replace("&"," ",$campo['TipoServizio']).' '.$campo['CalcoloPrezzo'].' '.$PrezzoServizio;
+                        }
+                    }                                                        
+            
+            ######################################### ARRAY UTILE AL CURL PER ANALITICS###################################
                     $n_camere3 = count($_REQUEST['TipoCamere3']);
                     for($i=0; $i<=($n_camere3-1); $i++){
                         $insertR3 = "INSERT INTO hospitality_richiesta(id_richiesta,
@@ -1344,11 +1663,97 @@ if($_REQUEST['action']=='modify'){
                                                             '".$_REQUEST['Prezzo3'][$i]."')";
                         $dbMysqli->query($insertR3);
                                         
+                        ######################################### ARRAY UTILE AL CURL PER ANALITICS####################################         
+                        $sel3 = "SELECT Id as idCamera,TipoCamere as camera FROM hospitality_tipo_camere WHERE Id = ".$_REQUEST['TipoCamere3'][$i]." AND idsito = ".$_REQUEST['idsito'];
+                        $res3 = $dbMysqli->query($sel3);
+                        $rec3 = $res3[0];
+
+                        $sel4 = "SELECT TipoSoggiorno as soggiorno FROM hospitality_tipo_soggiorno WHERE Id = ".$_REQUEST['TipoSoggiorno3'][$i]." AND idsito = ".$_REQUEST['idsito'];
+                        $res4 = $dbMysqli->query($sel4);
+                        $rec4 = $res4[0];
+
+                        $formato="%a";
+                        $GA4Notti = $fun->dateDiff($DataArrivo1,$DataPartenza1,$formato);
+                        $clean_camera = str_replace('&',' ',$rec3['camera']);
+                        $array_camere[] = array("item_name" => "quoto - $clean_camera","quantity" => "1","price" => $_REQUEST['Prezzo3'][$i]);
+
+                        
+                        $proposta3 .= '&pr'.$n_camere3.'id='.$rec3['idCamera'].'&pr'.$n_camere3.'nm=QUOTO - '.str_replace("&"," ",$rec3['camera']).' - '.str_replace("&"," ",$rec4['soggiorno']).' - dal '.$DataArrivo3.' al '.$DataPartenza3.'&pr'.$n_camere3.'ca='.str_replace("&"," ",$rec3['camera']).' - '.str_replace("&"," ",$rec4['soggiorno']).'&pr'.$n_camere3.'qt=1&pr'.$n_camere3.'pr='.$_REQUEST['Prezzo3'][$i].'$pr'.$n_camere3.'va='.$serv3;
+
+                        ######################################### ARRAY UTILE AL CURL PER ANALITICS####################################
                     
 
                 }// fine ciclo for delle camere
 
-             
+                    // ##############CURL VERSO ANALYTICS PER IMPUTARE I DATI DI QUOTO IN ANALYTICS##############
+                        // Solo se la provenienza è da Sito Web
+                        if($_REQUEST['FontePrenotazione']== 'Sito Web'){
+
+                            $dati_analytics = $fun->get_account_analytics($_REQUEST['idsito']);
+                            $AccountAnalytics = $dati_analytics['IdAccountAnalytics'];
+                            $measurement_id   = $dati_analytics['measurement_id'];
+                            $api_secret       = $dati_analytics['api_secret'];
+
+                            if($AccountAnalytics != ''){
+        
+                                $select = "SELECT CLIENT_ID FROM hospitality_client_id WHERE NumeroPrenotazione = '".$_REQUEST['NumeroPrenotazione']."' AND idsito = ".$_REQUEST['idsito'];
+                                $result = $dbMysqli->query($select);
+                                $record = $result[0];
+                                $CLIENT_ID = $record['CLIENT_ID'];
+            
+                                if($CLIENT_ID != ''){
+            
+/*                                     $stringaDati = 'v=1&tid=UA-'.$AccountAnalytics.'&cid='.$CLIENT_ID.'&t=event&ti='.$_REQUEST['NumeroPrenotazione'].'&tr='.str_replace(",",".",$_REQUEST['PrezzoP3']).'&pa=purchase&ec=Ecommerce&ea=purchase&el=QUOTO CRM'.$proposta3;
+            
+                                    $ch = curl_init();
+                                    curl_setopt($ch, CURLOPT_URL, 'https://www.google-analytics.com/collect');
+                                    curl_setopt($ch, CURLOPT_HTTPAUTH, CURLAUTH_BASIC);
+                                    curl_setopt($ch, CURLOPT_RETURNTRANSFER, 0);
+                                    curl_setopt($ch, CURLOPT_POST, true);
+                                    curl_setopt($ch, CURLOPT_POSTFIELDS, $stringaDati);
+                                    curl_exec($ch);
+                                    curl_close($ch);  */
+            
+                                    /**
+                                     * * NUOVO INVIO AD ANALYTICS GA4 EVENTO E-COMMERCE
+                                     */
+                                    if($api_secret != '' && $measurement_id != ''){// solo se i campi measurement_id e api_secret sono compilati
+
+            /*                         $CLIENT_ID_GA4_ = explode(".",$CLIENT_ID);
+                                    $CLIENT_ID_GA4  = $CLIENT_ID_GA4_[1]; */
+                                    $CLIENT_ID_GA4  = $CLIENT_ID;
+
+                                        $stringa_dati = array("client_id"  => $CLIENT_ID_GA4,
+                                                                "events" => array(array("name" => "purchase",
+                                                                "params" => array("items" => $array_camere,
+                                                                "affiliation" => "quoto",
+                                                                "currency" => "EUR",
+                                                                "transaction_id" => $rws['NumeroPrenotazione'],
+                                                                "value" => str_replace(",",".",($_REQUEST['NewTotale']==''?$rws2['PrezzoP']:$_REQUEST['NewTotale'])))))
+                                                            );
+
+                                        $data = json_encode($stringa_dati);
+                                        $url = 'https://www.google-analytics.com/mp/collect?api_secret=' . $api_secret . '&measurement_id=' . $measurement_id;
+                                        $ch = curl_init();
+                                        curl_setopt($ch, CURLOPT_USERAGENT, $_SERVER['HTTP_USER_AGENT']);
+                                        curl_setopt($ch, CURLOPT_URL, $url);
+                                        curl_setopt($ch, CURLOPT_HTTPHEADER, ['Content-Type: application/json']);
+                                        curl_setopt($ch, CURLOPT_POST, true);
+                                        curl_setopt($ch, CURLOPT_POSTFIELDS, $data);
+                                        curl_setopt($ch, CURLOPT_RETURNTRANSFER, 0);
+                                        curl_exec($ch);
+                                        curl_close($ch);
+
+                                    }
+
+
+
+                                }// fine se account è inserito su suiteweb
+        
+                            }// fine se client id è presente
+        
+                        }// fine if solo se la provenienza è da Sito Web
+                    // ##############CURL VERSO ANALYTICS PER IMPUTARE I DATI DI QUOTO IN ANALYTICS##############
 
             }
 
@@ -1400,7 +1805,58 @@ if($_REQUEST['action']=='modify'){
                 }
                 ## INSERIMENTO DELLO SCONTO IN TABELLA RELAZIONALE
                 $dbMysqli->query("INSERT INTO hospitality_relazione_sconto_proposte(idsito,id_richiesta,id_proposta,sconto) VALUES('".IDSITO."','".$IdRichiesta."','".$IdProposta4."','".$_REQUEST['SC4']."')");    
-               
+                ######################################### ARRAY UTILE AL CURL PER ANALITICS####################################
+            
+                $query  = " SELECT 
+                                hospitality_tipo_servizi.*,
+                                hospitality_relazione_servizi_proposte.num_persone,
+                                hospitality_relazione_servizi_proposte.num_notti 
+                            FROM 
+                                hospitality_relazione_servizi_proposte
+                            INNER JOIN 
+                                hospitality_tipo_servizi ON hospitality_relazione_servizi_proposte.servizio_id = hospitality_tipo_servizi.Id
+                            WHERE 
+                                hospitality_tipo_servizi.idsito = ".IDSITO."
+                            AND 
+                                hospitality_relazione_servizi_proposte.id_proposta = '".$IdProposta4."'
+                            ORDER BY 
+                                hospitality_tipo_servizi.TipoServizio ASC";
+                $record = $dbMysqli->query($query);
+
+                    if(sizeof($record)>0){
+
+                        $array_serv     = array();
+                        $num_persone    = '';
+                        $num_notti      = '';                          
+                        $PrezzoServizio = ''; 
+
+                        foreach($record as $key => $campo){
+
+                            switch($campo['CalcoloPrezzo']){
+                                case "Al giorno":
+                                    $num_persone = ''; 
+                                    $num_notti = $campo['num_notti'];                            
+                                    $PrezzoServizio = ($campo['PrezzoServizio']!=0?'€ '.number_format(($campo['PrezzoServizio']*$num_notti),2):'Gratis');
+                                break;
+                                case "A percentuale":
+                                $num_persone = '';
+                                $PrezzoServizio = ($campo['PercentualeServizio']!=''?'% '.number_format(($campo['PercentualeServizio']),2):'');
+                                break;
+                                case "Una tantum":
+                                    $num_persone = '';
+                                    $PrezzoServizio = ($campo['PrezzoServizio']!=0?'€ '.number_format($campo['PrezzoServizio'],2):'Gratis');
+                                break;
+                                case "A persona":
+                                $num_persone = $campo['num_persone'];
+                                $num_notti = $campo['num_notti'];                          
+                                $PrezzoServizio = ($campo['PrezzoServizio']!=0?'€ '.number_format(($campo['PrezzoServizio']*$num_notti*$num_persone),2):'Gratis');
+                                break;
+                            }
+                            $serv4 .= str_replace("&"," ",$campo['TipoServizio']).' '.$campo['CalcoloPrezzo'].' '.$PrezzoServizio;
+                        }
+                    }                                                        
+            
+            ######################################### ARRAY UTILE AL CURL PER ANALITICS###################################
                     $n_camere4 = count($_REQUEST['TipoCamere4']);
                     for($i=0; $i<=($n_camere4-1); $i++){
                         $insertR4 = "INSERT INTO hospitality_richiesta(id_richiesta,
@@ -1423,13 +1879,99 @@ if($_REQUEST['action']=='modify'){
                                                             '".$_REQUEST['EtaB4'][$i]."',
                                                             '".$_REQUEST['Prezzo4'][$i]."')";
                         $dbMysqli->query($insertR4);
+
+                        ######################################### ARRAY UTILE AL CURL PER ANALITICS####################################         
+                        $sel3 = "SELECT Id as idCamera,TipoCamere as camera FROM hospitality_tipo_camere WHERE Id = ".$_REQUEST['TipoCamere4'][$i]." AND idsito = ".$_REQUEST['idsito'];
+                        $res3 = $dbMysqli->query($sel3);
+                        $rec3 = $res3[0];
+
+                        $sel4 = "SELECT TipoSoggiorno as soggiorno FROM hospitality_tipo_soggiorno WHERE Id = ".$_REQUEST['TipoSoggiorno4'][$i]." AND idsito = ".$_REQUEST['idsito'];
+                        $res4 = $dbMysqli->query($sel4);
+                        $rec4 = $res4[0];
+
+                        $formato="%a";
+                        $GA4Notti = $fun->dateDiff($DataArrivo1,$DataPartenza1,$formato);
+                        $clean_camera = str_replace('&',' ',$rec3['camera']);
+                        $array_camere[] = array("item_name" => "quoto - $clean_camera","quantity" => "1","price" => $_REQUEST['Prezzo4'][$i]);
+
+                        
+                        $proposta4 .= '&pr'.$n_camere4.'id='.$rec3['idCamera'].'&pr'.$n_camere4.'nm=QUOTO - '.str_replace("&"," ",$rec3['camera']).' - '.str_replace("&"," ",$rec4['soggiorno']).' - dal '.$DataArrivo4.' al '.$DataPartenza4.'&pr'.$n_camere4.'ca='.str_replace("&"," ",$rec3['camera']).' - '.str_replace("&"," ",$rec4['soggiorno']).'&pr'.$n_camere4.'qt=1&pr'.$n_camere4.'pr='.$_REQUEST['Prezzo4'][$i].'$pr'.$n_camere4.'va='.$serv4;
+
+                        ######################################### ARRAY UTILE AL CURL PER ANALITICS####################################
                 
 
 
                     }// fine ciclo for delle camere
 
             
-                   
+                    // ##############CURL VERSO ANALYTICS PER IMPUTARE I DATI DI QUOTO IN ANALYTICS##############
+                        // Solo se la provenienza è da Sito Web
+                        if($_REQUEST['FontePrenotazione']== 'Sito Web'){
+
+                            $dati_analytics   = $fun->get_account_analytics($_REQUEST['idsito']);
+                            $AccountAnalytics = $dati_analytics['IdAccountAnalytics'];
+                            $measurement_id   = $dati_analytics['measurement_id'];
+                            $api_secret       = $dati_analytics['api_secret'];
+
+                            if($AccountAnalytics != ''){
+        
+                                $select = "SELECT CLIENT_ID FROM hospitality_client_id WHERE NumeroPrenotazione = '".$_REQUEST['NumeroPrenotazione']."' AND idsito = ".$_REQUEST['idsito'];
+                                $result = $dbMysqli->query($select);
+                                $record = $result[0];
+                                $CLIENT_ID = $record['CLIENT_ID'];
+            
+                                if($CLIENT_ID != ''){
+            
+/*                                     $stringaDati = 'v=1&tid=UA-'.$AccountAnalytics.'&cid='.$CLIENT_ID.'&t=event&ti='.$_REQUEST['NumeroPrenotazione'].'&tr='.str_replace(",",".",$_REQUEST['PrezzoP4']).'&pa=purchase&ec=Ecommerce&ea=purchase&el=QUOTO CRM'.$proposta4;
+            
+                                    $ch = curl_init();
+                                    curl_setopt($ch, CURLOPT_URL, 'https://www.google-analytics.com/collect');
+                                    curl_setopt($ch, CURLOPT_HTTPAUTH, CURLAUTH_BASIC);
+                                    curl_setopt($ch, CURLOPT_RETURNTRANSFER, 0);
+                                    curl_setopt($ch, CURLOPT_POST, true);
+                                    curl_setopt($ch, CURLOPT_POSTFIELDS, $stringaDati);
+                                    curl_exec($ch);
+                                    curl_close($ch);  */
+           
+                                    /**
+                                     * * NUOVO INVIO AD ANALYTICS GA4 EVENTO E-COMMERCE
+                                     */
+                                    if($api_secret != '' && $measurement_id != ''){// solo se i campi measurement_id e api_secret sono compilati
+
+            /*                         $CLIENT_ID_GA4_ = explode(".",$CLIENT_ID);
+                                    $CLIENT_ID_GA4  = $CLIENT_ID_GA4_[1]; */
+                                    $CLIENT_ID_GA4  = $CLIENT_ID;
+
+                                        $stringa_dati = array("client_id"  => $CLIENT_ID_GA4,
+                                                                "events" => array(array("name" => "purchase",
+                                                                "params" => array("items" => $array_camere,
+                                                                "affiliation" => "quoto",
+                                                                "currency" => "EUR",
+                                                                "transaction_id" => $_REQUEST['NumeroPrenotazione'],
+                                                                "value" => str_replace(",",".",$_REQUEST['PrezzoP1']))))
+                                                            );
+
+                                        $data = json_encode($stringa_dati);
+                                        $url = 'https://www.google-analytics.com/mp/collect?api_secret=' . $api_secret . '&measurement_id=' . $measurement_id;
+                                        $ch = curl_init();
+                                        curl_setopt($ch, CURLOPT_USERAGENT, $_SERVER['HTTP_USER_AGENT']);
+                                        curl_setopt($ch, CURLOPT_URL, $url);
+                                        curl_setopt($ch, CURLOPT_HTTPHEADER, ['Content-Type: application/json']);
+                                        curl_setopt($ch, CURLOPT_POST, true);
+                                        curl_setopt($ch, CURLOPT_POSTFIELDS, $data);
+                                        curl_setopt($ch, CURLOPT_RETURNTRANSFER, 0);
+                                        curl_exec($ch);
+                                        curl_close($ch);
+
+                                    }                                   
+
+                                }// fine se account è inserito su suiteweb
+        
+                            }// fine se client id è presente
+        
+                        }// fine if solo se la provenienza è da Sito Web
+                    // ##############CURL VERSO ANALYTICS PER IMPUTARE I DATI DI QUOTO IN ANALYTICS##############
+
 
             }
 
@@ -1480,7 +2022,58 @@ if($_REQUEST['action']=='modify'){
                 }
                 ## INSERIMENTO DELLO SCONTO IN TABELLA RELAZIONALE
                 $dbMysqli->query("INSERT INTO hospitality_relazione_sconto_proposte(idsito,id_richiesta,id_proposta,sconto) VALUES('".IDSITO."','".$IdRichiesta."','".$IdProposta5."','".$_REQUEST['SC5']."')");                        
-             
+                ######################################### ARRAY UTILE AL CURL PER ANALITICS####################################
+                
+                $query  = " SELECT 
+                                hospitality_tipo_servizi.*,
+                                hospitality_relazione_servizi_proposte.num_persone,
+                                hospitality_relazione_servizi_proposte.num_notti 
+                            FROM 
+                                hospitality_relazione_servizi_proposte
+                            INNER JOIN 
+                                hospitality_tipo_servizi ON hospitality_relazione_servizi_proposte.servizio_id = hospitality_tipo_servizi.Id
+                            WHERE 
+                                hospitality_tipo_servizi.idsito = ".IDSITO."
+                            AND 
+                                hospitality_relazione_servizi_proposte.id_proposta = '".$IdProposta5."'
+                            ORDER BY 
+                                hospitality_tipo_servizi.TipoServizio ASC";
+                $record = $dbMysqli->query($query);
+
+                    if(sizeof($record)>0){
+
+                        $array_serv     = array();
+                        $num_persone    = '';
+                        $num_notti      = '';                          
+                        $PrezzoServizio = ''; 
+
+                        foreach($record as $key => $campo){
+
+                            switch($campo['CalcoloPrezzo']){
+                                case "Al giorno":
+                                    $num_persone = ''; 
+                                    $num_notti = $campo['num_notti'];                            
+                                    $PrezzoServizio = ($campo['PrezzoServizio']!=0?'€ '.number_format(($campo['PrezzoServizio']*$num_notti),2):'Gratis');
+                                break;
+                                case "A percentuale":
+                                $num_persone = '';
+                                $PrezzoServizio = ($campo['PercentualeServizio']!=''?'% '.number_format(($campo['PercentualeServizio']),2):'');
+                                break;
+                                case "Una tantum":
+                                    $num_persone = '';
+                                    $PrezzoServizio = ($campo['PrezzoServizio']!=0?'€ '.number_format($campo['PrezzoServizio'],2):'Gratis');
+                                break;
+                                case "A persona":
+                                $num_persone = $campo['num_persone'];
+                                $num_notti = $campo['num_notti'];                          
+                                $PrezzoServizio = ($campo['PrezzoServizio']!=0?'€ '.number_format(($campo['PrezzoServizio']*$num_notti*$num_persone),2):'Gratis');
+                                break;
+                            }
+                            $serv5 .= str_replace("&"," ",$campo['TipoServizio']).' '.$campo['CalcoloPrezzo'].' '.$PrezzoServizio;
+                        }
+                    }                                                        
+            
+            ######################################### ARRAY UTILE AL CURL PER ANALITICS###################################
                     $n_camere5 = count($_REQUEST['TipoCamere5']);
                     for($i=0; $i<=($n_camere5-1); $i++){
                         $insertR5 = "INSERT INTO hospitality_richiesta(id_richiesta,
@@ -1504,11 +2097,95 @@ if($_REQUEST['action']=='modify'){
                                                             '".$_REQUEST['Prezzo5'][$i]."')";
 
                         $dbMysqli->query($insertR5); 
+
+                        ######################################### ARRAY UTILE AL CURL PER ANALITICS####################################         
+                        $sel3 = "SELECT Id as idCamera,TipoCamere as camera FROM hospitality_tipo_camere WHERE Id = ".$_REQUEST['TipoCamere5'][$i]." AND idsito = ".$_REQUEST['idsito'];
+                        $res3 = $dbMysqli->query($sel3);
+                        $rec3 = $res3[0];
+
+                        $sel4 = "SELECT TipoSoggiorno as soggiorno FROM hospitality_tipo_soggiorno WHERE Id = ".$_REQUEST['TipoSoggiorno5'][$i]." AND idsito = ".$_REQUEST['idsito'];
+                        $res4 = $dbMysqli->query($sel4);
+                        $rec4 = $res4[0];
+
+                        $formato="%a";
+                        $GA4Notti = $fun->dateDiff($DataArrivo1,$DataPartenza1,$formato);
+                        $clean_camera = str_replace('&',' ',$rec3['camera']);
+                        $array_camere[] = array("item_name" => "quoto - $clean_camera","quantity" => "1","price" => $_REQUEST['Prezzo5'][$i]);
+
+                        
+                        $proposta5 .= '&pr'.$n_camere5.'id='.$rec3['idCamera'].'&pr'.$n_camere5.'nm=QUOTO - '.str_replace("&"," ",$rec3['camera']).' - '.str_replace("&"," ",$rec4['soggiorno']).' - dal '.$DataArrivo5.' al '.$DataPartenza5.'&pr'.$n_camere5.'ca='.str_replace("&"," ",$rec3['camera']).' - '.str_replace("&"," ",$rec4['soggiorno']).'&pr'.$n_camere5.'qt=1&pr'.$n_camere5.'pr='.$_REQUEST['Prezzo5'][$i].'$pr'.$n_camere5.'va='.$serv5;
+
+                        ######################################### ARRAY UTILE AL CURL PER ANALITICS####################################
                         
 
                     } //fine ciclo for camere
 
-     
+                    // ##############CURL VERSO ANALYTICS PER IMPUTARE I DATI DI QUOTO IN ANALYTICS##############
+                        // Solo se la provenienza è da Sito Web
+                        if($_REQUEST['FontePrenotazione']== 'Sito Web'){
+
+                            $dati_analytics   = $fun->get_account_analytics($_REQUEST['idsito']);
+                            $AccountAnalytics = $dati_analytics['IdAccountAnalytics'];
+                            $measurement_id   = $dati_analytics['measurement_id'];
+                            $api_secret       = $dati_analytics['api_secret'];
+
+                            if($AccountAnalytics != ''){
+        
+                                $select = "SELECT CLIENT_ID FROM hospitality_client_id WHERE NumeroPrenotazione = '".$_REQUEST['NumeroPrenotazione']."' AND idsito = ".$_REQUEST['idsito'];
+                                $result = $dbMysqli->query($select);
+                                $record = $result[0];
+                                $CLIENT_ID = $record['CLIENT_ID'];
+            
+                                if($CLIENT_ID != ''){
+            
+/*                                     $stringaDati = 'v=1&tid=UA-'.$AccountAnalytics.'&cid='.$CLIENT_ID.'&t=event&ti='.$_REQUEST['NumeroPrenotazione'].'&tr='.str_replace(",",".",$_REQUEST['PrezzoP5']).'&pa=purchase&ec=Ecommerce&ea=purchase&el=QUOTO CRM'.$proposta5;
+            
+                                    $ch = curl_init();
+                                    curl_setopt($ch, CURLOPT_URL, 'https://www.google-analytics.com/collect');
+                                    curl_setopt($ch, CURLOPT_HTTPAUTH, CURLAUTH_BASIC);
+                                    curl_setopt($ch, CURLOPT_RETURNTRANSFER, 0);
+                                    curl_setopt($ch, CURLOPT_POST, true);
+                                    curl_setopt($ch, CURLOPT_POSTFIELDS, $stringaDati);
+                                    curl_exec($ch);
+                                    curl_close($ch);  */
+
+                                    /**
+                                     * * NUOVO INVIO AD ANALYTICS GA4 EVENTO E-COMMERCE
+                                     */
+                                    if($api_secret != '' && $measurement_id != ''){// solo se i campi measurement_id e api_secret sono compilati
+
+            /*                         $CLIENT_ID_GA4_ = explode(".",$CLIENT_ID);
+                                    $CLIENT_ID_GA4  = $CLIENT_ID_GA4_[1]; */
+                                    $CLIENT_ID_GA4  = $CLIENT_ID;
+
+                                        $stringa_dati = array("client_id"  => $CLIENT_ID_GA4,
+                                                                "events" => array(array("name" => "purchase",
+                                                                "params" => array("items" => $array_camere,
+                                                                "affiliation" => "quoto",
+                                                                "currency" => "EUR",
+                                                                "transaction_id" => $_REQUEST['NumeroPrenotazione'],
+                                                                "value" => str_replace(",",".",$_REQUEST['PrezzoP1']))))
+                                                            );
+
+                                        $data = json_encode($stringa_dati);
+                                        $url = 'https://www.google-analytics.com/mp/collect?api_secret=' . $api_secret . '&measurement_id=' . $measurement_id;
+                                        $ch = curl_init();
+                                        curl_setopt($ch, CURLOPT_USERAGENT, $_SERVER['HTTP_USER_AGENT']);
+                                        curl_setopt($ch, CURLOPT_URL, $url);
+                                        curl_setopt($ch, CURLOPT_HTTPHEADER, ['Content-Type: application/json']);
+                                        curl_setopt($ch, CURLOPT_POST, true);
+                                        curl_setopt($ch, CURLOPT_POSTFIELDS, $data);
+                                        curl_setopt($ch, CURLOPT_RETURNTRANSFER, 0);
+                                        curl_exec($ch);
+                                        curl_close($ch);
+
+                                    }            
+                                }// fine se account è inserito su suiteweb
+        
+                            }// fine se client id è presente
+        
+                        }// fine if solo se la provenienza è da Sito Web
+                    // ##############CURL VERSO ANALYTICS PER IMPUTARE I DATI DI QUOTO IN ANALYTICS##############
 
             }
 
@@ -2331,9 +3008,6 @@ if($_REQUEST['action']=='modify'){
 
     if($_REQUEST['IdMotivazione']!=''){
         header('Location:'.BASE_URL_SITO.'buoni_voucher/');
-    }
-    if($_REQUEST['TipoRichiesta']=='Conferma' && $TipoRichiesta == 'Preventivo'){
-        header('Location:'.BASE_URL_SITO.'conferme/');
     }
     if($_REQUEST['TipoRichiesta']=='Conferma'){
 
