@@ -10023,9 +10023,16 @@ class functions
             $filter_query = " AND DATE(DataChiuso) = '" . $data . "'";
             $filter_query_invio = " AND DataInvio = '" . $data . "'";
         } else {
-            $data = date('Y');
-            $filter_query = " AND YEAR(DataChiuso) = '" . $data . "'";
-            $filter_query_invio = " AND YEAR(DataInvio) = '" . $data . "'";
+            if($_REQUEST['anno'] == ''){
+                $data = date('Y');
+                $filter_query = " AND YEAR(DataChiuso) = '" . $data . "'";
+                $filter_query_invio = " AND YEAR(DataInvio) = '" . $data . "'";
+            }else{
+                $data = $_REQUEST['anno'];
+                $filter_query = " AND YEAR(DataChiuso) = '" . $data . "'";
+                $filter_query_invio = " AND YEAR(DataInvio) = '" . $data . "'";
+            }
+
         }
 
 
@@ -10068,28 +10075,28 @@ class functions
 
 
             //PREVENTIVI INVIATI
-            $selex = "SELECT COUNT(Id) as n_inviate FROM hospitality_guest WHERE TipoRichiesta = 'Preventivo' AND ChiPrenota = '" . $operatore . "'  AND idsito = " . IDSITO . " AND Archivia = 0 AND Inviata = 1 AND DataInvio IS NOT NULL " . $filter_query_invio . "";
+            $selex = "SELECT COUNT(Id) as n_inviate FROM hospitality_guest WHERE TipoRichiesta = 'Preventivo' AND ChiPrenota = '" . $operatore . "'  AND idsito = " . IDSITO . "  AND Inviata = 1 AND DataInvio IS NOT NULL " . $filter_query_invio . "";
             $risx = $dbMysqli->query($selex);
             $recordx = $risx[0];
 
             $n_inviate = $recordx['n_inviate'];
 
             //CONFERME IN ATTESA
-            $seleC = "SELECT COUNT(Id) as n_conf FROM hospitality_guest WHERE TipoRichiesta = 'Conferma' AND ChiPrenota = '" . $operatore . "'  AND idsito = " . IDSITO . " AND Archivia = 0 AND Chiuso = 0 AND DataInvio IS  NULL " . $filter_query_invio . "";
+            $seleC = "SELECT COUNT(Id) as n_conf FROM hospitality_guest WHERE TipoRichiesta = 'Conferma' AND ChiPrenota = '" . $operatore . "'  AND idsito = " . IDSITO . "  AND Chiuso = 0 AND DataInvio IS  NULL " . $filter_query_invio . "";
             $risC = $dbMysqli->query($seleC);
             $recordC = $risC[0];
 
             $n_conf = $recordC['n_conf'];
 
             //PRENO CHIUSEA
-            $seleCl = "SELECT COUNT(Id) as n_prenotazioni FROM hospitality_guest WHERE TipoRichiesta = 'Conferma' AND ChiPrenota = '" . $operatore . "'  AND idsito = " . IDSITO . " AND Disdetta = 0 AND Archivia = 0 AND Chiuso = 1 AND DataChiuso IS NOT NULL " . $filter_query . "";
+            $seleCl = "SELECT COUNT(Id) as n_prenotazioni FROM hospitality_guest WHERE TipoRichiesta = 'Conferma' AND ChiPrenota = '" . $operatore . "'  AND idsito = " . IDSITO . "  AND Chiuso = 1 AND DataChiuso IS NOT NULL " . $filter_query . "";
             $risCl = $dbMysqli->query($seleCl);
             $recordCl = $risCl[0];
 
             $n_prenotazioni = $recordCl['n_prenotazioni'];
 
             //PRENO DISDETTE
-            $seleD = "SELECT COUNT(Id) as n_disdette FROM hospitality_guest WHERE TipoRichiesta = 'Conferma' AND ChiPrenota = '" . $operatore . "'  AND idsito = " . IDSITO . " AND Disdetta = 1 AND Archivia = 0 AND Chiuso = 1 AND DataChiuso IS NOT NULL " . $filter_query . "";
+            $seleD = "SELECT COUNT(Id) as n_disdette FROM hospitality_guest WHERE TipoRichiesta = 'Conferma' AND ChiPrenota = '" . $operatore . "'  AND idsito = " . IDSITO . " AND Disdetta = 1  AND Chiuso = 1 AND DataChiuso IS NOT NULL " . $filter_query . "";
             $risD = $dbMysqli->query($seleD);
             $recordD = $risD[0];
 
