@@ -673,7 +673,7 @@ if($_REQUEST['azione'] == 'edit' && $_REQUEST['param'] != '') {
                                                 hospitality_tipo_camere.TipoCamere
                                         FROM 
                                             hospitality_richiesta
-                                        INNER JOIN 
+                                        LEFT JOIN 
                                             hospitality_tipo_camere 
                                         ON 
                                             hospitality_tipo_camere.Id = hospitality_richiesta.TipoCamere
@@ -712,6 +712,9 @@ if($_REQUEST['azione'] == 'edit' && $_REQUEST['param'] != '') {
                                                                                         $row = $dbMysqli->query($selSOgg);
 
                                                                                         $ListaSoggiorno  = '';
+                                                                                        if($val['TipoSoggiorno']==''){
+                                                                                            $proposte .='<option value="" selected="selected">scegli</option>';
+                                                                                        }
                                                                                         foreach($row as $chiave => $valore){
                                                                                             $proposte .='<option value="'.$valore['Id'].'" '.($val['TipoSoggiorno']==$valore['Id']?'selected="selected"':'').'>'.$fun->mini_clean($valore['TipoSoggiorno']).'</option>';
                                                                                         }
@@ -736,6 +739,9 @@ if($_REQUEST['azione'] == 'edit' && $_REQUEST['param'] != '') {
                                                                                     $rw = $dbMysqli->query($selCam);
 
                                                                                     $ListaCamere = '';
+                                                                                    if($val['id_camere']==''){
+                                                                                        $proposte .='<option value="" selected="selected">scegli</option>';
+                                                                                    }
                                                                                     foreach($rw as $key => $v){
                                                                                         $proposte  .='<option value="'.$v['Id'].'" '.($v['Id']==$val['id_camere']?'selected="selected"':'').'>'.$v['TipoCamere'].'</option>';
                                                                                     }
