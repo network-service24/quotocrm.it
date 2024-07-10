@@ -708,6 +708,24 @@ $( document ).ready(function() {
                 required: true,
                 minlength: 1
             },
+            'TipoSoggiorno1[]':{
+    			required:function(){
+    				  return $('#simple1').is(':empty') || $('#simple1E').is(':empty') || $('#simple1Bedzzle').is(':empty');
+
+    			}
+    		},
+            'TipoCamere1[]':{
+    			required:function(){
+    				  return $('#simple1').is(':empty') || $('#simple1E').is(':empty') || $('#simple1Bedzzle').is(':empty');
+
+    			}
+    		},
+            'Prezzo1[]':{
+    			required:function(){
+    				  return $('#simple1').is(':empty') || $('#simple1E').is(':empty') || $('#simple1Bedzzle').is(':empty');
+
+    			}
+    		},
             Nome: "required",
             Cognome: "required",
             Email: "required",
@@ -733,6 +751,9 @@ $( document ).ready(function() {
             TipoVacanza_: "",
             DataArrivo: "",
             DataPartenza: "",
+            "TipoSoggiorno1[]":"",
+            "TipoCamere1[]":"",
+            "Prezzo1[]":"",
             NumeroAdulti:"",
             FontePrenotazione:"",
             id_politiche:"",

@@ -673,7 +673,7 @@ if($_REQUEST['azione'] == 'edit' && $_REQUEST['param'] != '') {
                                                 hospitality_tipo_camere.TipoCamere
                                         FROM 
                                             hospitality_richiesta
-                                        LEFT JOIN 
+                                        INNER JOIN 
                                             hospitality_tipo_camere 
                                         ON 
                                             hospitality_tipo_camere.Id = hospitality_richiesta.TipoCamere
