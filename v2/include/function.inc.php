@@ -176,11 +176,10 @@ function n_archivio($output=null){
 }
 function tot_preventivi(){
 	global $db,$prima_data,$seconda_data;
-	$db->query('SELECT COUNT(Id) as tot_preventivi FROM hospitality_guest  WHERE TipoRichiesta = "Preventivo"                  
+	$db->query('SELECT COUNT(Id) as tot_preventivi FROM hospitality_guest  WHERE TipoRichiesta = "Preventivo"  				
                 AND
 					hospitality_guest.Hidden = 0
-				AND
-					hospitality_guest.Archivia = 0
+
 				AND
 					hospitality_guest.Chiuso = 0
 				AND
@@ -192,11 +191,10 @@ function tot_preventivi(){
 }
 function tot_invii(){
 	global $db,$prima_data,$seconda_data;
-	$db->query('SELECT COUNT(Id) as tot_invii FROM hospitality_guest  WHERE TipoRichiesta = "Preventivo" AND idsito = '.IDSITO.'                             
+	$db->query('SELECT COUNT(Id) as tot_invii FROM hospitality_guest  WHERE TipoRichiesta = "Preventivo" AND idsito = '.IDSITO.'                            
                             AND
                                 hospitality_guest.Hidden = 0
-                            AND
-                                hospitality_guest.Archivia = 0
+
                             AND
                                 hospitality_guest.Chiuso = 0
                             AND
@@ -210,12 +208,11 @@ function tot_conferme(){
 	global $db,$prima_data,$seconda_data;
 	$db->query('SELECT COUNT(Id) as tot_conferme FROM hospitality_guest  WHERE TipoRichiesta = "Conferma" AND idsito = '.IDSITO.'                             
                             AND Hidden = 0 
-                            AND Archivia = 0 
+
                             AND Chiuso = 0 
                             AND Disdetta = 0 
                             AND Accettato = 0 
-				            AND NoDisponibilita = 0 
-                            AND '.($_REQUEST['date']==''?' (DataRichiesta >= "'.date('Y').'-01-01" AND DataRichiesta <= "'.date('Y').'-12-31")':' (DataRichiesta >= "'.$prima_data.'" AND DataRichiesta <= "'.$seconda_data.'")').'');
+				            AND NoDisponibilita = 0 AND '.($_REQUEST['date']==''?' (DataRichiesta >= "'.date('Y').'-01-01" AND DataRichiesta <= "'.date('Y').'-12-31")':' (DataRichiesta >= "'.$prima_data.'" AND DataRichiesta <= "'.$seconda_data.'")').'');
 	$rwr = $db->row();
 	return $rwr['tot_conferme'];
 }
@@ -228,8 +225,7 @@ function tot_prenotazioni(){
 					hospitality_guest.Hidden = 0
 				AND
 					hospitality_guest.Disdetta = 0
-				AND 
-					hospitality_guest.Archivia = 0 				
+				
 				AND 
 					hospitality_guest.Chiuso = 1 
                 AND 

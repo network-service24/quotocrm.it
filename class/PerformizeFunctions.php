@@ -63,7 +63,7 @@ class PerformizeFunctions extends functions
             $this->numeroGiorniADR = $this->numeroGiorni + 1;
         } else {
             $this->data_inizio_periodo = date('Y') . '-01-01';
-            $this->data_fine_periodo = date('Y') . '-12-31';
+            $this->data_fine_periodo = date('Y-m-d');
             $this->numeroGiorni = $this->dateDifference($this->data_inizio_periodo, date('Y-m-d'));
             $this->numeroGiorniADR = $this->numeroGiorni + 1;
         }
@@ -214,8 +214,6 @@ class PerformizeFunctions extends functions
 				AND
 					hospitality_guest.Hidden = 0
 				AND
-					hospitality_guest.Archivia = 0
-				AND
 					hospitality_guest.Chiuso = 0
 				AND
 					hospitality_guest.Accettato = 0
@@ -270,8 +268,6 @@ class PerformizeFunctions extends functions
 				AND
 					hospitality_guest.Hidden = 0
 				AND
-					hospitality_guest.Archivia = 0
-				AND
 					hospitality_guest.Chiuso = 0
 				AND
 					hospitality_guest.Accettato = 0
@@ -305,13 +301,11 @@ class PerformizeFunctions extends functions
                             AND
                                 hospitality_guest.Hidden = 0
                             AND
-                                hospitality_guest.Archivia = 0
-                            AND
                                 hospitality_guest.Chiuso = 0
                             AND
                                 hospitality_guest.Accettato = 0
                             AND
-                                hospitality_guest.NoDisponibilita = 0
+					hospitality_guest.NoDisponibilita = 0 
                             AND DataInvio IS NOT NULL  
                             AND (DataRichiesta >= "' . $this->getDataInizioperiodo() . '" AND DataRichiesta <= "' . $this->getDataFineperiodo() . '")');
 
@@ -342,13 +336,11 @@ class PerformizeFunctions extends functions
                             AND
                                 hospitality_guest.Hidden = 0
                             AND
-                                hospitality_guest.Archivia = 0
-                            AND
                                 hospitality_guest.Chiuso = 0
                             AND
                                 hospitality_guest.Accettato = 0
                             AND
-                                hospitality_guest.NoDisponibilita = 0
+					            hospitality_guest.NoDisponibilita = 0 
                             AND DataInvio IS NOT NULL  
                             AND (DataRichiesta >= "' . $this->getDataInizioperiodo(-1) . '" AND DataRichiesta <= "' . $this->getDataFineperiodo(-1) . '")');
 
@@ -389,7 +381,6 @@ class PerformizeFunctions extends functions
                             WHERE TipoRichiesta = "Conferma" 
                             AND idsito = ' . $this->getIdSito() . '
                             AND Hidden = 0 
-                            AND Archivia = 0 
                             AND Chiuso = 0 
                             AND Disdetta = 0 
                             AND Accettato = 0 
@@ -437,7 +428,6 @@ class PerformizeFunctions extends functions
                             WHERE TipoRichiesta = "Conferma" 
                               AND idsito = ' . $this->getIdSito() . '
                             AND Hidden = 0 
-                            AND Archivia = 0 
                             AND Chiuso = 0 
                             AND Disdetta = 0 
                             AND Accettato = 0 
@@ -479,9 +469,7 @@ class PerformizeFunctions extends functions
                 AND
 					hospitality_guest.Hidden = 0
 				AND
-					hospitality_guest.Disdetta = 0
-				AND 
-					hospitality_guest.Archivia = 0 				
+					hospitality_guest.Disdetta = 0			
 				AND 
 					hospitality_guest.Chiuso = 1 
                 AND 
@@ -531,20 +519,18 @@ class PerformizeFunctions extends functions
         $sel = "SELECT COUNT(Id) as tot_prenotazioni
             FROM hospitality_guest
             WHERE TipoRichiesta = 'Conferma'
-                AND
-					hospitality_guest.Hidden = 0
-				AND
-					hospitality_guest.Disdetta = 0
-				AND 
-					hospitality_guest.Archivia = 0 				
-				AND 
-					hospitality_guest.Chiuso = 1 
-                AND 
-                    (hospitality_guest.IdMotivazione IS NULL OR hospitality_guest.DataRiconferma IS NOT NULL)
-                AND 
-                    hospitality_guest.CheckinOnlineClient = 0
-				AND 
-					hospitality_guest.NoDisponibilita = 0
+            AND
+                hospitality_guest.Hidden = 0
+            AND
+                hospitality_guest.Disdetta = 0
+            AND 
+                hospitality_guest.Chiuso = 1 
+            AND 
+                (hospitality_guest.IdMotivazione IS NULL OR hospitality_guest.DataRiconferma IS NOT NULL)
+            AND 
+                hospitality_guest.CheckinOnlineClient = 0
+            AND 
+                hospitality_guest.NoDisponibilita = 0
             AND hospitality_guest.idsito = " . $this->getIdSito() . "
             AND (hospitality_guest.DataRichiesta >= '" . $this->getDataInizioperiodo(-1) . "' 
             AND hospitality_guest.DataRichiesta <= '" . $this->getDataFineperiodo(-1) . "')";
@@ -695,7 +681,7 @@ class PerformizeFunctions extends functions
     {
         global $prima_data, $seconda_data;
 
-        $res = $this->query('SELECT COUNT(Id) as tot_annullate FROM hospitality_guest  WHERE  idsito = ' . $this->getIdSito() . ' AND Hidden = 0 AND  Archivia = 0  AND NoDisponibilita = 1  ' . ($_REQUEST['date'] == '' ? '' : ' AND (DataRichiesta >= "' . $prima_data . '" AND DataRichiesta <= "' . $seconda_data . '")') . '');
+        $res = $this->query('SELECT COUNT(Id) as tot_annullate FROM hospitality_guest  WHERE  idsito = ' . $this->getIdSito() . ' AND Hidden = 0  AND NoDisponibilita = 1  ' . ($_REQUEST['date'] == '' ? '' : ' AND (DataRichiesta >= "' . $prima_data . '" AND DataRichiesta <= "' . $seconda_data . '")') . '');
         $rwc = $res[0];
 
         return $rwc['tot_annullate'];
@@ -731,7 +717,6 @@ class PerformizeFunctions extends functions
                             WHERE idsito = ' . $this->getIdSito() . '
                             AND TipoRichiesta = "Conferma" 
                             AND Hidden = 0 
-                            AND Archivia = 0 
                             AND Disdetta = 1 
                             AND Chiuso = 1
                             AND (DataChiuso >= "' . $this->getDataInizioperiodo() . '" 

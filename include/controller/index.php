@@ -22,7 +22,7 @@ if($_REQUEST['date']!= ''){
 		$numeroGiorni_    = dateDifference(date('Y').'-01-01',date('Y-m-d'));
 		$numeroGiorniADR  = ($numeroGiorni_+1);
 		$prima_data   = date('Y').'-01-01';
-		$seconda_data = date('Y').'-12-31';
+		$seconda_data = date('Y-m-d');
 	}
 	###################################################################
 

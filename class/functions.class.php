@@ -4183,8 +4183,6 @@ class functions
                     AND
                         hospitality_guest.Hidden = 0
                     AND
-                        hospitality_guest.Archivia = 0
-                    AND
                         hospitality_guest.Chiuso = 0
                     AND
                         hospitality_guest.Accettato = 0
@@ -4225,8 +4223,6 @@ class functions
                     AND
                         hospitality_guest.Hidden = 0
                     AND
-                        hospitality_guest.Archivia = 0
-                    AND
                         hospitality_guest.Chiuso = 0
                     AND
                         hospitality_guest.Accettato = 0
@@ -4258,8 +4254,6 @@ class functions
                 AND
 					hospitality_guest.Hidden = 0
 				AND
-					hospitality_guest.Archivia = 0
-				AND
 					hospitality_guest.Chiuso = 0
 				AND
 					hospitality_guest.Accettato = 0
@@ -4286,8 +4280,6 @@ class functions
                 AND
 					hospitality_guest.Hidden = 0
 				AND
-					hospitality_guest.Archivia = 0
-				AND
 					hospitality_guest.Chiuso = 0
 				AND
 					hospitality_guest.Accettato = 0
@@ -4310,8 +4302,6 @@ class functions
         $res = $dbMysqli->query($q='SELECT COUNT(Id) as tot_conferme FROM hospitality_guest  WHERE TipoRichiesta = "Conferma" AND idsito = ' . IDSITO . '
 				AND
 					hospitality_guest.Hidden = 0
-				AND
-					hospitality_guest.Archivia = 0
 				AND
 					hospitality_guest.Chiuso = 0
                 AND
@@ -4346,8 +4336,6 @@ class functions
 				AND
 					hospitality_guest.Hidden = 0
 				AND
-					hospitality_guest.Archivia = 0
-				AND
 					hospitality_guest.Chiuso = 0
                 AND
                     hospitality_guest.Disdetta = 0
@@ -4378,9 +4366,7 @@ class functions
 				AND
 					hospitality_guest.Hidden = 0
 				AND
-					hospitality_guest.Disdetta = 0
-				AND 
-					hospitality_guest.Archivia = 0 				
+					hospitality_guest.Disdetta = 0			
 				AND 
 					hospitality_guest.Chiuso = 1 
                 AND 
@@ -4416,9 +4402,7 @@ class functions
 				AND
 					hospitality_guest.Hidden = 0
 				AND
-					hospitality_guest.Disdetta = 0
-				AND 
-					hospitality_guest.Archivia = 0 				
+					hospitality_guest.Disdetta = 0			
 				AND 
 					hospitality_guest.Chiuso = 1 
                 AND 
@@ -4526,8 +4510,6 @@ class functions
 									hospitality_guest.TipoRichiesta = "Conferma"
 								AND
 									hospitality_guest.Hidden = 0
-								AND
-									hospitality_guest.Archivia = 0
 								AND
 									hospitality_guest.Disdetta = 1
 								AND
