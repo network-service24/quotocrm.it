@@ -708,24 +708,30 @@ $( document ).ready(function() {
                 required: true,
                 minlength: 1
             },
-            'TipoSoggiorno1[]':{
-    			required:function(){
-    				  return $('#simple1').is(':empty') || $('#simple1E').is(':empty') || $('#simple1Bedzzle').is(':empty');
+            <?php if(($fun->check_simplebooking(IDSITO)==0 && $fun->check_ericsoftbooking(IDSITO)==0  && $fun->check_bedzzlebooking(IDSITO)==0)){?>
+                "TipoSoggiorno1[]": "required",
+                "TipoCamere1[]": "required",
+                "Prezzo1[]": "required",
+            <?}else{?>         
+                'TipoSoggiorno1[]':{
+                    required:function(){
+                        return $('#simple1').is(':empty') || $('#simple1E').is(':empty') || $('#simple1Bedzzle').is(':empty');
 
-    			}
-    		},
-            'TipoCamere1[]':{
-    			required:function(){
-    				  return $('#simple1').is(':empty') || $('#simple1E').is(':empty') || $('#simple1Bedzzle').is(':empty');
+                    }
+                },
+                'TipoCamere1[]':{
+                    required:function(){
+                        return $('#simple1').is(':empty') || $('#simple1E').is(':empty') || $('#simple1Bedzzle').is(':empty');
 
-    			}
-    		},
-            'Prezzo1[]':{
-    			required:function(){
-    				  return $('#simple1').is(':empty') || $('#simple1E').is(':empty') || $('#simple1Bedzzle').is(':empty');
+                    }
+                },
+                'Prezzo1[]':{
+                    required:function(){
+                        return $('#simple1').is(':empty') || $('#simple1E').is(':empty') || $('#simple1Bedzzle').is(':empty');
 
-    			}
-    		},
+                    }
+                },
+            <?}?>
             Nome: "required",
             Cognome: "required",
             Email: "required",
