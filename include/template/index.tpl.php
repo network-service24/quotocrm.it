@@ -59,7 +59,7 @@
                                                         <div class="row align-items-center">
                                                             <div class="col-8">
                                                                 <h4 class="text-primary f-w-600"><?=$fun->tot_conferme()?></h4>
-                                                                <h6 class="text-muted m-b-0">...... in Trattativa <?=$iconaSegnoC?></h6>
+                                                                <h6 class="text-muted m-b-0">...... in Trattativa <!-- <?=$iconaSegnoC?> --></h6>
                                                             </div>
                                                             <div class="col-4 text-right">
                                                                 <i class="fa fa-credit-card f-28"></i>
@@ -69,7 +69,7 @@
                                                 <div class="card-footer bg-c-blue">
                                                     <div class="row align-items-center">
                                                         <div class="col-9">
-                                                            <p class="text-white m-b-0 f-11 nowrap"><?=$PercentualeTrattativeConfronto;?></p>
+                                                            <!-- <p class="text-white m-b-0 f-11 nowrap"><?=$PercentualeTrattativeConfronto;?></p> -->
                                                         </div>
                                                         <div class="col-3 text-right">
                                                             <i class="ti-headphone-alt text-white f-16"></i>
