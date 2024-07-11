@@ -13,7 +13,7 @@ include($_SERVER['DOCUMENT_ROOT']."/include/function.inc.php");
             $update = "UPDATE utenti_quoto SET password = '".base64_encode($_POST['check_password'])."', data_account = '".date('Y-m-d')."' WHERE id = '".$_POST['idutente']."' ";
             $dbMysqli->query($update);
 
-            require_once(INC_PATH_CLASS.'PHPMailer/class.phpmailer.php');
+            require (INC_PATH_CLASS.'PHPMailer/PHPMailerAutoload.php');
             $mail 	= new PHPMailer(); 
 
             $msg 	.= top_email(1);
@@ -66,6 +66,17 @@ include($_SERVER['DOCUMENT_ROOT']."/include/function.inc.php");
             $msg 	.= footer_email(1);
             $msg    .= '<br><br><div align="center">Questa e-mail è stata inviata automaticamente dal software, non rispondere a questa e-mail!</div>';
             $body 	= $msg;
+
+            $mail->IsSMTP(); 
+            $mail->SMTPDebug = 0; 
+            $mail->Debugoutput = 'html';
+            $mail->SMTPAuth = SMTPAUTH; 
+            $mail->SMTPKeepAlive = true; 					
+            $mail->Host = SMTPHOST;
+            $mail->Port = SMTPPORT;
+            $mail->Username = SMTPUSERNAME;
+            $mail->Password = SMTPPASSWORD;
+
             $mail->SetFrom(MAIL_SEND, NOME_AMMINISTRAZIONE);
 
             $mail->AddAddress($_POST['email_utente']);
