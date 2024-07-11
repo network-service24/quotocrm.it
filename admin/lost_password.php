@@ -4,6 +4,8 @@ require($_SERVER['DOCUMENT_ROOT']."/include/settings.inc.php");
 
 include($_SERVER['DOCUMENT_ROOT']."/include/declaration.inc.php");
 
+require($_SERVER['DOCUMENT_ROOT']."/include/function.inc.php");
+
             $username   = DB_USER;
             $password   = DB_PASSWORD;
             $host       = HOST;
@@ -88,8 +90,8 @@ session_destroy();
                 {
                     
 	
-				   		require_once(INC_PATH_CLASS.'PHPMailer/class.phpmailer.php');
-						require(INC_PATH_SITO."function.inc.php");
+                    require (INC_PATH_CLASS.'PHPMailer/PHPMailerAutoload.php');
+						
 			
 						$NomeUtente = $row['utente_nome'].' '.$row['utente_cognome'];
 			
@@ -118,6 +120,17 @@ session_destroy();
 						$msg 	.= footer_email(1);
 			
 						$body 	= $msg;
+
+                        $mail->IsSMTP(); 
+                        $mail->SMTPDebug = 0; 
+                        $mail->Debugoutput = 'html';
+                        $mail->SMTPAuth = SMTPAUTH; 
+                        $mail->SMTPKeepAlive = true; 					
+                        $mail->Host = SMTPHOST;
+                        $mail->Port = SMTPPORT;
+                        $mail->Username = SMTPUSERNAME;
+                        $mail->Password = SMTPPASSWORD; 
+
 						$mail->SetFrom(MAIL_ASSISTENZA, NOME_AMMINISTRAZIONE);
 						$address = $_POST['email'];
 						$mail->AddAddress($address);			

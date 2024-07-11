@@ -1,6 +1,10 @@
 <?php
 
-            require("include/settings.inc.php");
+require($_SERVER['DOCUMENT_ROOT']."/include/settings.inc.php");
+
+include($_SERVER['DOCUMENT_ROOT']."/include/declaration.inc.php");
+
+require($_SERVER['DOCUMENT_ROOT']."/include/function.inc.php");
 
             $username   = DB_USER;
             $password   = DB_PASSWORD;
@@ -84,8 +88,7 @@
 
                     
 	
-				   		require_once(INC_PATH_CLASS.'PHPMailer/class.phpmailer.php');
-						require(INC_PATH_SITO."function.inc.php");
+                    require (INC_PATH_CLASS.'PHPMailer/PHPMailerAutoload.php');
 			
 						$NomeCliente = $row['nome'].' '.$row['cognome'];
 						if($NomeCliente=='')$NomeCliente = $row['rag_soc'];
@@ -126,6 +129,17 @@
 						$msg 	.= footer_email(1);
 		                $msg    .= '<br><br><div align="center">Questa e-mail è stata inviata automaticamente dal software, non rispondere a questa e-mail!</div>';
 						$body 	= $msg;
+
+                        $mail->IsSMTP(); 
+                        $mail->SMTPDebug = 0; 
+                        $mail->Debugoutput = 'html';
+                        $mail->SMTPAuth = SMTPAUTH; 
+                        $mail->SMTPKeepAlive = true; 					
+                        $mail->Host = SMTPHOST;
+                        $mail->Port = SMTPPORT;
+                        $mail->Username = SMTPUSERNAME;
+                        $mail->Password = SMTPPASSWORD; 
+                        
 						$mail->SetFrom(MAIL_ASSISTENZA, NOME_AMMINISTRAZIONE);
 						$address = $_REQUEST['email'];
 						//$address = MAIL_ADMIN;
