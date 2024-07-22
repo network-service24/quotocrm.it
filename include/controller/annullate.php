@@ -8,7 +8,7 @@ if($NumeroRecord > NUMERO_RECORD){
             $url_base = BASE_URL_SITO."annullate/";
             $pagine_vicine = PAGINE_VICINE;
             // ricavo il numero totale di record
-            $tot_righe = $fun->numeroRecord('hospitality_guest',IDSITO,'NoDisponibilita',1,'');
+            $tot_righe =  $fun->countRowsAnnullate(IDSITO);
             // totale pagine
             $tot_pagine = ceil($tot_righe / $righe_per_pagina);
 

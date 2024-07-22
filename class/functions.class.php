@@ -10291,7 +10291,7 @@ class functions
     {
         global $dbMysqli;
 
-        $sel = "SELECT COUNT(Id) as num FROM hospitality_guest  WHERE idsito = " . $idsito . " AND NoDisponibilita = 1 ";
+        $sel = "SELECT COUNT(Id) as num FROM hospitality_guest  WHERE idsito = " . $idsito . " AND NoDisponibilita = 1 AND Hidden = 0 ";
         $res = $dbMysqli->query($sel);
         $rwc = $res[0];
         return $rwc['num'];

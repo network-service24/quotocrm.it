@@ -133,6 +133,7 @@ include($_SERVER['DOCUMENT_ROOT']."/include/function.inc.php");
 				AND 
 					hospitality_guest.Hidden = 1 ";
 	$select  .=	  $andSelect." ";
+	$select  .=	  " ORDER BY hospitality_guest.NumeroPrenotazione DESC ";
 	if(!$_REQUEST['action']){
 		if($pagina_corrente!='' && $righe_per_pagina!=''){
 			$select .=" LIMIT ".$prima_riga.", ".$righe_per_pagina."";
