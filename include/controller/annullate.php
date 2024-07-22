@@ -1,6 +1,6 @@
 <?
 $NumeroRecord = $fun->countRowsAnnullate(IDSITO);
-if($NumeroRecord > NUMERO_RECORD){
+if(!$_REQUEST['action'] && $NumeroRecord > NUMERO_RECORD){
 
             // ----------------------------------------------------------------
             //    C A L C O L O   D E L   N U M E R O   D I   P A G I N E
@@ -8,7 +8,7 @@ if($NumeroRecord > NUMERO_RECORD){
             $url_base = BASE_URL_SITO."annullate/";
             $pagine_vicine = PAGINE_VICINE;
             // ricavo il numero totale di record
-            $tot_righe =  $fun->countRowsAnnullate(IDSITO);
+            $tot_righe = $fun->countRowsAnnullate(IDSITO);
             // totale pagine
             $tot_pagine = ceil($tot_righe / $righe_per_pagina);
 
@@ -37,6 +37,7 @@ if($NumeroRecord > NUMERO_RECORD){
 # VARIABILI
 $variabili .= '&action='.$_REQUEST['action'].'';
 $variabili .= '&Motivo='.$_REQUEST['Motivo'].'';
+$variabili .= '&TipoRichiesta='.$_REQUEST['TipoRichiesta'].'';
 $variabili .= ($_REQUEST['TipoSoggiorno']!=''?'&TipoSoggiorno='.$_REQUEST['TipoSoggiorno']:'');
 $variabili .= ($_REQUEST['NumeroPrenotazione']!=''?'&NumeroPrenotazione='.$_REQUEST['NumeroPrenotazione']:'');
 $variabili .= ($_REQUEST['Operatore']!=''?'&Operatore='.$_REQUEST['Operatore']:'');
@@ -120,7 +121,7 @@ $content .='<style>
                 #azioniPrev .dropdown-toggle::after {
                     display: none !important;
                 }
-                '.($NumeroRecord > NUMERO_RECORD?'
+                '.(!$_REQUEST['action'] && $NumeroRecord > NUMERO_RECORD?'
                 .pagination{
                     position:absolute!important;
                     right:20px!important;
@@ -166,7 +167,7 @@ $content .='<script>
                     responsive: true,
                     processing:true,
                     oLanguage: {sProcessing: " <div class=\'cell preloader5 loader-block\'><div class=\'circle-5 l loader-warning\'></div><div class=\'circle-5 m loader-warning\'></div><div class=\'circle-5 r loader-warning\'></div></div><span class=\'text-primary f-w-400 f-14 f-s-intial\'>QUOTO! sta caricando i dati...<br><span class=\'\'>Attendere!!</span></span>"},
-                    "paging": '.($NumeroRecord > NUMERO_RECORD?'false':'true').',
+                    "paging": '.(!$_REQUEST['action']?($NumeroRecord > NUMERO_RECORD?'false':'true'):'true').',
 						"pagingType": "simple_numbers",
 						"language": {
 							 "search": "Filtro rapido:",
@@ -254,7 +255,7 @@ $content .='<script>
 
                     $("#annullate_processing").removeClass("card");
 
-                    '.($NumeroRecord > NUMERO_RECORD?'$("#annullate_wrapper").prepend(\'<div class="dataTables_filter f-11" style="position:absolute;right:20px;top:100px">Filtro rapido disattivato finchè<br> non si riducono i record a meno di '.NUMERO_RECORD.'</div>\');$("#annullate_filter").hide();':'$(".buttons-page-length").before("<i class=\"fa fa-eye fa-2x fa-fw\"></i>");').'
+                    '.(!$_REQUEST['action']?($NumeroRecord > NUMERO_RECORD?'$("#annullate_wrapper").prepend(\'<div class="dataTables_filter f-11" style="position:absolute;right:20px;top:100px">Filtro rapido disattivato finchè<br> non si riducono i record a meno di '.NUMERO_RECORD.'</div>\');$("#annullate_filter").hide();':'$(".buttons-page-length").before("<i class=\"fa fa-eye fa-2x fa-fw\"></i>");'):'$(".buttons-page-length").before("<i class=\"fa fa-eye fa-2x fa-fw\"></i>");').'
                     $(".buttonExport").before("<i class=\"fa fa-file-excel-o fa-2x fa-fw\"></i>");'."\r\n";
 
 

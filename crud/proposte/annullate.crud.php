@@ -48,7 +48,17 @@ include($_SERVER['DOCUMENT_ROOT']."/include/function.inc.php");
 				$andSelectFilter = " AND hospitality_guest.Id IN (".implode(",",$lista_id_).")";
 			}
 		}
-
+		if($_REQUEST['TipoRichiesta']!=''){
+			if($_REQUEST['TipoRichiesta']=='Preventivo'){
+				$andSelect  .= " AND hospitality_guest.TipoRichiesta =  '".$_REQUEST['TipoRichiesta']."'";
+			}elseif($_REQUEST['TipoRichiesta']=='Conferma'){
+				$andSelect  .= " AND hospitality_guest.TipoRichiesta =  '".$_REQUEST['TipoRichiesta']."'";
+				$andSelect  .= " AND hospitality_guest.Chiuso =  0";
+			}elseif($_REQUEST['TipoRichiesta']=='ConfermaC'){
+				$andSelect  .= " AND hospitality_guest.TipoRichiesta =  'Conferma'";
+				$andSelect  .= " AND hospitality_guest.Chiuso =  1";
+			}
+		}
 		if($_REQUEST['NumeroPrenotazione']!=''){
 			$andSelect  .= " AND hospitality_guest.NumeroPrenotazione = ".$_REQUEST['NumeroPrenotazione']."";
 		}

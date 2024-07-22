@@ -160,7 +160,7 @@ if($_REQUEST['action']=='search'){
                                       }
 
 
-                                      if($_SERVER['REQUEST_URI']=='/archivio/'){
+                                      if($_SERVER['REQUEST_URI']=='/archivio/' || strstr($_SERVER['REQUEST_URI'],'/annullate/')){
                                           $form_ricerca .= '<div class="form-group">
                                                               <label for="TipoRichiesta" class="control-label"><b>Richiesta</b></label>
                                                                   <div class="input-group input-group-primary">
