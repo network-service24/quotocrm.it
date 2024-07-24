@@ -61,6 +61,7 @@ $variabili .= ($_REQUEST['Lingua']!=''?'&Lingua='.$_REQUEST['Lingua']:'');
 $variabili .= ($_REQUEST['Aperture']!=''?'&Aperture='.$_REQUEST['Aperture']:'');
 $variabili .= ($_REQUEST['chat']!=''?'&chat='.$_REQUEST['chat']:'');
 $variabili .= ($_REQUEST['campagna']!=''?'&campagna='.$_REQUEST['campagna']:'');
+$variabili .= ($_REQUEST['Inviata']!=''?'&Inviata='.$_REQUEST['Inviata']:'');
 
 $contoAllaRovescia = $fun->contoallarovescia(MINUTI_RICARICA,'preventivi');
 

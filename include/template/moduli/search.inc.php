@@ -129,7 +129,21 @@ if($_REQUEST['action']=='search'){
                                                             ';
                                         }
                                       }
-
+                                      if(strstr($_SERVER['REQUEST_URI'],'/preventivi/')){
+                                        $form_ricerca .= '<div class="col-md-4">
+                                                             <div class="form-group">
+                                                                   <label  class="control-label"><b>Preventivi Da inviare/Inviati</b></label>
+                                                                   <div class="input-group input-group-primary">
+                                                                     <span class="input-group-addon"><i class="icofont icofont-queen fa-fw"></i></span>
+                                                                       <select name="Inviata" id="Inviata" class="form-control">
+                                                                         <option value="">--</option>
+                                                                         <option value="NO" '.($_REQUEST['Inviata']=='NO'?'selected="selected"':'').'>Da inviare</option>
+                                                                         <option value="SI" '.($_REQUEST['Inviata']=='SI'?'selected="selected"':'').'>Inviati</option>
+                                                                       </select>
+                                                                   </div>
+                                                             </div>
+                                                           </div>';
+                                     }
                                       $form_ricerca .= '</div>';
 
                                       $form_ricerca .= '

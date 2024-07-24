@@ -254,7 +254,13 @@ include($_SERVER['DOCUMENT_ROOT']."/include/function.inc.php");
 		if($_REQUEST['Lingua']!=''){
 			$andSelect  .= " AND hospitality_guest.Lingua= '".$_REQUEST['Lingua']."'";
 		}
-
+		if($_REQUEST['Inviata']!= ''){
+			if($_REQUEST['Inviata']== 'NO'){
+				$andSelect  .= " AND hospitality_guest.Inviata is Null AND DataInvio is Null";
+			}else{
+				$andSelect  .= " AND hospitality_guest.Inviata is not Null AND DataInvio is not Null";
+			}
+		}
 	}
 
 	$anno_precendente_ = mktime(0, 0, 0, '06', '01', (date('Y')-1));
