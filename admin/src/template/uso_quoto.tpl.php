@@ -113,6 +113,18 @@
                                                                     $("#scadenza_quoto_pre"+idsito+"").hide();
                                                                 });
                                                             }
+                                                            function totale_conversioni(idsito){
+                                                                $("#totale_conversioni_pre"+idsito+"").html('<img src="<?=BASE_URL_SITO?>img/loader_performance.gif" style="width:40px;height:10px" />');
+                                                                $("#totale_conversioni"+idsito+"").load("<?=BASE_URL_ADMIN?>ajax/uso_quoto/totale_conversioni.php?idsito="+idsito+"", function() {
+                                                                    $("#totale_conversioni_pre"+idsito+"").hide();
+                                                                });
+                                                            }
+                                                            function tipo_contratto(idsito,id_tipo_contratto){
+                                                                $("#tipo_contratto_pre"+idsito+"").html('<img src="<?=BASE_URL_SITO?>img/loader_performance.gif" style="width:40px;height:10px" />');
+                                                                $("#tipo_contratto"+idsito+"").load("<?=BASE_URL_ADMIN?>ajax/uso_quoto/tipo_contratto.php?id_tipo_contratto="+id_tipo_contratto+"", function() {
+                                                                    $("#tipo_contratto_pre"+idsito+"").hide();
+                                                                });
+                                                            }
                                                         </script>
                                                         <div class="accordion-block">
                                                             <div class="accordion-box" id="single-open">

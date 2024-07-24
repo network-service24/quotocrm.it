@@ -17,55 +17,7 @@
       $lista_siti .= '<option value="'.$rw['idsito'].'" '.($rw['idsito']==$_REQUEST['idsito']?'selected="selected"':'').' '.($rw['data_end_hospitality']<=date('Y-m-d')?'style="color:#FF0000!important"':'').'>'.$rw['web'].'</option>';
     }
 
-    function totale_invii($idsito){
-        global $dbMysqli;
 
-        $select = "SELECT
-                    COUNT(hospitality_guest.Id) as totale_invii
-                  FROM
-                    hospitality_guest
-                  WHERE
-                    hospitality_guest.TipoRichiesta = 'Preventivo'
-                  AND
-                    hospitality_guest.idsito = ".$idsito."
-                  AND
-                    hospitality_guest.Chiuso = 0
-                  AND
-                    hospitality_guest.Hidden = 0
-                  AND
-                    hospitality_guest.NoDisponibilita = 0
-                  AND
-                    hospitality_guest.DataInvio IS NOT NULL";
-
-        $res = $dbMysqli->query($select);
-        $rws = $res[0];
-
-        return $rws['totale_invii'];
-    }
-
-    function totale_prenotazioni($idsito){
-        global $dbMysqli;
-
-          $select = "SELECT
-                      COUNT(hospitality_guest.Id) as totale_prenotazioni
-                    FROM
-                      hospitality_guest
-                    WHERE
-                      hospitality_guest.TipoRichiesta = 'Conferma'
-                    AND
-                      hospitality_guest.idsito = ".$idsito."
-                    AND
-                      hospitality_guest.Disdetta = 0
-                    AND
-                      hospitality_guest.Hidden = 0
-                    AND
-                      hospitality_guest.NoDisponibilita = 0";
-
-          $res = $dbMysqli->query($select);
-          $rwc = $res[0];
-
-          return $rwc['totale_prenotazioni'];
-    }
 
     function totale_fatturato($idsito,$tipo=null){
         global $dbMysqli;
@@ -254,22 +206,7 @@
       return $accessi;
   }
 
-  function tot_conversion($totale_invii,$totale_prenotazioni,$tipo=null){
-    $conversioni = @((100*$totale_prenotazioni)/$totale_invii);
-    if(is_int($conversioni)){
-  		$conversioni = $conversioni;
-  	}else{
-  		$conversioni =	number_format($conversioni,2,',','.');
-  	}
-    if($conversioni == ''){
-      $conversioni = 0;
-    }
-      if($tipo == 'format'){
-        return str_replace(",00", "",$conversioni);
-      }else{
-        return str_replace(",00", "",$conversioni).' %';
-      }
-  }
+
 
   function comunicazioni_quoto($idsito){
     global $dbMysqli;
@@ -296,7 +233,8 @@ function quoto_attivi(){
                             siti.email,
                             siti.tel,
                             siti.cell,
-                            siti.servizi_attivi
+                            siti.servizi_attivi,
+                            siti.id_tipo_contratto
                         FROM
                             siti
                         WHERE
@@ -396,12 +334,29 @@ function quoto_attivi(){
       $totale_fatturato_anno           = '';
       $log_accessi                     = '';
       $scadenza_quoto                  = '';
+      $tipo_contratto                  = '';
 
       foreach ($record as $ky  => $value) {
         //$totale_invii                    = totale_invii($value['idsito']);
         //$totale_prenotazioni             = totale_prenotazioni($value['idsito']);
         //$tot_conversione                 = tot_conversion($totale_invii,$totale_prenotazioni);
+        $tot_conversione                = '<script>
+                                              $(function(){
+                                                totale_conversioni('.$value['idsito'].');
+                                              })
+                                            </script>
+                                            <span id="totale_conversioni_pre'.$value['idsito'].'"></span>
+                                            <span id="totale_conversioni'.$value['idsito'].'"></span>';
+
         $comunicazioni_quoto             = comunicazioni_quoto($value['idsito']);
+
+        $tipo_contratto                  =  '<script>
+                                                $(function(){
+                                                  tipo_contratto('.$value['idsito'].','.$value['id_tipo_contratto'].');
+                                                })
+                                              </script>
+                                              <span id="tipo_contratto_pre'.$value['idsito'].'"></span>
+                                              <span id="tipo_contratto'.$value['idsito'].'"></span>';
         //$totale_fatturato                = totale_fatturato($value['idsito']);
         $totale_fatturato                = '<script>
                                             $(function(){
@@ -474,7 +429,7 @@ function quoto_attivi(){
 
 
 
-                    <div class="col-md-6 col-sm-6 col-xs-12">
+                    <div class="col-md-5 col-sm-5 col-xs-12">
                       <div class="info-box animated zoomIn del4">
                         <span class="info-box-icon bg-c-cyan"><i class="fa fa-h-square text-white"></i></span>
                         <div class="info-box-content">
@@ -506,14 +461,14 @@ function quoto_attivi(){
 
                           <span class="info-box-number"><small>
                           <i class="fa fa-arrow-right"></i>&nbsp;&nbsp;Prima attivazione&nbsp;&nbsp<b data-toogle="tooltip" title="Data della attività  del progetto in essere: attivazione Quoto" style="cursor:pointer">'.gira_data($value['data_start_hospitality']).'</b>&nbsp;ultimo rinnovo&nbsp;<b>'.$data_start.'</b> scadenza&nbsp;&nbsp<b data-toogle="tooltip" title="Data di fine accesso al software" style="cursor:pointer">'.gira_data($value['data_end_hospitality']).'</b> <br><small style="font-size:80%!important;font-weight:normal!important">'.($value['no_rinnovo_hospitality']==0?'Si aggiorna automaticamente alla scadenza':'NON si aggiorna più alla scadenza').'</small>  &nbsp;'.$scadenza_quoto.'</small> &nbsp;&nbsp;&nbsp;&nbsp;'.($value['no_rinnovo_hospitality']==0?'<i title="Rinnovo Automatico Abilitato" data-toggle="tooltip" class="fa fa-refresh text-green"></i>':'<i title="Rinnovo Automatico Disattivato, alla scadenza non sarà più attivo!" data-toggle="tooltip" class="fa fa-refresh text-red"></i>').'
-
                           </span>
-                          <span class="info-box-text">&nbsp;</span>
+                          <small>Tipo contratto <i class="fa fa-arrow-right"></i>&nbsp;&nbsp; <b>'. $tipo_contratto .'</b></small>
+                          <span class="info-box-text"></span>
                           </div><!-- /.info-box-content -->
                       </div><!-- /.info-box -->
                     </div><!-- /.col -->
 
-                    <div class="col-md-3 col-sm-3 col-xs-12">
+                    <div class="col-md-2 col-sm-2 col-xs-12">
                     <div class="info-box">
                     <span class="info-box-icon bg-c-cyan"><i class="fa fa-server text-white"></i></span>
                     <div class="info-box-content">
@@ -562,12 +517,12 @@ function quoto_attivi(){
                         </div><!-- /.info-box-content -->
                       </div><!-- /.info-box -->
                   </div><!-- /.col -->'."\r\n";
-/*
+
         $report .=' <div class="col-md-2 col-sm-2 col-xs-12">
                       <div class="info-box animated zoomIn del5">
                         <span class="info-box-icon bg-c-cyan"><i class="fa fa-calculator text-white"></i></span>
                         <div class="info-box-content">
-                          <span class="info-box-text">Tasso conversione</span>
+                          <span class="info-box-text">Tasso conversione</span><b class="text-green">Anno '.date('Y').'</b>
                           <span class="info-box-number">'.$tot_conversione.'
                           </span>
                           <span class="info-box-text">&nbsp;</span>
@@ -575,7 +530,7 @@ function quoto_attivi(){
                         </div><!-- /.info-box-content -->
                       </div><!-- /.info-box -->
                     </div><!-- /.col -->'."\r\n";
-*/
+
       $report .='   <div class="col-md-3 col-sm-3 col-xs-12">
                       <div class="info-box animated zoomIn del6">
                         <span class="info-box-icon bg-c-cyan"><i class="fa fa-euro text-white"></i></span>
