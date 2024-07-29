@@ -12,33 +12,33 @@
     // eta bimbi bedzzle booking
     $e = 1;
     $etaBimbi1 .='<option value="0">0</option>';
-    for($e==1; $e<=12; $e++){
+    for($e==1; $e<=18; $e++){
        $etaBimbi1 .='<option value="'.$e.'">'.$e.'</option>';
     }
     $e1 = 1;
     $etaBimbi2 .='<option value="0" '.($EtaBambini1=='0'?'selected="selected"':'').'>0</option>';
-    for($e1==1; $e1<=12; $e1++){
+    for($e1==1; $e1<=18; $e1++){
        $etaBimbi2 .='<option value="'.$e1.'" '.($EtaBambini1==$e1?'selected="selected"':'').'>'.$e1.'</option>';
     }
 
     $e3 = 1;
     $etaBimbi3 .='<option value="0" '.($EtaBambini3=='0'?'selected="selected"':'').'>0</option>';
-    for($e3==1; $e3<=12; $e3++){
+    for($e3==1; $e3<=18; $e3++){
        $etaBimbi3 .='<option value="'.$e3.'" '.($EtaBambini3==$e3?'selected="selected"':'').'>'.$e3.'</option>';
     }
     $e4 = 1;
     $etaBimbi4 .='<option value="0" '.($EtaBambini4=='0'?'selected="selected"':'').'>0</option>';
-    for($e4==1; $e4<=12; $e4++){
+    for($e4==1; $e4<=18; $e4++){
        $etaBimbi4 .='<option value="'.$e4.'" '.($EtaBambini4==$e4?'selected="selected"':'').'>'.$e4.'</option>';
     }
     $e5 = 1;
     $etaBimbi5 .='<option value="0" '.($EtaBambini5=='0'?'selected="selected"':'').'>0</option>';
-    for($e5==1; $e5<=12; $e5++){
+    for($e5==1; $e5<=18; $e5++){
        $etaBimbi5 .='<option value="'.$e5.'" '.($EtaBambini5==$e5?'selected="selected"':'').'>'.$e5.'</option>';
     }
     $e6 = 1;
     $etaBimbi6 .='<option value="0" '.($EtaBambini6=='0'?'selected="selected"':'').'>0</option>';
-    for($e6==1; $e6<=12; $e6++){
+    for($e6==1; $e6<=18; $e6++){
        $etaBimbi6 .='<option value="'.$e6.'" '.($EtaBambini6==$e6?'selected="selected"':'').'>'.$e6.'</option>';
     }
     ###############################################
