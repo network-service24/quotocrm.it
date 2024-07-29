@@ -3,7 +3,7 @@ include($_SERVER['DOCUMENT_ROOT']."/include/settings.inc.php");
 include($_SERVER['DOCUMENT_ROOT']."/include/declaration.inc.php");
 
         $idsito        = $_REQUEST['idsito'];
-        $promotionCoce = $_REQUEST['promotionCoce']; 
+        $promotionCode = $_REQUEST['promotionCode']; 
         $start         = $_REQUEST['start']; 
         $end           = $_REQUEST['end'];  
         $adulti        = $_REQUEST['adulti'];
@@ -22,14 +22,16 @@ include($_SERVER['DOCUMENT_ROOT']."/include/declaration.inc.php");
         $record = $Qquery[0];
 
               // terza chiamata QUERY
-          $xml3 .='<OTA_HotelAvailRQ PrimaryLangID="it-IT" xmlns="http://www.opentravel.org/OTA/2003/05"  Target="Production" Version="1.0">
+          $xml3 ='<OTA_HotelAvailRQ PrimaryLangID="it-IT" xmlns="http://www.opentravel.org/OTA/2003/05"  Target="Production" Version="1.0">
                   <AvailRequestSegments>
                       <AvailRequestSegment>
-                          <StayDateRange Start="'.$start.'" End="'.$end.'" />
-                          <RatePlanCandidates>
-                            <RatePlanCandidate PromotionCode="'.$promotionCoce.'" />
-                          </RatePlanCandidates> 
-                          <RoomStayCandidates>
+                          <StayDateRange Start="'.$start.'" End="'.$end.'" />';
+        if($promotionCode != ''){
+          $xml3 .='       <RatePlanCandidates>
+                            <RatePlanCandidate PromotionCode="'.$promotionCode.'" />
+                          </RatePlanCandidates>'; 
+        }
+          $xml3 .='         <RoomStayCandidates>
                               <RoomStayCandidate>
                                   <GuestCounts>
                                       <GuestCount AgeQualifyingCode="10.AQC" Count="'.$adulti.'" />';
@@ -93,9 +95,9 @@ include($_SERVER['DOCUMENT_ROOT']."/include/declaration.inc.php");
               
               $risultati = simplexml_load_file(BASE_PATH_SITO.'uploads/'.$idsito.'/query.xml', 'SimpleXMLElement', LIBXML_NOCDATA) or die("Error: Cannot create object");
        
-/*               echo'<pre>';
+/*                echo'<pre>';
               var_dump($risultati);
-              echo'</pre>';   */
+              echo'</pre>';   */ 
             
               foreach($risultati as $key => $value){
 
@@ -191,15 +193,15 @@ include($_SERVER['DOCUMENT_ROOT']."/include/declaration.inc.php");
                         <br>';
 
                    echo'<div class="row" id="etichette">        
-                          <div class="col-md-'.(date('Y-m-d') > $data_quoto_v2?'2':'3').'"><b>Tipo Camera</b></div>
+                          <div class="col-md-'.(date('Y-m-d') > $data_quoto_v2?'3':'3').'"><b>Tipo Camera</b></div>
                           <div class="col-md-'.(date('Y-m-d') > $data_quoto_v2?'3':'4').'"><b>Tipo Soggiorno</b></div>
-                           <div class="col-md-1"><b>Nr.Camere</b></div>
+                           <div class="col-md-1 text-center"><b class="cursore" data-toggle="tooltip" title="Numero Camere">Nr.</b></div>
                            ';
                            if(date('Y-m-d') > $data_quoto_v2){ 
-                            echo' <div class="col-md-1"><b>Adulti</b></div>
-                                  <div class="col-md-1"><b>Bambini</b></div>';
+                            echo' <div class="col-md-1 text-center"><b class="cursore" data-toggle="tooltip" title="Numero Adulti">A</b></div>
+                                  <div class="col-md-1 text-center"><b class="cursore" data-toggle="tooltip" title="Numero Bambini">B</b></div>';
                            }
-                  echo'  <div class="col-md-3"><b>Prezzo</b> <small>0000.00</small></div>
+                  echo'  <div class="col-md-2"><b>Prezzo</b> <small>0000.00</small></div>
                           <div class="col-md-1"><b>Scegli</b></div>
                          </div>
                          <br>';
@@ -269,13 +271,13 @@ include($_SERVER['DOCUMENT_ROOT']."/include/declaration.inc.php");
                                           <input type="hidden" name="TipoSoggiorno'.$p.'[]" id="TipoSoggiorno_'.$p.'_'.$n_righe.'"  value="'.$row['Id'].'"><i class="fa fa-angle-right"></i> <span class="text-orange f-11">'.$row['TipoSoggiorno'].'</span><br><div style="padding-left:20px"><small><i class="fa fa-trophy"></i> <b class="text-info"><em>TariffaSB:</em> '.$record['TRATTAMENTO'].'</b> <i class="fa fa-angle-right"></i> <span class="text-maroon f-11">'.$record['DISCOUNTDESCR'].'</span></small></div>                                 
                                       </div>
                                         <div class="col-md-1">
-                                          <input type="text" name="NumeroCamere'.$p.'[]" id="NumeroCamere_'.$p.'_'.$n_righe.'" class="form-control calc text-center" value="'.$record['UNITA'].'"> 
+                                          <input type="text" name="NumeroCamere'.$p.'[]" id="NumeroCamere_'.$p.'_'.$n_righe.'" class="form-control calc text-center" value="'.$record['UNITA'].'" style="font-size:80%;height:calc(2.25rem + 2px);"> 
                                         </div>
                                       '; 
                           if(date('Y-m-d') > $data_quoto_v2){ 
                                 echo'   <div class="col-md-1">  
                                             <i class="fa fa-male" style="position:absolute; top:10px;left:-2px;"></i>                    
-                                            <select name="NumAdulti'.$p.'[]" id="NumeroAdulti_'.$p.'_'.$n_righe.'" class="form-control" tabindex="20">
+                                            <select name="NumAdulti'.$p.'[]" id="NumeroAdulti_'.$p.'_'.$n_righe.'" class="form-control" style="font-size:80%">
                                                 <option value="" selected="selected">--</option>
                                                   '.$numero_adulti.'
                                             </select>
@@ -284,12 +286,12 @@ include($_SERVER['DOCUMENT_ROOT']."/include/declaration.inc.php");
                                         <div class="col-md-1">
                                             <i class="fa fa-child" style="position:absolute; top:10px;left:-2px;"></i> 
                                             <select name="NumBambini'.$p.'[]" id="NumeroBambini_'.$p.'_'.$n_righe.'_'.$n.'"
-                                                class="NumeroBambini_sb_'.$p.'_'.$n_righe.' form-control" tabindex="20" onchange="eta_bimbi_sb(\''.$p.'_'.$n_righe.'\');">
+                                                class="NumeroBambini_sb_'.$p.'_'.$n_righe.' form-control" style="font-size:80%"" onchange="eta_bimbi_sb(\''.$p.'_'.$n_righe.'\');">
                                                 <option value="" selected="selected">--</option>
                                                   '.$numero_bimbi.'
                                             </select>
                                             <div class="EtaBambini_sb'.$p.'_'.$n_righe.'" id="EtaB_'.$p.'_'.$n_righe.'_'.$n.'" style="display:none">
-                                                <input type="text"  name="EtaB'.$p.'[]" placeholder="Età: 1,2,3" class="form-control" value="'.($eta1==''?'':$eta1).''.($eta2==''?'':','.$eta2).''.($eta3==''?'':','.$eta3).''.($eta4==''?'':','.$eta4).''.($eta5==''?'':','.$eta5).''.($eta6==''?'':','.$eta6).'">
+                                                <input type="text"  name="EtaB'.$p.'[]" placeholder="Età: 1,2,3" class="form-control" style="font-size:80%" value="'.($eta1==''?'':$eta1).''.($eta2==''?'':','.$eta2).''.($eta3==''?'':','.$eta3).''.($eta4==''?'':','.$eta4).''.($eta5==''?'':','.$eta5).''.($eta6==''?'':','.$eta6).'">
                                             </div> 
                                         </div>';
 

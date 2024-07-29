@@ -971,7 +971,7 @@ include($_SERVER['DOCUMENT_ROOT']."/include/declaration.inc.php");
                       $tot_c = sizeof($ss);
                                                  
                       if(($tot_s > 0) && ($tot_c > 0)){
-                        if($numero_camere==1){
+
                         $n = 1;
                         foreach ($rec as $kk => $record) {
                           if($kk == 0){
@@ -1039,89 +1039,6 @@ include($_SERVER['DOCUMENT_ROOT']."/include/declaration.inc.php");
                         }
                         $n_righe++;
                       }
-
-                      if($numero_camere > 1){
-
-                        foreach ($rec as $kk => $record) {
-                          if($kk == 0){
-                          $n_c == 1;
-                          for ($n_c=1; $n_c <= $numero_camere; $n_c++) {
-                       
-                              echo'
-                                    <div class="row nascondi" id="riga_'.$p.'_'.$n_righe.'_'.$n.'">  
-                                      <div class="col-md-'.(date('Y-m-d') > $data_quoto_v2?'3':'4').'" >
-                                          <input type="hidden" value="" name="idrichiesta'.$p.'[]">
-                                            <input readonly type="hidden" name="NumeroCamere'.$p.'[]" id="NumeroCamere_'.$p.'_'.$n_righe.'" class="f-12 form-control calc text-center" value="1" style="font-size:80%;height:calc(2.25rem + 2px);"> 
-                                          <input type="hidden" name="TipoSoggiorno'.$p.'[]" id="TipoSoggiorno_'.$p.'_'.$n_righe.'"  value="'.$row['Id'].'"><i class="fa fa-angle-right"></i> <span class="text-orange f-11">'.$row['TipoSoggiorno'].'</span>
-                                          '.($record['DISCOUNTED']==1?'<br><div style="padding-left:20px"><small><i class="fa fa-trophy"></i> <b class="text-info f-11"><em>Offerta</em></b></small></div>':'').'                                 
-                                      </div>
-                                      <div class="col-md-'.(date('Y-m-d') > $data_quoto_v2?'3':'4').'">
-                                        <i class="fa fa-key"></i> <input type="hidden" name="TipoCamere'.$p.'[]" id="TipoCamere_'.$p.'_'.$n_righe.'" value="'.$rows['Id'].'"><span class="text-green f-11">'.$rows['TipoCamere'].'</span> <span class="text-gray f-10 cursore" data-toggle="tooltip" title="Camere disponibili">('.$record['DISPO'].')</span>
-                                      </div> '; 
-                                  if(date('Y-m-d') > $data_quoto_v2){ 
-                                        echo'   <div class="col-md-1">  
-                                                    <i class="fa fa-male" style="position:absolute; top:10px;left:-2px;"></i>                    
-                                                    <select name="NumAdulti'.$p.'[]" id="NumeroAdulti_'.$p.'_'.$n_righe.'" class="form-control f-12" style="font-size:80%">
-                                                        <option value="" selected="selected">--</option>
-                                                          '.$numero_adulti.'
-                                                    </select>
-                                                </div>
-              
-                                                <div class="col-md-1">
-                                                    <i class="fa fa-child" style="position:absolute; top:10px;left:-2px;"></i> 
-                                                    <select name="NumBambini'.$p.'[]" id="NumeroBambini_'.$p.'_'.$n_righe.'" style="font-size:80%"
-                                                        class="NumeroBambini_sb_'.$p.'_'.$n_righe.' form-control f-12"  onchange="eta_bimbi_sb(\''.$p.'_'.$n_righe.'\');">
-                                                        <option value="" selected="selected">--</option>
-                                                          '.$numero_bimbi.'
-                                                    </select>
-                                                    <div class="EtaBambini_sb'.$p.'_'.$n_righe.'" id="EtaB_'.$p.'_'.$n_righe.'" style="display:none">
-                                                        <input type="text"  name="EtaB'.$p.'[]" placeholder="Età: 1,2,3" class="form-control f-12" style="font-size:80%" value="'.($eta1==''?'':$eta1).''.($eta2==''?'':','.$eta2).''.($eta3==''?'':','.$eta3).''.($eta4==''?'':','.$eta4).''.($eta5==''?'':','.$eta5).''.($eta6==''?'':','.$eta6).'">
-                                                    </div> 
-                                                </div>';
-
-                                        echo'<script>
-                                                $( document ).ready(function() {                                      
-                                                    if($("#NumeroBambini_'.$p.'_'.$n_righe.'").val() != \'\'){
-                                                      $("#EtaB_'.$p.'_'.$n_righe.'").attr("style","display:block");
-                                                    }else{
-                                                      $("#EtaB_'.$p.'_'.$n_righe.'").attr("style","display:none");
-                                                    }
-                                                });
-                                              </script>';
-                                  }        
-                                echo'   <div class="col-md-3">
-                                            <div class="input-group">                                                    
-                                              <span class="input-group-addon"><i class="fa fa-euro"></i></span>                          
-                                              <input type="text" name="Prezzo'.$p.'[]" id="Prezzo_'.$p.'_'.$n_righe.'"  class="prezzo'.$p.' form-control f-12" placeholder="0000.00" value="'.$record['TOTALE'].'">
-                                            </div>
-                                        </div>
-                                        <div class="col-md-1">
-                                         <input type="checkbox" name="chec_eb_'.$p.'[]" id="chec_eb_'.$p.'_'.$n_righe.'_'.$n.'" class="check_scelta">
-                                        </div>   
-                                        <div style="clear:both;height:4px"></div>                                            
-                                    </div>';
-                                     $righe .= '
-                                                if($("#chec_eb_'.$p.'_'.$n_righe.'_'.$n.'").prop(\'checked\')==false) {
-                                                    $("#riga_'.$p.'_'.$n_righe.'_'.$n.'").remove(); 
-                                                    $("#hr_'.$p.'_'.$n_righe.'_'.$n.'").remove();                                                    
-                                                } 
-                                              '."\r\n";   
-                                echo (($n_c % $numero_camere == 0)?'<hr id="hr_'.$p.'_'.$n_righe.'_'.$n.'">':'');
-                              $n++;
-                          }
-                          $n_righe++;
-                        }
-
-                      }
-                     
-
-                      }
-
-
-
-
-
-                    }
                   }
                   echo'<script>
                           $( document ).ready(function() {            
