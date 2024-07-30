@@ -415,17 +415,13 @@ include($_SERVER['DOCUMENT_ROOT']."/include/declaration.inc.php");
 
                         $n = 1;
 
-                       
-                       $rec = array_unique($rec);
-               
-
                        if($numero_camere==1){
 
                           foreach ($rec as $kk => $record) {
 
                               echo'
                                     <div class="row nascondi" id="riga_'.$p.'_'.$n_righe.'_'.$n.'">  
-                                      <div class="col-md-'.(date('Y-m-d') > $data_quoto_v2?'4':'4').'" >
+                                      <div class="col-md-'.(date('Y-m-d') > $data_quoto_v2?'3':'4').'" >
                                           <input type="hidden" value="" name="idrichiesta'.$p.'[]">
                                           <input type="hidden" name="TipoSoggiorno'.$p.'[]" id="TipoSoggiorno_'.$p.'_'.$n_righe.'"  value="'.$row['Id'].'"><i class="fa fa-angle-right"></i> <span class="text-orange f-12">'.$row['TipoSoggiorno'].'</span><br><div style="padding-left:20px"><small><i class="fa fa-trophy"></i> <b class="text-info"><em>TariffaSB:</em> '.$record['TRATTAMENTO'].'</b> <i class="fa fa-angle-right"></i> <span class="text-maroon">'.$record['DISCOUNTDESCR'].'</span></small></div>                                 
                                       </div>
@@ -464,7 +460,7 @@ include($_SERVER['DOCUMENT_ROOT']."/include/declaration.inc.php");
                                         });
                                       </script>';
                           }        
-                                echo'   <div class="col-md-2">                    
+                                echo'   <div class="col-md-3">                    
                                               <input type="text" name="Prezzo'.$p.'[]" id="Prezzo_'.$p.'_'.$n_righe.'"  class="prezzo'.$p.' form-control f-12" placeholder="0000.00" value="'.$record['TOTALE'].'">
                                         </div>
                                         <div class="col-md-1">
@@ -493,7 +489,7 @@ include($_SERVER['DOCUMENT_ROOT']."/include/declaration.inc.php");
                             for ($n_c=1; $n_c <= $numero_camere; $n_c++) {
                               echo'
                                     <div class="row nascondi" id="riga_'.$p.'_'.$n_righe.'_'.$n.'">  
-                                      <div class="col-md-'.(date('Y-m-d') > $data_quoto_v2?'4':'4').'" >
+                                      <div class="col-md-'.(date('Y-m-d') > $data_quoto_v2?'3':'4').'" >
                                           <input type="hidden" value="" name="idrichiesta'.$p.'[]">
                                           <input type="hidden" name="TipoSoggiorno'.$p.'[]" id="TipoSoggiorno_'.$p.'_'.$n_righe.'"  value="'.$row['Id'].'"><i class="fa fa-angle-right"></i> <span class="text-orange f-12">'.$row['TipoSoggiorno'].'</span><br><div style="padding-left:20px"><small><i class="fa fa-trophy"></i> <b class="text-info"><em>TariffaSB:</em> '.$record['TRATTAMENTO'].'</b> <i class="fa fa-angle-right"></i> <span class="text-maroon">'.$record['DISCOUNTDESCR'].'</span></small></div>                                 
                                       </div>
@@ -532,7 +528,7 @@ include($_SERVER['DOCUMENT_ROOT']."/include/declaration.inc.php");
                                             });
                                           </script>';
                               }        
-                                echo'   <div class="col-md-2">                    
+                                echo'   <div class="col-md-3">                    
                                               <input type="text" name="Prezzo'.$p.'[]" id="Prezzo_'.$p.'_'.$n_righe.'"  class="prezzo'.$p.' form-control f-12" placeholder="0000.00" value="'.(($record['TOTALE']/$numero_camere)).'">
                                         </div>
                                         <div class="col-md-1">
