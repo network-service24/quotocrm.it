@@ -13,20 +13,19 @@
         $tot      = '';
         $select   = ''; 
 
-        $descr_ui .= 'Check per aprire QUOTO al login con la nuova o vecchia interfaccia UI'."\r\n";
+        $descr_ui .= 'Check per inviare copia della mail voucher verso Hotel'."\r\n";
         $descr_ui .= 'Impostando il valore: '."\r\n";
-        $descr_ui .= '0 = Quoto si apre con la vecchia interfaccia'."\r\n";
-        $descr_ui .= '1 = Quoto si apre con la nuova interfaccia'."\r\n";
+        $descr_ui .= '0 = Quoto NON invia copia email voucher anche verso hotel'."\r\n";
+        $descr_ui .= '1 = Quoto invia copia email voucher anche verso hotel'."\r\n";
 
 
         foreach($res as $k => $v){
 
-               $select = "SELECT * FROM hospitality_configurazioni WHERE idsito = ".$v['idsito']." AND parametro = 'check_interfaccia'";
+               $select = "SELECT * FROM hospitality_configurazioni WHERE idsito = ".$v['idsito']." AND parametro = 'check_email_voucher_hotel'";
                 $sel = $db->query($select);
                 $tot = sizeof($db->result($sel));
                 if($tot==0){
-                //
-                    $db->query("INSERT INTO hospitality_configurazioni(idsito,parametro,descrizione,valore) VALUES('".$v['idsito']."','check_interfaccia','".$descr_ui."','0')");
+                    $db->query("INSERT INTO hospitality_configurazioni(idsito,parametro,descrizione,valore) VALUES('".$v['idsito']."','check_email_voucher_hotel','".$descr_ui."','0')");
                 }
 
        }

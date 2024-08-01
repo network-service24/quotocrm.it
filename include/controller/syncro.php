@@ -805,7 +805,12 @@
         $descr_adr .= '0 = info-box non viene visualizzato'."\r\n";
         $descr_adr .= '1 = info-box  viene visualizzato'."\r\n";
         $dbMysqli->query("INSERT INTO hospitality_configurazioni(idsito,parametro,descrizione,valore) VALUES('".IDSITO."','check_adr','".$descr_adr."','0')");
-
+        
+        $descr_ehv .= 'Check per inviare copia della mail voucher verso Hotel'."\r\n";
+        $descr_ehv .= 'Impostando il valore : '."\r\n";
+        $descr_ehv .= '0 = Quoto NON invia copia email voucher anche verso hotel'."\r\n";
+        $descr_ehv .= '1 = Quoto invia copia email voucher anche verso hotel'."\r\n";
+        $dbMysqli->query("INSERT INTO hospitality_configurazioni(idsito,parametro,descrizione,valore) VALUES('".IDSITO."','check_email_voucher_hotel','".$descr_ehv."','0')");
         /**
          * * FINE NUOVO CODICE
          */

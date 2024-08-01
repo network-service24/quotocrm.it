@@ -3914,6 +3914,9 @@ function descr_parametro_config($value, $fieldname, $primary_key, $row, $xcrud){
     case "check_interfaccia":
         $result = 'Abilita o disabilita <b>per aprire QUOTO al login</b> con la <b>nuova</b> o <b>vecchia</b> interfaccia.';
         break;
+    case "check_email_voucher_hotel":
+        $result = 'Abilita o disabilita <b>invio copia della mail voucher</b> verso Hotel';
+        break;
     }
     return $result;
   }

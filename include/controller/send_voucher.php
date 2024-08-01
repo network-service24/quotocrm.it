@@ -53,7 +53,8 @@ if($_REQUEST['azione'] == 'send' && $_REQUEST['param'] != '') {
         }
         $SitoWeb   = $http.'www.'.$sito_tmp;   
         $logo      = $rows['logo'];   
-        $NomeHotel = $rows['nome'];          
+        $NomeHotel = $rows['nome'];
+        $EmailHotel= $rows['email'];            
         $tel       = $rows['tel'];
         $fax       = $rows['fax'];
         $cap       = $rows['cap'];
@@ -71,6 +72,7 @@ if($_REQUEST['azione'] == 'send' && $_REQUEST['param'] != '') {
 
        $link = (URL_LANDING.$directory_sito.'/'.base64_encode($IdRichiesta.'_'.$idsito.'_c').'/voucher/');
 
+       $check_invio_voucher_hotel = $fun->check_configurazioni(IDSITO,'check_email_voucher_hotel');
 
         //date_default_timezone_set('Etc/UTC');
         $qr = "SELECT * FROM hospitality_smtp WHERE idsito = ".$idsito." AND Abilitato = 1";  
@@ -110,9 +112,15 @@ if($_REQUEST['azione'] == 'send' && $_REQUEST['param'] != '') {
         } 
 
         $mail->setFrom(MAIL_SEND, $Operatore);
-        //$mail->addReplyTo($EmailOperatore, $Operatore);
+
         $mail->addAddress($Email, $Nome.' '.$Cognome);
+
+        if($check_invio_voucher_hotel==1){
+            $mail->AddCC($EmailHotel, $Nome.' '.$Cognome);
+        }
+
         $mail->isHTML(true);
+
         $mail->Subject = str_replace("[cliente]",$Nome.' '.$Cognome,OGGETTO_VAUCHER).' - '.$NomeHotel;
 
         include BASE_PATH_SITO.'email_template/voucher_mail.php';
