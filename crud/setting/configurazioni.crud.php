@@ -62,7 +62,7 @@ include($_SERVER['DOCUMENT_ROOT']."/include/function.inc.php");
 
 							$data[] = array(
                                 "parametro"             => $fun->descr_parametro_config($row['parametro']),
-                                "descrizione"           => $row['descrizione'],																	
+                                "descrizione"           => nl2br($row['descrizione']),																	
                                 "valore"                => ($row['valore']==0?'<i class="fa fa-times text-red"></i>':'<i class="fa fa-check text-green"></i>'),
 								"action"                => $action
 							);
