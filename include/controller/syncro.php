@@ -1417,10 +1417,10 @@
         //
         $diz89 = $dbMysqli->query("INSERT INTO hospitality_dizionario(idsito,Lingua,etichetta) VALUES('".IDSITO."','it','OGGETTO_VAUCHER')");
         $id_diz89 = $dbMysqli->getInsertId($diz89);
-        $dbMysqli->query("INSERT INTO hospitality_dizionario_lingua(id_dizionario,idsito,Lingua,testo) VALUES('".$id_diz89."','".IDSITO."','it','Conferma di prenotazione accettata e voucher')");
-        $dbMysqli->query("INSERT INTO hospitality_dizionario_lingua(id_dizionario,idsito,Lingua,testo) VALUES('".$id_diz89."','".IDSITO."','en','Confirming queuing and vouchers')");
-        $dbMysqli->query("INSERT INTO hospitality_dizionario_lingua(id_dizionario,idsito,Lingua,testo) VALUES('".$id_diz89."','".IDSITO."','fr','Confirmant les files d\'attente et des bons')");
-        $dbMysqli->query("INSERT INTO hospitality_dizionario_lingua(id_dizionario,idsito,Lingua,testo) VALUES('".$id_diz89."','".IDSITO."','de','Bestätigen Queuing und Gutscheine')");
+        $dbMysqli->query("INSERT INTO hospitality_dizionario_lingua(id_dizionario,idsito,Lingua,testo) VALUES('".$id_diz89."','".IDSITO."','it','Conferma di prenotazione accettata e voucher per [cliente]')");
+        $dbMysqli->query("INSERT INTO hospitality_dizionario_lingua(id_dizionario,idsito,Lingua,testo) VALUES('".$id_diz89."','".IDSITO."','en','Confirmation of booking accepted and voucher for [cliente]')");
+        $dbMysqli->query("INSERT INTO hospitality_dizionario_lingua(id_dizionario,idsito,Lingua,testo) VALUES('".$id_diz89."','".IDSITO."','fr','Confirmation de réservation acceptée et bon pour [cliente]')");
+        $dbMysqli->query("INSERT INTO hospitality_dizionario_lingua(id_dizionario,idsito,Lingua,testo) VALUES('".$id_diz89."','".IDSITO."','de','Akzeptierte Buchungsbestätigung und Gutschein für [cliente]')");
 
         $diz90 = $dbMysqli->query("INSERT INTO hospitality_dizionario(idsito,Lingua,etichetta) VALUES('".IDSITO."','it','TESTOMAIL_VAUCHER')");
         $id_diz90 = $dbMysqli->getInsertId($diz90);
