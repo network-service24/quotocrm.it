@@ -23,7 +23,7 @@ include($_SERVER['DOCUMENT_ROOT']."/include/declaration.inc.php");
     $result      = $dbMysqli->query($sql);
     $ret         = $result[0];
 
-    $TipoServizio   = $ret['TipoServizio'];
+    $TipoServizio   = addslashes($ret['TipoServizio']);
     $PrezzoServizio = $ret['PrezzoServizio'];
 
     $testo = '';
