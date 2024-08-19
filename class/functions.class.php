@@ -2223,8 +2223,8 @@ class functions
                         $etichetta_caparra = '<br /><i class=\'fa fa-level-up\' style=\'transform:rotate(90deg)\'></i>&nbsp; Carta di Credito a garanzia';
                     }
                     $saldo = ($PrezzoPC - $AccontoImporto);
-                    //$acconto = number_format($AccontoImporto, 2, ',', '.');
-                    $acconto = 'Carta di Credito a garanzia';
+                    $acconto = number_format($AccontoImporto, 2, ',', '.');
+                    //$acconto = 'Carta di Credito a garanzia';
                 }
                 if ($PrezzoPC == $saldo) {
                     $etichetta_saldo = '<i class=\'fa fa-level-up\' style=\'transform:rotate(90deg)\'></i>&nbsp; Cifra a saldo €.0,00';
