@@ -5625,7 +5625,7 @@ class functions
         if (sizeof($result) > 0) {
             $ListaCamere .= '<option value="">scegli</option>';
             foreach ($result as $key => $val) {
-                $ListaCamere .= '<option value="' . $val['Id'] . '">' . $val['TipoCamere'] . '</option>';
+                $ListaCamere .= '<option value="' . $val['Id'] . '">' . mini_clean($val['TipoCamere']) . '</option>';
             }
         } else {
             $ListaCamere = '';
