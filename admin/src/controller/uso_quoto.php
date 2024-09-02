@@ -463,6 +463,7 @@ function quoto_attivi(){
                           <i class="fa fa-arrow-right"></i>&nbsp;&nbsp;Prima attivazione&nbsp;&nbsp<b data-toogle="tooltip" title="Data della attività  del progetto in essere: attivazione Quoto" style="cursor:pointer">'.gira_data($value['data_start_hospitality']).'</b>&nbsp;ultimo rinnovo&nbsp;<b>'.$data_start.'</b> scadenza&nbsp;&nbsp<b data-toogle="tooltip" title="Data di fine accesso al software" style="cursor:pointer">'.gira_data($value['data_end_hospitality']).'</b> <br><small style="font-size:80%!important;font-weight:normal!important">'.($value['no_rinnovo_hospitality']==0?'Si aggiorna automaticamente alla scadenza':'NON si aggiorna più alla scadenza').'</small>  &nbsp;'.$scadenza_quoto.'</small> &nbsp;&nbsp;&nbsp;&nbsp;'.($value['no_rinnovo_hospitality']==0?'<i title="Rinnovo Automatico Abilitato" data-toggle="tooltip" class="fa fa-refresh text-green"></i>':'<i title="Rinnovo Automatico Disattivato, alla scadenza non sarà più attivo!" data-toggle="tooltip" class="fa fa-refresh text-red"></i>').'
                           </span>
                           <small>Tipo contratto <i class="fa fa-arrow-right"></i>&nbsp;&nbsp; <b>'. $tipo_contratto .'</b></small>
+                          <small>'.($value['note_servizio_quoto']).'</small>
                           <span class="info-box-text"></span>
                           </div><!-- /.info-box-content -->
                       </div><!-- /.info-box -->

@@ -25,7 +25,13 @@ require $_SERVER['DOCUMENT_ROOT'].'/class/PHPMailer/PHPMailerAutoload.php';
         $mail->Send();
 
     }
-
+	function gira_data($data)
+    {
+        $data = explode(" ", $data);
+        $data_tmp = explode("-", $data[0]);
+        $new_data = $data_tmp[2].'-'.$data_tmp[1].'-'.$data_tmp[0];
+        return $new_data;
+    }
 
 	$sql = 'SELECT 
 				siti.*
@@ -64,7 +70,7 @@ require $_SERVER['DOCUMENT_ROOT'].'/class/PHPMailer/PHPMailerAutoload.php';
 								$data_anno = mktime (0,0,0,date('m'),date('d'),(date('Y')+1));
 								$new_date = date('Y-m-d',$data_anno);
 
-								$update = "UPDATE siti SET data_end_hospitality = '".$new_date."' WHERE idsito = ".$row['idsito'];
+								$update = "UPDATE siti SET data_end_hospitality = '".$new_date."', note_servizio_quoto = '".$row['note_servizio_quoto']."<br>Rinnovato contratto QUOTO annuale dal ".gira_data($row['data_end_hospitality'])." al ".gira_data($new_date)."' WHERE idsito = ".$row['idsito'];
 								$dbMysqli->query($update);
 
 								$txt .= '### RINNOVO ANNUALE ESEGUITO ########## CLIENTE '.$row['web'].'<br>'."\r\n";
@@ -82,7 +88,7 @@ require $_SERVER['DOCUMENT_ROOT'].'/class/PHPMailer/PHPMailerAutoload.php';
 								$data_tri_anno = mktime (0,0,0,date('m'),date('d'),(date('Y')+3));
 								$new_tri_date = date('Y-m-d',$data_tri_anno);
 
-								$update = "UPDATE siti SET data_end_hospitality = '".$new_tri_date."' WHERE idsito = ".$row['idsito'];
+								$update = "UPDATE siti SET data_end_hospitality = '".$new_tri_date."', note_servizio_quoto = '".$row['note_servizio_quoto']."<br>Rinnovato contratto QUOTO triennale dal ".gira_data($row['data_end_hospitality'])." al ".gira_data($new_tri_date)."' WHERE idsito = ".$row['idsito'];
 								$dbMysqli->query($update);
 
 								$txt .= '### RINNOVO TRIENNALE ESEGUITO ########## CLIENTE '.$row['web'].'<br>'."\r\n";
