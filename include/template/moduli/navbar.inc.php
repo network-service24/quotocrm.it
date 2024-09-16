@@ -64,7 +64,7 @@
                                 </script>
                                 <?php
                                     $today = time();
-                                    $event = mktime(0,0,0,10,01,2024);
+                                    $event = mktime(0,0,0,10,15,2024);
                                     $countdown = round(($event - $today)/86400);
                                     echo '<span class="lampeggiante"><small><b class="p-r-10">&#10230;</b> '.$countdown.' gg. alla chiusura della vecchia UI</small></span>';
                                 ?>

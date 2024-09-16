@@ -1263,8 +1263,12 @@ require($_SERVER['DOCUMENT_ROOT']."/include/settings.inc.php");
         }else{
 
             echo'<div>
-                    <b>Permessi negati!</b><br><br>
-                    Contattare:<br>
+                    Il modulo di richiesta by Quoto! CRM non è più attivo!
+                    <br>
+                    Per mandare il tuo messaggio alla struttura, scrivi direttamente all\'hotel
+                    <br>
+                    Se sei il proprietario del sito, contatta Network Service
+                    <br>
                     <b>Network Service</b><br>
                     Via Valentini A. e L., 11 47922 Rimini (RN), Italia <br>
                     <b>Tel:</b> +39 0541790062 | <b>Fax:</b> +39 0541778656<br>
