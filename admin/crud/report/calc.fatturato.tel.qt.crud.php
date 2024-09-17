@@ -13,7 +13,7 @@ if($idsito != '' && $Id != ''){
                 WHERE g.Id = ".$Id."
                 AND g.idsito = $idsito";
 
-    $result = $dbMysqli_sviluppo_quoto->query($sql);
+    $result = $dbMysqli->query($sql);
     $record = $result[0];
     $cdPrice = count($result) > 0 ? $record['num'] : 0;
     

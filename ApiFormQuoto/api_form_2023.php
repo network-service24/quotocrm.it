@@ -1262,10 +1262,14 @@ require($_SERVER['DOCUMENT_ROOT']."/include/settings.inc.php");
 
         }else{
 
+            $s   = "SELECT siti.email FROM siti WHERE siti.idsito = " . $idsito . "";
+            $re  = $db_quoto->query($s);
+            $rec = $re[0];
+
             echo'<div>
                     Il modulo di richiesta by Quoto! CRM non è più attivo!
                     <br>
-                    Per mandare il tuo messaggio alla struttura, scrivi direttamente all\'hotel
+                    Per mandare il tuo messaggio alla struttura, scrivi direttamente a '.$rec['email'].'
                     <br>
                     Se sei il proprietario del sito, contatta Network Service
                     <br>

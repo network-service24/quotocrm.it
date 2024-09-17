@@ -82,7 +82,12 @@
                                             <span class="pcoded-mtext">Archivio</small></span>
                                         </a>
                                     </li> 
-
+                                    <li class="<?=$GLOBALS['ActiveMenu']['report/fatturato_telefono_quoto']?>">
+                                        <a href="<?=BASE_URL_ADMIN?>report/fatturato_telefono_quoto/">
+                                        <span class="pcoded-micon"><i class="fa fa-line-chart text-info"></i> </span>
+                                            <span class="pcoded-mtext">Rel.Campagne Telefono</small></span>
+                                        </a>
+                                    </li> 
                                 </ul>
                             </li>              
                             <li class="<?=$GLOBALS['ActiveMenu']['uso_quoto']?>">

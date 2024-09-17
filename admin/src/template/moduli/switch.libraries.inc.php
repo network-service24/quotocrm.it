@@ -21,6 +21,7 @@
         case"/admin/report/index/".$_REQUEST['azione']."/":
         case"/admin/report/archivio/":
         case"/admin/report/archivio/".$_REQUEST['azione']."/".$_REQUEST['param']."/":
+        case"/admin/report/fatturato_telefono_quoto/":
 
             echo '<!-- Data Table Css -->'."\r\n";
             echo '<link rel="stylesheet" type="text/css" href="'.BASE_URL_SITO.'css/dataTables.bootstrap4.min.css">'."\r\n";

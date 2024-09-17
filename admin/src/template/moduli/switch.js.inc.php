@@ -9,6 +9,8 @@
     case "/admin/filtro_quoto/":
     case "/admin/report/index/":
     case "/admin/report/archivio/":
+    case "/admin/report/fatturato_telefono_quoto/":
+
         echo '<!-- Select 2 js -->'."\r\n";
         echo '<script type="text/javascript" src="'.BASE_URL_SITO.'files/bower_components/select2/js/select2.full.min.js"></script>'."\r\n";
         echo '<!-- Multiselect js -->'."\r\n";

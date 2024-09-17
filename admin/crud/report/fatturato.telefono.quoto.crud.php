@@ -34,7 +34,7 @@ $qy     = "SELECT
                 LENGTH(hospitality_guest.Cellulare) > 5
             AND
 				hospitality_guest.Cellulare NOT LIKE '%000000%'";
-$q      = $dbMysqli_sviluppo_quoto->query($qy);
+$q      = $dbMysqli->query($qy);
 foreach($q as $k => $rw){
     $lista_tel[$rw['Id']] = trim($rw['Cellulare']);
 }
@@ -69,7 +69,7 @@ foreach ($lista_tel as $key => $value) {
                             hospitality_guest.Id = ".$key."
                         AND 
                             hospitality_guest_track_phone.telefono = '".$value."'";
-            $sq      = $dbMysqli_sviluppo_quoto->query($qry);
+            $sq      = $dbMysqli->query($qry);
 
             if(is_array($sq)) {
                 if($sq > count($sq)) 
@@ -97,29 +97,29 @@ foreach ($lista_tel as $key => $value) {
         $fatturato .= ' <script>
                             $(document).ready(function () {
                                 $("#fatturato_loading'.$row['Id'].'").html(\'<div class="preloader3" style="height:50px!important;"><div class="circ1"></div><div class="circ2 bg-info"></div><div class="circ3 bg-danger"></div><div class="circ4 bg-warning"></div></div>\');
-                                $("#fatturato'.$row['Id'].'").load("'.BASE_URL_SITO.'crud/report/calc.fatturato.tel.qt.crud.php?idsito='.$idsito.'&id='.$row['Id'].'", function() {
+                                $("#fatturato'.$row['Id'].'").load("'.BASE_URL_ADMIN.'crud/report/calc.fatturato.tel.qt.crud.php?idsito='.$idsito.'&id='.$row['Id'].'", function() {
                                     $("#fatturato_loading'.$row['Id'].'").remove();
                                 });
                             });
                         </script>'."\r\n"; 
  
  
-    $cliente = stripslashes($row['Nome']).' '.stripslashes($row['Cognome']);
+        $cliente = stripslashes($row['Nome']).' '.stripslashes($row['Cognome']);
 
-    if($tot > 0){
+        if($tot > 0){
 
-                        $data[] = array(													
-                                        "nr"                    => '<div class="text-center small nowrap">'.$row['NumeroPrenotazione'].'</div>',
-                                        "tipo"                  => '<div class="text-center small nowrap">'.$tipo.'</div>',
-                                        "nome"                  => '<div class="text-center small nowrap">'.(strlen($cliente)<=35?$cliente:substr($cliente,0,35).'...').'</div>',
-                                        "cell"                  => '<div class="text-center small nowrap">'.trim($row['Cellulare']).'</div>',
-                                        "campagna"              => '<div class="text-center small nowrap">'.$row['campagna'].'</div>',
-                                        "fatturato"             => '<div class="text-center small nowrap">'.$fatturato.'</div>'
-                                        );
-
+                $data[] = array(													
+                                "nr"                    => '<div class="text-center small nowrap">'.$row['NumeroPrenotazione'].'</div>',
+                                "tipo"                  => '<div class="text-center small nowrap">'.$tipo.'</div>',
+                                "nome"                  => '<div class="text-center small nowrap">'.(strlen($cliente)<=35?$cliente:substr($cliente,0,35).'...').'</div>',
+                                "cell"                  => '<div class="text-center small nowrap">'.trim($row['Cellulare']).'</div>',
+                                "campagna"              => '<div class="text-center small nowrap">'.$row['campagna'].'</div>',
+                                "fatturato"             => '<div class="text-center small nowrap">'.$fatturato.'</div>'
+                                );
+        }
     }
     $n++; 
-} 
+
 
 $fatturato = '';
 $data_vuoto[] = array();

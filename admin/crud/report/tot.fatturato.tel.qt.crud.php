@@ -29,7 +29,7 @@ $idsito = $_REQUEST['idsito'];
                     LENGTH(hospitality_guest.Cellulare) > 5
                 AND
                     hospitality_guest.Cellulare NOT LIKE '%000000%'";
-    $q      = $dbMysqli_sviluppo_quoto->query($qy);
+    $q      = $dbMysqli->query($qy);
 
     foreach($q as $k => $rw){
         $lista_tel[$rw['Id']] = trim($rw['Cellulare']);
@@ -50,7 +50,7 @@ $idsito = $_REQUEST['idsito'];
                         hospitality_guest.Id = ".$key."
                     AND 
                         hospitality_guest_track_phone.telefono = '".$value."'";
-        $sq      = $dbMysqli_sviluppo_quoto->query($qry);
+        $sq      = $dbMysqli->query($qry);
         
         foreach ($sq as $key => $val) {  
             $lista[] = $val['Id'];
@@ -63,7 +63,7 @@ $idsito = $_REQUEST['idsito'];
                 WHERE g.Id IN (".implode(",",$lista).")
                 AND g.idsito = $idsito";
 
-    $result = $dbMysqli_sviluppo_quoto->query($sql);
+    $result = $dbMysqli->query($sql);
     $record = $result[0];
     $cdPrice = count($result) > 0 ? $record['num'] : 0;
     
