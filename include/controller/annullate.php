@@ -106,7 +106,7 @@ $content .='                <th>Nr.</th>
                             <th>Partenza</th>
                             <th>Proposta</th>
                             <th>Invio</th>
-                            <th>Aperto</th>
+                            <th class="nowrap f-12">Apertura Richiesta</th>
                             <th></th>
                             <th>Motivazione</th>
                             <th class="notexport"></th>

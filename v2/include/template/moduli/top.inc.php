@@ -14,46 +14,48 @@
             <span class="sr-only">Toggle navigation</span>
           </a>
            <ul class="nav navbar-nav">
-              <li class="dropdown notifications-menu" >
-              <a href="<?=BASE_URL_ROOT?>dashboard-index/" class="f-12" id="change_ui_n">
-                  Passa alla nuova interfaccia QUOTO! 
-                  <i class="fa fa-object-ungroup" aria-hidden="true"></i>
-              </a>
-              <script>
-                  $(document).ready(function(){
-                      $("#change_ui_n").on("click", function(){
-                          $.ajax({
-                              url: "<?=BASE_URL_ROOT?>ajax/log/cambio_interfaccia.php",
-                              type: "POST",
-                              data: "idsito=<?=IDSITO?>&ui=new",
-                              dataType: "html",
-                              success: function(msg) {
-                                      console.log("Passaggio alla nuova interfaccia"); 
-                                  }
-                          });
-                          return true;
-                      });
-                  });
-              </script> 
-            </li>
-            <li class="dropdown notifications-menu" style="margin-left:30px!important;margin-top:15px!important">
-              <script>
-                $(function () {
-                    var i = 0;
-                    var speed = 1000;
-                    link = setInterval(function () {
-                        i++;
-                        $(".lampeggiante").css("color", i%2 == 1 ? "#FFFFFF" : "#00acc1");
-                    }, speed);
-                })
-              </script>
-              <?php
-                  $today = time();
-                  $event = mktime(0,0,0,10,15,2024);
-                  $countdown = round(($event - $today)/86400);
-                  echo '<span class="lampeggiante"><small><b style="margin-right:10px!important">&#10230;</b> '.$countdown.' gg. alla chiusura di questa interfaccia</small></span>';
-              ?>
-            </li>
+           <?php if('2024-10-15' > date('Y-m-d')){?>
+                <li class="dropdown notifications-menu" >
+                <a href="<?=BASE_URL_ROOT?>dashboard-index/" class="f-12" id="change_ui_n">
+                    Passa alla nuova interfaccia QUOTO! 
+                    <i class="fa fa-object-ungroup" aria-hidden="true"></i>
+                </a>
+                <script>
+                    $(document).ready(function(){
+                        $("#change_ui_n").on("click", function(){
+                            $.ajax({
+                                url: "<?=BASE_URL_ROOT?>ajax/log/cambio_interfaccia.php",
+                                type: "POST",
+                                data: "idsito=<?=IDSITO?>&ui=new",
+                                dataType: "html",
+                                success: function(msg) {
+                                        console.log("Passaggio alla nuova interfaccia"); 
+                                    }
+                            });
+                            return true;
+                        });
+                    });
+                </script> 
+              </li>
+              <li class="dropdown notifications-menu" style="margin-left:30px!important;margin-top:15px!important">
+                <script>
+                  $(function () {
+                      var i = 0;
+                      var speed = 1000;
+                      link = setInterval(function () {
+                          i++;
+                          $(".lampeggiante").css("color", i%2 == 1 ? "#FFFFFF" : "#00acc1");
+                      }, speed);
+                  })
+                </script>
+                <?php
+                    $today = time();
+                    $event = mktime(0,0,0,10,15,2024);
+                    $countdown = round(($event - $today)/86400);
+                    echo '<span class="lampeggiante"><small><b style="margin-right:10px!important">&#10230;</b> '.$countdown.' gg. alla chiusura di questa interfaccia</small></span>';
+                ?>
+              </li>
+            <?}?>
           </ul>
           <!-- Navbar Right Menu -->
           <div class="navbar-custom-menu">

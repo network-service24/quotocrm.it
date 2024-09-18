@@ -28,47 +28,49 @@
                                 * -----------------------------------------------------------------------------------
                             -->
                             <?php if(DATA_ATTIVAZIONE < DATA_QUOTO_V3){?>
-                            <li>
-                                <a href="<?=BASE_URL_SITO?>v2/dashboard-index/" class="text-white f-11" id="change_ui">
-                                    <span class="border-nav">  Passa alla vecchia interfaccia QUOTO! 
-                                        <i class="fa fa-object-ungroup text-white"></i>
-                                    </span>
-                                </a>
-                                <script>
-                                    $(document).ready(function(){
-                                        $("#change_ui").on("click",function(){
-                                            $.ajax({
-                                                url: "<?=BASE_URL_SITO?>ajax/log/cambio_interfaccia.php",
-                                                type: "POST",
-                                                data: "idsito=<?=IDSITO?>&ui=old",
-                                                dataType: "html",
-                                                success: function(msg) {
-                                                        console.log("Passaggio alla vecchia interfaccia"); 
-                                                    }
+                                <?php if('2024-10-15' > date('Y-m-d')){?>
+                                    <li>
+                                        <a href="<?=BASE_URL_SITO?>v2/dashboard-index/" class="text-white f-11" id="change_ui">
+                                            <span class="border-nav">  Passa alla vecchia interfaccia QUOTO! 
+                                                <i class="fa fa-object-ungroup text-white"></i>
+                                            </span>
+                                        </a>
+                                        <script>
+                                            $(document).ready(function(){
+                                                $("#change_ui").on("click",function(){
+                                                    $.ajax({
+                                                        url: "<?=BASE_URL_SITO?>ajax/log/cambio_interfaccia.php",
+                                                        type: "POST",
+                                                        data: "idsito=<?=IDSITO?>&ui=old",
+                                                        dataType: "html",
+                                                        success: function(msg) {
+                                                                console.log("Passaggio alla vecchia interfaccia"); 
+                                                            }
+                                                    });
+                                                    return true;
+                                                });
                                             });
-                                            return true;
-                                        });
-                                    });
-                                </script>                             
-                            </li>
-                            <li>
-                                <script>
-                                $(function () {
-                                    var i = 0;
-                                    var speed = 1000;
-                                    link = setInterval(function () {
-                                        i++;
-                                        $(".lampeggiante").css("color", i%2 == 1 ? "#FFFFFF" : "#14b2e7");
-                                    }, speed);
-                                })
-                                </script>
-                                <?php
-                                    $today = time();
-                                    $event = mktime(0,0,0,10,15,2024);
-                                    $countdown = round(($event - $today)/86400);
-                                    echo '<span class="lampeggiante"><small><b class="p-r-10">&#10230;</b> '.$countdown.' gg. alla chiusura della vecchia UI</small></span>';
-                                ?>
-                            </li> 
+                                        </script>                             
+                                    </li>
+                                    <li>
+                                        <script>
+                                        $(function () {
+                                            var i = 0;
+                                            var speed = 1000;
+                                            link = setInterval(function () {
+                                                i++;
+                                                $(".lampeggiante").css("color", i%2 == 1 ? "#FFFFFF" : "#14b2e7");
+                                            }, speed);
+                                        })
+                                        </script>
+                                        <?php
+                                            $today = time();
+                                            $event = mktime(0,0,0,10,15,2024);
+                                            $countdown = round(($event - $today)/86400);
+                                            echo '<span class="lampeggiante"><small><b class="p-r-10">&#10230;</b> '.$countdown.' gg. alla chiusura della vecchia UI</small></span>';
+                                        ?>
+                                    </li>
+                                <?}?> 
                             <?}?>
                         </ul>
                         <ul class="nav-right">
