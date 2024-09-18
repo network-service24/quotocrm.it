@@ -103,7 +103,7 @@
                                                             </form>
                                                                 <script>
                                                                     $(function() {
-                                                                        var data = [{ id: 0, text: 'Seleziona sito web per caricare i dati dal CSV'},<?=$list?>];
+                                                                        var data = [{ id: 0, text: 'Seleziona Sito da sssociare al CSV da caricare!'},<?=$list?>];
                                                                                 $(".js-example-data-array").select2({
                                                                                     data: data
                                                                                 });

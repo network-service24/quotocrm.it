@@ -40,11 +40,11 @@ require $_SERVER['DOCUMENT_ROOT'].'/class/PHPMailer/PHPMailerAutoload.php';
     }
  
 
-    $giorni7_tmp  = mktime(0, 0, 0, date('m'), (date('d')+7), date('Y'));// +7 giorni da oggi
-    $giorni7      = date('Y-m-d',$giorni7_tmp);
+    $giorni10_tmp  = mktime(0, 0, 0, date('m'), (date('d')+10), date('Y'));// +7 giorni da oggi
+    $giorni10      = date('Y-m-d',$giorni10_tmp);
 
     $tipoContratto = '';
-    $invio7       = '';
+    $invio10       = '';
     $array_servizi = '';
 
     $sel = "SELECT 
@@ -82,7 +82,7 @@ require $_SERVER['DOCUMENT_ROOT'].'/class/PHPMailer/PHPMailerAutoload.php';
             }
 
     
-            if($value['data_end_hospitality'] == $giorni7){
+            if($value['data_end_hospitality'] == $giorni10){
 
                 $messaggio = '<table class="tbl_body" cellpadding="0px" cellspacing="0px" border="0px" align="center">
                                     <tr>
@@ -99,6 +99,8 @@ require $_SERVER['DOCUMENT_ROOT'].'/class/PHPMailer/PHPMailerAutoload.php';
                                                     <br><br>
                                                 E\' necessario <b>sostituire</b> il prima possibile il <b>Widget Form QUOTO</b> dal suo <b>sito web</b> e dalle sue <b>landing page</b>!
                                                     <br><br>
+                                                Oppure <b>ricontattare il cliente</b> per un possibile rinnovo!
+                                                    <br><br>
                                                 Grazie
                                                     <br><br>
                                                 Lo Staff direzionale di QUOTO by Network Service
@@ -111,24 +113,21 @@ require $_SERVER['DOCUMENT_ROOT'].'/class/PHPMailer/PHPMailerAutoload.php';
                                 </tr>							
                             </table>';	
 
-                    inviaMail(MAIL_SEND,$MAIL_MARCELLO, 'CAMBIO FORM QUOTO PER '.clean_string($value['nome']), $messaggio);
-                    inviaMail(MAIL_SEND,$MAIL_SERENA, 'CAMBIO FORM QUOTO PER '.clean_string($value['nome']), $messaggio);
-                    inviaMail(MAIL_SEND,$MAIL_VERONICA, 'CAMBIO FORM QUOTO PER '.clean_string($value['nome']), $messaggio);
-                    inviaMail(MAIL_SEND,$MAIL_CATERINA, 'CAMBIO FORM QUOTO PER '.clean_string($value['nome']), $messaggio);
-                    inviaMail(MAIL_SEND,$MAIL_SIMONE, 'CAMBIO FORM QUOTO PER '.clean_string($value['nome']), $messaggio);
-                    inviaMail(MAIL_SEND,$MAIL_VINCENZO, 'CAMBIO FORM QUOTO PER '.clean_string($value['nome']), $messaggio);
+                    inviaMail(MAIL_SEND,$MAIL_MARCELLO, 'A BREVE VERRA\' BLOCCATO L\'ACCESSO A QUOTO PER '.clean_string($value['nome']), $messaggio);
+                    inviaMail(MAIL_SEND,$MAIL_SERENA, 'A BREVE VERRA\' BLOCCATO L\'ACCESSO A QUOTO PER '.clean_string($value['nome']), $messaggio);
+                    inviaMail(MAIL_SEND,$MAIL_VERONICA, 'A BREVE VERRA\' BLOCCATO L\'ACCESSO A QUOTO PER '.clean_string($value['nome']), $messaggio);
 
-                    echo '### ESEGUITO INVIO 7 gg prima ########## MAIL NOTIFICA CAMBIO FORM QUOTO! V3 per '.clean_string($value['nome']).'<br>'."\r\n";
-                    $invio7 = true;  
+                    echo '### ESEGUITO INVIO 10 gg prima ########## MAIL NOTIFICA PER BLOCCAGGIO ACCESSO A QUOTO E PER CAMBIO FORM QUOTO! V3 per '.clean_string($value['nome']).'<br>'."\r\n";
+                    $invio10 = true;  
             }else{
-                $invio7 = false;
+                $invio10 = false;
             }
 
     
         }
 
-    if($invio7==false){
-        echo '### NESSUN INVIO ########## MAIL dei 7 gg per cambio form QUOTO! V3'."\r\n";
+    if($invio10==false){
+        echo '### NESSUN INVIO ########## MAIL dei 10 gg per cambio form QUOTO! V3'."\r\n";
     }
 
 
