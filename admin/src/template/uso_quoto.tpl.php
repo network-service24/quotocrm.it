@@ -126,7 +126,7 @@
                                                                 });
                                                             }
                                                         </script>
-                                                        <div class="accordion-block">
+                                                        <div class="accordion-block" style="width:100%;box-sizing: border-box;box-shadow: 0 0 10px #666;">
                                                             <div class="accordion-box" id="single-open">
                                                                 <?php
 

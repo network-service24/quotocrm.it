@@ -315,11 +315,11 @@ function quoto_attivi(){
 
 
 
-      $report .= '     <a class="accordion-msg f-24 text-success">
+      $report .= ' <a class="accordion-msg f-24 text-success">
                             <i class="fa fa-area-chart"></i>
                             Report QUOTO ATTIVI n° '.$tot_attivi.'
                         </a>
-                        <div class="accordion-desc">';
+                        <div class="accordion-desc" >';
 
       $tot_conversione                 = '';
       $array_servizi                   = array();
@@ -545,14 +545,14 @@ function quoto_attivi(){
                     </div><!-- /.col -->
 
                   </div><!-- /.row -->
-                  <hr>';
+                  ';
 
       }
 
 
 
       $report .= '  <p></p>
-                  </div> ';
+                  </div>';
       return $report;
 
 }

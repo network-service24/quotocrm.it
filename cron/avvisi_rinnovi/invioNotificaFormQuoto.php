@@ -12,10 +12,10 @@ require $_SERVER['DOCUMENT_ROOT'].'/class/PHPMailer/PHPMailerAutoload.php';
     function inviaMail($mail_send,$destinatari,$oggetto, $messaggio){
 	  
 	  	$mail 	 = new PHPMailer;
-        $msg 	.= top_email(1);
+        $msg 	 = top_email(1);
         $msg 	.= $messaggio;      
         $msg 	.= footer_email(1);
-        $msg  .= '<br><br><div align="center">Questa e-mail è stata inviata automaticamente dal software, non rispondere a questa e-mail!</div>';
+        $msg    .= '<br><br><div align="center">Questa e-mail è stata inviata automaticamente dal software, non rispondere a questa e-mail!</div>';
 
         $body  = $msg;
 
@@ -95,7 +95,7 @@ require $_SERVER['DOCUMENT_ROOT'].'/class/PHPMailer/PHPMailerAutoload.php';
                                         <p style="font-size:16px">
                                                 Il Cliente  <b>'.clean_string($value['nome']).'</b>,
                                                     <br><br>
-                                                ha il servizio <b>'.$tipoContratto.' CRM</b> che fra 7 giorni verrà bloccato e gli sarà disattivato l\'account</b>
+                                                ha il servizio <b>'.$tipoContratto.' CRM</b> che fra 10 giorni verrà bloccato e gli sarà disattivato l\'account</b>
                                                     <br><br>
                                                 E\' necessario <b>sostituire</b> il prima possibile il <b>Widget Form QUOTO</b> dal suo <b>sito web</b> e dalle sue <b>landing page</b>!
                                                     <br><br>
