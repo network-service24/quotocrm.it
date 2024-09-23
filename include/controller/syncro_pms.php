@@ -89,7 +89,15 @@
 
                 $Notti = $diff->d;
 
-
+                ## calcolo sconto
+                $selectSconto = "SELECT sconto FROM hospitality_relazione_sconto_proposte WHERE idsito = ".IDSITO."  AND id_richiesta = ".$_REQUEST['azione']." AND id_proposta = ".$IdProposta."";
+                $resultSc = $dbMysqli->query($selectSconto);
+                if(sizeof($resultSc)>0){
+                        $rowSC = $resultSc[0];
+                        $percentualeSconto =  $rowSC['sconto'];
+                }else{
+                        $percentualeSconto = '';  
+                }
 
                         ### Query per servizi aggiuntivi
                         $selectS = "     SELECT 
@@ -120,6 +128,8 @@
                         $id_servizio  = '';
                         $TipoServizio = '';
                         $PrezzoServizio = '';
+                        $valoreScontoServizi  = '';
+                        $final_amount_servizi = '';
 
                         if(sizeof($resS)>0){
 
@@ -151,6 +161,12 @@
 
                                         $totaleServizi += $PrezzoServizio;
                                 }
+                                        if($percentualeSconto!=''){
+                                                $valoreScontoServizi  = (($totaleServizi*$percentualeSconto)/100);
+                                                $final_amount_servizi = ($totaleServizi-$valoreScontoServizi);
+                                        }else{
+                                                $final_amount_servizi = $totaleServizi;
+                                        }
                                 ################################################################
 
 
@@ -160,7 +176,7 @@
                                                         "charges"   =>   array(array("charge_id"                 => $ext_reservation_id,
                                                                                         "master_reservation_id"  => $pms_reservation_id,       
                                                                                         "date"                   => $data_serv,        
-                                                                                        "final_amount"           => $totaleServizi,
+                                                                                        "final_amount"           => $final_amount_servizi,
                                                                                         "sale_items"             => $servizi       
                                                                                         ) 
                                                                                 )           
@@ -200,37 +216,11 @@
                 $tipo_soggiorno = '';
                 $tipo_camera    = '';
                 $n              = 1;
+                $amountCamera_after_tax = '';
                 $numeroCamere = count($res2);
+
                 foreach ($res2 as $ky => $val) {
 
-/*                         switch($val['TipoSoggiorno']){
-                                case"All Inclusive":
-                                        $tipo_soggiorno = 'AI';
-                                break;
-                                case"Bed & Breakfast":
-                                case"Bed & Breakfast ( standard rate BB)":
-                                        $tipo_soggiorno = 'BB';
-                                break;
-                                case"Solo Pernottamento":
-                                case"Solo Pernotto":
-                                        $tipo_soggiorno = 'RO';
-                                break;
-                                case"Pensione Completa":
-                                case"Pensione Completa FORMULA GOLDEN ( Standard Rate Pensioni)":
-                                case"Pensione Completa ALL INCLUSIVE":
-                                        $tipo_soggiorno = 'FB';
-                                break;
-                                case"Mezza Pensione":
-                                        case"Mezza Pensione FORMULA GOLDEN ( standard rate pensioni)":
-                                        $tipo_soggiorno = 'HB';
-                                break; 
-                                case"Mezza Pensione All Inclusive":
-                                        $tipo_soggiorno = 'AI-HB';
-                                break; 
-                                default:
-                                        $tipo_soggiorno = $val['TipoSoggiorno'];
-                                break;
-                        } */
                         switch(true){
                                 case strstr($val['TipoSoggiorno'],"All Inclusive"):
                                         $tipo_soggiorno = 'AI';
@@ -260,6 +250,13 @@
 
                         $Prezzo      = intval($val['Prezzo']);
 
+                        if($percentualeSconto!=''){
+                                $valoreSconto           = (($Prezzo*$percentualeSconto)/100);
+                                $amountCamera_after_tax = ($Prezzo-$valoreSconto);
+                        }else{
+                                $amountCamera_after_tax = $Prezzo;
+                        }
+
                         if($val['EtaB'] != ''){
                                 
                                 $etaB_   = explode(",",$val['EtaB']);
@@ -272,7 +269,7 @@
                                 $Camere[] = array("room_type_id"        => intval($val['RoomTypeId']),
                                                 "room_type_description" => strip_tags($val['Descrizione']), 
                                                 "meal_plan"             => $tipo_soggiorno,          
-                                                "amount_after_tax"      => (($PrezzoProposto-$totaleServizi)/$numeroCamere),        
+                                                "amount_after_tax"      => $amountCamera_after_tax,        
                                                 "number_of_guests"      => ($NumAdulti+$NumBambini),
                                                 "adults_number"         => $NumAdulti,
                                                 "children_number"       => $NumBambini,
@@ -281,7 +278,7 @@
                                 $Camere[] = array("room_type_id"        => intval($val['RoomTypeId']),
                                                 "room_type_description" => strip_tags($val['Descrizione']), 
                                                 "meal_plan"             => $tipo_soggiorno,          
-                                                "amount_after_tax"      => (($PrezzoProposto-$totaleServizi)/$numeroCamere),        
+                                                "amount_after_tax"      => $amountCamera_after_tax,        
                                                 "number_of_guests"      => ($NumAdulti+$NumBambini),
                                                 "adults_number"         => $NumAdulti,
                                                 "children_number"       => $NumBambini);
