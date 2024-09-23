@@ -234,11 +234,12 @@ function quoto_attivi(){
                             siti.tel,
                             siti.cell,
                             siti.servizi_attivi,
-                            siti.id_tipo_contratto
+                            siti.id_tipo_contratto,
+                            siti.note_servizio_quoto
                         FROM
                             siti
                         WHERE
-                            siti.idsito NOT IN(1740,1987)
+                            siti.idsito NOT IN(1987)
                         AND
                             siti.hospitality = 1
                         AND
@@ -315,11 +316,11 @@ function quoto_attivi(){
 
 
 
-      $report .= ' <a class="accordion-msg f-24 text-success">
+      $report .= '     <a class="accordion-msg f-24 text-success">
                             <i class="fa fa-area-chart"></i>
                             Report QUOTO ATTIVI n° '.$tot_attivi.'
                         </a>
-                        <div class="accordion-desc" >';
+                        <div class="accordion-desc">';
 
       $tot_conversione                 = '';
       $array_servizi                   = array();
@@ -545,14 +546,14 @@ function quoto_attivi(){
                     </div><!-- /.col -->
 
                   </div><!-- /.row -->
-                  ';
+                  <hr>';
 
       }
 
 
 
       $report .= '  <p></p>
-                  </div>';
+                  </div> ';
       return $report;
 
 }
