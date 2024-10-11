@@ -5323,7 +5323,7 @@ class functions
     {
         global $dbMysqli;
 
-        $select = "SELECT * FROM hospitality_fonti_prenotazione WHERE idsito = " . $idsito . " AND Abilitato = 1";
+        $select = "SELECT * FROM hospitality_fonti_prenotazione WHERE idsito = " . $idsito . " AND Abilitato = 1 ORDER BY FontePrenotazione ASC";
         $res = $dbMysqli->query($select);
 
         return $res;

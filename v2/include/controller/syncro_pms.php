@@ -89,6 +89,22 @@
 
                 $Notti = $diff->d;
 
+                ## calcolo sconto
+                $selectSconto = "SELECT sconto FROM hospitality_relazione_sconto_proposte WHERE idsito = ".IDSITO." AND sconto != 0  AND id_richiesta = ".$_REQUEST['azione']." AND id_proposta = ".$IdProposta."";
+                $resultSc     = $db->query($selectSconto);
+                $rowSC        = $db->row($resultSc);
+                if(is_array($rowSC)) {
+                        if($rowSC > count($rowSC))
+                                $totSC = count($rowSC);
+                        }else{ 	
+                                $totSC = 0;
+                        }
+                if($totSC > 0){
+                        
+                        $percentualeSconto =  $rowSC['sconto'];
+                }else{
+                        $percentualeSconto = '';  
+                }
 
                         ### Query per servizi aggiuntivi
                         $selectS = "     SELECT 
@@ -121,6 +137,8 @@
                         $id_servizio  = '';
                         $TipoServizio = '';
                         $PrezzoServizio = '';
+                        $valoreScontoServizi  = '';
+                        $final_amount_servizi = '';
 
                         if(sizeof($resS)>0){
 
@@ -152,6 +170,13 @@
                                                                 
                                         $totaleServizi += $PrezzoServizio;
                                 }
+
+                                if($percentualeSconto!=''){
+                                        $valoreScontoServizi  = (($totaleServizi*$percentualeSconto)/100);
+                                        $final_amount_servizi = ($totaleServizi-$valoreScontoServizi);
+                                }else{
+                                        $final_amount_servizi = $totaleServizi;
+                                }                               
                                 ################################################################
 
 
@@ -161,7 +186,7 @@
                                                         "charges"   =>   array(array("charge_id"                 => $ext_reservation_id,
                                                                                         "master_reservation_id"  => $pms_reservation_id,       
                                                                                         "date"                   => $data_serv,        
-                                                                                        "final_amount"           => $totaleServizi,
+                                                                                        "final_amount"           => $final_amount_servizi,
                                                                                         "sale_items"             => $servizi       
                                                                                         ) 
                                                                                 )           
@@ -262,6 +287,12 @@
 
                         $Prezzo      = intval($val['Prezzo']);
 
+                        if($percentualeSconto!=''){
+                                $valoreSconto           = (($Prezzo*$percentualeSconto)/100);
+                                $amountCamera_after_tax = ($Prezzo-$valoreSconto);
+                        }else{
+                                $amountCamera_after_tax = $Prezzo;
+                        }
 
                         if($val['EtaB'] != ''){
                                 
@@ -275,7 +306,7 @@
                                 $Camere[] = array("room_type_id"        => intval($val['RoomTypeId']),
                                                 "room_type_description" => strip_tags($val['Descrizione']), 
                                                 "meal_plan"             => $tipo_soggiorno,          
-                                                "amount_after_tax"      => (($PrezzoProposto-$totaleServizi)/$numeroCamere),        
+                                                "amount_after_tax"      => $amountCamera_after_tax,        
                                                 "number_of_guests"      => ($NumAdulti+$NumBambini),
                                                 "adults_number"         => $NumAdulti,
                                                 "children_number"       => $NumBambini,
@@ -284,7 +315,7 @@
                                 $Camere[] = array("room_type_id"        => intval($val['RoomTypeId']),
                                                 "room_type_description" => strip_tags($val['Descrizione']), 
                                                 "meal_plan"             => $tipo_soggiorno,          
-                                                "amount_after_tax"      => (($PrezzoProposto-$totaleServizi)/$numeroCamere),        
+                                                "amount_after_tax"      => $amountCamera_after_tax,        
                                                 "number_of_guests"      => ($NumAdulti+$NumBambini),
                                                 "adults_number"         => $NumAdulti,
                                                 "children_number"       => $NumBambini);

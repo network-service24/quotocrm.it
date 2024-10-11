@@ -100,7 +100,7 @@ $content .='
 
                 // CONFIG DATATABLE
                 var table = $("#fonti").DataTable( {
-                                                               
+                    order: [[0, \'asc\']],                                 
                     responsive: true,
                     processing:true,
                     oLanguage: {sProcessing: " <div class=\'cell preloader5 loader-block\'><div class=\'circle-5 l loader-warning\'></div><div class=\'circle-5 m loader-warning\'></div><div class=\'circle-5 r loader-warning\'></div></div><span class=\'text-primary f-w-400 f-14 f-s-intial\'>QUOTO! sta caricando i dati...<br><span class=\'\'>Attendere!!</span></span>"},
@@ -149,7 +149,7 @@ $content .='
                         { "data": "action","class":"text-center"}
                     ],';
         $content .='    "columnDefs": [
-                              {"targets": [0,1,2], "orderable": false} 
+                              {"targets": [1,2], "orderable": false} 
 
                         ]
                     })

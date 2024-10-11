@@ -336,13 +336,13 @@
                                                             <form method="post" class="float-right-10">
                                                                 <select  name="querydate" class="h-input-medio" onchange="submit()">
                                                                     <?=$lista_anni?>
-                                                                </select>
+                                                                </select> 
                                                             </form>
                                                         </div>
                                                     </div>
                                                 </div>
                                                 </h5>  
-
+                                                <div class="text-center"><small>I valori del grafico non sono confrontabili con gli altri dati statitici del CRM perchè le richieste e le prenotazioni chiuse non tengono conto di archiviazioni, eliminazioni, disdette od altro, ma è un semplice conteggio senza nessuna variabile impostata!</small></div>
                                                 <div class="card-block"> 
                                                     <div class="row">
                                                         <div class="col-md-1"></div>
@@ -351,12 +351,13 @@
                                                                 <div id="bar-chart" style="width:100%; height:400px;"></div>
                                                             </div>
                                                         </div>
-                                                        <div class="col-md-1"></div>
+                                                       
                                                     </div>
                                                 </div>
                                             </div>
                                         </div>
-                                        <?=$JSGrafico?>
+                                      
+                                        <? echo $JSGrafico?>
                                         <div class="clearfix"></div>
                                     <?}?>
                                     <? include_module('backtop.inc.php'); ?>        

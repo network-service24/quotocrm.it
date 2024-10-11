@@ -344,13 +344,13 @@ function show_flags($value, $fieldname, $primary_key, $row, $xcrud)
 {
 	// se il campo contiene un solo codice di lingua
 	if(strlen($value) == 2) {
-		return '<img src="https://'.$_SERVER["HTTP_HOST"].'/img/flags/mini/'.$value.'.png" class="flag_ico">';
+		return '<img src="https://'.$_SERVER["HTTP_HOST"].'/v2/img/flags/mini/'.$value.'.png" class="flag_ico">';
 	}
 	else { // se il campo contiene più codici di lingua (es: testi di una domanda)
 		$lingue = explode(' ',$value);	// i codici di lingua devono essere separati da spazio
 		foreach($lingue as $val) {
 			if(strlen($val) == 2) {
-				$return_value .= ' <img src="https://'.$_SERVER["HTTP_HOST"].'/img/flags/mini/'.$val.'.png" class="flag_ico"> ';
+				$return_value .= ' <img src="https://'.$_SERVER["HTTP_HOST"].'/v2/img/flags/mini/'.$val.'.png" class="flag_ico"> ';
 			}
 		}
 		return $return_value;
@@ -3368,13 +3368,13 @@ function func_pms($value, $fieldname, $primary_key, $row, $xcrud)
 
             $color_ins  = 'text-orange';
             $title      = 'Ri-sincronizza se hai modificato la prenotazione dopo la prima sincro del '.$data_reservation;
-            $button_del = '<a href = "javascript: validator(\'//'.$_SERVER["HTTP_HOST"].'/delete_preno_pms/'.$row['hospitality_guest.Id'].'/sync/'.$tipo_pms.'/\');" title = "Elimina Prenotazione sincronizzata il '.$data_reservation.' dal PMS" data-toogle = "tooltip" style = "float: left;padding-left : 4px;"><i class = "fa fa-trash text-red" aria-hidden = "true"></i></a>';
+            $button_del = '<a href = "javascript: validator(\'//'.$_SERVER["HTTP_HOST"].'/v2/delete_preno_pms/'.$row['hospitality_guest.Id'].'/sync/'.$tipo_pms.'/\');" title = "Elimina Prenotazione sincronizzata il '.$data_reservation.' dal PMS" data-toogle = "tooltip" style = "float: left;padding-left : 4px;"><i class = "fa fa-trash text-red" aria-hidden = "true"></i></a>';
         }else{
             $color      = '';
             $title      = 'Sincronizza con PMS';
             $button_del = '';
         }
-        $button_ins    = '<a href = "javascript: validator_pms(\'//'.$_SERVER["HTTP_HOST"].'/syncro_pms/'.$row['hospitality_guest.Id'].'/sync/'.$tipo_pms.'/\');" title   = "'.$title.'"  data-toogle = "tooltip" style = "float: left;padding-right: 4px;margin-left: 4px"><i class = "fa fa-refresh '.$color_ins.'" aria-hidden = "true"></i></a>';
+        $button_ins    = '<a href = "javascript: validator_pms(\'//'.$_SERVER["HTTP_HOST"].'/v2/syncro_pms/'.$row['hospitality_guest.Id'].'/sync/'.$tipo_pms.'/\');" title   = "'.$title.'"  data-toogle = "tooltip" style = "float: left;padding-right: 4px;margin-left: 4px"><i class = "fa fa-refresh '.$color_ins.'" aria-hidden = "true"></i></a>';
 
         $action_button = $button_ins.$button_del;
     }
@@ -3397,7 +3397,7 @@ function func_pms_ericsoft($value, $fieldname, $primary_key, $row, $xcrud)
         $ret = '<i class="fa fa-check text-primary" data-toggle="tooltip" title="Sincronizzato Ericsoft" aria-hidden="true"></i><br/>';
 
         if ($rec['pms_info'] != 'modified') {
-            $ret .= '<a href="javascript: validator_pms(\'//' . $_SERVER["HTTP_HOST"] . '/modify_preno_pms/' . $row['hospitality_guest.Id'] . '/sync/' . $tipo_pms . '/\');" 
+            $ret .= '<a href="javascript: validator_pms(\'//' . $_SERVER["HTTP_HOST"] . '/v2/modify_preno_pms/' . $row['hospitality_guest.Id'] . '/sync/' . $tipo_pms . '/\');" 
                    title="Se modificate la prenotazione in QUOTO, per aggiornarla anche sul PMS cliccate sull\'icona! Modifica la prenotazione sincronizzata il ' . $data_reservation . ' dal PMS" 
                    data-toogle="tooltip"
                    style="margin-right: 10px" 
@@ -3405,7 +3405,7 @@ function func_pms_ericsoft($value, $fieldname, $primary_key, $row, $xcrud)
 
         } 
         if ($rec['pms_info'] != 'canceled') {
-            $ret .= '<a href="javascript: validator(\'//' . $_SERVER["HTTP_HOST"] . '/modify_preno_pms/' . $row['hospitality_guest.Id'] . '/sync/' . $tipo_pms . '&pms_info=canceled\');" 
+            $ret .= '<a href="javascript: validator(\'//' . $_SERVER["HTTP_HOST"] . '/v2/modify_preno_pms/' . $row['hospitality_guest.Id'] . '/sync/' . $tipo_pms . '&pms_info=canceled\');" 
                     title="Elimina Prenotazione sincronizzata il ' . $data_reservation . ' dal PMS, dopo aver cliccato devi mettere nel cestino di QUOTO la prenotazione, cosi viene eliminata anche nel PMS" 
                     data-toogle="tooltip" ><i class = "fa fa-trash text-red" aria-hidden = "true"></i></a>';
 
@@ -3436,13 +3436,13 @@ function func_pms_bedzzle($value, $fieldname, $primary_key, $row, $xcrud)
 
             $color_ins  = 'text-orange';
             $title      = 'Ri-sincronizza se hai modificato la prenotazione dopo la prima sincro del '.$data_reservation;
-            $button_del = '<a href = "javascript: validator(\'//'.$_SERVER["HTTP_HOST"].'/delete_preno_pms_bedzzle/'.$row['hospitality_guest.Id'].'/sync/B/\');" title = "Elimina Prenotazione sincronizzata il '.$data_reservation.' dal PMS" data-toogle = "tooltip" style = "float: left;padding-left : 4px;"><i class = "fa fa-trash text-red" aria-hidden = "true"></i></a>';
+            $button_del = '<a href = "javascript: validator(\'//'.$_SERVER["HTTP_HOST"].'/v2/delete_preno_pms_bedzzle/'.$row['hospitality_guest.Id'].'/sync/B/\');" title = "Elimina Prenotazione sincronizzata il '.$data_reservation.' dal PMS" data-toogle = "tooltip" style = "float: left;padding-left : 4px;"><i class = "fa fa-trash text-red" aria-hidden = "true"></i></a>';
         }else{
             $color      = '';
             $title      = 'Sincronizza con PMS';
             $button_del = '';
         }
-        $button_ins    = '<a href = "javascript: validator_pms(\'//'.$_SERVER["HTTP_HOST"].'/syncro_pms/'.$row['hospitality_guest.Id'].'/sync/B/\');" title   = "'.$title.'"  data-toogle = "tooltip" style = "float: left;padding-right: 4px;margin-left: 4px"><i class = "fa fa-refresh '.$color_ins.'" aria-hidden = "true"></i></a>';
+        $button_ins    = '<a href = "javascript: validator_pms(\'//'.$_SERVER["HTTP_HOST"].'/v2/syncro_pms/'.$row['hospitality_guest.Id'].'/sync/B/\');" title   = "'.$title.'"  data-toogle = "tooltip" style = "float: left;padding-right: 4px;margin-left: 4px"><i class = "fa fa-refresh '.$color_ins.'" aria-hidden = "true"></i></a>';
 
         $action_button = $button_ins.$button_del;
     
@@ -3462,8 +3462,8 @@ function flag_pms($value, $fieldname, $primary_key, $row, $xcrud){
                 $butt .= ($rw['RoomTypePms']==''?'<button type="button" class="btn btn-default btn-xs">Abbina tipo Camera</button>':'');
 
                 foreach($rows as $value) {
-                    $filtro1 = '<li><a href="//'.$_SERVER["HTTP_HOST"].'/associa_camere/0/'.$rw['Id'].'/"><small>Non abbinato</small></a></li>';
-                    $filtro .= '<li><a href="//'.$_SERVER["HTTP_HOST"].'/associa_camere/'.$value['RoomTypeId'].'/'.$rw['Id'].'/"><small>'.$value['RoomTypeDescription'].'</small></a></li>';
+                    $filtro1 = '<li><a href="//'.$_SERVER["HTTP_HOST"].'/v2/associa_camere/0/'.$rw['Id'].'/"><small>Non abbinato</small></a></li>';
+                    $filtro .= '<li><a href="//'.$_SERVER["HTTP_HOST"].'/v2/associa_camere/'.$value['RoomTypeId'].'/'.$rw['Id'].'/"><small>'.$value['RoomTypeDescription'].'</small></a></li>';
                     $butt .= ($rw['RoomTypePms']==$value['RoomTypeId']?'<button type="button" class="btn btn-default btn-xs">'.$value['RoomTypeDescription'].'</button>':'');
                 }
 
@@ -3501,8 +3501,8 @@ function flag_soggiorni_pms($value, $fieldname, $primary_key, $row, $xcrud){
             $butt .= ($rw['PlanTypePms']==''?'<button type="button" class="btn btn-default btn-xs">Abbina tipo Soggiorno</button>':'');
 
             foreach($rows as $value) {
-                $filtro1 = '<li><a href="//'.$_SERVER["HTTP_HOST"].'/associa_soggiorno/0/'.$rw['Id'].'/"><small>Non abbinato</small></a></li>';
-                $filtro .= '<li><a href="//'.$_SERVER["HTTP_HOST"].'/associa_soggiorno/'.$value['RateId'].'/'.$rw['Id'].'/"><small>['.$value['RateId'].'] '.$value['Description'].'</small></a></li>';
+                $filtro1 = '<li><a href="//'.$_SERVER["HTTP_HOST"].'/v2/associa_soggiorno/0/'.$rw['Id'].'/"><small>Non abbinato</small></a></li>';
+                $filtro .= '<li><a href="//'.$_SERVER["HTTP_HOST"].'/v2/associa_soggiorno/'.$value['RateId'].'/'.$rw['Id'].'/"><small>['.$value['RateId'].'] '.$value['Description'].'</small></a></li>';
                 $butt .= ($rw['PlanTypePms']==$value['RateId']?'<button type="button" class="btn btn-default btn-xs">['.$value['RateId'].'] '.$value['Description'].'</button>':'');
             }
 
@@ -4038,8 +4038,8 @@ function flag_pms_bedzzle($value, $fieldname, $primary_key, $row, $xcrud){
 
                 foreach($rows as $value) {
 
-                        $filtro1 = '<li><a href="//'.$_SERVER["HTTP_HOST"].'/associa_camere/0/'.$rw['Id'].'/"><small>Non abbinato</small></a></li>';
-                        $filtro .= '<li><a href="//'.$_SERVER["HTTP_HOST"].'/associa_camere/'.$value['RoomTypeId'].'/'.$rw['Id'].'/"><small>'.$value['RoomTypeDescription'].'</small></a></li>';
+                        $filtro1 = '<li><a href="//'.$_SERVER["HTTP_HOST"].'/v2/associa_camere/0/'.$rw['Id'].'/"><small>Non abbinato</small></a></li>';
+                        $filtro .= '<li><a href="//'.$_SERVER["HTTP_HOST"].'/v2/associa_camere/'.$value['RoomTypeId'].'/'.$rw['Id'].'/"><small>'.$value['RoomTypeDescription'].'</small></a></li>';
                         $butt .= ($rw['RoomTypePms']==$value['RoomTypeId']?'<button type="button" class="btn btn-default btn-xs">'.$value['RoomTypeDescription'].'</button>':'');
                     
                 }
@@ -4080,10 +4080,10 @@ function flag_pms_soggiorno_bedzzle($value, $fieldname, $primary_key, $row, $xcr
             foreach($rows as $value) {
                 if($value['RateId']==$rw['PlanCode'] ){
                     $butt = '<button type="button" class="btn btn-default btn-xs">['.$value['RateId'].'] '.$value['Description'].'</button>';
-                    $filtro1 = '<li><a href="//'.$_SERVER["HTTP_HOST"].'/associa_soggiorno/'.$value['RateId'].'/'.$rw['Id'].'/"><small>['.$value['RateId'].'] '.$value['Description'].'</small></a></li>';
+                    $filtro1 = '<li><a href="//'.$_SERVER["HTTP_HOST"].'/v2/associa_soggiorno/'.$value['RateId'].'/'.$rw['Id'].'/"><small>['.$value['RateId'].'] '.$value['Description'].'</small></a></li>';
                 }else{     
-                    $filtro1 = '<li><a href="//'.$_SERVER["HTTP_HOST"].'/associa_soggiorno/0/'.$rw['Id'].'/"><small>Non abbinato</small></a></li>';
-                    $filtro .= '<li><a href="//'.$_SERVER["HTTP_HOST"].'/associa_soggiorno/'.$value['RateId'].'/'.$rw['Id'].'/"><small>['.$value['RateId'].'] '.$value['Description'].'</small></a></li>';
+                    $filtro1 = '<li><a href="//'.$_SERVER["HTTP_HOST"].'/v2/associa_soggiorno/0/'.$rw['Id'].'/"><small>Non abbinato</small></a></li>';
+                    $filtro .= '<li><a href="//'.$_SERVER["HTTP_HOST"].'/v2/associa_soggiorno/'.$value['RateId'].'/'.$rw['Id'].'/"><small>['.$value['RateId'].'] '.$value['Description'].'</small></a></li>';
                     $butt .= ($value['RateId']==$rw['PlanCode']?'<button type="button" class="btn btn-default btn-xs">['.$value['RateId'].'] '.$value['Description'].'</button>':'');
                 }
             }
@@ -4121,8 +4121,8 @@ function flag_soggiorni_parity($value, $fieldname, $primary_key, $row, $xcrud){
             $butt .= ($rw['RateParityId']==''?'<button type="button" class="btn btn-default btn-xs">Abbina tipo Soggiorno</button>':'');
 
             foreach($rows as $value) {
-                $filtro1 = '<li><a href="//'.$_SERVER["HTTP_HOST"].'/associa_soggiorno_parity/0/'.$rw['Id'].'/"><small>Non abbinato</small></a></li>';
-                $filtro .= '<li><a href="//'.$_SERVER["HTTP_HOST"].'/associa_soggiorno_parity/'.$value['RateId'].'/'.$rw['Id'].'/"><small>['.$value['RateId'].'] '.$value['Description'].'</small></a></li>';
+                $filtro1 = '<li><a href="//'.$_SERVER["HTTP_HOST"].'/v2/associa_soggiorno_parity/0/'.$rw['Id'].'/"><small>Non abbinato</small></a></li>';
+                $filtro .= '<li><a href="//'.$_SERVER["HTTP_HOST"].'/v2/associa_soggiorno_parity/'.$value['RateId'].'/'.$rw['Id'].'/"><small>['.$value['RateId'].'] '.$value['Description'].'</small></a></li>';
                 $butt .= ($rw['RateParityId']==$value['RateId']?'<button type="button" class="btn btn-default btn-xs">['.$value['RateId'].'] '.$value['Description'].'</button>':'');
             }
 
@@ -4158,8 +4158,8 @@ function flag_camere_parity($value, $fieldname, $primary_key, $row, $xcrud){
                 $butt .= ($rw['RoomParityId']==''?'<button type="button" class="btn btn-default btn-xs">Abbina tipo Camera</button>':'');
 
                 foreach($rows as $value) {
-                    $filtro1 = '<li><a href="//'.$_SERVER["HTTP_HOST"].'/associa_camere_parity/0/'.$rw['Id'].'/"><small>Non abbinato</small></a></li>';
-                    $filtro .= '<li><a href="//'.$_SERVER["HTTP_HOST"].'/associa_camere_parity/'.$value['RoomId'].'/'.$rw['Id'].'/"><small>'.$value['RoomDescription'].'</small></a></li>';
+                    $filtro1 = '<li><a href="//'.$_SERVER["HTTP_HOST"].'/v2/associa_camere_parity/0/'.$rw['Id'].'/"><small>Non abbinato</small></a></li>';
+                    $filtro .= '<li><a href="//'.$_SERVER["HTTP_HOST"].'/v2/associa_camere_parity/'.$value['RoomId'].'/'.$rw['Id'].'/"><small>'.$value['RoomDescription'].'</small></a></li>';
                     $butt .= ($rw['RoomParityId']==$value['RoomId']?'<button type="button" class="btn btn-default btn-xs">'.$value['RoomDescription'].'</button>':'');
                 }
 

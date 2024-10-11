@@ -90,7 +90,7 @@
                 $Notti = $diff->d;
 
                 ## calcolo sconto
-                $selectSconto = "SELECT sconto FROM hospitality_relazione_sconto_proposte WHERE idsito = ".IDSITO."  AND id_richiesta = ".$_REQUEST['azione']." AND id_proposta = ".$IdProposta."";
+                $selectSconto = "SELECT sconto FROM hospitality_relazione_sconto_proposte WHERE idsito = ".IDSITO." AND sconto != 0  AND id_richiesta = ".$_REQUEST['azione']." AND id_proposta = ".$IdProposta."";
                 $resultSc = $dbMysqli->query($selectSconto);
                 if(sizeof($resultSc)>0){
                         $rowSC = $resultSc[0];

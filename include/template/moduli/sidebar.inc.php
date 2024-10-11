@@ -29,6 +29,7 @@ $anniprima = (date('Y')-$diff_anni);
                                                 </form>
                                             </li>
                                         </ul>
+                                        
                                 <?}?>
                                
                                 <?if(IS_NETWORK_SERVICE_USER == 1){ ?>
@@ -49,6 +50,7 @@ $anniprima = (date('Y')-$diff_anni);
                                             }
                                         
                                     ?>
+                                 
                                 <?}?>
                                
                             <?php $check=check_setup();
@@ -941,13 +943,14 @@ $anniprima = (date('Y')-$diff_anni);
                                                                         <?php
                                                                             $directory    = getDirectorySito(IDSITO);
                                                                             $id_richiesta = getLastPreventivo(IDSITO);
-                                                                            $v = base64_encode($id_richiesta.'_'.IDSITO.'_p');
+                                                                            $v = base64_encode($id_richiesta.'_'.IDSITO.'_p');                                                                                                                                                                                                                                 
                                                                         ?>
                                                                         <?php if(check_view_by_name_template(IDSITO,'default')==true){?> 
                                                                             <li class="<?=$GLOBALS['ActiveMenu']['anteprima_default']?> nowrap">
                                                                                 <a href="<?=BASE_URL_LANDING.$directory.'/'.$v.'/index/'?>" target="_blank">
                                                                                     <span class="pcoded-micon"></span>
-                                                                                    <span class="pcoded-mtext">Anteprima  <small>T.</small> <small class="text-white">Default</small></span>
+                                                                                    <span class="pcoded-mtext">Anteprima  <small>T.</small> <small class="text-white">Default
+                                                                                        </small></span>
                                                                                 </a>
                                                                             </li>
                                                                         <?}?>
