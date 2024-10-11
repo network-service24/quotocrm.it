@@ -192,19 +192,63 @@ if(!in_array(IDSITO,MODULI_INDEX)){
 
 
 		// Query SQL per contare le richieste di tipo 'Preventivo' per il mese
-		$select = "SELECT COUNT(Id) as tot_prev FROM hospitality_guest
+/* 		$select = "SELECT COUNT(Id) as tot_prev FROM hospitality_guest
 				WHERE DataRichiesta >= '$firstDayOfMonth' AND DataRichiesta <= '$lastDayOfMonth'
-				AND TipoRichiesta = 'Preventivo' AND idsito = ".IDSITO;
+				AND TipoRichiesta = 'Preventivo' AND idsito = ".IDSITO; */
+		$select = "SELECT 
+						COUNT(g.Id) as tot_prev
+					FROM 
+						hospitality_guest as g
+					WHERE 
+						g.TipoRichiesta = 'Preventivo'
+					AND
+						g.Hidden = 0
+					AND
+						g.Chiuso = 0
+					AND
+						g.Accettato = 0
+					AND
+						g.NoDisponibilita = 0
+					AND 
+						g.idsito = " . IDSITO . "
+					AND 
+						(g.DataRichiesta >= '" . $firstDayOfMonth . "' 
+					AND 
+						g.DataRichiesta <= '" . $lastDayOfMonth. "')";				
 		$res = $dbMysqli->query($select);
 		$rws = $res[0];
 		$tot_prev = $rws['tot_prev'];
 		$array_data_prev[] = $tot_prev;
 
 		// Query SQL per il tipo 'Conferma' gestendo sia DataRichiesta che DataChiuso
-		$select2 = "SELECT COUNT(Id) as tot_conf FROM hospitality_guest
+/* 		$select2 = "SELECT COUNT(Id) as tot_conf FROM hospitality_guest
 					WHERE (DataRichiesta >= '$firstDayOfMonth' AND DataRichiesta <= '$lastDayOfMonth'
 					OR DataChiuso >= '$firstDayOfMonth' AND DataChiuso <= '$lastDayOfMonth')
-					AND TipoRichiesta = 'Conferma' AND idsito = ".IDSITO;
+					AND TipoRichiesta = 'Conferma' AND idsito = ".IDSITO; */
+		$select2 = "SELECT 
+						COUNT(g.Id) as tot_conf
+					FROM 
+						hospitality_guest as g
+					WHERE 
+						g.TipoRichiesta = 'Conferma'
+					AND
+						g.Hidden = 0
+					AND
+						g.Disdetta = 0			
+					AND 
+						g.Chiuso = 1 
+					AND 
+						(g.IdMotivazione IS NULL OR g.DataRiconferma IS NOT NULL)
+					AND 
+						g.CheckinOnlineClient = 0
+					AND 
+						g.NoDisponibilita = 0
+					AND 
+						g.idsito = " . IDSITO. "
+					AND 
+						(g.DataRichiesta >= '" . $firstDayOfMonth . "' 
+					AND 
+						g.DataRichiesta <= '" . $lastDayOfMonth . "')";	
 		$res2 = $dbMysqli->query($select2);
 		$rws2 = $res2[0];
 		$tot_conf = $rws2['tot_conf'];
