@@ -181,21 +181,8 @@
 						$_SESSION['super_user'] = $DatiLog[0];
 						$_SESSION['super_pass'] = $DatiLog[1];
 					}
-                    if($_SESSION['utente']['data_start_hospitality'] > DATA_QUOTO_V3){
-                        header("Location: ".BASE_URL_SITO."dashboard-index/");
-                    }else{
 
-                        include_once($_SERVER['DOCUMENT_ROOT']."/include/declaration.inc.php");
-                        $checkUI = $fun->check_configurazioni($_SESSION['utente']['idsito'],'check_interfaccia');
-                        if($checkUI == 1){
-                            header("Location: ".BASE_URL_SITO."dashboard-index/");
-                        }else{
-                            header("Location: ".BASE_URL_SITO."v2/dashboard-index/");
-                        }                         
-                    
-                    }
-
-
+                    header("Location: ".BASE_URL_SITO."dashboard-index/");
                     die("Stai per essere reindirizzato a QUOTO!");
                 }
                 else

@@ -13,7 +13,7 @@ include($_SERVER['DOCUMENT_ROOT']."/include/function.inc.php");
 	$data        = array();
 
 	# QUERY PER COMPILARE IL DATATABLE
-	$select = "SELECT * FROM hospitality_configurazioni  WHERE idsito = ".$_REQUEST['idsito']." AND parametro != 'check_pagination'";
+	$select = "SELECT * FROM hospitality_configurazioni  WHERE idsito = ".$_REQUEST['idsito']." AND parametro != 'check_pagination' AND parametro != 'check_interfaccia'";
 	$rec = $dbMysqli->query($select);
 	
 	foreach($rec as $key => $row){
