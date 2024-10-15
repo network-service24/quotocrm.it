@@ -281,7 +281,7 @@ if(!in_array(IDSITO,MODULI_INDEX)){
 		$data_fatt = implode(',',$array_fatturato);
 	}
 
-	$JSGrafico = "  <script src=\"".BASE_URL_SITO."v2/material/assets/plugins/echarts/echarts-all.js\"></script>
+	$JSGrafico = "  <script src=\"".BASE_URL_SITO."js/plugins/echarts/echarts-all.js\"></script>
 					<script>
 					$(function () {
 							// ==============================================================
