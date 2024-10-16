@@ -690,13 +690,13 @@ $( document ).ready(function() {
             });
     <?}?>
 
-    $('#ctrl_form').on('keyup keypress', function(e) {
+/*     $('#ctrl_form').on('keyup keypress', function(e) {
     var keyCode = e.keyCode || e.which;
-    if (keyCode === 13) { 
-        e.preventDefault();
-        return false;
-    }
-    });
+        if (keyCode === 13) { 
+            e.preventDefault();
+            return false;
+        }
+    }); */
     // validate del form crea proposta
     $("#ctrl_form").validate({
         rules: {
