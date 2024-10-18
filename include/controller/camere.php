@@ -7,6 +7,7 @@ $legenda = '<div class="clearfix p-b-20"></div>
             <ul class="text-left">
                 <li> <b>ATTENZIONE ad eliminare delle camere</b>: </li>
                 <li> perchè così facendo se avete già una attività di preventivi e/o prenotazioni in corso, <b>andreste a svuotare le proposte di soggiorno in produzione</b> e le relative statistiche!</li>
+                <li> se dopo la prima sincronizzazione vengono modificati i nomi delle camere, i testi o le immagini; è neccessario modificare manualmente gli stessi anche su QUOTO!</li>
             </ul>';
 
 if(FORM_SUL_SITO==1){

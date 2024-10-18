@@ -3,6 +3,7 @@ $legenda = '<div class="clearfix p-b-20"></div>
             <ul>
                 <li> <b>ATTENZIONE ad eliminare delle tipologie di soggiorno</b>: </li>
                 <li> perchè così facendo se avete già una attività di preventivi e/o prenotazioni in corso, <b>andreste a svuotare le proposte di soggiorno in produzione</b> e le relative statistiche!</li>
+                <li> se dopo la prima sincronizzazione vengono modificati i nomi soggiorno o i testi di quelli già presenti; è neccessario modificare manualmente gli stessi anche su QUOTO!</li>
             </ul>';
             
     if(FORM_SUL_SITO==1){
