@@ -111,14 +111,15 @@ include($_SERVER['DOCUMENT_ROOT']."/include/function.inc.php");
                                             </script>
                                             <div id="dett_conta_click_pre'.$Id.'"></div>
                                             <div id="dett_conta_click'.$Id.'"></div>';
-
-                    $dett_check_proposta   = '<script>
+                                            
+                    $dett_check_proposta   = $fun->check_proposta($NumeroPrenotazione,$idsito);
+/*                     $dett_check_proposta   = '<script>
                                                 $(function(){
                                                     dett_check_proposta('.$NumeroPrenotazione.','.$idsito.');
                                                 })
                                             </script>
                                             <div id="dett_check_proposta_pre'.$NumeroPrenotazione.'"></div>
-                                            <div id="dett_check_proposta'.$NumeroPrenotazione.'"></div>'; 
+                                            <div id="dett_check_proposta'.$NumeroPrenotazione.'"></div>';  */
 
                             
                     $dett_referalAds = $fun->ReferralAds($idsito,$NumeroPrenotazione);   
