@@ -258,7 +258,7 @@
                         }
 
                         if($val['EtaB'] != ''){
-                                
+                                $etaB    = array();
                                 $etaB_   = explode(",",$val['EtaB']);
 
                                 foreach($etaB_ as $k => $v){
@@ -267,7 +267,7 @@
                                 }
 
                                 $Camere[] = array("room_type_id"        => intval($val['RoomTypeId']),
-                                                "room_type_description" => strip_tags($val['Descrizione']), 
+                                                "room_type_description" => strip_tags(addslashes($val['Descrizione'])), 
                                                 "meal_plan"             => $tipo_soggiorno,          
                                                 "amount_after_tax"      => $amountCamera_after_tax,        
                                                 "number_of_guests"      => ($NumAdulti+$NumBambini),
@@ -276,7 +276,7 @@
                                                 "children_age"          => $etaB);
                         }else{
                                 $Camere[] = array("room_type_id"        => intval($val['RoomTypeId']),
-                                                "room_type_description" => strip_tags($val['Descrizione']), 
+                                                "room_type_description" => strip_tags(addslashes($val['Descrizione'])), 
                                                 "meal_plan"             => $tipo_soggiorno,          
                                                 "amount_after_tax"      => $amountCamera_after_tax,        
                                                 "number_of_guests"      => ($NumAdulti+$NumBambini),
@@ -319,7 +319,7 @@
                                                                         "checkin_date"       => $Arrivo,
                                                                         "checkout_date"      => $Partenza,
                                                                         "ext_reservation_id" => "7",
-                                                                        "pms_reservation_id" => $rec['pms_reservation_id'],
+                                                                        "master_reservation_id" => $rec['pms_reservation_id'],
                                                                         "status"             =>  array("id"=>2, "desc"=>"confirmed"),
                                                                         "rooms"              =>  $Camere       
                                                                         )
@@ -349,9 +349,9 @@
 
 
                         $data_string = json_encode($data);
-
-
-
+                       
+                        //print_r($data_string);exit;
+                        
                         $ch = curl_init($urlHost.'insertReservations/'); 
                         curl_setopt($ch, CURLOPT_SSL_VERIFYPEER, false);                                                                
                         curl_setopt($ch, CURLOPT_CUSTOMREQUEST, 'POST');                                                                     
@@ -364,11 +364,11 @@
                                                                                                                                 
                         $result = curl_exec($ch);  
                         $risultato = json_decode($result);
-                        //print_r($risultato);
+                        
                         //$pms_reservation_id = $risultato[0]->link[0]->pms_reservation_id;
 
                         $ext_reservation_id    = $risultato[0]->link[0]->ext_reservation_id;
-                        $pms_reservation_id    = $risultato[0]->link[0]->pms_reservation_id;
+                        $pms_reservation_id    = $risultato[0]->link[0]->master_reservation_id;
 
                    
                         $data_serv = date('Y-m-d').'T'.date('h:i:s').'000Z';
@@ -379,7 +379,7 @@
 
 
                                         $data_stringS = json_encode($dataS);   
-
+                                        //print_r($data_stringS);exit;
                                         $chS = curl_init($urlHost.'charges/'); 
                                         curl_setopt($chS, CURLOPT_SSL_VERIFYPEER, false);                                                                
                                         curl_setopt($chS, CURLOPT_CUSTOMREQUEST, 'POST');                                                                     
