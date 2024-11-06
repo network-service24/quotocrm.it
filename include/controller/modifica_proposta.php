@@ -1168,7 +1168,7 @@ if($_REQUEST['action']=='modify'){
                     }
                 }
                 ## INSERIMENTO DELLO SCONTO IN TABELLA RELAZIONALE
-                $dbMysqli->query("INSERT INTO hospitality_relazione_sconto_proposte(idsito,id_richiesta,id_proposta,sconto) VALUES('".IDSITO."','".$IdRichiesta."','".$IdProposta."','".$_REQUEST['SC5']."')");                     
+                $dbMysqli->query("INSERT INTO hospitality_relazione_sconto_proposte(idsito,id_richiesta,id_proposta,sconto) VALUES('".IDSITO."','".$IdRichiesta."','".$IdProposta."','".$_REQUEST['SC1']."')");                     
 
                 $n_camere = count($_REQUEST['TipoCamere1']);
                     for($i=0; $i<=($n_camere-1); $i++){

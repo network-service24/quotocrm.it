@@ -155,8 +155,8 @@
 
 
                                         $servizi[] =  array(    "quantity"           => 1,
-                                                                "product_code"       => $id_servizio,
-                                                                "product_description"=> $TipoServizio,
+                                                                "product_code"       => "$id_servizio",
+                                                                "product_description"=> addslashes($TipoServizio) ,
                                                                 "unit_price"         => intval($PrezzoServizio));
 
                                         $totaleServizi += $PrezzoServizio;
@@ -170,19 +170,10 @@
                                 ################################################################
 
 
-                                        ### MODIFICA PER SEFRVIZI AGGIUNTIVI
-                                        $dataS = array("clientToken"=> $clientToken,
-                                                        "hotelCode" => $hotelCode,
-                                                        "charges"   =>   array(array("charge_id"                 => $ext_reservation_id,
-                                                                                        "master_reservation_id"  => $pms_reservation_id,       
-                                                                                        "date"                   => $data_serv,        
-                                                                                        "final_amount"           => $final_amount_servizi,
-                                                                                        "sale_items"             => $servizi       
-                                                                                        ) 
-                                                                                )           
-                                                        );  
+                                                        
+                                               
                         }
-
+                       
 
                 $array_eta_bimbi = array(intval($EtaBambini1),intval($EtaBambini2),intval($EtaBambini3),intval($EtaBambini4),intval($EtaBambini5),intval($EtaBambini6));
                 foreach($array_eta_bimbi as $ky => $vl){
@@ -309,6 +300,7 @@
                         }
 
                 if($tot > 0){
+                        $pms_reservation_id = $rec['pms_reservation_id'];
                         ### MODIFICA DI UNA PRENOTAZIONE GIA SINCRONIZZATA
                         $data = array("clientToken"=> $clientToken,
                                         "hotelCode"=> $hotelCode,
@@ -319,7 +311,7 @@
                                                                         "checkin_date"       => $Arrivo,
                                                                         "checkout_date"      => $Partenza,
                                                                         "ext_reservation_id" => "7",
-                                                                        "master_reservation_id" => $rec['pms_reservation_id'],
+                                                                        "master_reservation_id" =>"$pms_reservation_id" ,
                                                                         "status"             =>  array("id"=>2, "desc"=>"confirmed"),
                                                                         "rooms"              =>  $Camere       
                                                                         )
@@ -350,7 +342,7 @@
 
                         $data_string = json_encode($data);
                        
-                        //print_r($data_string);exit;
+                        //print_r($data_string);
                         
                         $ch = curl_init($urlHost.'insertReservations/'); 
                         curl_setopt($ch, CURLOPT_SSL_VERIFYPEER, false);                                                                
@@ -370,16 +362,27 @@
                         $ext_reservation_id    = $risultato[0]->link[0]->ext_reservation_id;
                         $pms_reservation_id    = $risultato[0]->link[0]->master_reservation_id;
 
-                   
-                        $data_serv = date('Y-m-d').'T'.date('h:i:s').'000Z';
+                
+                        $data_serv = date('Y-m-d').'T'.date('h:i:s').'.000Z';
 
 
 
                         if(sizeof($resS)>0){
-
+                              
+                                        ### MODIFICA PER SEFRVIZI AGGIUNTIVI
+                                        $dataS = array("clientToken"=> $clientToken,
+                                                        "hotelCode" => $hotelCode,
+                                                        "charges"   =>   array(array("charge_id"                 => "$ext_reservation_id",
+                                                                                        "master_reservation_id"  => "$pms_reservation_id",       
+                                                                                        "date"                   => "$data_serv",        
+                                                                                        "final_amount"           => $final_amount_servizi,
+                                                                                        "sale_items"             => $servizi       
+                                                                                        ) 
+                                                                                )           
+                                                        );
 
                                         $data_stringS = json_encode($dataS);   
-                                        //print_r($data_stringS);exit;
+                         //print_r($data_stringS);   exit;                    
                                         $chS = curl_init($urlHost.'charges/'); 
                                         curl_setopt($chS, CURLOPT_SSL_VERIFYPEER, false);                                                                
                                         curl_setopt($chS, CURLOPT_CUSTOMREQUEST, 'POST');                                                                     
