@@ -2154,22 +2154,23 @@ if($_REQUEST['action']=='modify'){
                         }
 
                     ## INSERIMENTO DELLO SCONTO IN TABELLA RELAZIONALE
-                    $dbMysqli->query("INSERT INTO hospitality_relazione_sconto_proposte(idsito,id_richiesta,id_proposta,sconto) VALUES('".IDSITO."','".$_REQUEST['Id']."','".$id_proposta4."','".$_REQUEST['SC4']."')");  
+                    $dbMysqli->query("INSERT INTO hospitality_relazione_sconto_proposte(idsito,id_richiesta,id_proposta,sconto) VALUES('".IDSITO."','".$_REQUEST['Id']."','".$IdProposta4."','".$_REQUEST['SC4']."')");  
 
 
-            }
+            
 
-            if($_REQUEST['PrezzoServizio4'] != '') {
-               
-                foreach($_REQUEST['PrezzoServizio4'] as $key4 => $value4){
-                    $dbMysqli->query("INSERT INTO hospitality_relazione_servizi_proposte(idsito,id_richiesta,id_proposta,servizio_id,num_persone,num_notti) VALUES('".IDSITO."','".$_REQUEST['Id']."','".$IdProposta4."','".$key4."','".$_REQUEST['num_persone_4_'.$key4]."','".$_REQUEST['notti4_'.$key4]."')");
+                if($_REQUEST['PrezzoServizio4'] != '') {
+                
+                    foreach($_REQUEST['PrezzoServizio4'] as $key4 => $value4){
+                        $dbMysqli->query("INSERT INTO hospitality_relazione_servizi_proposte(idsito,id_richiesta,id_proposta,servizio_id,num_persone,num_notti) VALUES('".IDSITO."','".$_REQUEST['Id']."','".$IdProposta4."','".$key4."','".$_REQUEST['num_persone_4_'.$key4]."','".$_REQUEST['notti4_'.$key4]."')");
+                    }
                 }
+                if($_REQUEST['VisibileServizio4'] != '' && $IdProposta4 != '') {
+                    foreach($_REQUEST['VisibileServizio4'] as $key4 => $value4){
+                        $dbMysqli->query("INSERT INTO hospitality_relazione_visibili_servizi_proposte(idsito,id_richiesta,id_proposta,servizio_id,visibile) VALUES('".IDSITO."','".$_REQUEST['Id']."','".$IdProposta4."','".$key4."','".$value4."')");
+                    }
+                } 
             }
-             if($_REQUEST['VisibileServizio4'] != '' && $IdProposta4 != '') {
-                foreach($_REQUEST['VisibileServizio4'] as $key4 => $value4){
-                    $dbMysqli->query("INSERT INTO hospitality_relazione_visibili_servizi_proposte(idsito,id_richiesta,id_proposta,servizio_id,visibile) VALUES('".IDSITO."','".$_REQUEST['Id']."','".$IdProposta4."','".$key4."','".$value4."')");
-                }
-            } 
 
             if($_REQUEST['id_proposta5']!=''){
 
@@ -2299,23 +2300,23 @@ if($_REQUEST['action']=='modify'){
                         }
 
                     ## INSERIMENTO DELLO SCONTO IN TABELLA RELAZIONALE
-                    $dbMysqli->query("INSERT INTO hospitality_relazione_sconto_proposte(idsito,id_richiesta,id_proposta,sconto) VALUES('".IDSITO."','".$_REQUEST['Id']."','".$id_proposta5."','".$_REQUEST['SC5']."')");  
+                    $dbMysqli->query("INSERT INTO hospitality_relazione_sconto_proposte(idsito,id_richiesta,id_proposta,sconto) VALUES('".IDSITO."','".$_REQUEST['Id']."','".$IdProposta5."','".$_REQUEST['SC5']."')");  
 
-            }
             
-            if($_REQUEST['PrezzoServizio5'] != '') {
-               
-                foreach($_REQUEST['PrezzoServizio5'] as $key5 => $value5){
-                    $dbMysqli->query("INSERT INTO hospitality_relazione_servizi_proposte(idsito,id_richiesta,id_proposta,servizio_id,num_persone,num_notti) VALUES('".IDSITO."','".$_REQUEST['Id']."','".$IdProposta5."','".$key5."','".$_REQUEST['num_persone_5_'.$key5]."','".$_REQUEST['notti5_'.$key5]."')");
-                }
-            }
-           
-             if($_REQUEST['VisibileServizio5'] != '' && $IdProposta5 != '') {
-                foreach($_REQUEST['VisibileServizio5'] as $key5 => $value5){
-                    $dbMysqli->query("INSERT INTO hospitality_relazione_visibili_servizi_proposte(idsito,id_richiesta,id_proposta,servizio_id,visibile) VALUES('".IDSITO."','".$_REQUEST['Id']."','".$IdProposta5."','".$key5."','".$value5."')");
-                }
-            } 
             
+                if($_REQUEST['PrezzoServizio5'] != '') {
+                
+                    foreach($_REQUEST['PrezzoServizio5'] as $key5 => $value5){
+                        $dbMysqli->query("INSERT INTO hospitality_relazione_servizi_proposte(idsito,id_richiesta,id_proposta,servizio_id,num_persone,num_notti) VALUES('".IDSITO."','".$_REQUEST['Id']."','".$IdProposta5."','".$key5."','".$_REQUEST['num_persone_5_'.$key5]."','".$_REQUEST['notti5_'.$key5]."')");
+                    }
+                }
+            
+                if($_REQUEST['VisibileServizio5'] != '' && $IdProposta5 != '') {
+                    foreach($_REQUEST['VisibileServizio5'] as $key5 => $value5){
+                        $dbMysqli->query("INSERT INTO hospitality_relazione_visibili_servizi_proposte(idsito,id_richiesta,id_proposta,servizio_id,visibile) VALUES('".IDSITO."','".$_REQUEST['Id']."','".$IdProposta5."','".$key5."','".$value5."')");
+                    }
+                } 
+            }
             if($_REQUEST['Chiuso'] == 1 && ($_REQUEST['DataChiuso'] != '0000-00-00' || $_REQUEST['DataChiuso'] != null)){
                 $dbMysqli->query("UPDATE hospitality_guest SET DataModificaPrenotazione = '".date('Y-m-d')."' WHERE Id = ".$_REQUEST['Id']." AND idsito = ".IDSITO);
                 popola_status_parity(IDSITO,$_REQUEST['NumeroPrenotazione'],8);
