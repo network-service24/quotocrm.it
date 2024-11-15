@@ -168,7 +168,7 @@ include($_SERVER['DOCUMENT_ROOT']."/include/function.inc.php");
                                                                         <label>Mastercard</label>
                                                                     </div>
                                                                     <div class="col-md-1">                                            	                                                     
-                                                                        <input type="checkbox" class="form-control" id="mastercard'.$row['Id'].'" name="mastercard" '.($row['mastercard']==1?'checked="checked"':'').' />
+                                                                        <input type="checkbox" class="form-control" id="mastercard'.$row['Id'].'" name="mastercard" '.($row['mastercard']==1?'checked="checked" value="1"':'value="0"').' />
                                                                     </div>
                                                                 </div>
                                                             </div>                                    
@@ -178,7 +178,7 @@ include($_SERVER['DOCUMENT_ROOT']."/include/function.inc.php");
                                                                         <label>Visa</label>
                                                                     </div>
                                                                     <div class="col-md-1">                                            	                                                     
-                                                                        <input type="checkbox" class="form-control" id="visa'.$row['Id'].'" name="visa" '.($row['visa']==1?'checked="checked"':'').' />
+                                                                        <input type="checkbox" class="form-control" id="visa'.$row['Id'].'" name="visa" '.($row['visa']==1?'checked="checked" value="1"':'value="0"').' />
                                                                     </div>
                                                                 </div>
                                                             </div>                                     
@@ -188,7 +188,7 @@ include($_SERVER['DOCUMENT_ROOT']."/include/function.inc.php");
                                                                         <label>Amex</label>
                                                                     </div>
                                                                     <div class="col-md-1">                                            	                                                     
-                                                                        <input type="checkbox" class="form-control" id="amex'.$row['Id'].'" name="amex" '.($row['amex']==1?'checked="checked"':'').' />
+                                                                        <input type="checkbox" class="form-control" id="amex'.$row['Id'].'" name="amex" '.($row['amex']==1?'checked="checked" value="1"':'value="0"').' />
                                                                     </div>
                                                                 </div>
                                                             </div> 
@@ -198,7 +198,7 @@ include($_SERVER['DOCUMENT_ROOT']."/include/function.inc.php");
                                                                         <label>Diners</label>
                                                                     </div>
                                                                     <div class="col-md-1">                                            	                                                     
-                                                                        <input type="checkbox" class="form-control" id="diners'.$row['Id'].'" name="diners" '.($row['diners']==1?'checked="checked"':'').' />
+                                                                        <input type="checkbox" class="form-control" id="diners'.$row['Id'].'" name="diners" '.($row['diners']==1?'checked="checked" value="1"':'value="0"').' />
                                                                     </div>
                                                                 </div>
                                                             </div> 
