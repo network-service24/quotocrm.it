@@ -1,6 +1,6 @@
 <?php
 // ribadisco error_reporting, perchè escludere alcuni warning
-error_reporting(0);
+//error_reporting(0);
 
 $DataDiOggi = date('Y-m-d');
 $GiornoInPiu = mktime (0,0,0,date('m'),(date('d')+1),date('Y'));
@@ -69,18 +69,18 @@ for($n==1; $n<=20; $n++){
     $NumeroBambini .='<option value="'.$n.'">'.$n.'</option>';
 }
 
-//controllo se l'url del boooking è compilato nella voce di menu [Collegamenti social] oppure se il cliente ha un booking engine sincronizzato 
+//controllo se l'url del boooking è compilato nella voce di menu [Collegamenti social] oppure se il cliente ha un booking engine sincronizzato
 if($fun->check_simplebooking(IDSITO)==0 && $fun->check_ericsoftbooking(IDSITO)==0 && $fun->check_bedzzlebooking(IDSITO)==0){
     $BookingOnline = $fun->check_UrlBookingOnline(IDSITO);
 }
-//controllo se simpleboooking è attivo 
+//controllo se simpleboooking è attivo
 if($fun->check_simplebooking(IDSITO)==1){
 
     $BookingOnline ='   <div class="row m-t-10">
                             <div class="col-md-4"></div>
                             <div class="col-md-4"></div>
                             <div class="col-md-4 text-center">
-                               <button type="button" class="btn btn-primary btn-sm" data-toggle="modal" data-target="#input_booking1">Apri SimpleBooking</button>  
+                               <button type="button" class="btn btn-primary btn-sm" data-toggle="modal" data-target="#input_booking1">Apri SimpleBooking</button>
                             </div>
                         </div>
                         <div id="wait1"></div>'."\r\n";
@@ -90,8 +90,8 @@ if($fun->check_simplebooking(IDSITO)==1){
     $BookingOnline2 ='   <div class="row m-t-10">
                             <div class="col-md-4"></div>
                             <div class="col-md-4"></div>
-                            <div class="col-md-4 text-center">                             
-                                <button type="button" class="btn btn-primary btn-sm" data-toggle="modal" data-target="#input_booking2">Apri SimpleBooking</button>                                                         
+                            <div class="col-md-4 text-center">
+                                <button type="button" class="btn btn-primary btn-sm" data-toggle="modal" data-target="#input_booking2">Apri SimpleBooking</button>
                             </div>
                         </div>
                         <div id="wait2"></div>'."\r\n";
@@ -101,19 +101,19 @@ if($fun->check_simplebooking(IDSITO)==1){
      $BookingOnline3 ='   <div class="row m-t-10">
                             <div class="col-md-4"></div>
                             <div class="col-md-4"></div>
-                            <div class="col-md-4 text-center">                                
-                                <button type="button" class="btn btn-primary btn-sm" data-toggle="modal" data-target="#input_booking3">Apri SimpleBooking</button>                                                                                        
+                            <div class="col-md-4 text-center">
+                                <button type="button" class="btn btn-primary btn-sm" data-toggle="modal" data-target="#input_booking3">Apri SimpleBooking</button>
                             </div>
                         </div>
-                        <div id="wait3"></div>'."\r\n";   
+                        <div id="wait3"></div>'."\r\n";
 
     $resultBookingOnline3 = '<div id="simple3"></div>'."\r\n";
 
     $BookingOnline4 ='   <div class="row m-t-10">
                             <div class="col-md-4"></div>
                             <div class="col-md-4"></div>
-                            <div class="col-md-4 text-center">                               
-                                <button type="button" class="btn btn-primary btn-sm" data-toggle="modal" data-target="#input_booking4">Apri SimpleBooking</button>                                                         
+                            <div class="col-md-4 text-center">
+                                <button type="button" class="btn btn-primary btn-sm" data-toggle="modal" data-target="#input_booking4">Apri SimpleBooking</button>
                             </div>
                         </div>
                         <div id="wait4"></div>'."\r\n";
@@ -123,21 +123,21 @@ if($fun->check_simplebooking(IDSITO)==1){
     $BookingOnline5 ='   <div class="row m-t-10">
                             <div class="col-md-4"></div>
                             <div class="col-md-4"></div>
-                            <div class="col-md-4 text-center">                               
-                                <button type="button" class="btn btn-primary btn-sm" data-toggle="modal" data-target="#input_booking5">Apri SimpleBooking</button>                                                         
+                            <div class="col-md-4 text-center">
+                                <button type="button" class="btn btn-primary btn-sm" data-toggle="modal" data-target="#input_booking5">Apri SimpleBooking</button>
                             </div>
                         </div>
                         <div id="wait5"></div>'."\r\n";
     $resultBookingOnline5 = '<div id="simple5"></div>'."\r\n";
 }
-//controllo se ericsoft boooking è attivo 
+//controllo se ericsoft boooking è attivo
 if($fun->check_ericsoftbooking(IDSITO)==1){
 
     $BookingOnline ='   <div class="row m-t-10">
                             <div class="col-md-4"></div>
                             <div class="col-md-4"></div>
-                            <div class="col-md-4 text-center">                               
-                                <button type="button" class="btn btn-primary btn-sm" data-toggle="modal" data-target="#input_ericsoft_booking1">Apri EricSoftBooking</button>                                                         
+                            <div class="col-md-4 text-center">
+                                <button type="button" class="btn btn-primary btn-sm" data-toggle="modal" data-target="#input_ericsoft_booking1">Apri EricSoftBooking</button>
                             </div>
                         </div>
                         <div id="wait1E"></div>'."\r\n";
@@ -147,8 +147,8 @@ if($fun->check_ericsoftbooking(IDSITO)==1){
     $BookingOnline2 ='   <div class="row m-t-10">
                             <div class="col-md-4"></div>
                             <div class="col-md-4"></div>
-                            <div class="col-md-4 text-center">                                
-                                <button type="button" class="btn btn-primary btn-sm" data-toggle="modal" data-target="#input_ericsoft_booking2">Apri EricSoftBooking</button>                                                         
+                            <div class="col-md-4 text-center">
+                                <button type="button" class="btn btn-primary btn-sm" data-toggle="modal" data-target="#input_ericsoft_booking2">Apri EricSoftBooking</button>
                             </div>
                         </div>
                         <div id="wait2E"></div>'."\r\n";
@@ -158,8 +158,8 @@ if($fun->check_ericsoftbooking(IDSITO)==1){
     $BookingOnline3 ='   <div class="row m-t-10">
                             <div class="col-md-4"></div>
                             <div class="col-md-4"></div>
-                            <div class="col-md-4 text-center">                                
-                                <button type="button" class="btn btn-primary btn-sm" data-toggle="modal" data-target="#input_ericsoft_booking3">Apri EricSoftBooking</button>                                                         
+                            <div class="col-md-4 text-center">
+                                <button type="button" class="btn btn-primary btn-sm" data-toggle="modal" data-target="#input_ericsoft_booking3">Apri EricSoftBooking</button>
                             </div>
                         </div>
                         <div id="wait3E"></div>'."\r\n";
@@ -169,8 +169,8 @@ if($fun->check_ericsoftbooking(IDSITO)==1){
     $BookingOnline4 ='   <div class="row m-t-10">
                             <div class="col-md-4"></div>
                             <div class="col-md-4"></div>
-                            <div class="col-md-4 text-center">                                
-                                <button type="button" class="btn btn-primary btn-sm" data-toggle="modal" data-target="#input_ericsoft_booking4">Apri EricSoftBooking</button>                                                         
+                            <div class="col-md-4 text-center">
+                                <button type="button" class="btn btn-primary btn-sm" data-toggle="modal" data-target="#input_ericsoft_booking4">Apri EricSoftBooking</button>
                             </div>
                         </div>
                         <div id="wait4E"></div>'."\r\n";
@@ -180,22 +180,22 @@ if($fun->check_ericsoftbooking(IDSITO)==1){
     $BookingOnline5 ='   <div class="row m-t-10">
                             <div class="col-md-4"></div>
                             <div class="col-md-4"></div>
-                            <div class="col-md-4 text-center">                                
-                                <button type="button" class="btn btn-primary btn-sm" data-toggle="modal" data-target="#input_ericsoft_booking5">Apri EricSoftBooking</button>                                                         
+                            <div class="col-md-4 text-center">
+                                <button type="button" class="btn btn-primary btn-sm" data-toggle="modal" data-target="#input_ericsoft_booking5">Apri EricSoftBooking</button>
                             </div>
                         </div>
                         <div id="wait5E"></div>'."\r\n";
 
-    $resultBookingOnline5 = '<div id="simple5E"></div>'."\r\n";                       
-} 
-//controllo se bedzzle boooking è attivo 
+    $resultBookingOnline5 = '<div id="simple5E"></div>'."\r\n";
+}
+//controllo se bedzzle boooking è attivo
 if($fun->check_bedzzlebooking(IDSITO)==1){
 
     $BookingOnline ='   <div class="row m-t-10">
                             <div class="col-md-4"></div>
                             <div class="col-md-4"></div>
-                            <div class="col-md-4 text-center">                               
-                                <button type="button" class="btn btn-primary btn-sm"  data-toggle="modal" data-target="#input_bedzzle_booking1">Apri BedzzleBooking</button>                                                         
+                            <div class="col-md-4 text-center">
+                                <button type="button" class="btn btn-primary btn-sm"  data-toggle="modal" data-target="#input_bedzzle_booking1">Apri BedzzleBooking</button>
                             </div>
                         </div>
                         <div id="wait1Bedzzle"></div>'."\r\n";
@@ -205,8 +205,8 @@ if($fun->check_bedzzlebooking(IDSITO)==1){
     $BookingOnline2 ='   <div class="row m-t-10">
                             <div class="col-md-4"></div>
                             <div class="col-md-4"></div>
-                            <div class="col-md-4 text-center">                                
-                                <button type="button" class="btn btn-primary btn-sm"  data-toggle="modal" data-target="#input_bedzzle_booking2">Apri BedzzleBooking</button>                                                         
+                            <div class="col-md-4 text-center">
+                                <button type="button" class="btn btn-primary btn-sm"  data-toggle="modal" data-target="#input_bedzzle_booking2">Apri BedzzleBooking</button>
                             </div>
                         </div>
                         <div id="wait2Bedzzle"></div>'."\r\n";
@@ -216,8 +216,8 @@ if($fun->check_bedzzlebooking(IDSITO)==1){
     $BookingOnline3 ='   <div class="row m-t-10">
                             <div class="col-md-4"></div>
                             <div class="col-md-4"></div>
-                            <div class="col-md-4 text-center">                                
-                                <button type="button" class="btn btn-primary btn-sm"  data-toggle="modal" data-target="#input_bedzzle_booking3">Apri BedzzleBooking</button>                                                         
+                            <div class="col-md-4 text-center">
+                                <button type="button" class="btn btn-primary btn-sm"  data-toggle="modal" data-target="#input_bedzzle_booking3">Apri BedzzleBooking</button>
                             </div>
                         </div>
                         <div id="wait3Bedzzle"></div>'."\r\n";
@@ -227,8 +227,8 @@ if($fun->check_bedzzlebooking(IDSITO)==1){
     $BookingOnline4 ='   <div class="row m-t-10">
                             <div class="col-md-4"></div>
                             <div class="col-md-4"></div>
-                            <div class="col-md-4 text-center">                               
-                                <button type="button" class="btn btn-primary btn-sm"  data-toggle="modal" data-target="#input_bedzzle_booking4">Apri BedzzleBooking</button>                                                         
+                            <div class="col-md-4 text-center">
+                                <button type="button" class="btn btn-primary btn-sm"  data-toggle="modal" data-target="#input_bedzzle_booking4">Apri BedzzleBooking</button>
                             </div>
                         </div>
                         <div id="wait4Bedzzle"></div>'."\r\n";
@@ -238,15 +238,15 @@ if($fun->check_bedzzlebooking(IDSITO)==1){
     $BookingOnline5 ='   <div class="row m-t-10">
                             <div class="col-md-4"></div>
                             <div class="col-md-4"></div>
-                            <div class="col-md-4 text-center">                                
-                                <button type="button" class="btn btn-primary btn-sm"  data-toggle="modal" data-target="#input_bedzzle_booking5">Apri BedzzleBooking</button>                                                         
+                            <div class="col-md-4 text-center">
+                                <button type="button" class="btn btn-primary btn-sm"  data-toggle="modal" data-target="#input_bedzzle_booking5">Apri BedzzleBooking</button>
                             </div>
                         </div>
                         <div id="wait5Bedzzle"></div>'."\r\n";
 
     $resultBookingOnline5 = '<div id="simple5Bedzzle"></div>'."\r\n";
 
-}                             
+}
 //query per la lista dei pacchetti
 $lista_pacchetti = $fun->lista_pacchetti(IDSITO,$Lingua);
 //query per la lista dei soggiorni
@@ -256,23 +256,23 @@ $ListaCamere  = $fun->lista_camere(IDSITO);
 //controllo se plugin delle select camere è attivo
 $stile_chosen = $fun->check_configurazioni(IDSITO,'select_tipo_camere');
 //select tipocamere 1,2,3,4,5
-$select_tipo_camere1 .= '  <select required name="TipoCamere1[]" id="TipoCamere_1_1" class="'.$stile_chosen.' form-control" '.(($fun->check_simplebooking(IDSITO)==0 && $fun->check_ericsoftbooking(IDSITO)==0 && $fun->check_bedzzlebooking(IDSITO)==0)?'onChange="get_listino(1,1);"':'').'>
+$select_tipo_camere1 .= '  <select required name="TipoCamere1[]" id="TipoCamere_1_1" class="'.$stile_chosen.' form-control" '.(($fun->check_simplebooking(IDSITO)==0 && $fun->check_ericsoftbooking(IDSITO)==0 && $fun->check_bedzzlebooking(IDSITO)==0)?($fun->check_listini(IDSITO)==1?'onChange="get_listino(1,1);"':''):'').'>
                                     '.$ListaCamere.'
                             </select>';
 
-$select_tipo_camere2 .= '  <select name="TipoCamere2[]" id="TipoCamere_2_1" class="'.$stile_chosen.' form-control" '.(($fun->check_simplebooking(IDSITO)==0 && $fun->check_ericsoftbooking(IDSITO)==0 && $fun->check_bedzzlebooking(IDSITO)==0)?'onChange="get_listino(2,1);"':'').'>
+$select_tipo_camere2 .= '  <select name="TipoCamere2[]" id="TipoCamere_2_1" class="'.$stile_chosen.' form-control" '.(($fun->check_simplebooking(IDSITO)==0 && $fun->check_ericsoftbooking(IDSITO)==0 && $fun->check_bedzzlebooking(IDSITO)==0)?($fun->check_listini(IDSITO)==1?'onChange="get_listino(2,1);"':''):'').'>
                                     '.$ListaCamere.'
                             </select>';
 
-$select_tipo_camere3 .= '  <select name="TipoCamere3[]" id="TipoCamere_3_1" class="'.$stile_chosen.' form-control" '.(($fun->check_simplebooking(IDSITO)==0 && $fun->check_ericsoftbooking(IDSITO)==0 && $fun->check_bedzzlebooking(IDSITO)==0)?'onChange="get_listino(3,1);"':'').'>
+$select_tipo_camere3 .= '  <select name="TipoCamere3[]" id="TipoCamere_3_1" class="'.$stile_chosen.' form-control" '.(($fun->check_simplebooking(IDSITO)==0 && $fun->check_ericsoftbooking(IDSITO)==0 && $fun->check_bedzzlebooking(IDSITO)==0)?($fun->check_listini(IDSITO)==1?'onChange="get_listino(3,1);"':''):'').'>
                                     '.$ListaCamere.'
                             </select>';
 
-$select_tipo_camere4 .= '  <select name="TipoCamere4[]" id="TipoCamere_4_1" class="'.$stile_chosen.' form-control" '.(($fun->check_simplebooking(IDSITO)==0 && $fun->check_ericsoftbooking(IDSITO)==0 && $fun->check_bedzzlebooking(IDSITO)==0)?'onChange="get_listino(4,1);"':'').'>
+$select_tipo_camere4 .= '  <select name="TipoCamere4[]" id="TipoCamere_4_1" class="'.$stile_chosen.' form-control" '.(($fun->check_simplebooking(IDSITO)==0 && $fun->check_ericsoftbooking(IDSITO)==0 && $fun->check_bedzzlebooking(IDSITO)==0)?($fun->check_listini(IDSITO)==1?'onChange="get_listino(4,1);"':''):'').'>
                                     '.$ListaCamere.'
                             </select>';
 
-$select_tipo_camere5 .= '  <select name="TipoCamere5[]" id="TipoCamere_5_1" class="'.$stile_chosen.' form-control" '.(($fun->check_simplebooking(IDSITO)==0 && $fun->check_ericsoftbooking(IDSITO)==0 && $fun->check_bedzzlebooking(IDSITO)==0)?'onChange="get_listino(5,1);"':'').'>
+$select_tipo_camere5 .= '  <select name="TipoCamere5[]" id="TipoCamere_5_1" class="'.$stile_chosen.' form-control" '.(($fun->check_simplebooking(IDSITO)==0 && $fun->check_ericsoftbooking(IDSITO)==0 && $fun->check_bedzzlebooking(IDSITO)==0)?($fun->check_listini(IDSITO)==1?'onChange="get_listino(5,1);"':''):'').'>
                                     '.$ListaCamere.'
                             </select>';
 
@@ -301,7 +301,7 @@ $ListaPrefissi = $fun->get_prefissi();
 $listaInfoBox = $fun->lista_infoBox(IDSITO);
 foreach($listaInfoBox as $key => $value){
     $infoBox .='<option value="'.$value['Id'].'">'.$value['Titolo'].'</option>';
-} 
+}
 
 ###SALVATAGGIO#####
 if($_POST['action']=='create'){
@@ -336,7 +336,7 @@ if($_POST['action']=='create'){
        // dati cliente
        $Nome                    = addslashes(ucfirst($_POST['Nome']));
        $Cognome                 = addslashes(ucfirst($_POST['Cognome']));
-       $Email                   = $_POST['Email'];  
+       $Email                   = $_POST['Email'];
        $PrefissoInternazionale  = $_POST['PrefissoInternazionale'];
        $Cellulare               = $_POST['Cellulare'];
        $DataNascita             = $_POST['DataNascita'];
@@ -448,11 +448,11 @@ if($_POST['action']=='create'){
 
             if(ucfirst($TipoVacanza) == $nome_template_scelto && $TipoRichiesta == 'Preventivo'){
                 // query per testo default landing page
-                $sele = "SELECT hospitality_dizionario_lingua.testo FROM hospitality_dizionario 
+                $sele = "SELECT hospitality_dizionario_lingua.testo FROM hospitality_dizionario
                             INNER JOIN hospitality_dizionario_lingua ON hospitality_dizionario_lingua.id_dizionario = hospitality_dizionario.id
-                            WHERE hospitality_dizionario.idsito = ".$idsito." 
+                            WHERE hospitality_dizionario.idsito = ".$idsito."
                             AND hospitality_dizionario.etichetta = 'PREVENTIVO_".$tipo_template_scelto."'
-                            AND hospitality_dizionario_lingua.idsito =  ".$idsito." 
+                            AND hospitality_dizionario_lingua.idsito =  ".$idsito."
                             AND hospitality_dizionario_lingua.Lingua = '".$Lingua."'";
                 $re = $dbMysqli->query($sele);
                 $v  = $re[0];
@@ -468,16 +468,16 @@ if($_POST['action']=='create'){
                             '".$IdRichiesta."',
                             '".$Lingua."',
                             '".addslashes($TestoAlternativoFP)."')";
-                $dbMysqli->query($in);   
+                $dbMysqli->query($in);
 
             }elseif(ucfirst($TipoVacanza) == $nome_template_scelto && $TipoRichiesta == 'Conferma'){
 
                 // query per testo default landing page
-                $sele = "SELECT hospitality_dizionario_lingua.testo FROM hospitality_dizionario 
+                $sele = "SELECT hospitality_dizionario_lingua.testo FROM hospitality_dizionario
                             INNER JOIN hospitality_dizionario_lingua ON hospitality_dizionario_lingua.id_dizionario = hospitality_dizionario.id
-                            WHERE hospitality_dizionario.idsito = ".$idsito." 
+                            WHERE hospitality_dizionario.idsito = ".$idsito."
                             AND hospitality_dizionario.etichetta = 'CONFERMA_".$tipo_template_scelto."'
-                            AND hospitality_dizionario_lingua.idsito =  ".$idsito." 
+                            AND hospitality_dizionario_lingua.idsito =  ".$idsito."
                             AND hospitality_dizionario_lingua.Lingua = '".$Lingua."'";
                 $re = $dbMysqli->query($sele);
                 $v = $re[0];
@@ -493,9 +493,9 @@ if($_POST['action']=='create'){
                             '".$IdRichiesta."',
                             '".$Lingua."',
                             '".addslashes($TestoAlternativoFC)."')";
-                $dbMysqli->query($in); 
+                $dbMysqli->query($in);
 
-            
+
             }
 
 
@@ -852,7 +852,7 @@ if($_POST['action']=='create'){
                     }
                 }
                 ## INSERIMENTO DELLO SCONTO IN TABELLA RELAZIONALE
-                $dbMysqli->query("INSERT INTO hospitality_relazione_sconto_proposte(idsito,id_richiesta,id_proposta,sconto) VALUES('".IDSITO."','".$IdRichiesta."','".$IdProposta5."','".$_POST['SC5']."')");    
+                $dbMysqli->query("INSERT INTO hospitality_relazione_sconto_proposte(idsito,id_richiesta,id_proposta,sconto) VALUES('".IDSITO."','".$IdRichiesta."','".$IdProposta5."','".$_POST['SC5']."')");
         }
             ## relazione per inserire info box visibili nel template
             if(is_array($_POST['id_infobox']) && !is_null($_POST['id_infobox']) && !empty($_POST['id_infobox'])) {
@@ -868,7 +868,7 @@ if($_POST['action']=='create'){
             }
             if($TipoRichiesta=='Preventivo'){
                 header('Location:'.BASE_URL_SITO.'preventivi/');
-            } 
+            }
 
 }
 ?>

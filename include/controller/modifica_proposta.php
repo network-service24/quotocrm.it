@@ -323,23 +323,23 @@ if($_REQUEST['azione'] == 'edit' && $_REQUEST['param'] != '') {
         //controllo se plugin delle select camere è attivo
         $stile_chosen = $fun->check_configurazioni(IDSITO,'select_tipo_camere');
         //select tipocamere 1,2,3,4,5
-        $select_tipo_camere1 .= '  <select required name="TipoCamere1[]" id="TipoCamere_1_1" class="'.$stile_chosen.' form-control" '.(($fun->check_simplebooking(IDSITO)==0 && $fun->check_ericsoftbooking(IDSITO)==0 && $fun->check_bedzzlebooking(IDSITO)==0)?'onChange="get_listino(1,1);"':'').'>
+        $select_tipo_camere1 .= '  <select required name="TipoCamere1[]" id="TipoCamere_1_1" class="'.$stile_chosen.' form-control" '.(($fun->check_simplebooking(IDSITO)==0 && $fun->check_ericsoftbooking(IDSITO)==0 && $fun->check_bedzzlebooking(IDSITO)==0)?($fun->check_listini(IDSITO)==1?'onChange="get_listino(1,1);"':''):'').'>
                                             '.$ListaCamere.'
                                     </select>';
 
-        $select_tipo_camere2 .= '  <select name="TipoCamere2[]" id="TipoCamere_2_1" class="'.$stile_chosen.' form-control" '.(($fun->check_simplebooking(IDSITO)==0 && $fun->check_ericsoftbooking(IDSITO)==0 && $fun->check_bedzzlebooking(IDSITO)==0)?'onChange="get_listino(2,1);"':'').'>
+        $select_tipo_camere2 .= '  <select name="TipoCamere2[]" id="TipoCamere_2_1" class="'.$stile_chosen.' form-control" '.(($fun->check_simplebooking(IDSITO)==0 && $fun->check_ericsoftbooking(IDSITO)==0 && $fun->check_bedzzlebooking(IDSITO)==0)?($fun->check_listini(IDSITO)==1?'onChange="get_listino(2,1);"':''):'').'>
                                             '.$ListaCamere.'
                                     </select>';
 
-        $select_tipo_camere3 .= '  <select name="TipoCamere3[]" id="TipoCamere_3_1" class="'.$stile_chosen.' form-control" '.(($fun->check_simplebooking(IDSITO)==0 && $fun->check_ericsoftbooking(IDSITO)==0 && $fun->check_bedzzlebooking(IDSITO)==0)?'onChange="get_listino(3,1);"':'').'>
+        $select_tipo_camere3 .= '  <select name="TipoCamere3[]" id="TipoCamere_3_1" class="'.$stile_chosen.' form-control" '.(($fun->check_simplebooking(IDSITO)==0 && $fun->check_ericsoftbooking(IDSITO)==0 && $fun->check_bedzzlebooking(IDSITO)==0)?($fun->check_listini(IDSITO)==1?'onChange="get_listino(3,1);"':''):'').'>
                                             '.$ListaCamere.'
                                     </select>';
 
-        $select_tipo_camere4 .= '  <select name="TipoCamere4[]" id="TipoCamere_4_1" class="'.$stile_chosen.' form-control" '.(($fun->check_simplebooking(IDSITO)==0 && $fun->check_ericsoftbooking(IDSITO)==0 && $fun->check_bedzzlebooking(IDSITO)==0)?'onChange="get_listino(4,1);"':'').'>
+        $select_tipo_camere4 .= '  <select name="TipoCamere4[]" id="TipoCamere_4_1" class="'.$stile_chosen.' form-control" '.(($fun->check_simplebooking(IDSITO)==0 && $fun->check_ericsoftbooking(IDSITO)==0 && $fun->check_bedzzlebooking(IDSITO)==0)?($fun->check_listini(IDSITO)==1?'onChange="get_listino(4,1);"':''):'').'>
                                             '.$ListaCamere.'
                                     </select>';
 
-        $select_tipo_camere5 .= '  <select name="TipoCamere5[]" id="TipoCamere_5_1" class="'.$stile_chosen.' form-control" '.(($fun->check_simplebooking(IDSITO)==0 && $fun->check_ericsoftbooking(IDSITO)==0 && $fun->check_bedzzlebooking(IDSITO)==0)?'onChange="get_listino(5,1);"':'').'>
+        $select_tipo_camere5 .= '  <select name="TipoCamere5[]" id="TipoCamere_5_1" class="'.$stile_chosen.' form-control" '.(($fun->check_simplebooking(IDSITO)==0 && $fun->check_ericsoftbooking(IDSITO)==0 && $fun->check_bedzzlebooking(IDSITO)==0)?($fun->check_listini(IDSITO)==1?'onChange="get_listino(5,1);"':''):'').'>
                                             '.$ListaCamere.'
                                     </select>';
 
@@ -688,7 +688,7 @@ if($_REQUEST['azione'] == 'edit' && $_REQUEST['param'] != '') {
                                 $num_righe = 1;
                                 foreach ($res2 as $ky => $val) {
 
-                                      
+
                                             $proposte  .= '<tr>
                                                             <td class="td25 no-border-top">
                                                                 <div class="td25 f-right posizione_spiegazione_prezzo" id="spiegazione_prezzo_soggiorno_'.$i.'_'.$num_righe.'"></div>
@@ -725,7 +725,7 @@ if($_REQUEST['azione'] == 'edit' && $_REQUEST['param'] != '') {
                                                                     <div class="form-group">
                                                                     '.($ky==0?'<label class="control-label"><b>Tipo Camera</b></label>':'').'
                                                                         <input type="hidden" name="NumeroCamere'.$i.'[]" id="NumeroCamere_'.$i.'_1" value="1">
-                                                                                <select name="TipoCamere'.$i.'[]"  id="TipoCamere_'.$i.'_'.$num_righe.'" class="'.$stile_chosen.'form-control" '.(($fun->check_simplebooking(IDSITO)==0 && $fun->check_ericsoftbooking(IDSITO)==0  && $fun->check_bedzzlebooking(IDSITO)==0)?'onChange="get_listino('.$i.','.$num_righe.');"':'').'>';
+                                                                                <select name="TipoCamere'.$i.'[]"  id="TipoCamere_'.$i.'_'.$num_righe.'" class="'.$stile_chosen.'form-control" '.(($fun->check_simplebooking(IDSITO)==0 && $fun->check_ericsoftbooking(IDSITO)==0  && $fun->check_bedzzlebooking(IDSITO)==0)?($fun->check_listini(IDSITO)==1?'onfocus="get_listino('.$i.','.$num_righe.');"':''):'').'>';
                                                                                     $selCam = " SELECT 
                                                                                                     * 
                                                                                                 FROM 
@@ -752,7 +752,8 @@ if($_REQUEST['azione'] == 'edit' && $_REQUEST['param'] != '') {
                                                                     <div class="form-group">
                                                                     '.($ky==0?'<label class="control-label"><b>Adulti</b></label>':'').'
                                                                                 <select name="NumAdulti'.$i.'[]" id="NumeroAdulti_'.$i.'_'.$num_righe.'"
-                                                                                    class="form-control"  '.(($fun->check_simplebooking(IDSITO)==0 && $fun->check_ericsoftbooking(IDSITO)==0  && $fun->check_bedzzlebooking(IDSITO)==0)?'onChange="get_listino('.$i.','.$num_righe.');"':'').'>
+                                                                                    class="form-control"  '.(($fun->check_simplebooking(IDSITO)==0 && $fun->check_ericsoftbooking(IDSITO)==0  && $fun->check_bedzzlebooking(IDSITO)==0)?($fun->check_listini(IDSITO)==1?'onfocus="get_listino('.$i.','.$num_righe.');"':''):'').'>
+                                                                                    <option value="" '.($val['NumAdulti']==''?'selected="selected"':'').'>scegli</option>
                                                                                     <option value="1" '.(1==$val['NumAdulti']?'selected="selected"':'').'>1</option>
                                                                                     <option value="2" '.(2==$val['NumAdulti']?'selected="selected"':'').'>2</option>
                                                                                     <option value="3" '.(3==$val['NumAdulti']?'selected="selected"':'').'>3</option>
@@ -795,7 +796,7 @@ if($_REQUEST['azione'] == 'edit' && $_REQUEST['param'] != '') {
                                                                         <div class="input-group">
                                                                             <input type="text" name="Prezzo'.$i.'[]" id="Prezzo_'.$i.'_'.$num_righe.'"
                                                                                         class="prezzo'.$i.' form-control" value="'.$val['Prezzo'].'"
-                                                                                        placeholder="Prezzo 0000.00" '.(($fun->check_simplebooking(IDSITO)==0 && $fun->check_ericsoftbooking(IDSITO)==0  && $fun->check_bedzzlebooking(IDSITO)==0)?'onfocus="get_listino('.$i.','.$num_righe.');"':'').' onkeyup="calcola_totale'.$i.'();">';
+                                                                                        placeholder="Prezzo 0000.00" '.(($fun->check_simplebooking(IDSITO)==0 && $fun->check_ericsoftbooking(IDSITO)==0  && $fun->check_bedzzlebooking(IDSITO)==0)?($fun->check_listini(IDSITO)==1?'onfocus="get_listino('.$i.','.$num_righe.');"':''):'').' onkeyup="calcola_totale'.$i.'();">';
                                     if($TipoRichiesta=='Preventivo'){
                                         $proposte  .= '                             <span class="input-group-addon btn bg-green" onclick="room_fields('.$i.',\'righe_room'.($i==1?'':$i).'\');">
                                                                                     <i class="fa fa-plus"></i>
@@ -839,7 +840,7 @@ if($_REQUEST['azione'] == 'edit' && $_REQUEST['param'] != '') {
                                         $proposte  .= '                 
                                                                 </td>
                                                             </tr>';
-                                                         
+                                    
                                     if($TipoRichiesta=='Preventivo'){
                                         $proposte  .= ' <tr>
                                                             <td colspan="7" class="nopadding no-border-top no-border-bottom">
@@ -1168,7 +1169,7 @@ if($_REQUEST['action']=='modify'){
                     }
                 }
                 ## INSERIMENTO DELLO SCONTO IN TABELLA RELAZIONALE
-                $dbMysqli->query("INSERT INTO hospitality_relazione_sconto_proposte(idsito,id_richiesta,id_proposta,sconto) VALUES('".IDSITO."','".$IdRichiesta."','".$IdProposta."','".$_REQUEST['SC1']."')");                     
+                $dbMysqli->query("INSERT INTO hospitality_relazione_sconto_proposte(idsito,id_richiesta,id_proposta,sconto) VALUES('".IDSITO."','".$IdRichiesta."','".$IdProposta."','".$_REQUEST['SC5']."')");                     
 
                 $n_camere = count($_REQUEST['TipoCamere1']);
                     for($i=0; $i<=($n_camere-1); $i++){
@@ -2157,7 +2158,7 @@ if($_REQUEST['action']=='modify'){
                     $dbMysqli->query("INSERT INTO hospitality_relazione_sconto_proposte(idsito,id_richiesta,id_proposta,sconto) VALUES('".IDSITO."','".$_REQUEST['Id']."','".$IdProposta4."','".$_REQUEST['SC4']."')");  
 
 
-            
+                
 
                 if($_REQUEST['PrezzoServizio4'] != '') {
                 
@@ -2171,7 +2172,6 @@ if($_REQUEST['action']=='modify'){
                     }
                 } 
             }
-
             if($_REQUEST['id_proposta5']!=''){
 
                 $DataArrivo5         = $_REQUEST['DataArrivo5'];

@@ -106,7 +106,7 @@
                                             <div class="form-group">
                                                 <label class="control-label"><b>Tipo Camera</b></label>
                                                 <input type="hidden" name="NumeroCamere<?=$nr?>[]" id="NumeroCamere_<?=$nr?>_1" value="1">
-                                                <select name="TipoCamere<?=$nr?>[]" id="TipoCamere_<?=$nr?>_1" class="<?=$stile_chosen?> form-control" <?=(($fun->check_simplebooking(IDSITO)==0 && $fun->check_ericsoftbooking(IDSITO)==0 && $fun->check_bedzzlebooking(IDSITO)==0)?'onChange="get_listino(<?=$nr?>,1);"':'')?>>
+                                                <select name="TipoCamere<?=$nr?>[]" id="TipoCamere_<?=$nr?>_1" class="<?=$stile_chosen?> form-control" <?=(($fun->check_simplebooking(IDSITO)==0 && $fun->check_ericsoftbooking(IDSITO)==0 && $fun->check_bedzzlebooking(IDSITO)==0)?($fun->check_listini(IDSITO)==1?'onChange="get_listino(<?=$nr?>,1);"':''):'')?>>
                                                         <?=$fun->lista_camere(IDSITO)?>
                                                 </select>
                                             </div>
@@ -114,7 +114,7 @@
                                         <td class="td10 no-border-top">
                                             <div class="form-group">
                                                 <label class="control-label"><b>Adulti</b></label>
-                                                <select required name="NumAdulti<?=$nr?>[]" id="NumeroAdulti_<?=$nr?>_1" class="form-control" <?=(($fun->check_simplebooking(IDSITO)==0 && $fun->check_ericsoftbooking(IDSITO)==0 && $fun->check_bedzzlebooking(IDSITO)==0)?'onChange="get_listino(<?=$nr?>,1);"':'')?>>
+                                                <select required name="NumAdulti<?=$nr?>[]" id="NumeroAdulti_<?=$nr?>_1" class="form-control" <?=(($fun->check_simplebooking(IDSITO)==0 && $fun->check_ericsoftbooking(IDSITO)==0 && $fun->check_bedzzlebooking(IDSITO)==0)?($fun->check_listini(IDSITO)==1?'onChange="get_listino(<?=$nr?>,1);"':''):'')?>>
                                                     <?=$NumeroAdulti?>
                                                 </select>
                                             </div>
@@ -135,7 +135,7 @@
                                             <div class="form-group">
                                                 <label class="control-label"><b>Prezzo</b></label>
                                                 <div class="input-group">
-                                                    <input type="text" name="Prezzo<?=$nr?>[]" id="Prezzo_<?=$nr?>_1" class="prezzo<?=$nr?> form-control" placeholder="Prezzo 0000.00"  <?=(($fun->check_simplebooking(IDSITO)==0 && $fun->check_ericsoftbooking(IDSITO)==0 && $fun->check_bedzzlebooking(IDSITO)==0)?'onfocus="get_listino(<?=$nr?>,1);"':'')?> onkeyup="calcola_totale<?=$nr?>();">
+                                                    <input type="text" name="Prezzo<?=$nr?>[]" id="Prezzo_<?=$nr?>_1" class="prezzo<?=$nr?> form-control" placeholder="Prezzo 0000.00"  <?=(($fun->check_simplebooking(IDSITO)==0 && $fun->check_ericsoftbooking(IDSITO)==0 && $fun->check_bedzzlebooking(IDSITO)==0)?($fun->check_listini(IDSITO)==1?'onChange="get_listino(<?=$nr?>,1);"':''):'')?> onkeyup="calcola_totale<?=$nr?>();">
                                                     <span class="input-group-addon" onclick="room_fields(<?=$nr?>,'righe_room<?=$nr?>');">
                                                         <i class="fa fa-plus"></i>
                                                     </span>

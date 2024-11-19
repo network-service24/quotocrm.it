@@ -11654,4 +11654,18 @@ class functions
         }
     }
 
+    function check_listini($idsito)
+    {
+        global $dbMysqli;
+
+        $select = "SELECT * FROM hospitality_numero_listini WHERE idsito = ".$idsito." AND Abilitato = 1";
+        $result = $dbMysqli->query($select);
+        if(sizeof($result)>0){
+            return 1;  
+        }else{
+            return 0;
+        }
+    }
+
+
 }
