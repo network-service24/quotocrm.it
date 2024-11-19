@@ -61,7 +61,7 @@ include($_SERVER['DOCUMENT_ROOT']."/include/declaration.inc.php");
 
 
         foreach ($lista_id_tipo_utente as $key => $value) {
-            $insertUT = "INSERT utente_tipo_utente SET idutente = ".$idutente.", id_tipo_utente = ".$value;
+            $insertUT = "INSERT INTO utente_tipo_utente(idutente,id_tipo_utente) VALUES('".$idutente."', '".$value."')";
             $dbMysqli->query($insertUT);
         }
 

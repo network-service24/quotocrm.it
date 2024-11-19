@@ -701,7 +701,7 @@ class functions
     public function getClienti()
     {
         global $dbMysqli;
-        $sql = 'SELECT * FROM anagrafica WHERE rag_soc != "" ORDER BY idanagra ASC';
+        $sql = 'SELECT * FROM anagrafica WHERE rag_soc != "" ORDER BY rag_soc ASC';
         $ret = $dbMysqli->query($sql);
         if (sizeof($ret)) {
             return ($ret);
@@ -719,7 +719,7 @@ class functions
     public function getSiti()
     {
         global $dbMysqli;
-        $sql = 'SELECT * FROM siti WHERE web != "" ORDER BY idsito DESC';
+        $sql = 'SELECT * FROM siti WHERE web != "" ORDER BY web ASC';
         $ret = $dbMysqli->query($sql);
         if (sizeof($ret)) {
             return ($ret);
