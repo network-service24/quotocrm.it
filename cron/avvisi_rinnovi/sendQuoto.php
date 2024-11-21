@@ -168,7 +168,7 @@ require $_SERVER['DOCUMENT_ROOT'].'/class/PHPMailer/PHPMailerAutoload.php';
 					$sendScad1 = true;
 					$listaClienti .= 'Clienti in scadenza domani : '.$NomeCliente.'<hr>'."\r\n";
 
-							inviaMail(MAIL_SEND,$MAIL_COMMERCIALI, ''.$TipoQuoto.' in scadenza domani il '.gira_data($v['data_start_hospitality']), $messaggio);
+							inviaMail(MAIL_SEND,$MAIL_COMMERCIALI, ''.$TipoQuoto.' in scadenza domani il '.gira_data($v['data_end_hospitality']), $messaggio);
 							inviaMail(MAIL_SEND,$MAIL_MARCELLO , 'COPIA DI CONTROLLO '.$TipoQuoto.' in scadenza domani il '.gira_data($v['data_end_hospitality']), $messaggio);
 							inviaMail(MAIL_SEND,$MAIL_SERENA_QT, 'COPIA: '.$TipoQuoto.' in scadenza domani il '.gira_data($v['data_end_hospitality']), $messaggio);
 							inviaMail(MAIL_SEND,$MAIL_ANTONIO , ''.$TipoQuoto.' in scadenza domani il '.gira_data($v['data_end_hospitality']), $messaggio);
