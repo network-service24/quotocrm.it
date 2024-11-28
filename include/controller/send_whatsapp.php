@@ -220,7 +220,7 @@ if($_REQUEST['azione'] == 'send' && $_REQUEST['param'] != '') {
                 }
 
                 if($Lingua == 'de'){
-                    $TestoWhatsApp = (urlencode(strip_tags((utf8_encode($testo))).$TWApp.$link));
+                    $TestoWhatsApp = (urlencode(strip_tags((($testo))).$TWApp.$link));
                 }else{
                     $TestoWhatsApp = urlencode(strip_tags(utf8_encode($testo)).$TWApp.$link);
                 }

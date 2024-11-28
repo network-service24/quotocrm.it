@@ -342,7 +342,7 @@
 
                         $data_string = json_encode($data);
                        
-                        //print_r($data_string);
+                        //print_r($data_string); exit;
                         
                         $ch = curl_init($urlHost.'insertReservations/'); 
                         curl_setopt($ch, CURLOPT_SSL_VERIFYPEER, false);                                                                
