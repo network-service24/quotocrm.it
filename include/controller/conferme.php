@@ -146,7 +146,7 @@ $content .='   //EQUALIZZO BOX DETTAGLI
 
                 // CONFIG DATATABLE
                 var table = $("#conferme").DataTable( {
-                    order: [[2, \'desc\'],[5, \'desc\']],
+                    order: [[5, \'desc\'],[2, \'desc\'],[13, \'desc\']],
                     responsive: true,
                     processing:true,
                     oLanguage: {sProcessing: "<div class=\'cell preloader5 loader-block\'><div class=\'circle-5 l loader-primary\'></div><div class=\'circle-5 m loader-primary\'></div><div class=\'circle-5 r loader-primary\'></div></div><span class=\'text-primary f-w-400 f-14 f-s-intial\'>QUOTO! sta caricando i dati...<br><span class=\'\'>Attendere!!</span></span>"},

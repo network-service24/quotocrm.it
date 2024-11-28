@@ -214,7 +214,7 @@ $riga_camere_proposta_4 ='
                 <div class="form-group">
                  <label class="control-label"><b>Bambini</b></label>
                     <select name="NumBambini4[]" class="NumeroBambini_4_1 form-control"  onchange="eta_bimbi(\'4_1\');">
-                        '.$NumeriBimbi.'
+                        '.$NumeroBambini.'
                     </select>
                     <div class="EtaBambini4_1" style="display:none">
                         <input type="text"  name="EtaB4[]" placeholder="Età: 1,3 mesi,< 1" class="form-control" data-toggle="tooltip" title="inserire prima un numero intero, poi successivamente 3 mesi, oppure < 1">
