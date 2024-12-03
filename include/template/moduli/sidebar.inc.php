@@ -1132,11 +1132,10 @@ $anniprima = (date('Y')-$diff_anni);
                                                     </li> 
                                                 <?}?>                                    
                                                     <li class="<?=$GLOBALS['ActiveMenu']['privacy']?>">
-                                                            <a href="https://www.iubenda.com/privacy-policy/173284/legal" class="iubenda-nostyle iubenda-embed" title="Privacy Policy">
+                                                        <a href="#" data-toggle="modal" data-target="#privacy" title="Privacy Policy">
                                                             <span class="pcoded-micon"><i class="fa fa-legal"></i></span>
                                                             <span class="pcoded-mtext">Privacy Policy</span>
-                                                            </a>
-                                                        <script type="text/javascript">(function (w,d) {var loader = function () {var s = d.createElement("script"), tag = d.getElementsByTagName("script")[0]; s.src = "//cdn.iubenda.com/iubenda.js"; tag.parentNode.insertBefore(s,tag);}; if(w.addEventListener){w.addEventListener("load", loader, false);}else if(w.attachEvent){w.attachEvent("onload", loader);}else{w.onload = loader;}})(window, document);</script>
+                                                        </a> 
                                                     </li>
                                         </ul>
                                 <?}?>

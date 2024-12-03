@@ -97,5 +97,18 @@
         email: '<?=EMAILHOTEL?>',
       });
     </script>
+
+    <div class="modal fade" id="privacy"  role="dialog" aria-labelledby="myModalLabel">
+        <div class="modal-dialog" role="document">
+            <div class="modal-content"  style="width:1000px!important">
+                <div class="modal-header">
+                    <h4 class="modal-title" id="myModalLabel">Privacy Policy</h4>
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                </div>
+                <div class="modal-body">
+                  <iframe src="<?=BASE_URL_SITO?>privacy_policy.html" frameborder="no" scrolling="yes" onload="resizeIframe(this)" style="min-height:800px;width:100%"></iframe>
+            </div>
+        </div>
+    </div>
 </body>
 </html>

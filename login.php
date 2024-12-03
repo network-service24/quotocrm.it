@@ -456,18 +456,7 @@
     <script type="text/javascript" src="<?=BASE_URL_SITO?>files/bower_components/i18next-browser-languagedetector/js/i18nextBrowserLanguageDetector.min.js"></script>
     <script type="text/javascript" src="<?=BASE_URL_SITO?>files/bower_components/jquery-i18next/js/jquery-i18next.min.js"></script>
     <script type="text/javascript" src="<?=BASE_URL_SITO?>files/assets/js/common-pages.js"></script>
-    <script type="text/javascript">
-        var _iub = _iub || [];
-        _iub.csConfiguration = {
-            cookiePolicyId: 173284,
-            siteId: 265459,
-            lang: "it"
-        };
-        (function (w, d) {
-            var loader = function () { var s = d.createElement("script"), tag = d.getElementsByTagName("script")[0]; s.src = "//cdn.iubenda.com/cookie_solution/iubenda_cs.js"; tag.parentNode.insertBefore(s, tag); };
-            if (w.addEventListener) { w.addEventListener("load", loader, false); } else if (w.attachEvent) { w.attachEvent("onload", loader); } else { w.onload = loader; }
-        })(window, document);
-    </script>
+
    
     <script>
         $(function () {
@@ -581,5 +570,17 @@
             });
         });
     </script>
+
+    <!-- Cookie Consent by FreePrivacyPolicy.com https://www.FreePrivacyPolicy.com -->
+    <script type="text/javascript" src="//www.freeprivacypolicy.com/public/cookie-consent/4.2.0/cookie-consent.js" charset="UTF-8"></script>
+    <script type="text/javascript" charset="UTF-8">
+    document.addEventListener('DOMContentLoaded', function () {
+    cookieconsent.run({"notice_banner_type":"headline","consent_type":"express","palette":"dark","language":"it","page_load_consent_levels":["strictly-necessary"],"notice_banner_reject_button_hide":false,"preferences_center_close_button_hide":false,"page_refresh_confirmation_buttons":false,"website_name":"https://www.quotocrm.it","website_privacy_policy_url":"https://www.quotocrm.it/privacy_policy.html"});
+    });
+    </script>
+    <noscript>Cookie Consent by <a href="https://www.freeprivacypolicy.com/">Free Privacy Policy Generator</a></noscript>
+    <!-- End Cookie Consent by FreePrivacyPolicy.com https://www.FreePrivacyPolicy.com -->
+    <!-- Below is the link that users can use to open Preferences Center to change their preferences. Do not modify the ID parameter. Place it where appropriate, style it as needed. -->
+    <a href="#" id="open_preferences_center">Update cookies preferences</a>
 </body>
 </html>
