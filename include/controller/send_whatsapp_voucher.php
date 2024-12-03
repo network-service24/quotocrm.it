@@ -80,6 +80,9 @@ if($_REQUEST['azione'] == 'send' && $_REQUEST['param'] != '') {
         $testo         = str_replace("&igrave;","i'", $testo);
         $testo         = str_replace("&ograve;","o'", $testo);
         $testo         = str_replace("&ugrave;","u'", $testo);
+        $testo         = str_replace("&uuml;","ü", $testo);
+        $testo         = str_replace("&ouml;","ö", $testo);
+        $testo         = str_replace("&szlig;","ß", $testo);
         $testo         = str_replace("&rsquo;","'",$testo);
         $testo         = str_replace("&hellip;","...",$testo);
         $testo         = str_replace("...","",$testo);
