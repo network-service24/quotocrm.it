@@ -1635,6 +1635,12 @@ span.select2-selection.error{
     color:#FFFFFF!important;
     padding:10px;
 }
+.boxCodiceScontoGreen{
+    float:right;
+    background-color:#0ac282;
+    color:#FFFFFF!important;
+    padding:10px;
+}
 .removeRigaProposta{
     position:relative;
     margin-top:-25px;

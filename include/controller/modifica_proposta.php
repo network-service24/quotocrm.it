@@ -406,7 +406,7 @@ if($_REQUEST['azione'] == 'edit' && $_REQUEST['param'] != '') {
         }
 
         $boxCodiceSconto = ($CodiceSconto != ''?
-                            '<small class="boxCodiceSconto nowrap">
+                            '<small class="'.($check_codice_sconto == true?'boxCodiceScontoGreen':'boxCodiceSconto').' nowrap">
                                     '.($CodiceSconto != ''  && $check_codice_sconto == true ? '<b>Applica il codice promo['.$CodiceSconto.']</b>'.($fine_sconto < date('Y-m-d H:i:s')?'<br><b>attenzione: la data di scadenza è superata!</b> ':'').' <i class="fa fa-question-circle" data-toggle="tooltip" title="" aria-hidden="true" data-original-title="'.$note_sconto.'"></i>' : ($CodiceSconto != ''  && $check_codice_sconto == false?'<b>Il codice promo inserito dal cliente è ['.$CodiceSconto.'],<br> ma non corrisponde a quello creato su QUOTO!</b>':'') ).'
                             </small>
                             <div class="clearfix p-b-10"></div>':'')."\r\n";

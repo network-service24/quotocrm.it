@@ -103,7 +103,7 @@
             <div class="modal-content">
                 <button type="button" class="close text-right m-r-20" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
                 <div class="modal-body">
-                  <iframe src="/privacy_policy" frameborder="no" scrolling="yes" onload="resizeIframe(this)" style="min-height:800px;width:100%"></iframe>
+                  <iframe src="<?=BASE_URL_SITO?>privacy_policy.html" frameborder="no" scrolling="yes" onload="resizeIframe(this)" style="min-height:800px;width:100%"></iframe>
             </div>
         </div>
     </div>
