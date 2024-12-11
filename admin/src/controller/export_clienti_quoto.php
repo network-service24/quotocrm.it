@@ -13,7 +13,7 @@ include($_SERVER['DOCUMENT_ROOT'].'/include/function.inc.php');
     $output = fopen('php://output', 'w');
 
     // output the column headings
-    fputcsv($output, array('Tipo Richiesta', 'Fonte Prenotazione', 'Referer', 'Target', 'Lingua', 'Nome', 'Cognome', 'Email', 'Data Arrivo', 'Data Partenza', 'Prenotazione Chiusa', 'Prenotazione Disdetta', 'Consenso Privacy', 'Consenso Marketing'),';');
+    fputcsv($output, array('Tipo Richiesta', 'Fonte Prenotazione', 'Referer', 'Target', 'Lingua', 'Nome', 'Cognome', 'Email', 'Cellulare', 'Data Arrivo', 'Data Partenza', 'Prenotazione Chiusa', 'Prenotazione Disdetta', 'Consenso Privacy', 'Consenso Marketing'),';');
 
 
     $q = "SELECT * FROM hospitality_guest WHERE idsito = ".$_REQUEST['idsito']." ";
@@ -113,7 +113,7 @@ include($_SERVER['DOCUMENT_ROOT'].'/include/function.inc.php');
             $privacy   = ($val['CheckConsensoPrivacy']==1?'Si':'No'); 
             $marketing = ($val['CheckConsensoMarketing']==1?'Si':'No');
 
-        fputcsv($output, array($val['TipoRichiesta'],$val['FontePrenotazione'],$valore_provenienza,$val['TipoVacanza'],$val['Lingua'],$val['Nome'],$val['Cognome'],$val['Email'],gira_data($val['DataArrivo']),gira_data($val['DataPartenza']),($val['Chiuso']==1?'Si':'No'),($val['Disdetta']==1?'Si':'No'),$privacy,$marketing),';');
+        fputcsv($output, array($val['TipoRichiesta'],$val['FontePrenotazione'],$valore_provenienza,$val['TipoVacanza'],$val['Lingua'],$val['Nome'],$val['Cognome'],$val['Email'],$val['Cellulare'],gira_data($val['DataArrivo']),gira_data($val['DataPartenza']),($val['Chiuso']==1?'Si':'No'),($val['Disdetta']==1?'Si':'No'),$privacy,$marketing),';');
 
         
     }
