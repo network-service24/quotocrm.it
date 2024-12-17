@@ -9436,7 +9436,14 @@ class functions
     {
         global $dbMysqli;
         $etichetta = '';
-        $select = "SELECT COUNT(Id) as numero FROM hospitality_listino_camere WHERE IdCamera = " . $IdCamera . " AND idsito = " . $idsito . " ";
+        $select = "SELECT COUNT(hospitality_listino_camere.Id) AS numero 
+                    FROM hospitality_listino_camere
+                        INNER JOIN
+                        hospitality_numero_listini 
+                            ON hospitality_numero_listini.Id = hospitality_listino_camere.IdNumeroListino 
+                    WHERE hospitality_listino_camere.IdCamera = " . $IdCamera . " 
+                    AND hospitality_listino_camere.idsito = " . $idsito . " 
+                    AND hospitality_numero_listini.Abilitato = 1";
         $record_ = $dbMysqli->query($select);
         $rec = $record_[0];
         if ($rec['numero'] == 0) {
