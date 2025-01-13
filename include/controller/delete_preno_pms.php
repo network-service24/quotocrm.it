@@ -144,9 +144,14 @@
                             AND 
                                 TypePms = 'C'
                             AND 
+                                pms_reservation_id != ''
+                            AND 
                                 idsito = ".IDSITO;
                 $res = $dbMysqli->query($select);
-                $rec = $res[0];
+
+                if(sizeof($res)>0){
+
+                   $rec = $res[0];
 
                     ### CANCELLAZIONE DI UNA PRENOTAZIONE GIA SINCRONIZZATA
                     $data = array("clientToken"=> $clientToken,
@@ -180,7 +185,7 @@
                     );                                                                                                                   
                                                                                                                 
                     $result = curl_exec($ch);  
-
+                }
 
                         $delete = "DELETE 
                                     FROM 

@@ -58,7 +58,7 @@ $row     = mysqli_fetch_assoc($sq);
         $rws = mysqli_fetch_assoc($sel);
         $data_import_tmp_ = explode(" ",$rws['data']);
         $data_import_tmp  = explode("-",$data_import_tmp_[0]);
-        $data_i_giorno    = $data_import_tmp[0];
+        $data_i_giorno    = '01';
         $data_i_mese      = $data_import_tmp[1];
         $data_i_anno      = $data_import_tmp[2];
         $ora_i_mail       = $data_import_tmp_[1];
@@ -115,7 +115,7 @@ $row     = mysqli_fetch_assoc($sq);
 
                                 if(strstr($headerInfo->subject,'ITALY FAMILY HOTELS')){ 
 
-                                    $body = imap_body($inbox, $mail);
+                                    $body = imap_body($inbox, $mail, FT_PEEK);
                 
                                     $righe = imap_qprint($body);
                        
@@ -132,7 +132,7 @@ $row     = mysqli_fetch_assoc($sq);
                     }// fine foreach
 
             } // fine if controllo emails classe
-       
+                 
             if(!empty($array_contenuti_email)){
 
               foreach($array_contenuti_email as $key => $value){
@@ -174,10 +174,12 @@ $row     = mysqli_fetch_assoc($sq);
                                             $email_body = trim($val['BODY']); 
                                             $email_body = str_replace('&quot;','"',$email_body);
 
-                                            preg_match_all('(<b>(.*?)</b>)', $email_body ,$result);
-                                            preg_match_all('(<td>(.*?)</td>)', $email_body ,$content);
-                                          
-                                            $risultato = $content[1];
+                                            preg_match_all('(<div id="code" style="display:none;visibility:hidden;">(.*?)</div>)', $email_body ,$result);
+
+                                            $valore = $result[1];
+                                            foreach ($valore as $y => $v) {
+                                                $risultato = json_decode($v,true);
+                                            }
 
                                             $conn2 = mysqli_connect($host, $username, $password,$dbname) or die ("Error connecting to database");
                                             mysqli_set_charset($conn2,'utf8');
@@ -187,40 +189,28 @@ $row     = mysqli_fetch_assoc($sq);
                                             $rws                = mysqli_fetch_assoc($res2);
                                             $NumeroPrenotazione =  (intval($rws['NumeroPrenotazione'])+1); 
                                             //
-                                            $FontePrenotazione  =   'italyfamilyhotels.it';
-                                            $DataRichiesta      =   date('Y-m-d');
-                                            $TipoRichiesta      =   'Preventivo';
-                                            $Nome               =   $risultato[0];
-                                            $Cognome            =   $risultato[1];
-                                            $Email              =   $risultato[2];
-                                            $Cellulare          =   $risultato[3];
-                                            if(strlen($risultato[4])==10 && strstr($risultato[4],"/")){
-                                                $DataArrivo_         =   explode("/",$risultato[4]);            
-                                                $DataPartenza_       =   explode("/",$risultato[5]);
-                                                $DataArrivo          =   $DataArrivo_[2].'-'.$DataArrivo_[1].'-'.$DataArrivo_[0];
-                                                $DataPartenza        =   $DataPartenza_[2].'-'.$DataPartenza_[1].'-'.$DataPartenza_[0];
-                                                $NumeroAdulti        =   $risultato[6];
-                                                if($risultato[7]!=''){
-                                                    $NumeroBambini      =   $risultato[7];
-                                                    $EtaBambini         =   $risultato[8];
-                                                }
-                                            }else{
-                                                $TestoNote           =   str_replace(","," ",$risultato[4]); 
-                                                $DataArrivo_         =   explode("/",$risultato[5]);            
-                                                $DataPartenza_       =   explode("/",$risultato[6]); 
-                                                $DataArrivo          =   $DataArrivo_[2].'-'.$DataArrivo_[1].'-'.$DataArrivo_[0];
-                                                $DataPartenza        =   $DataPartenza_[2].'-'.$DataPartenza_[1].'-'.$DataPartenza_[0];                                                                                                                        
-                                                $NumeroAdulti        =   $risultato[7];
-                                                if($risultato[8]!=''){
-                                                    $NumeroBambini      =   $risultato[8];
-                                                    $EtaBambini         =   $risultato[9];
-                                                }                                            
-                                            }
-                                            $Lingua                 =   'it';   
-                                            $Note                   = ($NumeroBambini > '0'?'Età: '.$EtaBambini."\r\n":'').($TestoNote!=''?'Note: '.$TestoNote:'');
-                                            $AbilitaInvio           = '0';
+                                            $FontePrenotazione = 'italyfamilyhotels.it';
+                                            $DataRichiesta     = date('Y-m-d');
+                                            $TipoRichiesta     = 'Preventivo';
+                                            $Nome              = $risultato['nome'];
+                                            $Cognome           = $risultato['cognome'];
+                                            $Email             = $risultato['email'];
+                                            $Cellulare         = $risultato['telefono'];
 
-                                            $TestoNote  = str_replace(","," ",$risultato['messaggio']);
+                                            $DataArrivo        = $risultato['data_arrivo'];
+                                            $DataPartenza      = $risultato['data_partenza'];
+                                            $NumeroAdulti      = $risultato['adulti'];
+                      
+                                            $NumeroBambini     = $risultato['bambini'];
+                                            $EtaBambini        = implode(",",$risultato['eta_bambini']);
+                                                
+                                            
+                                            $Lingua            = $risultato['language'];   
+                                            $TestoNote         = str_replace(","," ",$risultato['messaggio']);
+                                            $Note              = ($NumeroBambini > 0?'Età: '.$EtaBambini."\r\n": '').($TestoNote!= ''?'Note: '.$TestoNote: '');
+                                            $AbilitaInvio      = '0';
+
+                                           
 
                                     if($Nome != '' &&  $Cognome != '' && $Email != ''){
                                             $insert =  "INSERT INTO hospitality_guest(idsito,
@@ -258,6 +248,7 @@ $row     = mysqli_fetch_assoc($sq);
                                                                     '" . addslashes($Note) . "',
                                                                     '" . $AbilitaInvio . "')";
                                            mysqli_query($conn2,$insert);
+                                  
                                         }                           
                              } // fine foreach value  
 
@@ -374,11 +365,12 @@ $row     = mysqli_fetch_assoc($sq);
                                             $email_body = trim($val['BODY']); 
                                             $email_body = str_replace('&quot;','"',$email_body);
 
-                                            preg_match_all('(<b>(.*?)</b>)', $email_body ,$result);
-                                            preg_match_all('(<td>(.*?)</td>)', $email_body ,$content);
-                                          
-                                            $risultato = $content[1];
+                                            preg_match_all('(<div id="code" style="display:none;visibility:hidden;">(.*?)</div>)', $email_body ,$result);
 
+                                            $valore = $result[1];
+                                            foreach ($valore as $y => $v) {
+                                                $risultato = json_decode($v,true);
+                                            }
 
                                             $conn2 = mysqli_connect($host, $username, $password,$dbname) or die ("Error connecting to database");
                                             mysqli_set_charset($conn2,'utf8');
@@ -388,38 +380,27 @@ $row     = mysqli_fetch_assoc($sq);
                                             $rws                = mysqli_fetch_assoc($res2);
                                             $NumeroPrenotazione =  (intval($rws['NumeroPrenotazione'])+1); 
                                             //
-                                            $FontePrenotazione  =   'italyfamilyhotels.it';
-                                            $DataRichiesta      =   date('Y-m-d');
-                                            $TipoRichiesta      =   'Preventivo';
-                                            $Nome               =   $risultato[0];
-                                            $Cognome            =   $risultato[1];
-                                            $Email              =   $risultato[2];
-                                            $Cellulare          =   $risultato[3];
-                                            if(strlen($risultato[4])==10 && strstr($risultato[4],"/")){
-                                                $DataArrivo_         =   explode("/",$risultato[4]);            
-                                                $DataPartenza_       =   explode("/",$risultato[5]);
-                                                $DataArrivo          =   $DataArrivo_[2].'-'.$DataArrivo_[1].'-'.$DataArrivo_[0];
-                                                $DataPartenza        =   $DataPartenza_[2].'-'.$DataPartenza_[1].'-'.$DataPartenza_[0];
-                                                $NumeroAdulti        =   $risultato[6];
-                                                if($risultato[7]!=''){
-                                                    $NumeroBambini      =   $risultato[7];
-                                                    $EtaBambini         =   $risultato[8];
-                                                }
-                                            }else{
-                                                $TestoNote           =   str_replace(","," ",$risultato[4]); 
-                                                $DataArrivo_         =   explode("/",$risultato[5]);            
-                                                $DataPartenza_       =   explode("/",$risultato[6]); 
-                                                $DataArrivo          =   $DataArrivo_[2].'-'.$DataArrivo_[1].'-'.$DataArrivo_[0];
-                                                $DataPartenza        =   $DataPartenza_[2].'-'.$DataPartenza_[1].'-'.$DataPartenza_[0];                                                                                                                        
-                                                $NumeroAdulti        =   $risultato[7];
-                                                if($risultato[8]!=''){
-                                                    $NumeroBambini      =   $risultato[8];
-                                                    $EtaBambini         =   $risultato[9];
-                                                }                                            
-                                            }
-                                            $Lingua                 =   'it';   
-                                            $Note                   = ($NumeroBambini > '0'?'Età: '.$EtaBambini."\r\n":'').($TestoNote!=''?'Note: '.$TestoNote:'');
-                                            $AbilitaInvio           = '0';
+                                            $FontePrenotazione = 'italyfamilyhotels.it';
+                                            $DataRichiesta     = date('Y-m-d');
+                                            $TipoRichiesta     = 'Preventivo';
+                                            $Nome              = $risultato['nome'];
+                                            $Cognome           = $risultato['cognome'];
+                                            preg_match_all('(<a>(.*?)</a>)', $risultato['email'] ,$res);
+                                            $Email             = $res[1];
+                                            $Cellulare         = $risultato['telefono'];
+
+                                            $DataArrivo        = $risultato['data_arrivo'];
+                                            $DataPartenza      = $risultato['data_partenza'];
+                                            $NumeroAdulti      = $risultato['adulti'];
+                      
+                                            $NumeroBambini     = $risultato['bambini'];
+                                            $EtaBambini        = implode(",",$risultato['eta_bambini']);
+                                                
+                                            
+                                            $Lingua            = $risultato['language'];   
+                                            $TestoNote         = str_replace(","," ",$risultato['messaggio']);
+                                            $Note              = ($NumeroBambini > 0?'Età: '.$EtaBambini."\r\n": '').($TestoNote!= ''?'Note: '.$TestoNote: '');
+                                            $AbilitaInvio      = '0';
 
                                     if($Nome != '' &&  $Cognome != '' && $Email != ''){
                                             $insert =  "INSERT INTO hospitality_guest(idsito,
