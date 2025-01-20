@@ -55,9 +55,9 @@ $content .= '<form method="POST" name="form_social" id="form_social">
                         </div>
                     </div>
                     <div class="row m-t-10">
-                        <div class="col-md-1 text-right"><i class="fa fa-twitter fa-2x fa-fw"></i></div>
+                        <div class="col-md-1 text-right"><img src="/img/x-twitter.png"></div>
                         <div class="col-md-2">
-                            <label class="f-w-600">Twitter</label>
+                            <label class="f-w-600">X</label>
                         </div>
                         <div class="col-md-9">
                             <input class="form-control" type="text"  value="'.$Twitter .'" name="Twitter"   />

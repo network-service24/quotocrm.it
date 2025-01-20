@@ -10,8 +10,20 @@
 include($_SERVER['DOCUMENT_ROOT']."/include/settings.inc.php");
 include($_SERVER['DOCUMENT_ROOT']."/include/declaration.inc.php");
 
-    $idsito            = $_REQUEST['idsito'];
-    $abilita_mappa     = $_REQUEST['abilita_mappa'];
+    $idsito        = $_REQUEST['idsito'];
+    $abilita_mappa = $_REQUEST['abilita_mappa'];
+    $CIR           = $_REQUEST['CIR'];
+    $CIN           = $_REQUEST['CIN'];
+    if($CIR !=''){
+        $andCir = ',CIR = "'.$CIR.'"';
+    }else{
+        $andCir = ',CIR = NULL';
+    }
+    if($CIN !=''){
+        $andCin = ',CIN = "'.$CIN.'"';
+    }else{
+        $andCin = ',CIN = NULL';
+    }
     $coordinate        = str_replace("(","",$_REQUEST['coordinate']);
     $coordinate        = str_replace(")","",$coordinate);
     $coordinate        = str_replace(",","",$coordinate);
@@ -19,7 +31,7 @@ include($_SERVER['DOCUMENT_ROOT']."/include/declaration.inc.php");
 	$update = "UPDATE siti SET coordinate = pointfromtext('POINT(".$coordinate.")') WHERE idsito = ".$idsito;
 	$dbMysqli->query($update);
 
-	$update2 = "UPDATE siti SET abilita_mappa = ".$abilita_mappa." WHERE idsito = ".$idsito;
+	$update2 = "UPDATE siti SET abilita_mappa = ".$abilita_mappa." $andCir $andCin WHERE idsito = ".$idsito;
 	$dbMysqli->query($update2);
 
     ##LOGS OPERAZIONI

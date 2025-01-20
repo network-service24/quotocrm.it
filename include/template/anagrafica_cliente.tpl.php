@@ -13,7 +13,7 @@
                                     <div class="page-body">
                                     <div class="card">
                                             <div class="card-header">
-                                                <h5>Visualizza la tua anagrafica e/o modifica il maker della Google Map</h5>                                              
+                                                <h5>Visualizza la tua anagrafica e/o modifica il CIR, il CIN, il maker della Google Map</h5>                                              
 
                                             </div>
                                                 <div class="card-block">

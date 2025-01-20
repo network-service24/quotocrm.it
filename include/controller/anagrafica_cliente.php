@@ -7,6 +7,8 @@ $record = $result[0];
 $web                                          = addslashes($record['web']);
 $nome                                         = addslashes($record['nome']);
 $email                                        = $record['email'];
+$CIR                                          = $record['CIR'];
+$CIN                                          = $record['CIN'];
 $codice_provincia                             = $record['codice_provincia'];
 $nome_provincia_                              = $fun->getProvincia($codice_provincia); 
 $nome_provincia                               = $nome_provincia_['sigla_provincia'];
@@ -120,6 +122,22 @@ $content .= '<div class="row">
                 </div>
                 <div class="row m-t-10">
                     <div class="col-md-3">
+                        <label class="f-w-600">CIR</label>
+                    </div>
+                    <div class="col-md-9">
+                        <input class="form-control" type="text"  value="'.$CIR.'" name="CIR"  id="CIR"  />
+                    </div>
+                </div>
+                <div class="row m-t-10">
+                    <div class="col-md-3">
+                        <label class="f-w-600">CIN</label>
+                    </div>
+                    <div class="col-md-9">
+                        <input class="form-control" type="text"  value="'.$CIN.'" name="CIN" id="CIN"  />
+                    </div>
+                </div>
+                <div class="row m-t-10">
+                    <div class="col-md-3">
                         <label class="f-w-600">Coordinate</label>
                     </div>
                     <div class="col-md-9">
@@ -173,10 +191,12 @@ $content .= '<div class="row">
                         var idsito = $("#idsito").val();
                         var coordinate = $(\'#coordinate\').val();       
                         var abilita_mappa = $(\'#abilita_mappa\').val(); 
+                        var CIR = $(\'#CIR\').val(); 
+                        var CIN = $(\'#CIN\').val(); 
                             $.ajax({
                                 url: "'.BASE_URL_SITO.'ajax/generici/mappa.update.php",
                                 type: "POST",
-                                data: "idsito="+idsito+"&coordinate="+coordinate+"&abilita_mappa="+abilita_mappa+"",
+                                data: "idsito="+idsito+"&coordinate="+coordinate+"&abilita_mappa="+abilita_mappa+"&CIR="+CIR+"&CIN="+CIN+"",
                                 success: function(msg){  
                                     $("#res").html(\'<div class="clearfix p-b-30"></div><div class="alert alert-info"><p>Dati salvati con successo!</p></div>\');
                                     setTimeout(function(){ 
