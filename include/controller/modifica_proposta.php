@@ -877,7 +877,7 @@ if($_REQUEST['azione'] == 'edit' && $_REQUEST['param'] != '') {
                                                             </div>
                                                             <div class="col-md-3"> 
                                                                 <div class="form-group">
-                                                                    <label class="control-label"><b>Sconto</b></label>
+                                                                    <label class="control-label"><b>Sconto</b> <i class="cursore m-l-5 fa fa-question-circle" data-toggle="tooltip" data-html="true" title="Se usate la <b>sincronizzazione con un PMS</b>, una volta applicata la percentuale di sconto <b>non modificate più il Prezzo soggiorno proposto</b>!"></i></label>
                                                                         <select name="SC'.$i.'" id="SC_'.$i.'" class="form-control" >
                                                                             '.$lista_sconti.'
                                                                         </select>

@@ -377,7 +377,7 @@
                                                                                 </div>
                                                                                 <div class="col-md-3">
                                                                                     <div class="form-group">
-                                                                                        <label class="control-label"><b>Sconto</b></label>
+                                                                                        <label class="control-label"><b>Sconto</b> <i class="cursore m-l-5 fa fa-question-circle" data-toggle="tooltip" data-html="true" title="Se usate la <b>sincronizzazione con un PMS</b>, una volta applicata la percentuale di sconto <b>non modificate più il Prezzo soggiorno proposto</b>!"></i></label>
                                                                                         <select name="SC1" id="SC_1" class="form-control">
                                                                                             <option value="0" selected="selected"></option>
                                                                                             <?=$percentuali_sconto?>
@@ -489,7 +489,7 @@
                                                                                 </div>
                                                                                 <div class="col-md-3">
                                                                                     <div class="form-group">
-                                                                                        <label class="control-label"><b>Sconto</b></label>
+                                                                                        <label class="control-label"><b>Sconto</b> <i class="cursore m-l-5 fa fa-question-circle" data-toggle="tooltip" data-html="true" title="Se usate la <b>sincronizzazione con un PMS</b>, una volta applicata la percentuale di sconto <b>non modificate più il Prezzo soggiorno proposto</b>!"></i></label>
                                                                                         <select name="SC2" id="SC_2" class="form-control">
                                                                                             <option value="0" selected="selected"></option>
                                                                                             <?=$percentuali_sconto?>
@@ -601,7 +601,7 @@
                                                                                 </div>
                                                                                 <div class="col-md-3">
                                                                                     <div class="form-group">
-                                                                                        <label class="control-label"><b>Sconto</b></label>
+                                                                                        <label class="control-label"><b>Sconto</b> <i class="cursore m-l-5 fa fa-question-circle" data-toggle="tooltip" data-html="true" title="Se usate la <b>sincronizzazione con un PMS</b>, una volta applicata la percentuale di sconto <b>non modificate più il Prezzo soggiorno proposto</b>!"></i></label>
                                                                                         <select name="SC3" id="SC_3" class="form-control">
                                                                                             <option value="0" selected="selected"></option>
                                                                                             <?=$percentuali_sconto?>
@@ -713,7 +713,7 @@
                                                                                 </div>
                                                                                 <div class="col-md-3">
                                                                                     <div class="form-group">
-                                                                                        <label class="control-label"><b>Sconto</b></label>
+                                                                                        <label class="control-label"><b>Sconto</b> <i class="cursore m-l-5 fa fa-question-circle" data-toggle="tooltip" data-html="true" title="Se usate la <b>sincronizzazione con un PMS</b>, una volta applicata la percentuale di sconto <b>non modificate più il Prezzo soggiorno proposto</b>!"></i></label>
                                                                                         <select name="SC4" id="SC_4" class="form-control">
                                                                                             <option value="0" selected="selected"></option>
                                                                                             <?=$percentuali_sconto?>
@@ -825,7 +825,7 @@
                                                                                 </div>
                                                                                 <div class="col-md-3">
                                                                                     <div class="form-group">
-                                                                                        <label class="control-label"><b>Sconto</b></label>
+                                                                                        <label class="control-label"><b>Sconto</b> <i class="cursore m-l-5 fa fa-question-circle" data-toggle="tooltip" data-html="true" title="Se usate la <b>sincronizzazione con un PMS</b>, una volta applicata la percentuale di sconto <b>non modificate più il Prezzo soggiorno proposto</b>!"></i></label>
                                                                                         <select name="SC5" id="SC_5" class="form-control">
                                                                                             <option value="0" selected="selected"></option>
                                                                                             <?=$percentuali_sconto?>

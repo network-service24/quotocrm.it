@@ -65,7 +65,7 @@
                 $DataPartenza   = $value['DataPartenza'];
                 $ArrivoProposta = $value['Arrivo'];
                 $PartenzaProposta= $value['Partenza'];
-                $PrezzoProposto = intval($value['PrezzoProposto']);
+                $PrezzoProposto = floatval($value['PrezzoProposto']);
 
                 if($DataArrivo != $ArrivoProposta || $DataPartenza != $PartenzaProposta){
 
@@ -157,7 +157,7 @@
                                         $servizi[] =  array(    "quantity"           => 1,
                                                                 "product_code"       => "$id_servizio",
                                                                 "product_description"=> addslashes($TipoServizio) ,
-                                                                "unit_price"         => intval($PrezzoServizio));
+                                                                "unit_price"         => floatval($PrezzoServizio));
 
                                         $totaleServizi += $PrezzoServizio;
                                 }
@@ -239,14 +239,20 @@
 
                         $NumBambini  = intval($val['NumBambini']);
 
-                        $Prezzo      = intval($val['Prezzo']);
+                        $Prezzo      = floatval($val['Prezzo']);
 
-                        if($percentualeSconto!=''){
-                                $valoreSconto           = (($Prezzo*$percentualeSconto)/100);
-                                $amountCamera_after_tax = ($Prezzo-$valoreSconto);
+                        if($numeroCamere > 1){
+                                if($percentualeSconto!=''){
+                                        $valoreSconto   = (($Prezzo*$percentualeSconto)/100);
+                                        $amountCamera_after_tax = ($Prezzo-$valoreSconto);
+                                }else{
+                                        $amountCamera_after_tax = $Prezzo;
+                                }
                         }else{
-                                $amountCamera_after_tax = $Prezzo;
+                                $amountCamera_after_tax = $PrezzoProposto;
                         }
+
+                     
 
                         if($val['EtaB'] != ''){
                                 $etaB    = array();
@@ -342,7 +348,7 @@
 
                         $data_string = json_encode($data);
                        
-                        //print_r($data_string); exit;
+                        //print_r($data_string);
                         
                         $ch = curl_init($urlHost.'insertReservations/'); 
                         curl_setopt($ch, CURLOPT_SSL_VERIFYPEER, false);                                                                

@@ -43,7 +43,7 @@ $riga_camere_proposta_1 ='
                 <div class="form-group">
                     <label class="control-label"><b>Prezzo</b></label>
                     <div class="input-group">
-                        <input type="text" name="Prezzo1[]" id="Prezzo_1_1" class="prezzo1 form-control" placeholder="Prezzo 0000.00"  '.(($fun->check_simplebooking(IDSITO)==0 && $fun->check_ericsoftbooking(IDSITO)==0 && $fun->check_bedzzlebooking(IDSITO)==0)?($fun->check_listini(IDSITO)==1?'onChange="get_listino(1,1);"':''):'').' onkeyup="calcola_totale1();">
+                        <input type="text" name="Prezzo1[]" id="Prezzo_1_1" class="prezzo1 form-control" placeholder="Prezzo 0000.00"  '.(($fun->check_simplebooking(IDSITO)==0 && $fun->check_ericsoftbooking(IDSITO)==0 && $fun->check_bedzzlebooking(IDSITO)==0)?($fun->check_listini(IDSITO)==1?'onfocus="get_listino(1,1);"':''):'').' onkeyup="calcola_totale1();">
                         <span class="input-group-addon" onclick="room_fields(1,\'righe_room\');">
                             <i class="fa fa-plus"></i>
                         </span>
@@ -104,7 +104,7 @@ $riga_camere_proposta_2 ='
                 <div class="form-group">
                     <label class="control-label"><b>Prezzo</b></label>
                     <div class="input-group">   
-                        <input type="text" name="Prezzo2[]" id="Prezzo_2_1" class="prezzo2 form-control" placeholder="Prezzo 0000.00"  '.(($fun->check_simplebooking(IDSITO)==0 && $fun->check_ericsoftbooking(IDSITO)==0 && $fun->check_bedzzlebooking(IDSITO)==0)?($fun->check_listini(IDSITO)==1?'onChange="get_listino(2,1);"':''):'').' onkeyup="calcola_totale2();">
+                        <input type="text" name="Prezzo2[]" id="Prezzo_2_1" class="prezzo2 form-control" placeholder="Prezzo 0000.00"  '.(($fun->check_simplebooking(IDSITO)==0 && $fun->check_ericsoftbooking(IDSITO)==0 && $fun->check_bedzzlebooking(IDSITO)==0)?($fun->check_listini(IDSITO)==1?'onfocus="get_listino(2,1);"':''):'').' onkeyup="calcola_totale2();">
                         <span class="input-group-addon" onclick="room_fields(2,\'righe_room2\');">
                             <i class="fa fa-plus"></i>
                         </span>
@@ -165,7 +165,7 @@ $riga_camere_proposta_3 ='
                 <div class="form-group">
                  <label class="control-label"><b>Prezzo</b></label>
                     <div class="input-group">
-                        <input type="text" name="Prezzo3[]" id="Prezzo_3_1" class="prezzo3 form-control" placeholder="Prezzo 0000.00" '.(($fun->check_simplebooking(IDSITO)==0 && $fun->check_ericsoftbooking(IDSITO)==0 && $fun->check_bedzzlebooking(IDSITO)==0)?($fun->check_listini(IDSITO)==1?'onChange="get_listino(3,1);"':''):'').' onkeyup="calcola_totale3();">
+                        <input type="text" name="Prezzo3[]" id="Prezzo_3_1" class="prezzo3 form-control" placeholder="Prezzo 0000.00" '.(($fun->check_simplebooking(IDSITO)==0 && $fun->check_ericsoftbooking(IDSITO)==0 && $fun->check_bedzzlebooking(IDSITO)==0)?($fun->check_listini(IDSITO)==1?'onfocus="get_listino(3,1);"':''):'').' onkeyup="calcola_totale3();">
                         <span class="input-group-addon" onclick="room_fields(3,\'righe_room3\');">
                             <i class="fa fa-plus"></i>
                         </span>
@@ -226,7 +226,7 @@ $riga_camere_proposta_4 ='
                 <div class="form-group">
                  <label class="control-label"><b>Prezzo</b></label>
                     <div class="input-group">
-                        <input type="text" name="Prezzo4[]" id="Prezzo_4_1" class="prezzo4 form-control" placeholder="Prezzo 0000.00" '.(($fun->check_simplebooking(IDSITO)==0 && $fun->check_ericsoftbooking(IDSITO)==0 && $fun->check_bedzzlebooking(IDSITO)==0)?($fun->check_listini(IDSITO)==1?'onChange="get_listino(4,1);"':''):'').' onkeyup="calcola_totale4();">
+                        <input type="text" name="Prezzo4[]" id="Prezzo_4_1" class="prezzo4 form-control" placeholder="Prezzo 0000.00" '.(($fun->check_simplebooking(IDSITO)==0 && $fun->check_ericsoftbooking(IDSITO)==0 && $fun->check_bedzzlebooking(IDSITO)==0)?($fun->check_listini(IDSITO)==1?'onfocus="get_listino(4,1);"':''):'').' onkeyup="calcola_totale4();">
                         <span class="input-group-addon" onclick="room_fields(4,\'righe_room4\');">
                             <i class="fa fa-plus"></i>
                         </span>
@@ -287,7 +287,7 @@ $riga_camere_proposta_5 ='
                 <div class="form-group">
                  <label class="control-label"><b>Prezzo</b></label>
                     <div class="input-group">
-                        <input type="text" name="Prezzo5[]" id="Prezzo_5_1" class="prezzo5 form-control" placeholder="Prezzo 0000.00" '.(($fun->check_simplebooking(IDSITO)==0 && $fun->check_ericsoftbooking(IDSITO)==0 && $fun->check_bedzzlebooking(IDSITO)==0)?($fun->check_listini(IDSITO)==1?'onChange="get_listino(5,1);"':''):'').' onkeyup="calcola_totale5();">
+                        <input type="text" name="Prezzo5[]" id="Prezzo_5_1" class="prezzo5 form-control" placeholder="Prezzo 0000.00" '.(($fun->check_simplebooking(IDSITO)==0 && $fun->check_ericsoftbooking(IDSITO)==0 && $fun->check_bedzzlebooking(IDSITO)==0)?($fun->check_listini(IDSITO)==1?'onfocus="get_listino(5,1);"':''):'').' onkeyup="calcola_totale5();">
                         <span class="input-group-addon" onclick="room_fields(5,\'righe_room5\');">
                             <i class="fa fa-plus"></i>
                         </span>
