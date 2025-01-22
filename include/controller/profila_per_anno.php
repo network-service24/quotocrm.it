@@ -136,9 +136,7 @@ $content .='<style>
                 #profila_info_serverSide{
                     display: none !important;
                 }
-                #pulsante_esporta{
-                    display: none !important;
-                } 
+
                 ').'                
             </style>'."\r\n";
 # CODICE JS PER ESECUZIONE INSERT,UPDATE;DELETE E DATATABLE
@@ -202,27 +200,21 @@ $content .='<script>
                         },
                     \'pageLength\',                    
 
-                        {
-                            extend: \'collection\',
-                            className: \'buttonExport\',
-                            text: \'Esporta\',
-                            buttons: [  
-                                { 
-                                    extend: \'excel\', 
-                                    text: \'Excel\',
-                                    exportOptions: {
-                                        columns: \':not(.notexport)\'
-                                    }, 
-                                },  
-                                { 
-                                    extend: \'print\', 
-                                    text: \'Stampa\',
-                                    exportOptions: {
-                                        columns: \':not(.notexport)\'
-                                    }, 
-                                }                               
-                            ]
-                        },
+
+                    {
+                        extend: \'collection\',
+                        className: \'buttonExport\',
+                        text: \'Esporta EXCEL\',
+                        buttons: [
+                              {
+                                extend: \'excel\',
+                                text: \'Excel\',
+                                exportOptions: {
+                                    columns: \':not(.notexport)\'
+                                },
+                            },
+                        ]
+                    }, 
                     ],			
                     "ajax": "'.BASE_URL_SITO.'crud/proposte/profila_anno.crud.php?idsito='.IDSITO.''.$variabili.'",
                     "deferRender": true,
@@ -256,14 +248,17 @@ $content .='<script>
                     table.order( [ 0, \'DESC\' ] ).draw();
                     $("#profila_processing").removeClass("card"); 
 
-                    '.($NumeroRecord > NUMERO_RECORD?'$("#profila_wrapper").prepend(\'<div class="dataTables_filter f-11" style="position:absolute;right:20px;top:80px">Filtro rapido disattivato finchè<br> non si riducono i record a meno di '.NUMERO_RECORD.'</div>\');$("#profila_filter").hide();':'$(".buttons-page-length").before("<i class=\"fa fa-eye fa-2x fa-fw\"></i>");').'
-                    $(".buttonExport").after("<button class=\"dt-button buttons-collection buttonExportFull\" onclick=\"document.getElementById(\'form_export\').submit();\" id=\"pulsante_esporta\" data-toggle=\"tooltip\" title=\"Questo Export scarica il contenuto del Profila per Anno in CSV!\"><i class=\"fa fa-file-archive-o fa-2x fa-fw\"></i> Esporta CSV</button>");
-                    $(".buttonExport").before("<i class=\"fa fa-file-excel-o fa-2x fa-fw\"></i>");'."\r\n";
+                 '.(!$_REQUEST['action']?($NumeroRecord > NUMERO_RECORD?
+                    '$("#profila_wrapper").prepend(\'<div class="dataTables_filter f-11" style="position:absolute;right:20px;top:80px">Filtro rapido disattivato finchè<br> non si riducono i record a meno di '.NUMERO_RECORD.'</div>\');
+                    $("#profila_filter").hide();
+                    $(".buttonSearch").after("<button class=\"dt-button buttons-collection buttonExportFull\" onclick=\"document.getElementById(\'form_export\').submit();\" id=\"pulsante_esporta\" data-toggle=\"tooltip\" title=\"Questo Export scarica il totale dei record per l\'anno scelto in CSV!\"><i class=\"fa fa-file-archive-o fa-2x fa-fw\"></i> Esporta CSV</button>");'
+                    :'$(".buttons-page-length").before("<i class=\"fa fa-eye fa-2x fa-fw\"></i>"); $(".buttons-page-length").after("<button class=\"dt-button buttons-collection buttonExportFull\" onclick=\"document.getElementById(\'form_export\').submit();\" id=\"pulsante_esporta\" data-toggle=\"tooltip\" title=\"Questo Export scarica il totale dei record per l\'anno scelto in CSV!\"><i class=\"fa fa-file-archive-o fa-2x fa-fw\"></i> Esporta CSV</button>");'):'').'
+                    $(".buttonExport").before("<i class=\"fa fa-file-excel-o fa-2x fa-fw\" data-toggle=\"tooltip\" title=\"Questo Export scarica i record per pagina in EXCEL!\"></i>").attr(\'data-toggle\',\'tooltip\').attr(\'title\',\'Questo Export scarica i record per pagina in EXCEL!\');'."\r\n";
 
 
 $content .='})
             </script>';     
-$content .='<form method="POST" id="form_export" name="form_export" action="'.BASE_URL_SITO.'include/controller/export_clienti_quoto.php">
+$bt_export .='<form method="POST" id="form_export" name="form_export" action="'.BASE_URL_SITO.'include/controller/export_clienti_quoto.php">
                     <input type="hidden" name="action" value="export">
                     <input type="hidden" name="idsito" value="'.IDSITO.'">
                     <input type="hidden" name="Lingua" value="'.$_REQUEST['Lingua'].'">
