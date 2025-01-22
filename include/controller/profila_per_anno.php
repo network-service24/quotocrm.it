@@ -258,7 +258,7 @@ $content .='<script>
 
 $content .='})
             </script>';     
-$bt_export .='<form method="POST" id="form_export" name="form_export" action="'.BASE_URL_SITO.'include/controller/export_clienti_quoto.php">
+$content .='<form method="POST" id="form_export" name="form_export" action="'.BASE_URL_SITO.'include/controller/export_clienti_quoto.php">
                     <input type="hidden" name="action" value="export">
                     <input type="hidden" name="idsito" value="'.IDSITO.'">
                     <input type="hidden" name="Lingua" value="'.$_REQUEST['Lingua'].'">
