@@ -8,7 +8,7 @@ if($_REQUEST['action'] == 'del_po'){
     $delete = "DELETE FROM hospitality_politiche  WHERE id = ".$_REQUEST['id']." AND idsito = ".$_REQUEST['idsito'];
     $dbMysqli->query($delete);
 
-    $delete2 = "DELETE FROM hospitality_politiche_lingue  WHERE id_politiche = ".$_REQUEST['id']." AND idsito = ".$_REQUEST['idsito'];
+    $delete2 = "DELETE FROM hospitality_politiche_lingua  WHERE id_politiche = ".$_REQUEST['id']." AND idsito = ".$_REQUEST['idsito'];
     $dbMysqli->query($delete2);
 }
 
