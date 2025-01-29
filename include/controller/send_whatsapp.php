@@ -240,14 +240,15 @@ if($_REQUEST['azione'] == 'send' && $_REQUEST['param'] != '') {
                 include($_SERVER['DOCUMENT_ROOT'].'/include/template/moduli/logs.inc.php');
                 ##LOG##
 
-
+                # https://web.whatsapp.com APRE IL BROWSER ED INVIA DA BROWSER
+                # https://api.whatsapp.com APRE IL BROWSER MA FA SCARICARE APP ed INVIO AVVIENE DA APP
                 if($TipoRichiesta == 'Preventivo') { 
                    
-                   $prt->_goto('https://api.whatsapp.com/send?phone='.$WhatsApp.'&text='.$TestoWhatsApp);
+                   $prt->_goto('https://web.whatsapp.com/send?phone='.$WhatsApp.'&text='.$TestoWhatsApp);
                 }
                 
                 if($TipoRichiesta == 'Conferma') {                    
-                    $prt->_goto('https://api.whatsapp.com/send?phone='.$WhatsApp.'&text='.$TestoWhatsApp);
+                    $prt->_goto('https://web.whatsapp.com/send?phone='.$WhatsApp.'&text='.$TestoWhatsApp);
                 }
   
 }

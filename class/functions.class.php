@@ -2543,6 +2543,7 @@ class functions
         $contatore = '  <script>
                             function countdown() {
                                 $("#' . $page . '").DataTable().ajax.reload();
+                                $(".modal").modal("hide");
                                 $("#infobox").hide();
                                 $("#closeButtonBoxInfo").hide();
                                 $("#closeButtonInfoBox").hide();

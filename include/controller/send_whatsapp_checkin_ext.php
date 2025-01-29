@@ -104,8 +104,9 @@ if($_GET['azione'] == 'send' && $_GET['param'] != '') {
                 $testo        .= TXTLINK7."\r\n";
                 $TestoWhatsApp = urlencode(strip_tags(utf8_encode(clean($testo))).$link);
 
-                  
-                $prt->_goto('https://api.whatsapp.com/send?phone='.$WhatsApp.'&text='.$TestoWhatsApp);
+                # https://web.whatsapp.com APRE IL BROWSER ED INVIA DA BROWSER
+                # https://api.whatsapp.com APRE IL BROWSER MA FA SCARICARE APP ed INVIO AVVIENE DA APP   
+                $prt->_goto('https://web.whatsapp.com/send?phone='.$WhatsApp.'&text='.$TestoWhatsApp);
            
      
 
