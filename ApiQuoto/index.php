@@ -257,6 +257,7 @@ if(typeof window.quoto_form == 'undefined'){
 	</ul>
 </p>
 <p></p>
+<!--
 <h3><b>APPLICATION PROGRAM INTERFACE</b></h3>
 <script> var clipboard = new ClipboardJS('#FQ4fa');</script>
 <P>Questa metodo necessità la <b>costruzione del FORM da parte del vostro WebMaster</b>, successivamente dovrà inviare il form (anche in ajax va bene, se si preferisce!) ad una pagina che contenga il codice qui compilato, oppure su se stesso!</P><br>
@@ -362,10 +363,10 @@ $dati = array(
 	*/	
 	&lt;script type="text/javascript" src="https://www.quotocrm.it/apiForm/js/saveUtmApiQuoto.min.js"  async defer&gt;&lt;/script&gt;
 
-</pre>	
+</pre>	-->
 ################################################################################################################################################### <br>
 <b>ATTENZIONE:</b> <br>
-<b>Tutte le altre opzioni</b> (in uso fino al 31-12-2023) per includere nel proprio sito un form di QUOTO, <b>sono OBSOLETE!!</b><br>
+<b>Tutte le altre opzioni</b> (in uso fino al 15-04-2024) per includere nel proprio sito un form di QUOTO, <b>sono OBSOLETE!!</b><br>
 Se doveste ancora avere in uso un vecchio sistema di raccolta dati da form, vi consigliamo di <b>sostituirlo con il Widget JS Form QUOTO!</b>
 ################################################################################################################################################### <br>
 		<div style="clear:both;height:10px"></div>

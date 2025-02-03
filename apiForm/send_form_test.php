@@ -31,7 +31,7 @@ if ($_REQUEST['action'] == 'send') {
    * ? invio dei dati tramite codice php cUrl()
   */
   $ch = curl_init();
-  curl_setopt($ch, CURLOPT_URL, 'https://www.quotocrm.it/ApiFormQuoto/api_form_2023_test.php');
+  curl_setopt($ch, CURLOPT_URL, 'https://www.quotocrm.it/ApiFormQuoto/api_form_2023.php');
   curl_setopt($ch, CURLOPT_USERPWD, $user . ':' . $pass);
   curl_setopt($ch, CURLOPT_HTTPAUTH, CURLAUTH_BASIC);
   curl_setopt($ch, CURLOPT_RETURNTRANSFER, 0);
