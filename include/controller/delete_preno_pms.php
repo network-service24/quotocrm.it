@@ -19,19 +19,18 @@
          * !codice per cancellare una prenotazione da PMS
          * ? se 5Stelle il primo tipo di codice
          */
-        if($tipoP == '5Stelle'){         
-                $PMScheck    = "SELECT * FROM hospitality_pms WHERE idsito = ".IDSITO." AND Pms = '".($_REQUEST['valore'] == 'C'?'hotelcinquestelle.cloud': 'booking.ericsoft.com')."' AND Abilitato = 1 ORDER BY Id DESC LIMIT 1";
+        if($tipoP == '5Stelle'){   
+
+                $PMScheck    = "SELECT * FROM hospitality_pms WHERE idsito = ".IDSITO." AND Pms = 'hotelcinquestelle.cloud' AND Abilitato = 1 ORDER BY Id DESC LIMIT 1";
                 $PMSquery    = $dbMysqli->query($PMScheck);
                 $PMScheck    = $PMSquery[0];
                 $urlHost     = $PMScheck['UrlHost'];
                 $clientToken = $PMScheck['Provider'];
                 $hotelCode   = $PMScheck['Code'];
-                $LicenzaId   = $PMScheck['LicenzaId']; 
-
-               /** 
-                 * ! query per estrpolare i dati della prenotazione 
-                 * */
-                $select = "SELECT hospitality_guest.*, hospitality_proposte.Id as IdProposta, hospitality_proposte.PrezzoP as PrezzoProposto
+                $LicenzaId   = $PMScheck['LicenzaId'];
+    
+                $select = "SELECT hospitality_guest.*, hospitality_proposte.Id as IdProposta, hospitality_proposte.PrezzoP as PrezzoProposto,
+                                hospitality_proposte.Arrivo,hospitality_proposte.Partenza
                         FROM hospitality_guest 
                         INNER JOIN hospitality_proposte ON hospitality_proposte.id_richiesta = hospitality_guest.Id
                         WHERE hospitality_guest.Id = ".$_REQUEST['azione']."
@@ -53,9 +52,119 @@
                 $EtaBambini4    = $value['EtaBambini4'];
                 $EtaBambini5    = $value['EtaBambini5'];
                 $EtaBambini6    = $value['EtaBambini6'];
-                $Arrivo         = $value['DataArrivo'];
-                $Partenza       = $value['DataPartenza'];
-                $PrezzoProposto = intval($value['PrezzoProposto']);
+                $DataArrivo     = $value['DataArrivo'];
+                $DataPartenza   = $value['DataPartenza'];
+                $ArrivoProposta = $value['Arrivo'];
+                $PartenzaProposta= $value['Partenza'];
+                $PrezzoProposto = floatval($value['PrezzoProposto']);
+
+                if($DataArrivo != $ArrivoProposta || $DataPartenza != $PartenzaProposta){
+
+                        $date1 = date_create_from_format('Y-m-d', $PartenzaProposta);
+
+                        $date2 = date_create_from_format('Y-m-d', $ArrivoProposta);
+
+                        $Arrivo   = $ArrivoProposta;
+                        $Partenza = $PartenzaProposta;
+
+                }else{
+                        $date1 = date_create_from_format('Y-m-d', $DataPartenza);
+
+                        $date2 = date_create_from_format('Y-m-d', $DataArrivo);
+
+                        $Arrivo   = $DataArrivo;
+                        $Partenza = $DataPartenza;
+                }
+
+                $diff  = date_diff($date1, $date2);
+
+                $Notti = $diff->d;
+
+                ## calcolo sconto
+                $selectSconto = "SELECT sconto FROM hospitality_relazione_sconto_proposte WHERE idsito = ".IDSITO." AND sconto != 0  AND id_richiesta = ".$_REQUEST['azione']." AND id_proposta = ".$IdProposta."";
+                $resultSc = $dbMysqli->query($selectSconto);
+                if(sizeof($resultSc)>0){
+                        $rowSC = $resultSc[0];
+                        $percentualeSconto =  $rowSC['sconto'];
+                }else{
+                        $percentualeSconto = '';  
+                }
+
+                        ### Query per servizi aggiuntivi
+                        $selectS = "     SELECT 
+                                                        hospitality_tipo_servizi.Id as id_servizio,
+                                                        hospitality_tipo_servizi.TipoServizio,
+                                                        hospitality_tipo_servizi.PrezzoServizio,
+                                                        hospitality_tipo_servizi.CalcoloPrezzo,
+                                                        hospitality_tipo_servizi.PercentualeServizio,
+                                                        hospitality_relazione_servizi_proposte.num_persone ,
+                                                        hospitality_relazione_servizi_proposte.num_notti
+                                                FROM 
+                                                        hospitality_relazione_servizi_proposte 
+                                                INNER JOIN 
+                                                        hospitality_tipo_servizi 
+                                                ON 
+                                                        hospitality_relazione_servizi_proposte.servizio_id = hospitality_tipo_servizi.Id             
+                                                WHERE 
+                                                        hospitality_relazione_servizi_proposte.idsito = ".IDSITO."  
+                                                AND
+                                                        hospitality_tipo_servizi.idsito = ".IDSITO." 
+                                                AND 
+                                                        hospitality_relazione_servizi_proposte.id_richiesta = ".$_REQUEST['azione']." 
+                                                AND 
+                                                        hospitality_relazione_servizi_proposte.id_proposta = ".$IdProposta ."";
+                        $resS = $dbMysqli->query($selectS);
+
+                        $servizi      = array();
+                        $id_servizio  = '';
+                        $TipoServizio = '';
+                        $PrezzoServizio = '';
+                        $valoreScontoServizi  = '';
+                        $final_amount_servizi = '';
+
+                        if(sizeof($resS)>0){
+
+                                foreach ($resS as $k => $vl) {
+
+                                        switch($vl['CalcoloPrezzo']){
+                                        case "Al giorno":
+                                                $PrezzoServizio = ($vl['PrezzoServizio']!=0?($vl['PrezzoServizio']*$Notti):0);
+                                        break;
+                                        case "A percentuale":
+                                                $PrezzoServizio = ($vl['PercentualeServizio']!=''?($PrezzoProposto*$vl['PercentualeServizio']/100):0);
+                                        break;
+                                        case "Una tantum":
+                                                $PrezzoServizio = ($vl['PrezzoServizio']!=0?$vl['PrezzoServizio']:0);
+                                        break;
+                                        case "A persona":
+                                                $PrezzoServizio = ($vl['PrezzoServizio']!=0?($vl['PrezzoServizio']*($vl['num_notti']*$vl['num_persone'])):0);
+                                        break;
+                                        }
+                                        
+                                        $id_servizio    = $vl['id_servizio'];
+                                        $TipoServizio   = $vl['TipoServizio'];
+
+
+                                        $servizi[] =  array(    "quantity"           => 1,
+                                                                "product_code"       => "$id_servizio",
+                                                                "product_description"=> addslashes($TipoServizio) ,
+                                                                "unit_price"         => floatval($PrezzoServizio));
+
+                                        $totaleServizi += $PrezzoServizio;
+                                }
+                                        if($percentualeSconto!=''){
+                                                $valoreScontoServizi  = (($totaleServizi*$percentualeSconto)/100);
+                                                $final_amount_servizi = ($totaleServizi-$valoreScontoServizi);
+                                        }else{
+                                                $final_amount_servizi = $totaleServizi;
+                                        }
+                                ################################################################
+
+
+                                                        
+                                               
+                        }
+                       
 
                 $array_eta_bimbi = array(intval($EtaBambini1),intval($EtaBambini2),intval($EtaBambini3),intval($EtaBambini4),intval($EtaBambini5),intval($EtaBambini6));
                 foreach($array_eta_bimbi as $ky => $vl){
@@ -64,8 +173,15 @@
                         }         
                 }
 
-                $select2 = "SELECT hospitality_richiesta.NumeroCamere,hospitality_pms_camere.RoomTypeDescription,hospitality_tipo_soggiorno.TipoSoggiorno,
-                hospitality_camere_testo.Descrizione
+                $select2 = "SELECT hospitality_richiesta.NumeroCamere,
+                                hospitality_richiesta.NumAdulti,
+                                hospitality_richiesta.NumBambini,
+                                hospitality_richiesta.EtaB,
+                                hospitality_richiesta.Prezzo,
+                                hospitality_pms_camere.RoomTypeDescription,
+                                hospitality_pms_camere.RoomTypeId,
+                                hospitality_tipo_soggiorno.TipoSoggiorno,
+                                hospitality_camere_testo.Descrizione
                                 FROM hospitality_richiesta 
                                 INNER JOIN hospitality_tipo_camere ON hospitality_tipo_camere.Id = hospitality_richiesta.TipoCamere
                                 INNER JOIN hospitality_camere_testo ON hospitality_camere_testo.camere_id = hospitality_tipo_camere.Id
@@ -78,114 +194,198 @@
 
                 $Camere         = array();
                 $data           = array();
+                $etaB           = array();
                 $tipo_soggiorno = '';
                 $tipo_camera    = '';
                 $n              = 1;
+                $amountCamera_after_tax = '';
+                $numeroCamere = count($res2);
 
                 foreach ($res2 as $ky => $val) {
 
-                        switch($val['TipoSoggiorno']){
-                                case"All Inclusive":
-                                        $tipo_soggiorno = 'AL';
+                        switch(true){
+                                case strstr($val['TipoSoggiorno'],"All Inclusive"):
+                                        $tipo_soggiorno = 'AI';
                                 break;
-                                case"Bed & Breakfast":
+                                case strstr($val['TipoSoggiorno'],"Bed & Breakfast"):
                                         $tipo_soggiorno = 'BB';
                                 break;
-                                case"Pensione Completa":
+                                case strstr($val['TipoSoggiorno'],"Solo Perno"):
+                                        $tipo_soggiorno = 'RO';
+                                break;
+                                case strstr($val['TipoSoggiorno'],"Pensione Completa"):
                                         $tipo_soggiorno = 'FB';
                                 break;
-                                case"Mezza Pensione":
+                                case strstr($val['TipoSoggiorno'],"Mezza Pensione"):
                                         $tipo_soggiorno = 'HB';
+                                break; 
+                                case strstr($val['TipoSoggiorno'],"Mezza Pensione All Inclusive"):
+                                        $tipo_soggiorno = 'AI-HB';
                                 break; 
                                 default:
                                         $tipo_soggiorno = $val['TipoSoggiorno'];
                                 break;
                         }
-                    
+                        $NumAdulti   = intval($val['NumAdulti']);
 
-                        if(intval($val['NumeroCamere'])>1){
+                        $NumBambini  = intval($val['NumBambini']);
 
-                                for($n==1; $n<=intval($val['NumeroCamere']); $n++){
+                        $Prezzo      = floatval($val['Prezzo']);
 
-                                        $Camere[] = array("room_type_id"        => $val['RoomTypeDescription'],
-                                                        "room_type_description" => strip_tags($val['Descrizione']), 
-                                                        "meal_plan"             => $tipo_soggiorno,          
-                                                        "amount_after_tax"      => ($PrezzoProposto/intval($val['NumeroCamere'])),        
-                                                        "number_of_guests"      => ($NumeroAdulti+$NumeroBambini),
-                                                        "adults_number"         => $NumeroAdulti,
-                                                        "children_number"       => $NumeroBambini,
-                                                        "children_age"          => (($NumeroBambini > 0 || $NumeroBambini != '') ? ($tipo_camere!='Singola'?$EtaBimbi:'') : 0 ));
+/*                         if($numeroCamere > 1){
+                                if($percentualeSconto!=''){
+                                        $valoreSconto   = (($Prezzo*$percentualeSconto)/100);
+                                        $amountCamera_after_tax = ($Prezzo-$valoreSconto);
+                                }else{
+                                        $amountCamera_after_tax = $Prezzo;
                                 }
-                               
                         }else{
+                                $amountCamera_after_tax = $PrezzoProposto;
+                        } */
 
-                       
-                                $Camere[] = array("room_type_id"        => $val['RoomTypeDescription'],
-                                                "room_type_description" => strip_tags($val['Descrizione']), 
+                        if($percentualeSconto!=''){
+                                $valoreSconto           = (($Prezzo*$percentualeSconto)/100);
+                                $amountCamera_after_tax = ($Prezzo-$valoreSconto);
+                        }else{
+                                $amountCamera_after_tax = $Prezzo;
+                        }   
+
+                        if($val['EtaB'] != ''){
+                                $etaB    = array();
+                                $etaB_   = explode(",",$val['EtaB']);
+
+                                foreach($etaB_ as $k => $v){
+                                        $etaB[] = intval($v);
+
+                                }
+
+                                $Camere[] = array("room_type_id"        => intval($val['RoomTypeId']),
+                                                "room_type_description" => strip_tags(addslashes($val['Descrizione'])), 
                                                 "meal_plan"             => $tipo_soggiorno,          
-                                                "amount_after_tax"      => $PrezzoProposto,        
-                                                "number_of_guests"      => ($NumeroAdulti+$NumeroBambini),
-                                                "adults_number"         => $NumeroAdulti,
-                                                "children_number"       => $NumeroBambini,
-                                                "children_age"          => (($NumeroBambini > 0 || $NumeroBambini != '') ? ($tipo_camere!='Singola'?$EtaBimbi:'') : 0 ));
-
-                                 
+                                                "amount_after_tax"      => $amountCamera_after_tax,        
+                                                "number_of_guests"      => ($NumAdulti+$NumBambini),
+                                                "adults_number"         => $NumAdulti,
+                                                "children_number"       => $NumBambini,
+                                                "children_age"          => $etaB);
+                        }else{
+                                $Camere[] = array("room_type_id"        => intval($val['RoomTypeId']),
+                                                "room_type_description" => strip_tags(addslashes($val['Descrizione'])), 
+                                                "meal_plan"             => $tipo_soggiorno,          
+                                                "amount_after_tax"      => $amountCamera_after_tax,        
+                                                "number_of_guests"      => ($NumAdulti+$NumBambini),
+                                                "adults_number"         => $NumAdulti,
+                                                "children_number"       => $NumBambini);
                         }
+
+
+
                 }            
 
 
-
                 $select = "SELECT 
-                            * 
-                            FROM 
+                                * 
+                        FROM 
                                 hospitality_data_syncro_pms 
-                            WHERE 
+                        WHERE 
                                 id_prenotazione = ".$_REQUEST['azione']." 
-                            AND 
+                        AND 
                                 TypePms = 'C'
-                            AND 
+                        AND 
                                 pms_reservation_id != ''
-                            AND 
+                        AND 
                                 idsito = ".IDSITO;
                 $res = $dbMysqli->query($select);
+                $rec = $res[0];
+                if(is_array($rec)) {
+                        if($rec > count($rec))
+                                $tot = count($rec);
+                        }else{ 	
+                                $tot = 0;
+                        }
 
-                if(sizeof($res)>0){
+                if($tot > 0){
+                        $pms_reservation_id = $rec['pms_reservation_id'];
+                        ### MODIFICA DI UNA PRENOTAZIONE GIA SINCRONIZZATA
+                        $data = array("clientToken"=> $clientToken,
+                                        "hotelCode"=> $hotelCode,
+                                        "reservations"   =>   array(array("name"             => $Nome,
+                                                                        "surname"            => $Cognome, 
+                                                                        "email"              => $Email,         
+                                                                        "phone"              => $Cellulare,        
+                                                                        "checkin_date"       => $Arrivo,
+                                                                        "checkout_date"      => $Partenza,
+                                                                        "ext_reservation_id" => "7",
+                                                                        "master_reservation_id" =>"$pms_reservation_id" ,
+                                                                        "status"             =>  array("id"=>3, "desc"=>"cancelled"),
+                                                                        "rooms"              =>  $Camere       
+                                                                        )
+                                                                )            
+                                        );            
 
-                   $rec = $res[0];
-
-                    ### CANCELLAZIONE DI UNA PRENOTAZIONE GIA SINCRONIZZATA
-                    $data = array("clientToken"=> $clientToken,
-                    "hotelCode"=> $hotelCode,
-                    "reservations"   =>   array(array("name"             => $Nome,
-                                                    "surname"            => $Cognome, 
-                                                    "email"              => $Email,         
-                                                    "phone"              => $Cellulare,        
-                                                    "checkin_date"       => $Arrivo,
-                                                    "checkout_date"      => $Partenza,
-                                                    "ext_reservation_id" => "7",
-                                                    "pms_reservation_id" => $rec['pms_reservation_id'],
-                                                    "status"             =>  array("id"=>3, "desc"=>"cancelled"),
-                                                    "rooms"              =>  $Camere       
-                                                    )
-                                            )            
-                    );   
-
-
-
-                    $data_string = json_encode($data);
-
-                    $ch = curl_init($urlHost.'insertReservations/'); 
-                    curl_setopt($ch, CURLOPT_SSL_VERIFYPEER, false);                                                                
-                    curl_setopt($ch, CURLOPT_CUSTOMREQUEST, 'POST');                                                                     
-                    curl_setopt($ch, CURLOPT_POSTFIELDS, $data_string);                                                                  
-                    curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);                                                                      
-                    curl_setopt($ch, CURLOPT_HTTPHEADER, array(                                                                          
-                    'Content-Type: application/json',                                                                                
-                    'Content-Length: ' . strlen($data_string))                                                                       
-                    );                                                                                                                   
-                                                                                                                
-                    $result = curl_exec($ch);  
                 }
+
+
+
+
+                        $data_string = json_encode($data);
+                       
+                       // print_r($data_string);
+                        
+                        $ch = curl_init($urlHost.'insertReservations/'); 
+                        curl_setopt($ch, CURLOPT_SSL_VERIFYPEER, false);                                                                
+                        curl_setopt($ch, CURLOPT_CUSTOMREQUEST, 'POST');                                                                     
+                        curl_setopt($ch, CURLOPT_POSTFIELDS, $data_string);                                                                  
+                        curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);                                                                      
+                        curl_setopt($ch, CURLOPT_HTTPHEADER, array(                                                                          
+                        'Content-Type: application/json',                                                                                
+                        'Content-Length: ' . strlen($data_string))                                                                       
+                        );                                                                                                                   
+                                                                                                                                
+                        $result = curl_exec($ch);  
+                        $risultato = json_decode($result);
+                        
+                        //$pms_reservation_id = $risultato[0]->link[0]->pms_reservation_id;
+
+                        $ext_reservation_id    = $risultato[0]->link[0]->ext_reservation_id;
+                        $pms_reservation_id    = $risultato[0]->link[0]->master_reservation_id;
+
+                
+                        $data_serv = date('Y-m-d').'T'.date('h:i:s').'.000Z';
+
+
+
+                        if(sizeof($resS)>0){
+                              
+                                        ### MODIFICA PER SEFRVIZI AGGIUNTIVI
+                                        $dataS = array("clientToken"=> $clientToken,
+                                                        "hotelCode" => $hotelCode,
+                                                        "charges"   =>   array(array("charge_id"                 => "$ext_reservation_id",
+                                                                                        "master_reservation_id"  => "$pms_reservation_id",       
+                                                                                        "date"                   => "$data_serv",        
+                                                                                        "final_amount"           => $final_amount_servizi,
+                                                                                        "sale_items"             => $servizi       
+                                                                                        ) 
+                                                                                )           
+                                                        );
+
+                                        $data_stringS = json_encode($dataS);   
+                        // print_r($data_stringS);   exit;                    
+                                        $chS = curl_init($urlHost.'charges/'); 
+                                        curl_setopt($chS, CURLOPT_SSL_VERIFYPEER, false);                                                                
+                                        curl_setopt($chS, CURLOPT_CUSTOMREQUEST, 'POST');                                                                     
+                                        curl_setopt($chS, CURLOPT_POSTFIELDS, $data_stringS);                                                                  
+                                        curl_setopt($chS, CURLOPT_RETURNTRANSFER, true);                                                                      
+                                        curl_setopt($chS, CURLOPT_HTTPHEADER, array(                                                                          
+                                        'Content-Type: application/json',                                                                                
+                                        'Content-Length: ' . strlen($data_stringS))                                                                       
+                                        ); 
+                                        $resultS = curl_exec($chS);  
+                                        $risultatoS = json_decode($resultS);
+                        } 
+
+
+
+
 
                         $delete = "DELETE 
                                     FROM 

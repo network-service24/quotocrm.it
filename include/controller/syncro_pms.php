@@ -241,7 +241,7 @@
 
                         $Prezzo      = floatval($val['Prezzo']);
 
-                        if($numeroCamere > 1){
+/*                         if($numeroCamere > 1){
                                 if($percentualeSconto!=''){
                                         $valoreSconto   = (($Prezzo*$percentualeSconto)/100);
                                         $amountCamera_after_tax = ($Prezzo-$valoreSconto);
@@ -250,9 +250,14 @@
                                 }
                         }else{
                                 $amountCamera_after_tax = $PrezzoProposto;
-                        }
+                        } */
 
-                     
+                        if($percentualeSconto!=''){
+                                $valoreSconto           = (($Prezzo*$percentualeSconto)/100);
+                                $amountCamera_after_tax = ($Prezzo-$valoreSconto);
+                        }else{
+                                $amountCamera_after_tax = $Prezzo;
+                        }   
 
                         if($val['EtaB'] != ''){
                                 $etaB    = array();
@@ -348,7 +353,7 @@
 
                         $data_string = json_encode($data);
                        
-                        //print_r($data_string);
+                       // print_r($data_string);
                         
                         $ch = curl_init($urlHost.'insertReservations/'); 
                         curl_setopt($ch, CURLOPT_SSL_VERIFYPEER, false);                                                                
@@ -388,7 +393,7 @@
                                                         );
 
                                         $data_stringS = json_encode($dataS);   
-                         //print_r($data_stringS);   exit;                    
+                        // print_r($data_stringS);   exit;                    
                                         $chS = curl_init($urlHost.'charges/'); 
                                         curl_setopt($chS, CURLOPT_SSL_VERIFYPEER, false);                                                                
                                         curl_setopt($chS, CURLOPT_CUSTOMREQUEST, 'POST');                                                                     
@@ -640,5 +645,5 @@
     } 
     
 
-   $prt->_goto(BASE_URL_SITO.''.$_REQUEST['prov'].'/'); 
+  $prt->_goto(BASE_URL_SITO.''.$_REQUEST['prov'].'/'); 
 ?>
