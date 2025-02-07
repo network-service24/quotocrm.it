@@ -136,6 +136,8 @@ if($_REQUEST['azione'] == 'edit' && $_REQUEST['param'] != '') {
             $NumeroBambini .='<option value="'.$n.'" '.($n==$NumBambini?'selected="selected"':'').'>'.$n.'</option>';
         }
 
+        $check_pms5 = $fun->check_5stelle_pms(IDSITO);
+        
         //controllo se l'url del boooking è compilato nella voce di menu [Collegamenti social] oppure se il cliente ha un booking engine sincronizzato 
         if($fun->check_simplebooking(IDSITO)==0 && $fun->check_ericsoftbooking(IDSITO)==0 && $fun->check_bedzzlebooking(IDSITO)==0){
             $BookingOnline = $fun->check_UrlBookingOnline(IDSITO);
@@ -871,7 +873,7 @@ if($_REQUEST['azione'] == 'edit' && $_REQUEST['param'] != '') {
                                                             </div>
                                                             <div class="col-md-3"> 
                                                                 <div class="form-group">
-                                                                    <label class="control-label"><b>Prezzo soggiorno proposto</b></label>
+                                                                    <label class="control-label"><b>Prezzo soggiorno proposto</b> '.($check_pms5==1?'<i class="cursore m-l-5 fa fa-question-circle" data-toggle="tooltip" data-html="true" title="Se il totale soggiorno dopo l\'applicazione dello sconto contiene dei decimali, non modificate manualmente il valore arrotondandolo, perchè al momento della sincronia con 5 Stelle verrebbe rispristinato automaticamente sul PMS!"></i>':'').'</label>
                                                                      <input type="text" onclick="calcola_totale'.$i.'();" name="PrezzoP'.$i.'" id="PrezzoP_'.$i.'" class="form-control" placeholder="0000.00" value="'.$PrezzoP.'">
                                                                 </div>
                                                             </div>

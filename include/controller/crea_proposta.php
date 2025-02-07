@@ -69,6 +69,8 @@ for($n==1; $n<=20; $n++){
     $NumeroBambini .='<option value="'.$n.'">'.$n.'</option>';
 }
 
+$check_pms5 = $fun->check_5stelle_pms(IDSITO);
+
 //controllo se l'url del boooking è compilato nella voce di menu [Collegamenti social] oppure se il cliente ha un booking engine sincronizzato
 if($fun->check_simplebooking(IDSITO)==0 && $fun->check_ericsoftbooking(IDSITO)==0 && $fun->check_bedzzlebooking(IDSITO)==0){
     $BookingOnline = $fun->check_UrlBookingOnline(IDSITO);

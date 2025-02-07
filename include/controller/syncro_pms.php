@@ -353,7 +353,7 @@
 
                         $data_string = json_encode($data);
                        
-                       // print_r($data_string);
+                        //print_r($data_string);
                         
                         $ch = curl_init($urlHost.'insertReservations/'); 
                         curl_setopt($ch, CURLOPT_SSL_VERIFYPEER, false);                                                                
@@ -393,7 +393,7 @@
                                                         );
 
                                         $data_stringS = json_encode($dataS);   
-                        // print_r($data_stringS);   exit;                    
+                         //print_r($data_stringS);   exit;                    
                                         $chS = curl_init($urlHost.'charges/'); 
                                         curl_setopt($chS, CURLOPT_SSL_VERIFYPEER, false);                                                                
                                         curl_setopt($chS, CURLOPT_CUSTOMREQUEST, 'POST');                                                                     

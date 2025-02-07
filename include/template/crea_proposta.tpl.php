@@ -276,7 +276,7 @@
                                                                                     </div>
                                                                                     <div class="col-md-3"> 
                                                                                         <div class="form-group">
-                                                                                            <label class="control-label"><b>Prezzo soggiorno proposto</b></label>
+                                                                                            <label class="control-label"><b>Prezzo soggiorno proposto</b> <?php echo ($check_pms5==1?'<i class="cursore m-l-5 fa fa-question-circle" data-toggle="tooltip" data-html="true" title="Se il totale soggiorno dopo l\'applicazione dello sconto contiene dei decimali, non modificate manualmente il valore arrotondandolo, perchè al momento della sincronia con 5 Stelle verrebbe rispristinato automaticamente sul PMS!"></i>':'')?></label>
                                                                                             <input type="text" title="Clicca per il calcolo del totale" onclick="calcola_totale1();" name="PrezzoP1" id="PrezzoP_1" class="form-control" placeholder="0000.00">
                                                                                         </div>
                                                                                     </div>
@@ -385,7 +385,7 @@
                                                                                     </div>
                                                                                     <div class="col-md-3"> 
                                                                                         <div class="form-group">
-                                                                                            <label class="control-label"><b>Prezzo soggiorno proposto</b></label>
+                                                                                            <label class="control-label"><b>Prezzo soggiorno proposto</b> <?php echo ($check_pms5==1?'<i class="cursore m-l-5 fa fa-question-circle" data-toggle="tooltip" data-html="true" title="Se il totale soggiorno dopo l\'applicazione dello sconto contiene dei decimali, non modificate manualmente il valore arrotondandolo, perchè al momento della sincronia con 5 Stelle verrebbe rispristinato automaticamente sul PMS!"></i>':'')?></label>
                                                                                             <input type="text" title="Clicca per il calcolo del totale" onclick="calcola_totale2();" name="PrezzoP2" id="PrezzoP_2" class="form-control" placeholder="0000.00">
                                                                                         </div>
                                                                                     </div>
@@ -494,7 +494,7 @@
                                                                                     </div>
                                                                                     <div class="col-md-3"> 
                                                                                         <div class="form-group">
-                                                                                            <label class="control-label"><b>Prezzo soggiorno proposto</b></label>
+                                                                                            <label class="control-label"><b>Prezzo soggiorno proposto</b> <?php echo ($check_pms5==1?'<i class="cursore m-l-5 fa fa-question-circle" data-toggle="tooltip" data-html="true" title="Se il totale soggiorno dopo l\'applicazione dello sconto contiene dei decimali, non modificate manualmente il valore arrotondandolo, perchè al momento della sincronia con 5 Stelle verrebbe rispristinato automaticamente sul PMS!"></i>':'')?></label>
                                                                                             <input type="text" title="Clicca per il calcolo del totale" onclick="calcola_totale3();" name="PrezzoP3" id="PrezzoP_3" class="form-control" placeholder="0000.00">
                                                                                         </div>
                                                                                     </div>
@@ -603,7 +603,7 @@
                                                                                     </div>
                                                                                     <div class="col-md-3"> 
                                                                                         <div class="form-group">
-                                                                                            <label class="control-label"><b>Prezzo soggiorno proposto</b></label>
+                                                                                            <label class="control-label"><b>Prezzo soggiorno proposto</b> <?php echo ($check_pms5==1?'<i class="cursore m-l-5 fa fa-question-circle" data-toggle="tooltip" data-html="true" title="Se il totale soggiorno dopo l\'applicazione dello sconto contiene dei decimali, non modificate manualmente il valore arrotondandolo, perchè al momento della sincronia con 5 Stelle verrebbe rispristinato automaticamente sul PMS!"></i>':'')?></label>
                                                                                             <input type="text" title="Clicca per il calcolo del totale" onclick="calcola_totale4();" name="PrezzoP4" id="PrezzoP_4" class="form-control" placeholder="0000.00">
                                                                                         </div>
                                                                                     </div>
@@ -712,7 +712,7 @@
                                                                                     </div>
                                                                                     <div class="col-md-3"> 
                                                                                         <div class="form-group">
-                                                                                            <label class="control-label"><b>Prezzo soggiorno proposto</b></label>
+                                                                                            <label class="control-label"><b>Prezzo soggiorno proposto</b> <?php echo ($check_pms5==1?'<i class="cursore m-l-5 fa fa-question-circle" data-toggle="tooltip" data-html="true" title="Se il totale soggiorno dopo l\'applicazione dello sconto contiene dei decimali, non modificate manualmente il valore arrotondandolo, perchè al momento della sincronia con 5 Stelle verrebbe rispristinato automaticamente sul PMS!"></i>':'')?></label>
                                                                                             <input type="text" title="Clicca per il calcolo del totale" onclick="calcola_totale5();" name="PrezzoP5" id="PrezzoP_5" class="form-control" placeholder="0000.00">
                                                                                         </div>
                                                                                     </div>
