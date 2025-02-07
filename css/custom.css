@@ -1804,6 +1804,9 @@ input.periodo::placeholder {
 .inline {
     display: flex !important;
 }
-.cke_dialog.cke_browser_webkit{
+/* .cke_dialog.cke_browser_webkit{
     z-index:999999999999999!important;
+} */
+.modal{
+    z-index:1051!important;
 }
