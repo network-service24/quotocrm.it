@@ -378,6 +378,8 @@ $content .= '                       </div>
                                             <label>Logo</label>
                                         </div>
                                         <div class="col-md-9">
+                                            <small class="text-danger">ATTENZIONE: non caricare grandi loghi, prima ridimensionarli, esempi standard 250x250 (250xauto), 280x280 (280xauto), ecc.</small>
+                                            <br>
                                             <small class="text-info">Una volta scelto il file, non dimenticare di cliccare sul pulsante "Upload"</small>
                                             <div class="input-group">
                                             <span class="input-group-addon"><i class="fa fa-fw fa-tasks"></i></span>
