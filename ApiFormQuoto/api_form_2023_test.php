@@ -22,12 +22,12 @@ require($_SERVER['DOCUMENT_ROOT']."/include/settings.inc.php");
         $db_quoto = new MysqliDb(HOST, DB_USER, DB_PASSWORD, DATABASE);
 
         ## QUERY PER CONFIGURAZIONE SMTP TURBO, SERVIZIO ESTERNO PER INVIO EMAIL ##
-        $selSmtp = "SELECT * FROM hospitality_smtp WHERE idsito = ".$idsito." AND Abilitato = 1";  
+        $selSmtp = "SELECT * FROM hospitality_smtp WHERE idsito = ".$idsito." AND Abilitato = 1";
         $resSmtp = $db_quoto->query($selSmtp);
         if(sizeof($resSmtp)>0){
             $recSmtp = $resSmtp[0];
-            $isSMTP = 1; 
-        }else{ 	
+            $isSMTP = 1;
+        }else{
             $isSMTP = 0;
         }
         $SmtpAuth     = $recSmtp['SMTPAuth'];
@@ -36,7 +36,7 @@ require($_SERVER['DOCUMENT_ROOT']."/include/settings.inc.php");
         $SmtpSecure   = $recSmtp['SMTPSecure'];
         $SmtpUsername = $recSmtp['SMTPUsername'];
         $SmtpPassword = $recSmtp['SMTPPassword'];
-        $NumberSend   = $recSmtp['NumberSend'];	
+        $NumberSend   = $recSmtp['NumberSend'];
         ## FINE SMTP ##
 
         $sql = "SELECT siti.*,anagrafica.rag_soc
@@ -52,7 +52,20 @@ require($_SERVER['DOCUMENT_ROOT']."/include/settings.inc.php");
         $ret      = $record[0];
         $permessi = $db_quoto->count;
 
-    if ($permessi > 0) {
+        /**
+            *? CONTROLLO CHE IL SITO DEL CLIENTE SIA CONTENUTO NELL URLBACK, 
+            *? PER EVITARE CHE VENGA IMPOSTATO NELLO SCRIPT DEL FORM UN IDSITO ERRATO 
+            *? O DI NON PROPRIETA' DEL CLIENTE ABILITATO!!
+        */
+        if(!strstr($urlback,$ret['web'])){
+            echo'<div>
+                    <b>ERRORE</b><br><br>
+                    Invio bloccato: tentativo di accesso all\'applicativo con un IDSITO <b>non valido</b>!
+                </div>';
+            exit;
+        }
+
+        if ($permessi > 0) {
 
             $idsito   = $ret['idsito'];
             $sito_tmp = str_replace("http://","",$ret['web']);
@@ -79,7 +92,7 @@ require($_SERVER['DOCUMENT_ROOT']."/include/settings.inc.php");
                     break;
                 case "de":
                     $id_lingua = 4;
-                    break; 
+                    break;
                 case "es":
                     $id_lingua = 2;
                     break;
@@ -112,7 +125,7 @@ require($_SERVER['DOCUMENT_ROOT']."/include/settings.inc.php");
                     break;
                 case "jp":
                     $id_lingua = 2;
-                    break;                   
+                    break;
                 default:
                     $id_lingua = 1;
                     break;
@@ -177,17 +190,7 @@ require($_SERVER['DOCUMENT_ROOT']."/include/settings.inc.php");
                 $logo                     = $r['logo'];
 
                 $nome                     = ucfirst($_REQUEST['nome']);
-                if(preg_replace("/[^0-9]/", "", $nome)==true){
-                    $nome = '';
-                    echo 'TENTATIVO DI SPAMMING, ESECUZIONE DEL FORM BLOCCATA!';
-                    exit;
-                }
                 $cognome                  = ucfirst($_REQUEST['cognome']);
-                if(preg_replace("/[^0-9]/", "", $cognome)==true){
-                    $cognome = '';
-                    echo 'TENTATIVO DI SPAMMING, ESECUZIONE DEL FORM BLOCCATA!';
-                    exit;
-                }
                 $email                    = clean_email($_REQUEST['email']);
                 $telefono                 = $_REQUEST['telefono'];
 
@@ -196,7 +199,7 @@ require($_SERVER['DOCUMENT_ROOT']."/include/settings.inc.php");
 
                 $dataP                    = explode("-",$_REQUEST['data_partenza']);
                 $partenza                 = $dataP[2].'-'.$dataP[1].'-'.$dataP[0];
-                
+
                 if($_REQUEST['DataArrivo']!=''){
                     $dataAa                   = explode("-",$_REQUEST['DataArrivo']);
                     $DataArrivo               = $dataAa[2].'-'.$dataAa[1].'-'.$dataAa[0];
@@ -204,23 +207,23 @@ require($_SERVER['DOCUMENT_ROOT']."/include/settings.inc.php");
 
                 if($_REQUEST['DataPartenza']!=''){
                     $dataPa                   = explode("-",$_REQUEST['DataPartenza']);
-                    $DataPartenza             = $dataPa[2].'-'.$dataPa[1].'-'.$dataPa[0];                
+                    $DataPartenza             = $dataPa[2].'-'.$dataPa[1].'-'.$dataPa[0];
                 }
 
                 $TipoCamere               = $_REQUEST['TipoCamere'];
 
 
                 $adulti                                     = $_REQUEST['adulti'];
-                $bambini                                    = $_REQUEST['bambini'];   
+                $bambini                                    = $_REQUEST['bambini'];
 
                 $messaggio                                  = $_REQUEST['messaggio'];
                 $hotel                                      = $_REQUEST['hotel'];
                 $codice_sconto                              = $_REQUEST['codice_sconto'];
                 $animali_ammessi_tmp                        = $_REQUEST['animali_ammessi'];
                 if($animali_ammessi_tmp == 1){
-                    $animali_ammessi = 'Si'; 
+                    $animali_ammessi = 'Si';
                 }elseif($animali_ammessi_tmp == 0){
-                    $animali_ammessi = 'No'; 
+                    $animali_ammessi = 'No';
                 }
 
 
@@ -247,8 +250,8 @@ require($_SERVER['DOCUMENT_ROOT']."/include/settings.inc.php");
                         $language = 'de';
                         $etichettaPulsanteRispondi = 'Klicken Sie hier, um zu antworten: ';
                         $etichettaFraseBottom = 'Diese E-Mail wurde automatisch versendet, antworten Sie nicht auf diese E-Mail!';
-                        break; 
-                    case "es":                       
+                        break;
+                    case "es":
                     case "ru":
                     case "nl":
                     case "pl":
@@ -259,17 +262,17 @@ require($_SERVER['DOCUMENT_ROOT']."/include/settings.inc.php");
                     case "cn":
                     case "br":
                     case "jp":
-                        $language = 'en'; 
+                        $language = 'en';
                         $etichettaPulsanteRispondi = 'Click here to answer: ';
-                        $etichettaFraseBottom = 'This email was sent automatically, do not reply to this email!';  
-                        break;           
+                        $etichettaFraseBottom = 'This email was sent automatically, do not reply to this email!';
+                        break;
                     default:
                         $language = 'it';
                         $etichettaPulsanteRispondi = 'Clicca qui per rispondere a: ';
                         $etichettaFraseBottom = 'Questa e-mail è stata inviata automaticamente, non rispondere a questa e-mail!';
                         break;
                 }
-                
+
                  $select = "SELECT dizionario_form_quoto.etichetta,dizionario_form_quoto_lingue.testo FROM dizionario_form_quoto
                  INNER JOIN dizionario_form_quoto_lingue ON dizionario_form_quoto_lingue.id_dizionario = dizionario_form_quoto.id
                  WHERE dizionario_form_quoto_lingue.Lingua = '".$language."'
@@ -280,29 +283,29 @@ require($_SERVER['DOCUMENT_ROOT']."/include/settings.inc.php");
                     define($value['etichetta'],$value['testo']);
 
                 }
-                
+
 
                 $responseform['nome'][$language]                 = RESPONSE_FORM_NOME;
                 $responseform['cognome'][$language]              = RESPONSE_FORM_COGNOME;
                 $responseform['email'][$language]                = RESPONSE_FORM_EMAIL;
                 $responseform['telefono'][$language]             = RESPONSE_FORM_TELEFONO;
-            
+
                 $responseform['arrivo'][$language]               = RESPONSE_FORM_ARRIVO;
                 $responseform['partenza'][$language]             = RESPONSE_FORM_PARTENZA;
-            
+
                 $responseform['arrivo_alternativo'][$language]   = RESPONSE_FORM_ARRIVO_ALTERNATIVO;
                 $responseform['partenza_alternativo'][$language] = RESPONSE_FORM_PARTENZA_ALTERNATIVO;
                 $responseform['adulti_totale'][$language]        = RESPONSE_FORM_TOTALE_ADULTI;
                 $responseform['bambini_totale'][$language]       = RESPONSE_FORM_TOTALE_BAMBINI;
-            
+
                 $responseform['adulti'][$language]               = RESPONSE_FORM_ADULTI;
                 $responseform['bambini'][$language]              = RESPONSE_FORM_BAMBINI;
                 $responseform['bambini_eta'][$language]          = RESPONSE_FORM_BAMBINI_ETA;
-            
+
                 $responseform['sistemazione'][$language]         = RESPONSE_FORM_SISTEMAZIONE;
                 $responseform['trattamento'][$language]          = RESPONSE_FORM_TRATTAMENTO;
                 $responseform['target'][$language]               = RESPONSE_FORM_TARGET;
-            
+
                 $responseform['messaggio'][$language]            = RESPONSE_FORM_MESSAGGIO;
                 $responseform['codice_sconto'][$language]        = RESPONSE_FORM_CODICE_SCONTO;
                 $responseform['animali'][$language]              = RESPONSE_FORM_ANIMALI_AMMESSI;
@@ -314,15 +317,15 @@ require($_SERVER['DOCUMENT_ROOT']."/include/settings.inc.php");
 
                 function verifyCaptcha($response, $remoteip, $chiave_segreta_recaptcha)
                 {
-        
+
                     $url = "https://www.google.com/recaptcha/api/siteverify";
                     $url .= "?secret=" . urlencode(stripslashes($chiave_segreta_recaptcha));
                     $url .= "&response=" . urlencode(stripslashes($response));
                     $url .= "&remoteip=" . urlencode(stripslashes($remoteip));
-        
+
                     $response = file_get_contents($url);
                     $response = json_decode($response, true);
-        
+
                     return (object) $response;
                 }
 
@@ -458,7 +461,7 @@ require($_SERVER['DOCUMENT_ROOT']."/include/settings.inc.php");
                             }
                         }
                         $msg .= ' </tr>';
-                   
+
                     $msg .= '   </table>';
                 }
 
@@ -501,11 +504,11 @@ require($_SERVER['DOCUMENT_ROOT']."/include/settings.inc.php");
                             }
                         }
                         $msg .= ' </tr>';
-                   
+
                     $msg .= '   </table>';
                 }
 
- 
+
 
                 if(isset($_REQUEST['TipoSoggiorno_3']) && $_REQUEST['TipoSoggiorno_3'] != ''){
                     $msg .= '<table cellpadding="0" cellspacing="0" width="100%" border="0" align="center">';
@@ -544,9 +547,9 @@ require($_SERVER['DOCUMENT_ROOT']."/include/settings.inc.php");
                             }
                         }
                         $msg .= ' </tr>';
-                   
+
                     $msg .= '   </table>';
-                }   
+                }
 
                 if ($messaggio != '') {
                     $msg .= '<table cellpadding="0" cellspacing="0" width="100%" border="0" align="center">
@@ -704,7 +707,7 @@ require($_SERVER['DOCUMENT_ROOT']."/include/settings.inc.php");
                             }
                         }
                         $msg_hotel .= ' </tr>';
-                   
+
                     $msg_hotel .= '   </table>';
                 }
 
@@ -747,11 +750,11 @@ require($_SERVER['DOCUMENT_ROOT']."/include/settings.inc.php");
                             }
                         }
                         $msg_hotel .= ' </tr>';
-                   
+
                     $msg_hotel .= '   </table>';
                 }
 
- 
+
 
                 if(isset($_REQUEST['TipoSoggiorno_3']) && $_REQUEST['TipoSoggiorno_3'] != ''){
                     $msg_hotel .= '<table cellpadding="0" cellspacing="0" width="100%" border="0" align="center">';
@@ -790,9 +793,9 @@ require($_SERVER['DOCUMENT_ROOT']."/include/settings.inc.php");
                             }
                         }
                         $msg_hotel .= ' </tr>';
-                   
+
                     $msg_hotel .= '   </table>';
-                } 
+                }
 
                 if ($messaggio != '') {
                     $msg_hotel .= '<table cellpadding="0" cellspacing="0" width="100%" border="0" align="center">
@@ -836,38 +839,38 @@ require($_SERVER['DOCUMENT_ROOT']."/include/settings.inc.php");
                         curl_close($curl);
 
                         $responseCaptchaData = json_decode($data);
-            
+
                         if ($responseCaptchaData->success) {
 
                                 if ($nome != '' && $cognome != '' && $email != '' && $urlback != '' && $language != '' && $adulti != '' && $arrivo != '' && $partenza != '') {
 
                                 if($isSMTP == 1){
-                                    $mail->IsSMTP(); 
-                                    $mail->SMTPDebug = 0; 
+                                    $mail->IsSMTP();
+                                    $mail->SMTPDebug = 0;
                                     $mail->Debugoutput = 'html';
-                                    $mail->SMTPAuth = $SmtpAuth; 
+                                    $mail->SMTPAuth = $SmtpAuth;
                                     if($SmtpSecure!=''){
-                                        $mail->SMTPSecure = $SmtpSecure; 
+                                        $mail->SMTPSecure = $SmtpSecure;
                                     }
-                                    $mail->SMTPKeepAlive = true; 					
+                                    $mail->SMTPKeepAlive = true;
                                     $mail->Host = $SmtpHost;
                                     $mail->Port = $SmtpPort;
                                     $mail->Username = $SmtpUsername;
                                     $mail->Password = $SmtpPassword;
 
-                                    $mail_hotel->IsSMTP(); 
-                                    $mail_hotel->SMTPDebug = 0; 
+                                    $mail_hotel->IsSMTP();
+                                    $mail_hotel->SMTPDebug = 0;
                                     $mail_hotel->Debugoutput = 'html';
-                                    $mail_hotel->SMTPAuth = $SmtpAuth; 
+                                    $mail_hotel->SMTPAuth = $SmtpAuth;
                                     if($SmtpSecure!=''){
-                                        $mail_hotel->SMTPSecure = $SmtpSecure; 
+                                        $mail_hotel->SMTPSecure = $SmtpSecure;
                                     }
-                                    $mail_hotel->SMTPKeepAlive = true; 					
+                                    $mail_hotel->SMTPKeepAlive = true;
                                     $mail_hotel->Host = $SmtpHost;
                                     $mail_hotel->Port = $SmtpPort;
                                     $mail_hotel->Username = $SmtpUsername;
                                     $mail_hotel->Password = $SmtpPassword;
-                                } 
+                                }
                                     $mail->setFrom(MAIL_SEND, $Hotel);
                                     $mail->addAddress($email, $nome.' '.$cognome);
                                     $mail->isHTML(true);
@@ -902,7 +905,7 @@ require($_SERVER['DOCUMENT_ROOT']."/include/settings.inc.php");
                                         $data_arrivo         = $_REQUEST['data_arrivo'];
 
                                         $data_partenza       = $_REQUEST['data_partenza'];
-                
+
 
                                             if(isset($_REQUEST['TipoSoggiorno_1']) && $_REQUEST['TipoSoggiorno_1'] != ''){
                                                 $RigheCompilate  .= (isset($_REQUEST['TipoSoggiorno_1']) && $_REQUEST['TipoSoggiorno_1'] != ''?' - Trattamento: '.$_REQUEST['TipoSoggiorno_1']:'').'  '.(isset($_REQUEST['TipoCamere']) && $_REQUEST['TipoCamere']!= '' ?'  -   Sistemazione: '.$_REQUEST['TipoCamere']:'').' '.(isset($_REQUEST['NumAdulti_1'])?'  -  Nr.Adulti: '.$_REQUEST['NumAdulti_1']:'').' '.(isset($_REQUEST['NumBambini_1']) && $_REQUEST['NumBambini_1']!= '' ?'  -  Nr.Bambini: '.$_REQUEST['NumBambini_1']:'').'  '.(isset($_REQUEST['EtaB1_1']) && $_REQUEST['EtaB1_1'] != '' ?'  -  Età: '.$_REQUEST['EtaB1_1']:'').''.(isset($_REQUEST['EtaB2_1']) && $_REQUEST['EtaB2_1'] != '' ?', '.$_REQUEST['EtaB2_1']:'').''.(isset($_REQUEST['EtaB3_1']) && $_REQUEST['EtaB3_1'] != '' ?', '.$_REQUEST['EtaB3_1']:'').''.(isset($_REQUEST['EtaB4_1']) && $_REQUEST['EtaB4_1'] != '' ?', '.$_REQUEST['EtaB4_1']:'').''.(isset($_REQUEST['EtaB5_1']) && $_REQUEST['EtaB5_1'] != '' ?', '.$_REQUEST['EtaB5_1']:'').''.(isset($_REQUEST['EtaB6_1']) && $_REQUEST['EtaB6_1'] != '' ?', '.$_REQUEST['EtaB6_1']:'')."\r\n";
@@ -918,7 +921,7 @@ require($_SERVER['DOCUMENT_ROOT']."/include/settings.inc.php");
                                             $note          .=  (($_REQUEST['DataArrivo']!='' || $_REQUEST['DataPartenza']!='')?"\r\n".'Data Arrivo Alternativa: '.$DataArrivo.' Data Partenza Alternativa: '.$DataPartenza."\r\n":'');
                                             $note          .=  ($RigheCompilate!=''?"\r\n".$RigheCompilate."\r\n":'');
                                             $note          .=  ($_REQUEST['messaggio']!=''?"\r\n".'Note: '.$_REQUEST['messaggio']:'');
-                                            
+
                                             $ConsensoMarketing    = ($_REQUEST['marketing']!=''?1:0);
                                             $ConsensoProfilazione = ($_REQUEST['profilazione']!=''?1:0);
                                             $ConsensoPrivacy      = ($_REQUEST['consenso']!=''?1:0);
@@ -962,25 +965,25 @@ require($_SERVER['DOCUMENT_ROOT']."/include/settings.inc.php");
                                                 $track_tmp     = explode('&fbclid', $array_traccia[1]);
                                                 $track         = 'facebook';
                                                 $campagna      = $track_tmp[0];
-                                                $daDove        = '';    
+                                                $daDove        = '';
                                             }elseif((strstr($Tracking,'campagna')) && (strstr($Tracking,'gclid'))){
                                                 $array_traccia = explode('campagna=',$Tracking);
                                                 $track_tmp     = explode('&gclid', $array_traccia[1]);
                                                 $track         = 'google';
-                                                $campagna      = $track_tmp[0]; 
-                                                $daDove        = ''; 
+                                                $campagna      = $track_tmp[0];
+                                                $daDove        = '';
                                             }elseif((strstr($Tracking,'facebook')) && (!strstr($Tracking,'utm_campaign'))){
                                                 $track         = 'facebook';
-                                                $campagna      = '';  
-                                                $daDove        = '';  
+                                                $campagna      = '';
+                                                $daDove        = '';
                                             }elseif((strstr($Tracking,'gclid')) && (!strstr($Tracking,'facebook')) && (!strstr($Tracking,'campagna'))){
                                                 $track         = 'google';
                                                 $campagna      = '';
-                                                $daDove        = '';     
+                                                $daDove        = '';
                                             }elseif((!strstr($Tracking,'facebook')) && (!strstr($Tracking,'utm_campaign')) && (!strstr($Tracking,'campagna')) && (!strstr($Tracking,'gclid'))){
                                                 $track         = '';
-                                                $campagna      = ''; 
-                                                $daDove        =  $Tracking;                                    
+                                                $campagna      = '';
+                                                $daDove        =  $Tracking;
                                             }
 
                                             $insert_tracking = "INSERT INTO hospitality_tracking_ads
@@ -1023,7 +1026,7 @@ require($_SERVER['DOCUMENT_ROOT']."/include/settings.inc.php");
                                                                 , '".addslashes($_REQUEST['utm_campaign'])."'
                                                                 , '".date('Y-m-d H:i:s')."'
                                                                 )";
-                                        $db_quoto->query($utm_insert);                                            
+                                        $db_quoto->query($utm_insert);
 
                                         $syncro = "INSERT INTO hospitality_data_syncro(idsito,data) VALUES('".$idsito."','".date('Y-m-d H:i:s')."')";
                                         $db_quoto->query($syncro);
@@ -1037,7 +1040,7 @@ require($_SERVER['DOCUMENT_ROOT']."/include/settings.inc.php");
                                         echo'   <script language="JavaScript">
                                                     document.form_response_q.submit();
                                                 </script>'."\r\n";
-                                        
+
 
                                     } else {
 
@@ -1046,7 +1049,7 @@ require($_SERVER['DOCUMENT_ROOT']."/include/settings.inc.php");
                                     }
 
 
-                
+
                             } else {
 
                                 // ritorno alla pagina KO
@@ -1063,34 +1066,34 @@ require($_SERVER['DOCUMENT_ROOT']."/include/settings.inc.php");
         }else{  // SE IL CAPTCHA E' DISABILITATO
 
             if ($nome != '' && $cognome != '' && $email != '' && $urlback != '' && $language != '' && $adulti != '' && $arrivo != '' && $partenza != '') {
-                
+
                 if($isSMTP == 1){
-                    $mail->IsSMTP(); 
-                    $mail->SMTPDebug = 0; 
+                    $mail->IsSMTP();
+                    $mail->SMTPDebug = 0;
                     $mail->Debugoutput = 'html';
-                    $mail->SMTPAuth = $SmtpAuth; 
+                    $mail->SMTPAuth = $SmtpAuth;
                     if($SmtpSecure!=''){
-                        $mail->SMTPSecure = $SmtpSecure; 
+                        $mail->SMTPSecure = $SmtpSecure;
                     }
-                    $mail->SMTPKeepAlive = true; 					
+                    $mail->SMTPKeepAlive = true;
                     $mail->Host = $SmtpHost;
                     $mail->Port = $SmtpPort;
                     $mail->Username = $SmtpUsername;
                     $mail->Password = $SmtpPassword;
 
-                    $mail_hotel->IsSMTP(); 
-                    $mail_hotel->SMTPDebug = 0; 
+                    $mail_hotel->IsSMTP();
+                    $mail_hotel->SMTPDebug = 0;
                     $mail_hotel->Debugoutput = 'html';
-                    $mail_hotel->SMTPAuth = $SmtpAuth; 
+                    $mail_hotel->SMTPAuth = $SmtpAuth;
                     if($SmtpSecure!=''){
-                        $mail_hotel->SMTPSecure = $SmtpSecure; 
+                        $mail_hotel->SMTPSecure = $SmtpSecure;
                     }
-                    $mail_hotel->SMTPKeepAlive = true; 					
+                    $mail_hotel->SMTPKeepAlive = true;
                     $mail_hotel->Host = $SmtpHost;
                     $mail_hotel->Port = $SmtpPort;
                     $mail_hotel->Username = $SmtpUsername;
                     $mail_hotel->Password = $SmtpPassword;
-                } 
+                }
                 $mail->setFrom(MAIL_SEND, $Hotel);
                 $mail->addAddress($email, $nome.' '.$cognome);
                 $mail->isHTML(true);
@@ -1141,7 +1144,7 @@ require($_SERVER['DOCUMENT_ROOT']."/include/settings.inc.php");
                         $note          .=  (($_REQUEST['DataArrivo']!='' || $_REQUEST['DataPartenza']!='')?"\r\n".'Data Arrivo Alternativa: '.$DataArrivo.' Data Partenza Alternativa: '.$DataPartenza."\r\n":'');
                         $note          .=  ($RigheCompilate!=''?"\r\n".$RigheCompilate."\r\n":'');
                         $note          .=  ($_REQUEST['messaggio']!=''?"\r\n".'Note: '.$_REQUEST['messaggio']:'');
-                        
+
                         $ConsensoMarketing    = ($_REQUEST['marketing']!=''?1:0);
                         $ConsensoProfilazione = ($_REQUEST['profilazione']!=''?1:0);
                         $ConsensoPrivacy      = ($_REQUEST['consenso']!=''?1:0);
@@ -1185,25 +1188,25 @@ require($_SERVER['DOCUMENT_ROOT']."/include/settings.inc.php");
                             $track_tmp     = explode('&fbclid', $array_traccia[1]);
                             $track         = 'facebook';
                             $campagna      = $track_tmp[0];
-                            $daDove        = '';    
+                            $daDove        = '';
                         }elseif((strstr($Tracking,'campagna')) && (strstr($Tracking,'gclid'))){
                             $array_traccia = explode('campagna=',$Tracking);
                             $track_tmp     = explode('&gclid', $array_traccia[1]);
                             $track         = 'google';
-                            $campagna      = $track_tmp[0]; 
-                            $daDove        = ''; 
+                            $campagna      = $track_tmp[0];
+                            $daDove        = '';
                         }elseif((strstr($Tracking,'facebook')) && (!strstr($Tracking,'utm_campaign'))){
                             $track         = 'facebook';
-                            $campagna      = '';  
-                            $daDove        = '';  
+                            $campagna      = '';
+                            $daDove        = '';
                         }elseif((strstr($Tracking,'gclid')) && (!strstr($Tracking,'facebook')) && (!strstr($Tracking,'campagna'))){
                             $track         = 'google';
                             $campagna      = '';
-                            $daDove        = '';     
+                            $daDove        = '';
                         }elseif((!strstr($Tracking,'facebook')) && (!strstr($Tracking,'utm_campaign')) && (!strstr($Tracking,'campagna')) && (!strstr($Tracking,'gclid'))){
                             $track         = '';
-                            $campagna      = ''; 
-                            $daDove        =  $Tracking;                                    
+                            $campagna      = '';
+                            $daDove        =  $Tracking;
                         }
 
                         $insert_tracking = "INSERT INTO hospitality_tracking_ads
@@ -1245,7 +1248,7 @@ require($_SERVER['DOCUMENT_ROOT']."/include/settings.inc.php");
                                         , '".addslashes($_REQUEST['utm_campaign'])."'
                                         , '".date('Y-m-d H:i:s')."'
                                         )";
-                    $db_quoto->query($utm_insert);                      
+                    $db_quoto->query($utm_insert);
 
                     $syncro = "INSERT INTO hospitality_data_syncro(idsito,data) VALUES('".$idsito."','".date('Y-m-d H:i:s')."')";
                     $db_quoto->query($syncro);
@@ -1259,7 +1262,7 @@ require($_SERVER['DOCUMENT_ROOT']."/include/settings.inc.php");
                     echo'   <script language="JavaScript">
                                 document.form_response_q.submit();
                             </script>'."\r\n";
-                    
+
 
                 } else {
 
@@ -1270,25 +1273,25 @@ require($_SERVER['DOCUMENT_ROOT']."/include/settings.inc.php");
 
         }// FINE CONTROLLO CAPTCHA
 
-        }else{
+    }else{
 
-            $s   = "SELECT siti.email FROM siti WHERE siti.idsito = " . $idsito . "";
-            $re  = $db_quoto->query($s);
-            $rec = $re[0];
+        $s   = "SELECT siti.email FROM siti WHERE siti.idsito = " . $idsito . "";
+        $re  = $db_quoto->query($s);
+        $rec = $re[0];
 
-            echo'<div>
-                    Il modulo di richiesta by Quoto! CRM non è più attivo!
-                    <br>
-                    Per mandare il tuo messaggio alla struttura, scrivi direttamente a '.$rec['email'].'
-                    <br>
-                    Se sei il proprietario del sito, contatta Network Service
-                    <br>
-                    <b>Network Service</b><br>
-                    <b>Contatto tecnico:</b> support@quoto.travel
-                </div>';
-        }
+        echo'<div>
+                Il modulo di richiesta by Quoto! CRM non è più attivo!
+                <br>
+                Per mandare il tuo messaggio alla struttura, scrivi direttamente a '.$rec['email'].'
+                <br>
+                Se sei il proprietario del sito, contatta Network Service
+                <br>
+                <b>Network Service</b><br>
+                <b>Contatto tecnico:</b> support@quoto.travel
+            </div>';
+    }
 
-        $db_quoto->disconnect();
+    $db_quoto->disconnect();
 }else{
     echo'<div>
             <b>ERRORE</b><br><br>

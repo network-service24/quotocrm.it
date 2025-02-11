@@ -51,7 +51,18 @@ require($_SERVER['DOCUMENT_ROOT']."/include/settings.inc.php");
         $record   = $db_quoto->query($sql);
         $ret      = $record[0];
         $permessi = $db_quoto->count;
-
+        /**
+            *? CONTROLLO CHE IL SITO DEL CLIENTE SIA CONTENUTO NELL URLBACK, 
+            *? PER EVITARE CHE VENGA IMPOSTATO NELLO SCRIPT DEL FORM UN IDSITO ERRATO 
+            *? O DI NON PROPRIETA' DEL CLIENTE ABILITATO!!
+        */
+        if(!strstr($urlback,$ret['web'])){
+            echo'<div>
+                    <b>ERRORE</b><br><br>
+                    Invio bloccato: tentativo di accesso all\'applicativo con un IDSITO <b>non valido</b>!
+                </div>';
+            exit;
+        }
     if ($permessi > 0) {
 
             $idsito   = $ret['idsito'];
