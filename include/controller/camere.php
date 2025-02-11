@@ -355,7 +355,7 @@ $content .='        responsive: true,
                 if($booking_attivo == 1 && $pms_attivo == 1){ 
 
         $content .='    "columnDefs": [
-                            {"targets": [0,1,2,3,4,5,6,7,8,9], "orderable": false} 
+                            {"targets": [0,1,2,3,4,5,6,8,9], "orderable": false} 
     
                             ]
                         })';
@@ -364,7 +364,7 @@ $content .='        responsive: true,
                 if ($booking_attivo == 1 && $pms_attivo == 0){      
 
         $content .='    "columnDefs": [
-                              {"targets": [0,1,2,3,4,5,6,7,8], "orderable": false} 
+                              {"targets": [0,1,2,3,4,5,7,8], "orderable": false} 
 
                         ]
                     })';
@@ -372,7 +372,7 @@ $content .='        responsive: true,
                 }
                 if($booking_attivo == 0 && $pms_attivo == 1){ 
         $content .='    "columnDefs": [
-                        {"targets": [0,1,2,3,4,5,6,7,8], "orderable": false} 
+                        {"targets": [0,1,2,3,4,5,7,8], "orderable": false} 
 
                         ]
                     })';
@@ -382,7 +382,7 @@ $content .='        responsive: true,
                 if ($booking_attivo == 0 && $pms_attivo == 0){  
 
         $content .='    "columnDefs": [
-                            {"targets": [0,1,2,3,4,5,6,7], "orderable": false} 
+                            {"targets": [0,1,2,3,4,6,7], "orderable": false} 
 
                         ]
                     })';   
