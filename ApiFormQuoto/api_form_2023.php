@@ -56,13 +56,13 @@ require($_SERVER['DOCUMENT_ROOT']."/include/settings.inc.php");
             *? PER EVITARE CHE VENGA IMPOSTATO NELLO SCRIPT DEL FORM UN IDSITO ERRATO 
             *? O DI NON PROPRIETA' DEL CLIENTE ABILITATO!!
         */
-        if(!strstr($urlback,$ret['web'])){
+/*         if(!strstr($urlback,$ret['web'])){
             echo'<div>
                     <b>ERRORE</b><br><br>
                     Invio bloccato: tentativo di accesso all\'applicativo con un IDSITO <b>non valido</b>!
                 </div>';
             exit;
-        }
+        } */
     if ($permessi > 0) {
 
             $idsito   = $ret['idsito'];

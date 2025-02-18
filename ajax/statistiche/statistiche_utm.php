@@ -6,6 +6,7 @@ $stat = new statistiche();
 
 $idsito            = $_REQUEST['idsito'];
 $filter_query      = urldecode($_REQUEST['filter_query']);
+$filter_query_p      = urldecode($_REQUEST['filter_query_p']);
 $DataRichiesta_dal = $_REQUEST['DataRichiesta_dal'];
 $DataRichiesta_al  = $_REQUEST['DataRichiesta_al'];
 

@@ -19,6 +19,8 @@ if ($_REQUEST['action'] == 'request_date') {
 
     $DataRichiesta_al = $seconda_data;
 
+    $filter_query_p = " AND hospitality_guest.DataRichiesta >= '$DataRichiesta_dal' AND hospitality_guest.DataRichiesta <= '$DataRichiesta_al'";
+
     $filter_query = " AND ((hospitality_guest.DataRichiesta >= '$DataRichiesta_dal' AND hospitality_guest.DataRichiesta <= '$DataRichiesta_al') OR (date(hospitality_guest.DataChiuso) IS NOT NULL AND date(hospitality_guest.DataChiuso) >= '$DataRichiesta_dal' AND date(hospitality_guest.DataChiuso) <= '$DataRichiesta_al'))";
   
 }else{
@@ -34,7 +36,8 @@ if ($_REQUEST['action'] == 'request_date') {
     $DataRichiesta_dal = date('Y-m-d',$dal);
 
     $DataRichiesta_al = date('Y-m-d',$al);
-    
+
+    $filter_query_p = " AND hospitality_guest.DataRichiesta >= '$DataRichiesta_dal' AND hospitality_guest.DataRichiesta <= '$DataRichiesta_al'";
 
     $filter_query = " AND ((hospitality_guest.DataRichiesta >= '$DataRichiesta_dal' AND hospitality_guest.DataRichiesta <= '$DataRichiesta_al') OR (date(hospitality_guest.DataChiuso) IS NOT NULL AND date(hospitality_guest.DataChiuso) >= '$DataRichiesta_dal' AND date(hospitality_guest.DataChiuso) <= '$DataRichiesta_al'))";
    
@@ -49,7 +52,7 @@ $legendaSn_BOX .= ' <script>
                                 $.ajax({								 
                                     type: "POST",								 
                                     url: "' . BASE_URL_SITO . 'ajax/statistiche/facebook_ads_utm.php",								 
-                                    data: "idsito=' . IDSITO . '&filter_query=' . $filter_query . '&action=' . $_REQUEST['action'] . '&querydate=' . $_REQUEST['querydate'] . '",
+                                    data: "idsito=' . IDSITO . '&filter_query_p=' . $filter_query_p . '&filter_query=' . $filter_query . '&action=' . $_REQUEST['action'] . '&querydate=' . $_REQUEST['querydate'] . '",
                                     dataType: "html",
                                         success: function(msg){
                                             $("#facebook_ads").html(msg);

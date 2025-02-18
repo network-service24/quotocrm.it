@@ -20,6 +20,8 @@ if ($_REQUEST['action'] == 'request_date') {
 
     $DataRichiesta_al = $seconda_data;
 
+	$filter_query_p = " AND hospitality_guest.DataRichiesta >= '$DataRichiesta_dal' AND hospitality_guest.DataRichiesta <= '$DataRichiesta_al'";
+
     $filter_query = " AND ((hospitality_guest.DataRichiesta >= '$DataRichiesta_dal' AND hospitality_guest.DataRichiesta <= '$DataRichiesta_al') OR (hospitality_guest.DataChiuso IS NOT NULL AND DATE(hospitality_guest.DataChiuso) >= '$DataRichiesta_dal' AND DATE(hospitality_guest.DataChiuso) <= '$DataRichiesta_al'))";
 
 }else{
@@ -36,8 +38,10 @@ if ($_REQUEST['action'] == 'request_date') {
 
     $DataRichiesta_al = date('Y-m-d',$al);
 
+	$filter_query_p = " AND hospitality_guest.DataRichiesta >= '$DataRichiesta_dal' AND hospitality_guest.DataRichiesta <= '$DataRichiesta_al'";
 
     $filter_query = " AND ((hospitality_guest.DataRichiesta >= '$DataRichiesta_dal' AND hospitality_guest.DataRichiesta <= '$DataRichiesta_al') OR (hospitality_guest.DataChiuso IS NOT NULL AND DATE(hospitality_guest.DataChiuso) >= '$DataRichiesta_dal' AND DATE(hospitality_guest.DataChiuso) <= '$DataRichiesta_al'))";
 
 }
 $filter_query = urlencode($filter_query);
+$filter_query_p = urlencode($filter_query_p);

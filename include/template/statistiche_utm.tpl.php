@@ -54,7 +54,7 @@
                                                                                         $.ajax({								 
                                                                                             type: "POST",								 
                                                                                             url: "<?=BASE_URL_SITO?>ajax/statistiche/statistiche_utm.php",								 
-                                                                                            data: "idsito=<?=IDSITO?>&filter_query=<?=$filter_query?>&action=<?=$_REQUEST['action']?>&DataRichiesta_dal=<?=$DataRichiesta_dal?>&DataRichiesta_al=<?=$DataRichiesta_al?>",
+                                                                                            data: "idsito=<?=IDSITO?>&filter_query_p=<?=$filter_query_p?>&filter_query=<?=$filter_query?>&action=<?=$_REQUEST['action']?>&DataRichiesta_dal=<?=$DataRichiesta_dal?>&DataRichiesta_al=<?=$DataRichiesta_al?>",
                                                                                             dataType: "html",
                                                                                                 success: function(msg){
                                                                                                     $("#statisticheQ").html(msg);

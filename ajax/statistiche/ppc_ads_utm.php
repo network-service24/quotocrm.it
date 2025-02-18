@@ -8,6 +8,8 @@ $idsito                        = $_REQUEST['idsito'];
 
 $filter_query                  = $_REQUEST['filter_query'];
 
+$filter_query_p                  = $_REQUEST['filter_query_p'];
+
 $totalePPCn = $stat->fatt_utm($idsito,$filter_query,'google','cpc');
 
 $rws9n      = $stat->campagne_utm($idsito,'google','cpc');
@@ -41,8 +43,8 @@ if ($totCampn > 0) {
 
     foreach ($rws9n as $key9n => $value9n) {
 
-        $numero_campagne   = $stat->CountRicevuteCampagnaAds($idsito,$value9n['Campagna'],'google','cpc',$filter_query);
-        $numero_prev_send  = $stat->CountInviateCampagnaAds($idsito,$value9n['Campagna'],'google','cpc',$filter_query);
+        $numero_campagne   = $stat->CountRicevuteCampagnaAds($idsito,$value9n['Campagna'],'google','cpc',$filter_query_p);
+        $numero_prev_send  = $stat->CountInviateCampagnaAds($idsito,$value9n['Campagna'],'google','cpc',$filter_query_p);
         $preno_chiuse      = $stat->CountConfermateCampagnaAds($idsito,$value9n['Campagna'],'google','cpc',$filter_query);
         $totalePerCampagna = $stat->fatturato_per_campagna($idsito, $value9n['Campagna'],'google','cpc',$filter_query);
 

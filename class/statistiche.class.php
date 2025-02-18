@@ -108,7 +108,7 @@ class statistiche
     
     }
     function CountInviateAds($idsito,$source,$medium){
-        global $dbMysqli,$filter_query,$idsito;
+        global $dbMysqli,$filter_query_p,$idsito;
     
     
         $sql      = "   SELECT 
@@ -123,7 +123,7 @@ class statistiche
                             hospitality_utm_ads.idsito = hospitality_guest.idsito)
                         WHERE 
                             1 = 1
-                            ".$filter_query."
+                            ".$filter_query_p."
                         AND 
                             hospitality_guest.idsito = ".$idsito." 
                         AND 
@@ -140,6 +140,10 @@ class statistiche
                             hospitality_guest.Hidden = 0
                         AND 
                             hospitality_guest.Inviata = 1
+                        AND 
+                            hospitality_guest.Chiuso = 0
+                        AND 
+                            hospitality_guest.Accettato = 0
                         AND
                             hospitality_utm_ads.utm_source = '".$source."'
                         AND
@@ -152,7 +156,7 @@ class statistiche
     
     }
     function CountRicevuteAds($idsito,$source,$medium){
-        global $dbMysqli,$filter_query,$idsito;
+        global $dbMysqli,$filter_query_p,$idsito;
     
         $sql      = "   SELECT 
                             hospitality_guest.* 
@@ -166,7 +170,7 @@ class statistiche
                             hospitality_utm_ads.idsito = hospitality_guest.idsito)
                         WHERE 
                             1 = 1
-                            ".$filter_query."
+                            ".$filter_query_p."
                         AND 
                             hospitality_guest.idsito = ".$idsito." 
                         AND 
@@ -181,6 +185,10 @@ class statistiche
                             hospitality_guest.Disdetta = 0
                         AND 
                             hospitality_guest.Hidden = 0
+                        AND 
+                            hospitality_guest.Chiuso = 0
+                        AND 
+                            hospitality_guest.Accettato = 0
                         AND
                             hospitality_utm_ads.utm_source = '".$source."'
                         AND
@@ -195,7 +203,7 @@ class statistiche
        
        
     function CountRicevute($idsito){
-        global $dbMysqli,$filter_query,$idsito;
+        global $dbMysqli,$filter_query_p,$idsito;
     
      echo   $sql      = "   SELECT 
                             hospitality_guest.* 
@@ -209,7 +217,7 @@ class statistiche
                             hospitality_utm_ads.idsito = hospitality_guest.idsito)
                         WHERE 
                             1 = 1
-                            ".$filter_query."
+                            ".$filter_query_p."
                         AND 
                             hospitality_guest.idsito = ".$idsito." 
                         AND 
@@ -223,7 +231,11 @@ class statistiche
                         AND 
                             hospitality_guest.Disdetta = 0
                         AND 
-                            hospitality_guest.Hidden = 0";
+                            hospitality_guest.Hidden = 0
+                        AND 
+                            hospitality_guest.Chiuso = 0
+                        AND 
+                            hospitality_guest.Accettato = 0";
     
         $rw = $dbMysqli->query($sql);
         $rwc = sizeof($rw);
@@ -268,6 +280,10 @@ class statistiche
                 AND g.Hidden = 0
                 AND g.NoDisponibilita = 0
                 AND g.Disdetta = 0
+                AND 
+                    g.Chiuso = 0
+                AND 
+                    g.Accettato = 0
                 group by u.referrer,u.NumeroPrenotazione";
     
         $res = $dbMysqli->query($select);
@@ -313,6 +329,10 @@ class statistiche
                 AND g.Inviata = 1
                 AND g.NoDisponibilita = 0
                 AND g.Disdetta = 0
+                AND 
+                    g.Chiuso = 0
+                AND 
+                    g.Accettato = 0
                 group by u.referrer,u.NumeroPrenotazione";
     
         $res = $dbMysqli->query($select);
@@ -425,7 +445,11 @@ class statistiche
                     AND g.TipoRichiesta = 'Preventivo'
                     AND g.Hidden = 0
                     AND g.NoDisponibilita = 0
-                    AND g.Disdetta = 0 ";
+                    AND g.Disdetta = 0 
+                    AND 
+                        g.Chiuso = 0
+                    AND 
+                        g.Accettato = 0";
     
     
         $res = $dbMysqli->query($select);
@@ -449,7 +473,11 @@ class statistiche
                     AND g.Hidden = 0
                     AND g.Inviata = 1
                     AND g.NoDisponibilita = 0
-                    AND g.Disdetta = 0 ";
+                    AND g.Disdetta = 0 
+                     AND 
+                        g.Chiuso = 0
+                    AND 
+                        g.Accettato = 0";
     
     
         $res = $dbMysqli->query($select);
@@ -611,7 +639,7 @@ class statistiche
             return $rwc;
     
     }
-    function CountInviateCampagnaAds($idsito,$campagna, $source, $medium,$filter_query){
+    function CountInviateCampagnaAds($idsito,$campagna, $source, $medium,$filter_query_p){
         global $dbMysqli;
     
         $sql      = "   SELECT 
@@ -626,7 +654,7 @@ class statistiche
                                 ) 
                         WHERE 
                             1 = 1
-                            ".$filter_query."
+                            ".$filter_query_p."
                         AND 
                             hospitality_guest.idsito = ".$idsito." 
                         AND 
@@ -641,6 +669,10 @@ class statistiche
                             hospitality_guest.Hidden = 0
                         AND 
                             hospitality_guest.Inviata = 1
+                        AND 
+                            hospitality_guest.Chiuso = 0
+                        AND 
+                            hospitality_guest.Accettato = 0
                         AND 
                             hospitality_utm_ads.utm_source = '".$source."'
                         AND 
@@ -658,7 +690,7 @@ class statistiche
             return $rwc;
     
     }
-    function CountRicevuteCampagnaAds($idsito,$campagna, $source, $medium,$filter_query){
+    function CountRicevuteCampagnaAds($idsito,$campagna, $source, $medium,$filter_query_p){
         global $dbMysqli;
     
         $sql      = "   SELECT 
@@ -673,7 +705,7 @@ class statistiche
                                 ) 
                         WHERE 
                             1 = 1
-                            ".$filter_query."
+                            ".$filter_query_p."
                         AND 
                             hospitality_guest.idsito = ".$idsito." 
                         AND 
@@ -686,6 +718,10 @@ class statistiche
                             hospitality_guest.Disdetta = 0
                         AND 
                             hospitality_guest.Hidden = 0
+                        AND 
+                            hospitality_guest.Chiuso = 0
+                        AND 
+                            hospitality_guest.Accettato = 0
                         AND 
                             hospitality_utm_ads.utm_source = '".$source."'
                         AND 
