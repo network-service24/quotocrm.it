@@ -116,10 +116,10 @@
                                 if($tot1 == 0){
                                     $sync1 = $dbMysqli->query("INSERT INTO hospitality_tipo_soggiorno(idsito,Lingua,TipoSoggiorno,PlanCode,Abilitato) VALUES('".IDSITO."','it','".$tipo_soggiorno_it."','".$v['MealPlanCode'][0]."','1')");
                                     $id_sync1 = $dbMysqli->getInsertId($sync1);
-                                    $db->query("INSERT INTO hospitality_tipo_soggiorno_lingua(soggiorni_id,idsito,lingue,Soggiorno,Descrizione,PlanCode) VALUES('".$id_sync1."','".IDSITO."','it','".$tipo_soggiorno_it."','".addslashes($testo_soggiorno_it)."','".$v['MealPlanCode'][0]."')");      
-                                    $db->query("INSERT INTO hospitality_tipo_soggiorno_lingua(soggiorni_id,idsito,lingue,Soggiorno,Descrizione,PlanCode) VALUES('".$id_sync1."','".IDSITO."','en','".$tipo_soggiorno_en."','".addslashes($testo_soggiorno_en)."','".$v['MealPlanCode'][0]."')");      
-                                    $db->query("INSERT INTO hospitality_tipo_soggiorno_lingua(soggiorni_id,idsito,lingue,Soggiorno,Descrizione,PlanCode) VALUES('".$id_sync1."','".IDSITO."','fr','".$tipo_soggiorno_fr."','".addslashes($testo_soggiorno_fr)."','".$v['MealPlanCode'][0]."')");      
-                                    $db->query("INSERT INTO hospitality_tipo_soggiorno_lingua(soggiorni_id,idsito,lingue,Soggiorno,Descrizione,PlanCode) VALUES('".$id_sync1."','".IDSITO."','de','".$tipo_soggiorno_de."','".addslashes($testo_soggiorno_de)."','".$v['MealPlanCode'][0]."')");      
+                                    $dbMysqli->query("INSERT INTO hospitality_tipo_soggiorno_lingua(soggiorni_id,idsito,lingue,Soggiorno,Descrizione,PlanCode) VALUES('".$id_sync1."','".IDSITO."','it','".$tipo_soggiorno_it."','".addslashes($testo_soggiorno_it)."','".$v['MealPlanCode'][0]."')");      
+                                    $dbMysqli->query("INSERT INTO hospitality_tipo_soggiorno_lingua(soggiorni_id,idsito,lingue,Soggiorno,Descrizione,PlanCode) VALUES('".$id_sync1."','".IDSITO."','en','".$tipo_soggiorno_en."','".addslashes($testo_soggiorno_en)."','".$v['MealPlanCode'][0]."')");      
+                                    $dbMysqli->query("INSERT INTO hospitality_tipo_soggiorno_lingua(soggiorni_id,idsito,lingue,Soggiorno,Descrizione,PlanCode) VALUES('".$id_sync1."','".IDSITO."','fr','".$tipo_soggiorno_fr."','".addslashes($testo_soggiorno_fr)."','".$v['MealPlanCode'][0]."')");      
+                                    $dbMysqli->query("INSERT INTO hospitality_tipo_soggiorno_lingua(soggiorni_id,idsito,lingue,Soggiorno,Descrizione,PlanCode) VALUES('".$id_sync1."','".IDSITO."','de','".$tipo_soggiorno_de."','".addslashes($testo_soggiorno_de)."','".$v['MealPlanCode'][0]."')");      
                                 }                                                                  
                             }
 
@@ -197,15 +197,15 @@
                           $selcam1 = $dbMysqli->query("SELECT * FROM hospitality_tipo_camere WHERE idsito = '".IDSITO."' AND Lingua = 'it' AND RoomCode = '".$rec['RoomCode']."' AND Abilitato = 1");
                           $totcam1 = sizeof($selcam1);
                             if($totcam1 == 0){ 
-                              $cam1 = $dbMysqli->query("INSERT INTO hospitality_tipo_camere(idsito,Lingua,TipoCamere,RoomCode,Abilitato) VALUES('".IDSITO."','it','".$rec['Camera']."','".$rec['RoomCode']."','1')");                        
+                              $cam1 = $dbMysqli->query("INSERT INTO hospitality_tipo_camere(idsito,Lingua,TipoCamere,RoomCode,Abilitato) VALUES('".IDSITO."','it','".addslashes($rec['Camera'])."','".$rec['RoomCode']."','1')");                        
                               $id_cam1 = $dbMysqli->getInsertId($cam1); 
-                              $db->query("INSERT INTO hospitality_camere_testo(camere_id,idsito,lingue,Camera,Descrizione,RoomCode) VALUES('".$id_cam1."','".IDSITO."','it','".$rec['Camera']."','','".$rec['RoomCode']."')");      
-                              $db->query("INSERT INTO hospitality_camere_testo(camere_id,idsito,lingue,Camera,Descrizione,RoomCode) VALUES('".$id_cam1."','".IDSITO."','en','".$rec['Camera']."','','".$rec['RoomCode']."')");
-                              $db->query("INSERT INTO hospitality_camere_testo(camere_id,idsito,lingue,Camera,Descrizione,RoomCode) VALUES('".$id_cam1."','".IDSITO."','fr','".$rec['Camera']."','','".$rec['RoomCode']."')");
-                              $db->query("INSERT INTO hospitality_camere_testo(camere_id,idsito,lingue,Camera,Descrizione,RoomCode) VALUES('".$id_cam1."','".IDSITO."','de','".$rec['Camera']."','','".$rec['RoomCode']."')");
-                              $db->query("INSERT INTO hospitality_gallery_camera(IdCamera,idsito,Foto) VALUES('".$id_cam1."','".IDSITO."','singola1.jpg')");
-                              $db->query("INSERT INTO hospitality_gallery_camera(IdCamera,idsito,Foto) VALUES('".$id_cam1."','".IDSITO."','doppia1.jpg')"); 
-                              $db->query("INSERT INTO hospitality_gallery_camera(IdCamera,idsito,Foto) VALUES('".$id_cam1."','".IDSITO."','tripla1.jpg')");
+                              $dbMysqli->query("INSERT INTO hospitality_camere_testo(camere_id,idsito,lingue,Camera,Descrizione,RoomCode) VALUES('".$id_cam1."','".IDSITO."','it','".addslashes($rec['Camera'])."','','".$rec['RoomCode']."')");      
+                              $dbMysqli->query("INSERT INTO hospitality_camere_testo(camere_id,idsito,lingue,Camera,Descrizione,RoomCode) VALUES('".$id_cam1."','".IDSITO."','en','".addslashes($rec['Camera'])."','','".$rec['RoomCode']."')");
+                              $dbMysqli->query("INSERT INTO hospitality_camere_testo(camere_id,idsito,lingue,Camera,Descrizione,RoomCode) VALUES('".$id_cam1."','".IDSITO."','fr','".addslashes($rec['Camera'])."','','".$rec['RoomCode']."')");
+                              $dbMysqli->query("INSERT INTO hospitality_camere_testo(camere_id,idsito,lingue,Camera,Descrizione,RoomCode) VALUES('".$id_cam1."','".IDSITO."','de','".addslashes($rec['Camera'])."','','".$rec['RoomCode']."')");
+                              $dbMysqli->query("INSERT INTO hospitality_gallery_camera(IdCamera,idsito,Foto) VALUES('".$id_cam1."','".IDSITO."','singola1.jpg')");
+                              $dbMysqli->query("INSERT INTO hospitality_gallery_camera(IdCamera,idsito,Foto) VALUES('".$id_cam1."','".IDSITO."','doppia1.jpg')"); 
+                              $dbMysqli->query("INSERT INTO hospitality_gallery_camera(IdCamera,idsito,Foto) VALUES('".$id_cam1."','".IDSITO."','tripla1.jpg')");
                             }
                     }
                     
