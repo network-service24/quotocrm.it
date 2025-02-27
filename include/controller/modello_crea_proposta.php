@@ -34,7 +34,7 @@ $riga_camere_proposta_1 ='
                         '.$NumeroBambini.'
                     </select>
                     <div class="EtaBambini1_1" style="display:none">
-                        <input type="text"  name="EtaB1[]" placeholder="Età: 1,3 mesi,< 1" class="form-control" data-toggle="tooltip" title="inserire prima un numero intero, poi successivamente 3 mesi, oppure < 1">
+                        <input type="text"  name="EtaB1[]" placeholder="1,3,8" class="form-control" data-toggle="tooltip" title="Se non avate una sincronizzazione attiva con un PMS potete anche inserire una parte di testo per esempio: 10 anni, 8 mesi">
                     </div>
                 </div>
             </td>
@@ -95,7 +95,7 @@ $riga_camere_proposta_2 ='
                         '.$NumeroBambini.'
                     </select>
                     <div class="EtaBambini2_1" style="display:none">
-                        <input type="text"  name="EtaB2[]" placeholder="Età: 1,3 mesi,< 1" class="form-control" data-toggle="tooltip" title="inserire prima un numero intero, poi successivamente 3 mesi, oppure < 1">
+                        <input type="text"  name="EtaB2[]" placeholder="1,3,8" class="form-control" data-toggle="tooltip" title="Se non avate una sincronizzazione attiva con un PMS potete anche inserire una parte di testo per esempio: 10 anni, 8 mesi">
                     </div>
                 </div>
             </td>
@@ -156,7 +156,7 @@ $riga_camere_proposta_3 ='
                         '.$NumeroBambini.'
                     </select>
                     <div class="EtaBambini3_1" style="display:none">
-                        <input type="text"  name="EtaB3[]" placeholder="Età: 1,3 mesi,< 1" class="form-control" data-toggle="tooltip" title="inserire prima un numero intero, poi successivamente 3 mesi, oppure < 1">
+                        <input type="text"  name="EtaB3[]" placeholder="1,3,8" class="form-control" data-toggle="tooltip" title="Se non avate una sincronizzazione attiva con un PMS potete anche inserire una parte di testo per esempio: 10 anni, 8 mesi">
                     </div>
                 </div>
             </td>
@@ -217,7 +217,7 @@ $riga_camere_proposta_4 ='
                         '.$NumeroBambini.'
                     </select>
                     <div class="EtaBambini4_1" style="display:none">
-                        <input type="text"  name="EtaB4[]" placeholder="Età: 1,3 mesi,< 1" class="form-control" data-toggle="tooltip" title="inserire prima un numero intero, poi successivamente 3 mesi, oppure < 1">
+                        <input type="text"  name="EtaB4[]" placeholder="1,3,8" class="form-control" data-toggle="tooltip" title="Se non avate una sincronizzazione attiva con un PMS potete anche inserire una parte di testo per esempio: 10 anni, 8 mesi">
                     </div>
                 </div>
             </td>
@@ -278,7 +278,7 @@ $riga_camere_proposta_5 ='
                         '.$NumeroBambini.'
                     </select>
                     <div class="EtaBambini5_1" style="display:none">
-                        <input type="text"  name="EtaB5[]" placeholder="Età: 1,3 mesi,< 1" class="form-control" data-toggle="tooltip" title="inserire prima un numero intero, poi successivamente 3 mesi, oppure < 1">
+                        <input type="text"  name="EtaB5[]" placeholder="1,3,8" class="form-control" data-toggle="tooltip" title="Se non avate una sincronizzazione attiva con un PMS potete anche inserire una parte di testo per esempio: 10 anni, 8 mesi">
                     </div>
                 </div>
             </td>

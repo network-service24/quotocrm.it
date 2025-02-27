@@ -126,7 +126,7 @@
                                                     <?=$NumeroBambini?>
                                                 </select>
                                                 <div class="EtaBambini<?=$nr?>_1" style="display:none">
-                                                    <input type="text"  name="EtaB<?=$nr?>[]" placeholder="Età: 1,3 mesi,< 1" class="form-control" data-toggle="tooltip" title="inserire prima un numero intero, poi successivamente 3 mesi, oppure < 1">
+                                                    <input type="text"  name="EtaB<?=$nr?>[]" placeholder="1,3,8" class="form-control" data-toggle="tooltip" title="Se non avate una sincronizzazione attiva con un PMS potete anche inserire una parte di testo per esempio: 10 anni, 8 mesi">
                                                 </div>
                                             </div>
                                         </td>

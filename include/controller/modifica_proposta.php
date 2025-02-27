@@ -787,7 +787,7 @@ if($_REQUEST['azione'] == 'edit' && $_REQUEST['param'] != '') {
                                                                                     <option value="10" '.(10==$val['NumBambini']?'selected="selected"':'').'>10</option>
                                                                                 </select>
                                                                                 <div class="EtaBambini'.$i.'_'.$num_righe.'" style="'.($val['EtaB']!=''?'display:block':'display:none').'">
-                                                                                    <input type="text"  name="EtaB'.$i.'[]" placeholder="Età: 1,2,3" value="'.$val['EtaB'].'" class="form-control">
+                                                                                    <input type="text"  name="EtaB'.$i.'[]" placeholder="1,2,3" value="'.$val['EtaB'].'" class="form-control" title="Se non avate una sincronizzazione attiva con un PMS potete anche inserire una parte di testo per esempio: 10 anni, 8 mesi">
                                                                                 </div>
                                                                     </div>
                                                                 </td>
