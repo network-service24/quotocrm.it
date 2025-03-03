@@ -65,7 +65,7 @@ $content .=' <div class="modal fade" id="ModalePdi" tabindex="-1" role="dialog" 
                                                 <label>Immagine PDI</label>
                                             </div>
                                             <div class="col-md-8">
-                                                <span class="f-11 f-w-600 m-b-10">Calcola la posizione dell\'evento ricettiva inserendo l\'indirizzo e la località</span>
+                                                <span class="f-11 f-w-600 m-b-10">Una volta scelto il file, clicca sul pulsante "Upload"</span>
                                                 <div class="input-group">
                                                 <span class="input-group-addon"><i class="fa fa-fw fa-photo"></i></span>
                                                 <input type="file" class="form-control"  name="file_img" id="file_img">

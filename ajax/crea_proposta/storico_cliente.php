@@ -73,7 +73,7 @@ include($_SERVER['DOCUMENT_ROOT']."/include/function.inc.php");
                                         <div id="view'.$Id.'" class="cursore f-14"><i class="fa fa-angle-double-right m-r-10"></i>
 										'.($value['TipoRichiesta']=='Preventivo'?'Preventivo Nr. '.$NumeroPrenotazione.' del '.$DataRichiesta:($value['Chiuso']==1?'Prenotazione':'Conferma').' Nr. '.$NumeroPrenotazione.' del '.($value['Chiuso']==1?$DataChiuso:$DataRichiesta)).'
 										</div>
-                                        <div id="hid'.$Id.'" class="m-t-10 m-l-20 f-12" style="display:none">';
+                                        <div id="hid'.$Id.'" class="m-t-10 m-l-20 f-12" style="display:none;max-height:200px;overflow-y:auto;overflow-x:auto;">';
 
 					$select = "SELECT hospitality_proposte.Id as IdProposta,hospitality_proposte.NomeProposta, hospitality_proposte.PrezzoL,hospitality_proposte.PrezzoP,hospitality_guest.TipoRichiesta,hospitality_guest.idsito,
 										hospitality_guest.AccontoRichiesta,hospitality_guest.Nome,hospitality_guest.Cognome,hospitality_guest.AccontoLibero,
